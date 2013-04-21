@@ -1,5 +1,11 @@
 /* app css stylesheet */
 
+.wine-thumbnail {
+  height: 10.3em;
+  width: 3em;
+  padding: 0.5em;
+}
+
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -27,4 +33,8 @@
 .menu > li:nth-child(1):before {
   content: "";
   padding: 0;
+}
+
+.summary {
+  padding: 1em;
 }

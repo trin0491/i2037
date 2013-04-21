@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <h3>{{title}}</h3>
+</div>
+<div class="modal-body">
+  <form name="login" class="form-horizontal">
+    <div class="control-group">
+      <label class="control-label" for="inputUsername">Email</label>
+      <div class="controls">
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-envelope"></i></span>
+          <input type="text" id="inputUsername" placeholder="Username" ng-model="userName" ng-readonly="userNameReadonly" required>
+        </div>              
+      </div>  
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputPassword">Password</label>
+      <div class="controls">
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-lock"></i></span>
+          <input type="password" id="inputPassword" placeholder="Password" ng-model="password" required>
+        </div>      
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button ng-click="submit()" class="btn btn-primary">Submit</button>
+  <button ng-click="cancel()" class="btn">Cancel</button>  
+</div>'

@@ -1,0 +1,50 @@
+<div class="row-fluid">
+  <div class="span1 offset11">
+    <div class="btn-group">
+      <button class="btn" ng-click="add()"><i class="icon-plus-sign"></i></button>
+      <button class="btn" ng-click="smallThumbnails()"><i class="icon-th"></i></button>
+      <button class="btn" ng-click="largeThumbnails()"><i class="icon-th-large"></i></button>
+    </div>
+  </div>
+</div>
+<div class="row-fluid">
+<!--   <div class="row-fluid" ng-repeat="row in wineGrid">
+    <div class="span3" ng-repeat="wine in row">
+      <img src="img/wine_thumbnail.jpg" class="pull-left">
+      <div>
+        <h5>{{wine.name}}</h5>
+        <p>{{wine.vintage}}</p>                      
+        <p>{{wine.description}}</p>
+        <i class="icon-star" ng-repeat="wine.rating"></i>
+      </div>
+    </div>
+  </div>
+ -->
+  <ul class="thumbnails" ng-repeat="row in wineGrid">
+    <li ng-class="wineCls" ng-repeat="wine in row">
+      <div class="thumbnail media">
+        <a href="#" class="pull-left">
+          <img src="img/wine_thumbnail.jpg" class="media-object wine-thumbnail">
+        </a>
+        <div class="media-body">
+          <a href="#"><h4 class="media-heading">{{wine.name}} ({{wine.vintage}})</h4></a>
+          <p>{{wine.description}}</p>
+          <p>
+            <a class="btn btn-small" 
+                ng-mouseenter="editCls='btn-primary'" 
+                ng-mouseleave="editCls=''" 
+                ng-class="editCls">
+                <i class="icon-edit"></i> Edit
+            </a>
+            <a class="btn btn-small" 
+               ng-mouseenter="deleteCls='btn-danger'" 
+               ng-mouseleave="deleteCls=''" 
+               ng-class="deleteCls">
+               <i class="icon-trash"></i> Delete
+            </a>                        
+          </p>
+        </div>
+      </div> 
+    </li>
+  </ul>
+</div>
