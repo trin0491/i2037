@@ -163,6 +163,6 @@ function SlickgridCtrl($scope) {
 }
 SlickgridCtrl.$inject = ['$scope'];
 
-function RecipiesCtrl($scope) {
+function RecipesCtrl($scope) {
 };
-RecipiesCtrl.$inject = ['$scope'];
+RecipesCtrl.$inject = ['$scope'];

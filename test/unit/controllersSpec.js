@@ -81,7 +81,7 @@ describe('recipie controller', function() {
   beforeEach(function() {
     inject(function($rootScope, $controller) {
       scope = $rootScope.$new();
-      ctrl = $controller('RecipiesCtrl', {$scope: scope});
+      ctrl = $controller('RecipesCtrl', {$scope: scope});
     });
   });
 
