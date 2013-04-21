@@ -74,6 +74,7 @@ WineViewCtrl.$inject = ['$scope', '$dialog', 'wineService'];
 function WineFormCtrl($scope) {
 
 };
+WineFormCtrl.$inject = ['$scope'];
 
 function NavBarCtrl($scope, $location, $dialog) {
   $scope.userName = 'Richard Priestley';
@@ -101,6 +102,7 @@ function NavBarCtrl($scope, $location, $dialog) {
     });
   };
 }
+NavBarCtrl.$inject = ['$scope', '$location', '$dialog'];
 
 function LoginFormCtrl($scope, dialog, userName) {
   var me = this;
@@ -125,6 +127,7 @@ function LoginFormCtrl($scope, dialog, userName) {
     });
   }
 }
+LoginFormCtrl.$inject = ['$scope', 'dialog', 'userName'];
 
 function HomeCtrl() {}
 HomeCtrl.$inject = [];
@@ -158,3 +161,8 @@ function SlickgridCtrl($scope) {
   };
   var grid = new Slick.Grid('#myGrid', data, columns, options);
 }
+SlickgridCtrl.$inject = ['$scope'];
+
+function RecipiesCtrl($scope) {
+};
+RecipiesCtrl.$inject = ['$scope'];

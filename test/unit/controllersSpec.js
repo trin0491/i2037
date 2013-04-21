@@ -75,3 +75,18 @@ describe('WineViewCtrl', function(){
   });
 });
 
+describe('recipie controller', function() {
+  var scope, ctrl;
+
+  beforeEach(function() {
+    inject(function($rootScope, $controller) {
+      scope = $rootScope.$new();
+      ctrl = $controller('RecipiesCtrl', {$scope: scope});
+    });
+  });
+
+  it('should be defined', function() {
+    expect(ctrl).toBeDefined();
+  });
+});
+
