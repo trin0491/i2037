@@ -7,7 +7,7 @@ describe('WineViewCtrl', function(){
   var NO_WINES = 4;
 
   beforeEach(function() {
-    module('myApp.services');
+    module('i2037.services');
 
     var wines = [];
     for (var i = 0; i < NO_WINES; i++) {

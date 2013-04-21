@@ -8,7 +8,7 @@
 //angular.module('myApp.services', []).
 //  value('version', '0.1');
 
-angular.module('myApp.services', ['ngResource'])
+angular.module('i2037.services', ['ngResource'])
   .value('version', '0.1')
   .factory('wineService', function($resource){
     return $resource('/cellar-webapp/wines', {}, {
