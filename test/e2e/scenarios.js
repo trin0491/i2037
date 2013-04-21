@@ -19,7 +19,7 @@ describe('my app', function() {
     });
 
     it('should render home when user navigates to /home', function() {
-      expect(element('[ng-view] p:first').text()).toMatch(/partial for view 1/);
+      expect(element('[ng-view] h1:first').text()).toMatch(/Interface 2037/);
     });
   });
 
