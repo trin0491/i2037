@@ -23,6 +23,17 @@ describe('my app', function() {
     });
   });
 
+  describe('recipes', function() {
+    beforeEach(function() {
+      browser().navigateTo('#/recipes');
+    })
+
+    it('should render a recipes header', function() {
+      pause();
+      expect(element('[ng-view] h2:first').text()).toMatch(/Recipes/);
+    })
+  })
+
   describe('slickgrid', function() {
 
     beforeEach(function() {

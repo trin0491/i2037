@@ -75,7 +75,7 @@ describe('WineViewCtrl', function(){
   });
 });
 
-describe('recipie controller', function() {
+describe('recipe controller', function() {
   var scope, ctrl;
 
   beforeEach(function() {
