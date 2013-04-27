@@ -8,18 +8,6 @@
   </div>
 </div>
 <div class="row-fluid">
-<!--   <div class="row-fluid" ng-repeat="row in wineGrid">
-    <div class="span3" ng-repeat="wine in row">
-      <img src="img/wine_thumbnail.jpg" class="pull-left">
-      <div>
-        <h5>{{wine.name}}</h5>
-        <p>{{wine.vintage}}</p>                      
-        <p>{{wine.description}}</p>
-        <i class="icon-star" ng-repeat="wine.rating"></i>
-      </div>
-    </div>
-  </div>
- -->
   <ul class="thumbnails" ng-repeat="row in wineGrid">
     <li ng-class="wineCls" ng-repeat="wine in row">
       <div class="thumbnail media">
