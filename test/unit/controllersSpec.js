@@ -3,13 +3,13 @@
 /* jasmine specs for controllers go here */
 
 describe('WineViewCtrl', function(){
-  var scope, ctrl, $httpBackend, dialog;
+  var wines, scope, ctrl, $httpBackend, dialog;
   var NO_WINES = 4;
 
   beforeEach(function() {
     module('i2037.services');
 
-    var wines = [];
+    wines = [];
     for (var i = 0; i < NO_WINES; i++) {
       wines[i] = {
         name: 'wine',
@@ -73,6 +73,62 @@ describe('WineViewCtrl', function(){
     expect(scope.add).toBeDefined();
     expect(scope.add()).toBeUndefined();
   });
+
+  it('should have an edit wine method', function() {
+    expect(scope.edit).toBeDefined();
+    expect(scope.edit(wines[0])).toBeUndefined();   
+  });
+});
+
+describe('wineform controller', function() {
+  var wine, scope, ctrl, dialog;
+  var mode = 'Edit';
+
+  beforeEach(function() {
+    wine = {
+      name: 'aWine',
+      description: 'aDescription'
+    };
+    inject(function($rootScope, $controller) {
+      scope = $rootScope.$new();
+      dialog = {
+        isOpen: true,
+        close: function(result) {
+          this.isOpen = false;
+          this.rv = result;
+        }
+      };
+      ctrl = $controller('WineFormCtrl', {
+        $scope: scope, 
+        dialog: dialog, 
+        wine: wine,
+        mode: mode
+      });
+    })
+  });
+
+  it('should bind the wine', function() {
+    expect(scope.wine).toEqual(wine);
+  });
+
+  it('should bind the mode', function() {
+    expect(scope.mode).toEqual(mode);
+  })
+
+  it('should have a cancel method', function() {
+    expect(angular.isFunction(scope.cancel)).toBe(true);
+    expect(dialog.isOpen).toBe(true);
+    scope.cancel();
+    expect(dialog.isOpen).toBe(false);
+    expect(dialog.rv).toBeUndefined();
+  });
+
+  it('should have a submit method', function() {
+    expect(angular.isFunction(scope.submit)).toBe(true);
+    expect(dialog.rv).toBeUndefined();
+    scope.submit();
+    expect(dialog.rv).toEqual(wine);
+  })
 });
 
 describe('recipe controller', function() {

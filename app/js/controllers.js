@@ -2,6 +2,35 @@
 
 /* Controllers */
 function WineViewCtrl($scope, $dialog, wineService) {
+
+  function newWineForm(wine) {
+    var opts = {
+        backdrop: true,
+        keyboard: true,
+        dialogFade: true,
+        backdropClick: true,
+        templateUrl: 'partials/wineform.html', 
+        controller: 'WineFormCtrl',
+    };
+
+    if (wine) {
+      opts.resolve = { 
+        wine: function() { 
+          return angular.copy(wine);
+        },
+        mode: function() { return 'Edit' }
+      }
+    } else {
+      opts.resolve = {
+        wine: function() { return {} },
+        mode: function() { return 'New' }
+      }
+    }
+
+    var d = $dialog.dialog(opts);
+    return d;
+  };
+
   $scope.winesPerRow = 4;
   $scope.wines = wineService.query();
   $scope.wineCls = 'span3';
@@ -16,23 +45,22 @@ function WineViewCtrl($scope, $dialog, wineService) {
     $scope.winesPerRow = 3;
   };
 
-  $scope.add = function() {
-    var opts = {
-        backdrop: true,
-        keyboard: true,
-        dialogFade: true,
-        backdropClick: true,
-        templateUrl: 'partials/wineform.html', 
-        controller: 'WineFormCtrl',
-        resolve: {
-        }
-    };
-
-    var d = $dialog.dialog(opts);
-    d.open().then(function(credentials){
-      if(credentials)
+  $scope.edit = function(wine) {
+    var f = newWineForm(wine);
+    f.open().then(function(wine){
+      if(wine)
       {
-        alert('dialog closed with credentials: ' + credentials);
+        alert('dialog closed with wine: ' + wine);
+      }
+    });
+  };
+
+  $scope.add = function() {
+    var d = newWineForm();
+    d.open().then(function(wine){
+      if(wine)
+      {
+        alert('dialog closed with wine: ' + wine);
       }
     });
   };
@@ -71,10 +99,19 @@ function WineViewCtrl($scope, $dialog, wineService) {
 }
 WineViewCtrl.$inject = ['$scope', '$dialog', 'wineService'];
 
-function WineFormCtrl($scope) {
+function WineFormCtrl($scope, dialog, wine, mode) {
+  $scope.wine = wine;
+  $scope.mode = mode;
 
+  $scope.cancel = function(){
+    dialog.close();
+  };
+
+  $scope.submit = function() {
+    dialog.close($scope.wine);
+  }
 };
-WineFormCtrl.$inject = ['$scope'];
+WineFormCtrl.$inject = ['$scope', 'dialog', 'wine', 'mode'];
 
 function NavBarCtrl($scope, $location, $dialog) {
   $scope.userName = 'Richard Priestley';
@@ -105,8 +142,6 @@ function NavBarCtrl($scope, $location, $dialog) {
 NavBarCtrl.$inject = ['$scope', '$location', '$dialog'];
 
 function LoginFormCtrl($scope, dialog, userName) {
-  var me = this;
-
   if (userName) {
     $scope.title = 'Change Password'
     $scope.userName = userName;

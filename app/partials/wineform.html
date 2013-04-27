@@ -6,13 +6,19 @@
     <div class="control-group">
       <label class="control-label" for="inputName">Name</label>
       <div class="controls">
-        <input type="text" id="inputName" placeholder="Name" ng-model="userName" required>
+        <input type="text" id="inputName" placeholder="Name" ng-model="wine.name" required>
       </div>  
     </div>
     <div class="control-group">
       <label class="control-label" for="inputGrape">Grape</label>
       <div class="controls">
-        <input type="text" id="inputGrape" placeholder="Grape" ng-model="password" required>
+        <input type="text" id="inputGrape" placeholder="Grape" ng-model="wine.grape" required>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputDescription">Description</label>
+      <div class="controls">
+        <textarea id="inputDescription" placeholder="Description" ng-model="wine.description" rows="5"></textarea>
       </div>
     </div>
   </form>
