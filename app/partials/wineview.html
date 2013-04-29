@@ -1,4 +1,9 @@
 <div class="row-fluid">
+  <div class="span2">
+    <form class="form-search">
+    <input type="text" class="input-medium search-query" ng-model="query" placeholder="Search">
+    <button type="submit" class="btn">Search</button>    
+  </div>
   <div class="span1">
     <div class="btn-group">
       <button id="addWine" class="btn" ng-click="add()"><i class="icon-plus-sign"></i></button>
@@ -6,7 +11,9 @@
       <button class="btn" ng-click="largeThumbnails()"><i class="icon-th-large"></i></button>
     </div>
   </div>
+</form>
 </div>
+<hr>
 <div class="row-fluid">
   <ul class="thumbnails" ng-repeat="row in wineGrid">
     <li ng-class="wineCls" ng-repeat="wine in row">
