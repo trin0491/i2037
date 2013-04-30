@@ -1,17 +1,19 @@
 <div class="row-fluid">
-  <div class="span2">
-    <form class="form-search">
-    <input type="text" class="input-medium search-query" ng-model="query" placeholder="Search">
-    <button type="submit" class="btn">Search</button>    
-  </div>
-  <div class="span1">
+  <div class="span4">
     <div class="btn-group">
       <button id="addWine" class="btn" ng-click="add()"><i class="icon-plus-sign"></i></button>
       <button class="btn" ng-click="smallThumbnails()"><i class="icon-th"></i></button>
       <button class="btn" ng-click="largeThumbnails()"><i class="icon-th-large"></i></button>
-    </div>
+    </div>  
   </div>
-</form>
+  <div class="span4 offset4">
+    <form class="form-search pull-right">
+      <div class="input-append">
+        <input type="text" class="search-query">
+        <button type="submit" class="btn">Search</button>
+      </div>       
+    </form>
+  </div>
 </div>
 <hr>
 <div class="row-fluid">
