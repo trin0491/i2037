@@ -99,9 +99,11 @@ function WineViewCtrl($scope, $dialog, wineService) {
 }
 WineViewCtrl.$inject = ['$scope', '$dialog', 'wineService'];
 
-function WineFormCtrl($scope, dialog, wine, mode) {
+function WineFormCtrl($scope, dialog, wine, mode, grapeService) {
   $scope.wine = wine;
   $scope.mode = mode;
+  $scope.grapes = grapeService.query();
+  $scope.selected = undefined;
 
   $scope.cancel = function(){
     dialog.close();
@@ -111,7 +113,7 @@ function WineFormCtrl($scope, dialog, wine, mode) {
     dialog.close($scope.wine);
   }
 };
-WineFormCtrl.$inject = ['$scope', 'dialog', 'wine', 'mode'];
+WineFormCtrl.$inject = ['$scope', 'dialog', 'wine', 'mode', 'grapeService'];
 
 function NavBarCtrl($scope, $location, $dialog) {
   $scope.userName = 'Richard Priestley';

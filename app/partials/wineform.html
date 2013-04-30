@@ -12,10 +12,7 @@
     <div class="control-group">
       <label class="control-label" for="inputGrape">Grape</label>
       <div class="controls">
-        <select id="inputGrape" placeholder="Grape" ng-model="wine.grape" required>
-          <option>Shiraz</option>
-          <option>Merlot</option>
-        </select>   
+        <input type="text" ng-model="selected" typeahead="grape.name for grape in grapes | filter: $viewValue">
       </div>
     </div>
     <div class="control-group">
