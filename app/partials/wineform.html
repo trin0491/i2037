@@ -12,13 +12,22 @@
     <div class="control-group">
       <label class="control-label" for="inputGrape">Grape</label>
       <div class="controls">
-        <input type="text" ng-model="selected" typeahead="grape.name for grape in grapes | filter: $viewValue">
+        <div class="input-append">
+          <input type="text" ng-model="selected" typeahead="grape.name for grape in grapes | filter: $viewValue">
+          <button class="btn disabled" type="button"><i class="icon-plus-sign"></i></button>
+        </div>
       </div>
     </div>
     <div class="control-group">
       <label class="control-label" for="inputDescription">Description</label>
       <div class="controls">
         <textarea id="inputDescription" placeholder="Description" ng-model="wine.description" rows="5"></textarea>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputRating">Rating</label>
+      <div class="controls">
+        <rating value="wine.rating" max="5" readonly="false"></rating>
       </div>
     </div>
   </form>

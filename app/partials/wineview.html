@@ -26,6 +26,7 @@
         <div class="media-body">
           <a href="#"><h4 class="media-heading">{{wine.name}} ({{wine.vintage}})</h4></a>
           <p>{{wine.description}}</p>
+          <p><rating value="wine.rating" max="5" readonly="true"></rating></p>
           <p>
             <a class="btn btn-small" 
                 ng-mouseenter="editCls='btn-primary'" 
