@@ -22,7 +22,7 @@ function WineViewCtrl($scope, $dialog, wineService) {
       }
     } else {
       opts.resolve = {
-        wine: function() { return {} },
+        wine: function() { return { rating: 0 } },
         mode: function() { return 'New' }
       }
     }
