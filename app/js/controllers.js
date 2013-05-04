@@ -102,8 +102,19 @@ WineViewCtrl.$inject = ['$scope', '$dialog', 'wineService'];
 function WineFormCtrl($scope, dialog, wine, mode, grapeService) {
   $scope.wine = wine;
   $scope.mode = mode;
+  $scope.isNewGrape = false;
   $scope.grapes = grapeService.query();
-  $scope.selected = undefined;
+  $scope.selected = wine.grapeId;
+
+  $scope.onGrapeChange = function() {
+    var found = false;
+    angular.forEach($scope.grapes, function(grape) {
+      if ($scope.selected == grape.name) {
+        found = true;
+      }
+    });
+    $scope.isNewGrape = !found;
+  };
 
   $scope.cancel = function(){
     dialog.close();

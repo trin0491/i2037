@@ -81,15 +81,21 @@ describe('WineViewCtrl', function(){
 });
 
 describe('wineform controller', function() {
-  var wine, scope, ctrl, dialog;
+  var wine, scope, ctrl, dialog, $httpBackend, grapes;
   var mode = 'Edit';
 
   beforeEach(function() {
+    module('i2037.services');
     wine = {
       name: 'aWine',
       description: 'aDescription'
     };
-    inject(function($rootScope, $controller) {
+
+    grapes = [ { grapeId: 1, name: "aGrape"} ];
+
+    inject(function($rootScope, $controller, _$httpBackend_) {
+      $httpBackend = _$httpBackend_;
+      $httpBackend.expectGET('/cellar-webapp/grapes').respond(grapes);
       scope = $rootScope.$new();
       dialog = {
         isOpen: true,
@@ -128,6 +134,23 @@ describe('wineform controller', function() {
     expect(dialog.rv).toBeUndefined();
     scope.submit();
     expect(dialog.rv).toEqual(wine);
+  });
+
+  it('should bind grapes', function() {
+    expect(scope.grapes).toEqual([]);
+    $httpBackend.flush();
+    expect(scope.grapes.length).toBe(1);
+  });
+
+  it('should identify new grapes', function() {
+    $httpBackend.flush();
+    expect(scope.isNewGrape).toBe(false);
+    scope.selected = 'aNewGrape';
+    scope.onGrapeChange();
+    expect(scope.isNewGrape).toBe(true);
+    scope.selected = 'aGrape';
+    scope.onGrapeChange();
+    expect(scope.isNewGrape).toBe(false);
   })
 });
 

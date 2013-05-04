@@ -10,11 +10,17 @@
       </div>  
     </div>
     <div class="control-group">
+      <label class="control-label" for="inputVintage">Vintage</label>
+      <div class="controls">
+        <input type="text" id="inputVintage" placeholder="Vintage" ng-model="wine.vintage" required>
+      </div>  
+    </div>    
+    <div class="control-group">
       <label class="control-label" for="inputGrape">Grape</label>
       <div class="controls">
         <div class="input-append">
-          <input type="text" ng-model="selected" typeahead="grape.name for grape in grapes | filter: $viewValue">
-          <button class="btn disabled" type="button"><i class="icon-plus-sign"></i></button>
+          <input type="text" ng-model="selected" ng-change="onGrapeChange()" typeahead="grape.name for grape in grapes | filter: $viewValue">
+          <button class="btn" ng-disabled="!isNewGrape" ng-class="{ disabled: !isNewGrape }" type="button"><i class="icon-plus-sign"></i></button>
         </div>
       </div>
     </div>
