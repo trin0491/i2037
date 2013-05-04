@@ -88,7 +88,8 @@ describe('wineform controller', function() {
     module('i2037.services');
     wine = {
       name: 'aWine',
-      description: 'aDescription'
+      description: 'aDescription',
+      grapeId: 1
     };
 
     grapes = [ { grapeId: 1, name: "aGrape"} ];
@@ -142,13 +143,19 @@ describe('wineform controller', function() {
     expect(scope.grapes.length).toBe(1);
   });
 
+  it('should bind grapeName', function() {
+    expect(scope.grapeName).toBeUndefined();
+    $httpBackend.flush();
+    expect(scope.grapeName).toEqual("aGrape");
+  });
+
   it('should identify new grapes', function() {
     $httpBackend.flush();
     expect(scope.isNewGrape).toBe(false);
-    scope.selected = 'aNewGrape';
+    scope.grapeName = 'aNewGrape';
     scope.onGrapeChange();
     expect(scope.isNewGrape).toBe(true);
-    scope.selected = 'aGrape';
+    scope.grapeName = 'aGrape';
     scope.onGrapeChange();
     expect(scope.isNewGrape).toBe(false);
   })

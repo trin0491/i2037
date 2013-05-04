@@ -103,20 +103,42 @@ function WineFormCtrl($scope, dialog, wine, mode, grapeService) {
   $scope.wine = wine;
   $scope.mode = mode;
   $scope.isNewGrape = false;
-  $scope.grapes = grapeService.query();
-  $scope.selected = wine.grapeId;
 
-  $scope.onGrapeChange = function() {
-    var found = false;
+  $scope.$watch("grapes.length", function(length) {
     angular.forEach($scope.grapes, function(grape) {
-      if ($scope.selected == grape.name) {
-        found = true;
+      if (wine.grapeId == grape.grapeId) {
+        $scope.grapeName = grape.name;
       }
     });
-    $scope.isNewGrape = !found;
+  });
+  $scope.grapes = grapeService.query();
+
+  function findGrape(grapeName) {
+    var rv;
+    angular.forEach($scope.grapes, function(grape) {
+      if (grape.name == grapeName) {
+         rv = grape;
+      }
+    });
+    return rv;    
   };
 
-  $scope.cancel = function(){
+  $scope.$watch('grapeName', function(newGrapeName, oldGrapeName) {
+    if (newGrapeName) {
+      var grape = findGrape(newGrapeName);
+      if (grape) {
+        wine.grapeId = grape.grapeId;
+      } else {
+        wine.grapeId = undefined;
+      }      
+    }
+  });
+
+  $scope.onGrapeChange = function() {
+    $scope.isNewGrape = angular.isUndefined(findGrape($scope.grapeName));
+  };
+
+  $scope.cancel = function() {
     dialog.close();
   };
 

@@ -21,7 +21,7 @@
       <label class="control-label" for="inputGrape">Grape</label>
       <div class="controls">
         <div class="input-append">
-          <input type="text" id="inputGrape" name="grape" ng-model="selected" 
+          <input type="text" id="inputGrape" name="grape" ng-model="grapeName" 
             ng-change="onGrapeChange()" typeahead="grape.name for grape in grapes | filter: $viewValue" 
             placeholder="Grape" required>
           <button class="btn" ng-disabled="!isNewGrape" ng-class="{ disabled: !isNewGrape }" type="button"><i class="icon-plus-sign"></i></button>
