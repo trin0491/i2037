@@ -3,6 +3,10 @@
 /* Controllers */
 function WineViewCtrl($scope, $dialog, wineService) {
 
+  function refresh() {
+    $scope.wines = wineService.query();    
+  };
+
   function newWineForm(wine) {
     var opts = {
         backdrop: true,
@@ -22,7 +26,7 @@ function WineViewCtrl($scope, $dialog, wineService) {
       }
     } else {
       opts.resolve = {
-        wine: function() { return { rating: 0 } },
+        wine: function() { return new wineService({ rating: 0 }) },
         mode: function() { return 'New' }
       }
     }
@@ -30,10 +34,6 @@ function WineViewCtrl($scope, $dialog, wineService) {
     var d = $dialog.dialog(opts);
     return d;
   };
-
-  $scope.winesPerRow = 4;
-  $scope.wines = wineService.query();
-  $scope.wineCls = 'span3';
 
   $scope.smallThumbnails = function() {
     $scope.wineCls = 'span3';
@@ -48,21 +48,23 @@ function WineViewCtrl($scope, $dialog, wineService) {
   $scope.edit = function(wine) {
     var f = newWineForm(wine);
     f.open().then(function(wine){
-      if(wine)
-      {
-        alert('dialog closed with wine: ' + wine);
-      }
+      wine.$save();
     });
   };
 
   $scope.add = function() {
     var d = newWineForm();
     d.open().then(function(wine){
-      if(wine)
-      {
-        alert('dialog closed with wine: ' + wine);
-      }
+      wine.$save();
     });
+  };
+
+  $scope.delete = function(wine) {
+    wine.$delete();
+  };
+
+  $scope.refresh = function() {
+    refresh();
   };
 
   function noRows(wines, winesPerRow) {
@@ -96,6 +98,10 @@ function WineViewCtrl($scope, $dialog, wineService) {
   $scope.$watch('winesPerRow', function(newWinesPerRow) {
     layoutGrid($scope.wines, newWinesPerRow);
   }, true);
+
+  $scope.winesPerRow = 4;
+  $scope.wineCls = 'span3';
+  refresh();
 }
 WineViewCtrl.$inject = ['$scope', '$dialog', 'wineService'];
 

@@ -13,9 +13,10 @@ angular.module('i2037.services', ['ngResource'])
 .value('version', '0.1')
 
 .factory('wineService', function($resource) {
-	return $resource('/cellar-webapp/wines', {}, {
-	  query: {method:'GET', params:{}, isArray:true}
-	})
+	return $resource('/cellar-webapp/wines/:wineId', 
+		{ wineId: '@wineId' }, 
+		{ query: {method:'GET', params:{}, isArray:true } }
+	)
 })  
 
 .factory('grapeService', function($resource) {
