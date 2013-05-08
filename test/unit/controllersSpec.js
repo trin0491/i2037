@@ -82,8 +82,6 @@ describe('WineViewCtrl', function(){
 
 describe('wineform controller', function() {
   var wine, scope, ctrl, dialog, $httpBackend, grapes;
-  var mode = 'Edit';
-
   beforeEach(function() {
     module('i2037.services');
     wine = {
@@ -109,7 +107,6 @@ describe('wineform controller', function() {
         $scope: scope, 
         dialog: dialog, 
         wine: wine,
-        mode: mode
       });
     })
   });
@@ -117,10 +114,6 @@ describe('wineform controller', function() {
   it('should bind the wine', function() {
     expect(scope.wine).toEqual(wine);
   });
-
-  it('should bind the mode', function() {
-    expect(scope.mode).toEqual(mode);
-  })
 
   it('should have a cancel method', function() {
     expect(angular.isFunction(scope.cancel)).toBe(true);

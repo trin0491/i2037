@@ -1,13 +1,13 @@
 'use strict';
 
 /* Controllers */
-function WineViewCtrl($scope, $dialog, wineService) {
+function WineViewCtrl($scope, $dialog, Wine) {
 
   function refresh() {
-    $scope.wines = wineService.query();    
+    $scope.wines = Wine.query();    
   };
 
-  function newWineForm(wine) {
+  function createOrUpdate(wine) {
     var opts = {
         backdrop: true,
         keyboard: true,
@@ -15,56 +15,19 @@ function WineViewCtrl($scope, $dialog, wineService) {
         backdropClick: true,
         templateUrl: 'partials/wineform.html', 
         controller: 'WineFormCtrl',
+        resolve: { 
+          wine: function() { 
+            return wine;
+          }
+        }
     };
 
-    if (wine) {
-      opts.resolve = { 
-        wine: function() { 
-          return angular.copy(wine);
-        },
-        mode: function() { return 'Edit' }
-      }
-    } else {
-      opts.resolve = {
-        wine: function() { return new wineService({ rating: 0 }) },
-        mode: function() { return 'New' }
-      }
-    }
-
     var d = $dialog.dialog(opts);
-    return d;
-  };
-
-  $scope.smallThumbnails = function() {
-    $scope.wineCls = 'span3';
-    $scope.winesPerRow = 4;
-  };
-
-  $scope.largeThumbnails = function() {
-    $scope.wineCls = 'span4';
-    $scope.winesPerRow = 3;
-  };
-
-  $scope.edit = function(wine) {
-    var f = newWineForm(wine);
-    f.open().then(function(wine){
-      wine.$save();
-    });
-  };
-
-  $scope.add = function() {
-    var d = newWineForm();
     d.open().then(function(wine){
-      wine.$save();
+      wine.$save({}, function() {
+        refresh();
+      });
     });
-  };
-
-  $scope.delete = function(wine) {
-    wine.$delete();
-  };
-
-  $scope.refresh = function() {
-    refresh();
   };
 
   function noRows(wines, winesPerRow) {
@@ -87,6 +50,33 @@ function WineViewCtrl($scope, $dialog, wineService) {
     $scope.wineGrid = winePM;
   };
 
+  $scope.smallThumbnails = function() {
+    $scope.wineCls = 'span3';
+    $scope.winesPerRow = 4;
+  };
+
+  $scope.largeThumbnails = function() {
+    $scope.wineCls = 'span4';
+    $scope.winesPerRow = 3;
+  };
+
+  $scope.edit = function(wine) {
+    createOrUpdate(copy);
+  };
+
+  $scope.add = function() {
+    var wine = new Wine({ rating: 0 });
+    createOrUpdate(wine);
+  };
+
+  $scope.delete = function(wine) {
+    wine.$delete();
+  };
+
+  $scope.refresh = function() {
+    refresh();
+  };
+
   $scope.noRows = function() {
     return noRows($scope.wines, $scope.winesPerRow);
   };
@@ -103,11 +93,10 @@ function WineViewCtrl($scope, $dialog, wineService) {
   $scope.wineCls = 'span3';
   refresh();
 }
-WineViewCtrl.$inject = ['$scope', '$dialog', 'wineService'];
+WineViewCtrl.$inject = ['$scope', '$dialog', 'Wine'];
 
-function WineFormCtrl($scope, dialog, wine, mode, grapeService) {
+function WineFormCtrl($scope, dialog, wine, Grape) {
   $scope.wine = wine;
-  $scope.mode = mode;
   $scope.isNewGrape = false;
 
   $scope.$watch("grapes.length", function(length) {
@@ -117,7 +106,7 @@ function WineFormCtrl($scope, dialog, wine, mode, grapeService) {
       }
     });
   });
-  $scope.grapes = grapeService.query();
+  $scope.grapes = Grape.query();
 
   function findGrape(grapeName) {
     var rv;
@@ -152,7 +141,7 @@ function WineFormCtrl($scope, dialog, wine, mode, grapeService) {
     dialog.close($scope.wine);
   }
 };
-WineFormCtrl.$inject = ['$scope', 'dialog', 'wine', 'mode', 'grapeService'];
+WineFormCtrl.$inject = ['$scope', 'dialog', 'wine', 'Grape'];
 
 function NavBarCtrl($scope, $location, $dialog) {
   $scope.userName = 'Richard Priestley';
