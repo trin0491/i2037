@@ -61,6 +61,7 @@ function WineViewCtrl($scope, $dialog, Wine) {
   };
 
   $scope.edit = function(wine) {
+    var copy = angular.copy(wine);
     createOrUpdate(copy);
   };
 
