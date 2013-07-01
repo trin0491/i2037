@@ -183,7 +183,7 @@ function NavBarCtrl($scope, $location, $dialog, $http, User) {
           j_username: credentials.userName,
           j_password: credentials.password
         });
-        $http.post('/cellar-webapp/j_spring_security_check', user, { 
+        $http.post('/i2037-webapp/j_spring_security_check', user, { 
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           }
@@ -197,7 +197,7 @@ function NavBarCtrl($scope, $location, $dialog, $http, User) {
   };
 
   $scope.logout = function() {
-    $http.get('/cellar-webapp/j_spring_security_logout')
+    $http.get('/i2037-webapp/j_spring_security_logout')
     .success(function(data, status) {
       $scope.user = null;
     }).error(function(data, status) {
