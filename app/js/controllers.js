@@ -144,11 +144,19 @@ function WineFormCtrl($scope, dialog, wine, Grape) {
 };
 WineFormCtrl.$inject = ['$scope', 'dialog', 'wine', 'Grape'];
 
-function NavBarCtrl($scope, $location, $dialog) {
-  $scope.userName = 'Richard Priestley';
+function NavBarCtrl($scope, $location, $dialog, $http, User) {
+  $scope.user = null;
   $scope.$location = $location;
 
-  $scope.showForm = function() {
+  function setMenuVisibility(user) {
+    var isLoggedIn = user != null;
+    $scope.showCellar = isLoggedIn;
+    $scope.showCage = isLoggedIn;
+  }
+
+  $scope.$watch("user", setMenuVisibility);
+
+  $scope.login = function() {
     var opts = {
         backdrop: true,
         keyboard: true,
@@ -157,29 +165,65 @@ function NavBarCtrl($scope, $location, $dialog) {
         templateUrl: 'partials/loginform.html', 
         controller: 'LoginFormCtrl',
         resolve: {
-          userName: function() { return angular.copy($scope.userName) }
+          user: function() {
+            if ($scope.user) {
+              return angular.copy($scope.user)  
+            } else {
+              return  null;
+            }              
+          }
         }
     };
 
-    var d = $dialog.dialog(opts);
-    d.open().then(function(credentials){
+    var loginForm = $dialog.dialog(opts);
+    loginForm.open().then(function(credentials){
       if(credentials)
-      {
-        alert('dialog closed with credentials: ' + credentials);
+      {        
+        var user = jQuery.param({
+          j_username: credentials.userName,
+          j_password: credentials.password
+        });
+        $http.post('/cellar-webapp/j_spring_security_check', user, { 
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }).success(function(data, status) {
+          $scope.user = data;
+        }).error(function(data, status) {
+          alert("Failed to authenticate");
+        });
       }
     });
   };
-}
-NavBarCtrl.$inject = ['$scope', '$location', '$dialog'];
 
-function LoginFormCtrl($scope, dialog, userName) {
-  if (userName) {
+  $scope.logout = function() {
+    $http.get('/cellar-webapp/j_spring_security_logout')
+    .success(function(data, status) {
+      $scope.user = null;
+    }).error(function(data, status) {
+      alert("Failed to logout");
+    }); 
+  };
+
+  $scope.getAccountLabel = function() {
+    if ($scope.user) {
+      return $scope.user.userName;      
+    } else {
+      return 'My Account';      
+    }
+  };
+
+//  $scope.user = User.get();
+}
+NavBarCtrl.$inject = ['$scope', '$location', '$dialog', '$http', 'User'];
+
+function LoginFormCtrl($scope, dialog, user) {
+  if (user) {
     $scope.title = 'Change Password'
-    $scope.userName = userName;
+    $scope.userName = user.userName;
     $scope.userNameReadonly = true;
   } else {
     $scope.title = 'Login'
-    $scope.userName = 'Username';
   }
 
   $scope.cancel = function(){
@@ -193,7 +237,7 @@ function LoginFormCtrl($scope, dialog, userName) {
     });
   }
 }
-LoginFormCtrl.$inject = ['$scope', 'dialog', 'userName'];
+LoginFormCtrl.$inject = ['$scope', 'dialog', 'user'];
 
 function HomeCtrl() {}
 HomeCtrl.$inject = [];

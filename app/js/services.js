@@ -23,4 +23,9 @@ angular.module('i2037.services', ['ngResource'])
   	return $resource('/cellar-webapp/grapes', {}, {
   		query: {method:'GET', params:{}, isArray:true}
   	})
+})
+
+.factory('User', function($resource) {
+	return $resource('/cellar-webapp/userprofile/')
 });
+

@@ -1,0 +1,712 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"grape",
+				"grapeId"
+			],
+			[
+				"grapeId",
+				"grapeIdOf"
+			],
+			[
+				"new",
+				"newGrapeName"
+			],
+			[
+				"grapeI",
+				"grapeIdOf"
+			],
+			[
+				"f",
+				"found"
+			],
+			[
+				"fo",
+				"for	for (…) {…} (Improved Native For-Loop)"
+			],
+			[
+				"for",
+				"for	for (…) {…} (Improved Native For-Loop)"
+			],
+			[
+				"gra",
+				"grapes"
+			],
+			[
+				"to",
+				"toBe"
+			],
+			[
+				"p",
+				"params"
+			],
+			[
+				"op",
+				"option	Tag"
+			],
+			[
+				"nav",
+				"navigateTo"
+			],
+			[
+				"descri",
+				"description"
+			],
+			[
+				"toBe",
+				"toBeUndefined"
+			],
+			[
+				"wine",
+				"wine"
+			],
+			[
+				"newWine",
+				"newWineForm"
+			],
+			[
+				"re",
+				"resolve"
+			],
+			[
+				"co",
+				"copy"
+			],
+			[
+				"te",
+				"text"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"na",
+				"navigateTo"
+			],
+			[
+				"fu",
+				"function"
+			],
+			[
+				"des",
+				"describe"
+			],
+			[
+				"i",
+				"inject"
+			],
+			[
+				"Sl",
+				"SlickgridCtrl"
+			],
+			[
+				"Lon",
+				"LoginFormCtrl"
+			],
+			[
+				"toE",
+				"toEqual"
+			],
+			[
+				"tob",
+				"toBeUndefined"
+			],
+			[
+				"large",
+				"largeThumbnails"
+			],
+			[
+				"win",
+				"wineGrid"
+			],
+			[
+				"wines",
+				"winesPerRow"
+			],
+			[
+				"l",
+				"li	Tag"
+			],
+			[
+				"no",
+				"noWinesPerRow"
+			],
+			[
+				"http",
+				"httpBackend"
+			],
+			[
+				"ht",
+				"httpBackend"
+			],
+			[
+				"li",
+				"link	Tag"
+			],
+			[
+				"slick",
+				"slickgrid"
+			],
+			[
+				"in",
+				"input	Tag"
+			],
+			[
+				"le",
+				"len"
+			],
+			[
+				"addGrape",
+				"addGrapeButton"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "app/js/controllers.js",
+			"settings":
+			{
+				"buffer_size": 5896,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/services.js",
+			"settings":
+			{
+				"buffer_size": 596,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "scripts/deploy.sh",
+			"settings":
+			{
+				"buffer_size": 157,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/index.html",
+			"settings":
+			{
+				"buffer_size": 3622,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+		],
+		"width": 416.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/richard/Dev/src/i2037/app/partials/wineform.html",
+		"/C/Users/richard/Dev/src/i2037/app/js/services.js",
+		"/C/Users/richard/Dev/src/i2037/test/unit/controllersSpec.js",
+		"/C/Users/richard/Dev/src/i2037/test/e2e/scenarios.js",
+		"/C/Users/richard/Dev/src/i2037/app/index.html",
+		"/C/Users/richard/Dev/src/i2037/app/partials/wineview.html",
+		"/C/Users/richard/Dev/src/i2037/app/js/app.js",
+		"/C/Users/richard/Dev/src/i2037/app/lib/ui-bootstrap/ui-bootstrap-tpls-0.3.0.js",
+		"/C/Users/richard/AppData/Roaming/Sublime Text 3/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Users/richard/Dev/src/i2037/scripts/deploy.sh",
+		"/C/Users/richard/Dev/src/i2037/scripts/build.sh",
+		"/C/Users/richard/Dev/src/i2037/app/partials/recipes.html",
+		"/C/Users/richard/Dev/src/i2037/app/partials/recipies.html",
+		"/C/Users/richard/Dev/src/i2037/app/js/directives.js",
+		"/C/Users/richard/Dev/src/i2037/app/js/filters.js",
+		"/C/Users/richard/Dev/src/i2037/test/unit/directivesSpec.js",
+		"/C/Users/richard/Dev/src/i2037/test/unit/filtersSpec.js",
+		"/C/Users/richard/Dev/src/i2037/test/unit/servicesSpec.js",
+		"/C/Users/richard/Dev/src/i2037/app/partials/home.html",
+		"/C/Users/richard/Dev/src/angular-seed/app/js/app.js",
+		"/C/Users/richard/Dev/src/angular-seed/app/index.html",
+		"/C/Users/richard/Dev/src/angular-seed/app/partials/wineview.html",
+		"/C/Users/richard/Dev/src/angular-seed/test/e2e/scenarios.js",
+		"/C/Users/richard/Dev/src/angular-seed/app/partials/home.html",
+		"/C/Users/richard/Dev/src/angular-seed/test/unit/controllersSpec.js",
+		"/C/Users/richard/Dev/src/angular-seed/app/js/controllers.js",
+		"/C/Users/richard/Dev/src/angular-seed/app/partials/wineform.html",
+		"/C/Users/richard/Dev/src/angular-seed/app/css/.gitignore",
+		"/C/Users/richard/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/richard/AppData/Roaming/Sublime Text 3/Packages/User/HTML.sublime-settings",
+		"/C/Users/richard/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/richard/Dev/src/angular-seed/app/css/app.css",
+		"/C/Users/richard/Dev/src/angular-seed/app/partials/loginform.html",
+		"/C/Users/richard/Dev/src/angular-seed/app/css/bootstrap-responsive.css",
+		"/C/Users/richard/Dev/src/angular-seed/app/js/services.js",
+		"/C/Users/richard/Dev/src/angular-seed/test/unit/servicesSpec.js",
+		"/C/Users/richard/Dev/src/angular-seed/test/e2e/runner.html",
+		"/C/Users/richard/Dev/src/angular-seed/config/testacular.conf.js",
+		"/C/Users/richard/Dev/src/angular-seed/app/partials/slickgrid.html",
+		"/C/Users/richard/Dev/src/angular-seed/scripts/test.bat",
+		"/C/Users/richard/Dev/src/angular-seed/scripts/test.sh",
+		"/C/Users/richard/Dev/src/angular-seed/app/partials/wineview2.html",
+		"/C/Users/richard/Dev/src/cbc/index.html",
+		"/C/Users/richard/Dev/src/angular-seed/app/index (2).html",
+		"/C/Users/richard/Dev/src/angular-phonecat/app/js/app.js",
+		"/C/Users/richard/Dev/src/angular-phonecat/app/js/services.js",
+		"/C/Users/richard/Dev/src/angular-phonecat/scripts/test.bat",
+		"/C/Users/richard/Dev/src/angular-phonecat/test/e2e/scenarios.js",
+		"/C/Users/richard/Dev/src/angular-phonecat/test/unit/controllersSpec.js",
+		"/C/Users/richard/Dev/src/angular-phonecat/app/js/filters.js",
+		"/C/Users/richard/Dev/src/angular-phonecat/app/js/directives.js",
+		"/C/Users/richard/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/richard/AppData/Roaming/Sublime Text 2/Packages/User/JavaScript.sublime-settings",
+		"/C/Users/richard/Dev/src/angular-phonecat/config/testacular-e2e.conf.js",
+		"/C/Users/richard/Dev/src/angular-phonecat/config/testacular.conf.js",
+		"/C/Users/richard/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/richard/AppData/Roaming/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/app/Application.js",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/app/app.js",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/run-tests.html",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/app/controller/MainController.js",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/.sencha/app/sencha.cfg",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/app-test/app-test.js",
+		"/C/Users/richard/Dev/javascript/DeftJS-0.8.0/build/deft-debug.js",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/bootstrap.js",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/app/model/Wine.js",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/app/CellarApplication.js",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/index.html",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/app/controller/WineGridController.js",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/app/store/Grapes.js",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/app/store/Wines.js",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/app/view/wine/WineGrid.js",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/app/view/wine/WineToolbar.js",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/app-test/DeftTestApplication.js",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/app-test/specs/wineform.js",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/app/view/wine/WineForm.js",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/app/DeftApplication.js",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/app-test/specs/grapes.js",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/app-test/specs/wines.js",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/app/view/Viewport.js",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/app/view/grape/GrapeCombo.js",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/app/controller/WineFormController.js",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/app/controller/Main.js",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/app/model/Grape.js",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/app/controller/Wines.js",
+		"/C/Users/richard/Dev/src/cellar/cellar-ext/app/view/wine/Form.js",
+		"/C/Users/richard/Dev/src/HelloAndroid/assets/www/main.js",
+		"/C/Users/richard/Dev/src/HelloAndroid/assets/www/js/index.js",
+		"/C/Users/richard/Dev/src/HelloAndroid/assets/www/index.html"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"slickgrid",
+			"grapeService",
+			"wineService",
+			"mode",
+			"newWineForm",
+			"reload",
+			"grapeIdOf",
+			"selected",
+			"apply",
+			"addGrapeDisabled",
+			"addGrapeEnabled",
+			"newGrape",
+			"rating",
+			"$scope",
+			"scope",
+			"credentials",
+			"recipies",
+			"Recipies",
+			"recipies",
+			"Recipies",
+			"recipies",
+			"Recipies",
+			"recipies",
+			"Recipies",
+			"recipies",
+			"Recipies",
+			"<i class=\"icon-chevron-right\"></i>",
+			"myApp",
+			"dialog",
+			"Password",
+			"inputPassword",
+			"newWines",
+			"NO_WINES_ROW",
+			"a",
+			"noWinesPerRow",
+			"button",
+			".media",
+			"caption",
+			"thumbnails",
+			"deleteCls",
+			"deleteClass",
+			"wines",
+			"WINES",
+			"wines",
+			"rowIdx",
+			"doIt",
+			"row",
+			"ROW",
+			"row",
+			"ROW",
+			"row",
+			"i",
+			"I",
+			"i",
+			"I",
+			"i",
+			"view2",
+			"view1",
+			"myCtrl1",
+			"i",
+			"@media",
+			" <",
+			"result",
+			"Email",
+			"          '<h1>This is the title</h1>'+\n          '</div>'+\n          '<div class=\"modal-body\">'+\n          '<p>Enter a value to pass to <code>close</code> as the result: <input ng-model=\"result\" /></p>'+\n          '</div>'+\n          '<div class=\"modal-footer\">'+\n          '<button ng-click=\"close(result)\" class=\"btn btn-primary\" >Close</button>'+\n          '</div>';",
+			"json",
+			"Cellar.view.Viewport",
+			"DeftQuickStart",
+			"CellarApplication",
+			"DeftApplication",
+			"DeftQuickStart",
+			"model",
+			"Ext"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"CompanyStore",
+			"Cellar"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "app/js/controllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5896,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3299,
+								3299
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/js/services.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 596,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								504,
+								525
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "scripts/deploy.sh",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 157,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								97,
+								97
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3622,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1761,
+								1761
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 168.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"project": "i2037.sublime-project",
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"index.",
+				"app\\index.html"
+			],
+			[
+				"del",
+				"scripts\\deploy.sh"
+			],
+			[
+				"controllers.js",
+				"app\\js\\controllers.js"
+			],
+			[
+				"controllerspec.js",
+				"test\\unit\\controllersSpec.js"
+			],
+			[
+				"controllers",
+				"app\\js\\controllers.js"
+			],
+			[
+				"app.j",
+				"app\\js\\app.js"
+			],
+			[
+				"winewv",
+				"app\\partials\\wineview.html"
+			],
+			[
+				"controllerspec",
+				"test\\unit\\controllersSpec.js"
+			],
+			[
+				"controller.js",
+				"app\\js\\controllers.js"
+			],
+			[
+				"wineform",
+				"app\\partials\\wineform.html"
+			],
+			[
+				"index.ht",
+				"app\\index.html"
+			],
+			[
+				"",
+				"test\\unit\\controllersSpec.js"
+			],
+			[
+				"controllesp",
+				"test\\unit\\controllersSpec.js"
+			],
+			[
+				"rec",
+				"app\\partials\\recipies.html"
+			],
+			[
+				"controlersp",
+				"test\\unit\\controllersSpec.js"
+			],
+			[
+				"home",
+				"app\\partials\\home.html"
+			],
+			[
+				"index",
+				"app/index.html"
+			],
+			[
+				"controllersp",
+				"test/unit/controllersSpec.js"
+			],
+			[
+				"controll",
+				"app/js/controllers.js"
+			],
+			[
+				"con",
+				"test/unit/controllersSpec.js"
+			],
+			[
+				"controller",
+				"test/unit/controllersSpec.js"
+			],
+			[
+				"winegrid",
+				"app/controller/WineGridController.js"
+			],
+			[
+				"wine.js",
+				"model/Wine.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 204.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
