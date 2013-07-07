@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"us",
+				"userName"
+			],
+			[
+				"for",
+				"for	for (…) {…}"
+			],
+			[
+				"is",
+				"isLoggedIn"
+			],
+			[
 				"grape",
 				"grapeId"
 			],
@@ -25,10 +37,6 @@
 			],
 			[
 				"fo",
-				"for	for (…) {…} (Improved Native For-Loop)"
-			],
-			[
-				"for",
 				"for	for (…) {…} (Improved Native For-Loop)"
 			],
 			[
@@ -171,23 +179,7 @@
 			"file": "app/js/controllers.js",
 			"settings":
 			{
-				"buffer_size": 5896,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/js/services.js",
-			"settings":
-			{
-				"buffer_size": 596,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "scripts/deploy.sh",
-			"settings":
-			{
-				"buffer_size": 157,
+				"buffer_size": 6824,
 				"line_ending": "Windows"
 			}
 		},
@@ -195,7 +187,23 @@
 			"file": "app/index.html",
 			"settings":
 			{
-				"buffer_size": 3622,
+				"buffer_size": 4018,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/services.js",
+			"settings":
+			{
+				"buffer_size": 940,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/app.js",
+			"settings":
+			{
+				"buffer_size": 1054,
 				"line_ending": "Windows"
 			}
 		}
@@ -227,8 +235,9 @@
 	},
 	"file_history":
 	[
-		"/C/Users/richard/Dev/src/i2037/app/partials/wineform.html",
 		"/C/Users/richard/Dev/src/i2037/app/js/services.js",
+		"/C/Users/richard/Dev/src/i2037/scripts/deploy.sh",
+		"/C/Users/richard/Dev/src/i2037/app/partials/wineform.html",
 		"/C/Users/richard/Dev/src/i2037/test/unit/controllersSpec.js",
 		"/C/Users/richard/Dev/src/i2037/test/e2e/scenarios.js",
 		"/C/Users/richard/Dev/src/i2037/app/index.html",
@@ -236,7 +245,6 @@
 		"/C/Users/richard/Dev/src/i2037/app/js/app.js",
 		"/C/Users/richard/Dev/src/i2037/app/lib/ui-bootstrap/ui-bootstrap-tpls-0.3.0.js",
 		"/C/Users/richard/AppData/Roaming/Sublime Text 3/Packages/Default/Default (Windows).sublime-keymap",
-		"/C/Users/richard/Dev/src/i2037/scripts/deploy.sh",
 		"/C/Users/richard/Dev/src/i2037/scripts/build.sh",
 		"/C/Users/richard/Dev/src/i2037/app/partials/recipes.html",
 		"/C/Users/richard/Dev/src/i2037/app/partials/recipies.html",
@@ -334,6 +342,15 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"		\n",
+			"instance",
+			"cellar-webapp",
+			"cellar",
+			"d",
+			"showLoginForm",
+			"userName",
+			"Username",
+			"userName",
 			"slickgrid",
 			"grapeService",
 			"wineService",
@@ -435,15 +452,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5896,
+						"buffer_size": 6824,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3299,
-								3299
+								4062,
+								4062
 							]
 						],
 						"settings":
@@ -453,26 +470,55 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 84.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "app/js/services.js",
+					"file": "app/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 596,
+						"buffer_size": 4018,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								504,
-								525
+								2683,
+								2683
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 126.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/js/services.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 940,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								677,
+								677
 							]
 						],
 						"settings":
@@ -486,57 +532,28 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "scripts/deploy.sh",
+					"buffer": 3,
+					"file": "app/js/app.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 157,
+						"buffer_size": 1054,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								97,
-								97
+								960,
+								960
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "app/index.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3622,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1761,
-								1761
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 168.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -586,6 +603,10 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"serv",
+				"app\\js\\services.js"
+			],
 			[
 				"index.",
 				"app\\index.html"

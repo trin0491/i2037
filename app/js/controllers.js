@@ -144,7 +144,7 @@ function WineFormCtrl($scope, dialog, wine, Grape) {
 };
 WineFormCtrl.$inject = ['$scope', 'dialog', 'wine', 'Grape'];
 
-function NavBarCtrl($scope, $location, $dialog, $http, User) {
+function NavBarCtrl($scope, $location, $dialog, $http, User, Session) {
   $scope.user = null;
   $scope.$location = $location;
 
@@ -152,9 +152,15 @@ function NavBarCtrl($scope, $location, $dialog, $http, User) {
     var isLoggedIn = user != null;
     $scope.showCellar = isLoggedIn;
     $scope.showCage = isLoggedIn;
+    $scope.showLogin = !isLoggedIn;
+    $scope.showLogout = isLoggedIn;
   }
-
+  setMenuVisibility($scope.user);
   $scope.$watch("user", setMenuVisibility);
+
+  Session.on('logout', function() {
+    $scope.login();
+  });
 
   $scope.login = function() {
     var opts = {
@@ -166,7 +172,7 @@ function NavBarCtrl($scope, $location, $dialog, $http, User) {
         controller: 'LoginFormCtrl',
         resolve: {
           user: function() {
-            if ($scope.user) {
+            if ($scope.user && $scope.user.userName) {
               return angular.copy($scope.user)  
             } else {
               return  null;
@@ -177,8 +183,7 @@ function NavBarCtrl($scope, $location, $dialog, $http, User) {
 
     var loginForm = $dialog.dialog(opts);
     loginForm.open().then(function(credentials){
-      if(credentials)
-      {        
+      if(credentials) {        
         var user = jQuery.param({
           j_username: credentials.userName,
           j_password: credentials.password
@@ -206,16 +211,16 @@ function NavBarCtrl($scope, $location, $dialog, $http, User) {
   };
 
   $scope.getAccountLabel = function() {
-    if ($scope.user) {
+    if ($scope.user && $scope.user.userName) {
       return $scope.user.userName;      
     } else {
       return 'My Account';      
     }
   };
 
-//  $scope.user = User.get();
+  $scope.user = User.get();
 }
-NavBarCtrl.$inject = ['$scope', '$location', '$dialog', '$http', 'User'];
+NavBarCtrl.$inject = ['$scope', '$location', '$dialog', '$http', 'User', 'Session'];
 
 function LoginFormCtrl($scope, dialog, user) {
   if (user) {

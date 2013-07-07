@@ -26,6 +26,26 @@ angular.module('i2037.services', ['ngResource'])
 })
 
 .factory('User', function($resource) {
-	return $resource('/i2037-webapp/userprofile/')
-});
+	return $resource('/i2037-webapp/session/user')
+})
+
+.factory('Session', function() {
+	var my = {};
+
+	var handlers = [];
+
+	my.on = function(name, callback) {
+		handlers.push(callback);
+	};
+
+	my.logout = function() {
+		for (var i = 0; i < handlers.length; i++) {
+			handlers[i]();
+		};
+	};
+
+	return my;
+})
+
+;
 
