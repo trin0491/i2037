@@ -6,6 +6,7 @@ var i2037 = angular.module('i2037', ['ui.bootstrap', 'i2037.filters', 'i2037.ser
 i2037.config(function($routeProvider, $httpProvider) {
     $routeProvider.when('/home',      {templateUrl: 'partials/home.html', controller: HomeCtrl});
     $routeProvider.when('/recipes',   {templateUrl: 'partials/recipes.html', controller: RecipesCtrl});
+	$routeProvider.when('/scallops',   {templateUrl: 'partials/recipes.html', controller: RecipesCtrl});
     $routeProvider.when('/wineview',  {templateUrl: 'partials/wineview.html',  controller: WineViewCtrl});
     $routeProvider.when('/cage', {templateUrl: 'partials/slickgrid.html', controller: SlickgridCtrl});
     $routeProvider.otherwise({redirectTo: '/home'});
@@ -16,7 +17,7 @@ i2037.config(function($routeProvider, $httpProvider) {
 			    return response;
 		    }, function(response) {
 				if (response && response.status == 403) {					
-			    	Session.logout();
+			    	Session.raiseAuthFailure();
 				}
 				return $q.reject(response);
 		    });

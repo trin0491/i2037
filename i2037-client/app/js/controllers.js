@@ -99,6 +99,8 @@ WineViewCtrl.$inject = ['$scope', '$dialog', 'Wine'];
 function WineFormCtrl($scope, dialog, wine, Grape) {
   $scope.wine = wine;
   $scope.isNewGrape = false;
+  $scope.grapeName = null;
+  $scope.grapes = Grape.query();
 
   $scope.$watch("grapes.length", function(length) {
     angular.forEach($scope.grapes, function(grape) {
@@ -107,7 +109,23 @@ function WineFormCtrl($scope, dialog, wine, Grape) {
       }
     });
   });
-  $scope.grapes = Grape.query();
+
+  $scope.$watch('grapeName', function(newGrapeName, oldGrapeName) {
+    if (newGrapeName) {
+      onGrapeChanged();
+    }
+  });
+
+  function onGrapeChanged() {
+    var grape = findGrape($scope.grapeName);
+    if (grape) {
+      wine.grapeId = grape.grapeId;
+      $scope.isNewGrape = false;
+    } else {
+      wine.grapeId = undefined;
+      $scope.isNewGrape = true;
+    }      
+  };
 
   function findGrape(grapeName) {
     var rv;
@@ -119,19 +137,14 @@ function WineFormCtrl($scope, dialog, wine, Grape) {
     return rv;    
   };
 
-  $scope.$watch('grapeName', function(newGrapeName, oldGrapeName) {
-    if (newGrapeName) {
-      var grape = findGrape(newGrapeName);
-      if (grape) {
-        wine.grapeId = grape.grapeId;
-      } else {
-        wine.grapeId = undefined;
-      }      
+  $scope.addGrape = function() {
+    if (!$scope.isNewGrape) {
+      return;
     }
-  });
-
-  $scope.onGrapeChange = function() {
-    $scope.isNewGrape = angular.isUndefined(findGrape($scope.grapeName));
+    var grape = new Grape({name: $scope.grapeName});
+    grape.$save({}, function() {
+      onGrapeChanged();
+    });
   };
 
   $scope.cancel = function() {
@@ -139,12 +152,15 @@ function WineFormCtrl($scope, dialog, wine, Grape) {
   };
 
   $scope.submit = function() {
+    if ($scope.isNewGrape) {
+      return;
+    }
     dialog.close($scope.wine);
   }
 };
 WineFormCtrl.$inject = ['$scope', 'dialog', 'wine', 'Grape'];
 
-function NavBarCtrl($scope, $location, $dialog, $http, User, Session) {
+function NavBarCtrl($scope, $location, $dialog, User, Session) {
   $scope.user = null;
   $scope.$location = $location;
 
@@ -158,7 +174,7 @@ function NavBarCtrl($scope, $location, $dialog, $http, User, Session) {
   setMenuVisibility($scope.user);
   $scope.$watch("user", setMenuVisibility);
 
-  Session.on('logout', function() {
+  Session.on('authFailure', function() {
     $scope.login();
   });
 
@@ -171,39 +187,26 @@ function NavBarCtrl($scope, $location, $dialog, $http, User, Session) {
         templateUrl: 'partials/loginform.html', 
         controller: 'LoginFormCtrl',
         resolve: {
-          user: function() {
+          userName: function() {
             if ($scope.user && $scope.user.userName) {
-              return angular.copy($scope.user)  
+              return $scope.user.userName;  
             } else {
-              return  null;
+              return null;
             }              
           }
         }
     };
 
     var loginForm = $dialog.dialog(opts);
-    loginForm.open().then(function(credentials){
-      if(credentials) {        
-        var user = jQuery.param({
-          j_username: credentials.userName,
-          j_password: credentials.password
-        });
-        $http.post('/i2037-webapp/j_spring_security_check', user, { 
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }
-        }).success(function(data, status) {
-          $scope.user = data;
-        }).error(function(data, status) {
-          alert("Failed to authenticate");
-        });
+    loginForm.open().then(function(user){
+      if(user) {        
+        $scope.user = user;
       }
     });
   };
 
   $scope.logout = function() {
-    $http.get('/i2037-webapp/j_spring_security_logout')
-    .success(function(data, status) {
+    User.logout().success(function(data, status) {
       $scope.user = null;
     }).error(function(data, status) {
       alert("Failed to logout");
@@ -220,15 +223,17 @@ function NavBarCtrl($scope, $location, $dialog, $http, User, Session) {
 
   $scope.user = User.get();
 }
-NavBarCtrl.$inject = ['$scope', '$location', '$dialog', '$http', 'User', 'Session'];
+NavBarCtrl.$inject = ['$scope', '$location', '$dialog', 'User', 'Session'];
 
-function LoginFormCtrl($scope, dialog, user) {
-  if (user) {
+function LoginFormCtrl($scope, dialog, User, userName) {
+  $scope.rememberMe = true;
+  if (userName) {
     $scope.title = 'Change Password'
-    $scope.userName = user.userName;
+    $scope.userName = userName;
     $scope.userNameReadonly = true;
   } else {
-    $scope.title = 'Login'
+    $scope.title = 'Login';
+    $scope.userName = $.cookie('userName');
   }
 
   $scope.cancel = function(){
@@ -236,13 +241,20 @@ function LoginFormCtrl($scope, dialog, user) {
   };
 
   $scope.submit = function() {
-    dialog.close({
-      userName: $scope.userName, 
-      password: $scope.password
+    if ($scope.rememberMe && $scope.userName) {
+      $.cookie('userName', $scope.userName, { expires: 7 });
+    } else {
+      $.cookie.removeCookier('userName');
+    }
+
+    User.login($scope.userName, $scope.password).success(function(user, status) {
+      dialog.close(user);
+    }).error(function(data, status) {
+      alert("Failed to authenticate");
     });
   }
 }
-LoginFormCtrl.$inject = ['$scope', 'dialog', 'user'];
+LoginFormCtrl.$inject = ['$scope', 'dialog', 'User', 'userName'];
 
 function HomeCtrl() {}
 HomeCtrl.$inject = [];

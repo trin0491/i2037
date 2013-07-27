@@ -4,16 +4,24 @@
 		"selected_items":
 		[
 			[
+				"is",
+				"isNewGrape"
+			],
+			[
+				"gra",
+				"grapeName"
+			],
+			[
+				"user",
+				"userName"
+			],
+			[
 				"us",
 				"userName"
 			],
 			[
 				"for",
 				"for	for (…) {…}"
-			],
-			[
-				"is",
-				"isLoggedIn"
 			],
 			[
 				"grape",
@@ -38,10 +46,6 @@
 			[
 				"fo",
 				"for	for (…) {…} (Improved Native For-Loop)"
-			],
-			[
-				"gra",
-				"grapes"
 			],
 			[
 				"to",
@@ -179,7 +183,7 @@
 			"file": "app/js/controllers.js",
 			"settings":
 			{
-				"buffer_size": 6824,
+				"buffer_size": 6960,
 				"line_ending": "Windows"
 			}
 		},
@@ -187,15 +191,7 @@
 			"file": "app/index.html",
 			"settings":
 			{
-				"buffer_size": 4018,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/js/services.js",
-			"settings":
-			{
-				"buffer_size": 940,
+				"buffer_size": 4078,
 				"line_ending": "Windows"
 			}
 		},
@@ -203,7 +199,23 @@
 			"file": "app/js/app.js",
 			"settings":
 			{
-				"buffer_size": 1054,
+				"buffer_size": 1166,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/partials/recipes.html",
+			"settings":
+			{
+				"buffer_size": 3177,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/partials/wineform.html",
+			"settings":
+			{
+				"buffer_size": 2578,
 				"line_ending": "Windows"
 			}
 		}
@@ -235,6 +247,9 @@
 	},
 	"file_history":
 	[
+		"/C/Users/richard/Dev/src/i2037/i2037-client/app/js/services.js",
+		"/C/Users/richard/Dev/src/i2037/i2037-client/app/partials/loginform.html",
+		"/C/Users/richard/Dev/src/i2037/i2037-client/app/lib/angular/angular-cookies.js",
 		"/C/Users/richard/Dev/src/i2037/app/js/services.js",
 		"/C/Users/richard/Dev/src/i2037/scripts/deploy.sh",
 		"/C/Users/richard/Dev/src/i2037/app/partials/wineform.html",
@@ -339,9 +354,17 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"new Wine",
+			"WineFormCtrl",
+			"data",
+			"user",
+			"userName",
+			"Browser",
+			"BrowserProvider",
+			"$browser",
 			"		\n",
 			"instance",
 			"cellar-webapp",
@@ -443,7 +466,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -452,15 +475,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6824,
+						"buffer_size": 6960,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4062,
-								4062
+								2478,
+								2478
 							]
 						],
 						"settings":
@@ -470,7 +493,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 84.0,
+						"translation.y": 1330.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -481,15 +504,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4018,
+						"buffer_size": 4078,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2683,
-								2683
+								3280,
+								3280
 							]
 						],
 						"settings":
@@ -499,26 +522,26 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 126.0,
+						"translation.y": 364.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "app/js/services.js",
+					"file": "app/js/app.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 940,
+						"buffer_size": 1166,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								677,
-								677
+								481,
+								481
 							]
 						],
 						"settings":
@@ -533,24 +556,55 @@
 				},
 				{
 					"buffer": 3,
-					"file": "app/js/app.js",
+					"file": "app/partials/recipes.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1054,
+						"buffer_size": 3177,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								960,
-								960
+								542,
+								550
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/partials/wineform.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2578,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1702,
+								1702
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -604,6 +658,22 @@
 		"selected_items":
 		[
 			[
+				"wineform",
+				"i2037-client\\app\\partials\\wineform.html"
+			],
+			[
+				"recip",
+				"i2037-client\\app\\partials\\recipes.html"
+			],
+			[
+				"cook",
+				"i2037-client\\app\\lib\\angular\\angular-cookies.js"
+			],
+			[
+				"login",
+				"i2037-client\\app\\partials\\loginform.html"
+			],
+			[
 				"serv",
 				"app\\js\\services.js"
 			],
@@ -642,10 +712,6 @@
 			[
 				"controller.js",
 				"app\\js\\controllers.js"
-			],
-			[
-				"wineform",
-				"app\\partials\\wineform.html"
 			],
 			[
 				"index.ht",
@@ -712,11 +778,11 @@
 	},
 	"select_symbol":
 	{
-		"height": 0.0,
+		"height": 392.0,
 		"selected_items":
 		[
 		],
-		"width": 0.0
+		"width": 392.0
 	},
 	"settings":
 	{

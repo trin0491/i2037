@@ -22,9 +22,13 @@
       <div class="controls">
         <div class="input-append">
           <input type="text" id="inputGrape" name="grape" ng-model="grapeName" 
-            ng-change="onGrapeChange()" typeahead="grape.name for grape in grapes | filter: $viewValue" 
+            ng-change="onGrapeChange()" 
+            typeahead="grape.name for grape in grapes | filter: $viewValue" 
             placeholder="Grape" required>
-          <button class="btn" ng-disabled="!isNewGrape" ng-class="{ disabled: !isNewGrape }" type="button"><i class="icon-plus-sign"></i></button>
+          <button class="btn" 
+            ng-disabled="!isNewGrape" 
+            ng-class="{ disabled: !isNewGrape }" 
+            ng-click="addGrape()" type="button"><i class="icon-plus-sign"></i></button>
         </div>
       </div>
     </div>
@@ -43,6 +47,9 @@
   </form>
 </div>
 <div class="modal-footer">
-  <button ng-click="submit()" class="btn btn-primary" ng-disabled="wineform.$invalid">Submit</button>
+  <button ng-click="submit()" 
+    class="btn btn-primary" 
+    ng-disabled="wineform.$invalid || isNewGrape"
+    ng-class="{ disabled: !isNewGrape }">Submit</button>
   <button ng-click="cancel()" class="btn">Cancel</button>  
 </div>'

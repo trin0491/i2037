@@ -25,8 +25,26 @@ angular.module('i2037.services', ['ngResource'])
   	})
 })
 
-.factory('User', function($resource) {
-	return $resource('/i2037-webapp/session/user')
+.factory('User', function($resource, $http) {
+	var user = $resource('/i2037-webapp/session/user');
+
+	user.login = function(userName, password) {
+	    var loginParams = jQuery.param({
+	      j_username: userName,
+	      j_password: password
+	    });		
+	    return $http.post('/i2037-webapp/j_spring_security_check', loginParams, { 
+	      headers: {
+	        'Content-Type': 'application/x-www-form-urlencoded'
+	      }
+	    });
+	};
+
+	user.logout = function() {
+	    return $http.get('/i2037-webapp/j_spring_security_logout');
+	};
+
+	return user;
 })
 
 .factory('Session', function() {
@@ -38,7 +56,7 @@ angular.module('i2037.services', ['ngResource'])
 		handlers.push(callback);
 	};
 
-	my.logout = function() {
+	my.raiseAuthFailure = function() {
 		for (var i = 0; i < handlers.length; i++) {
 			handlers[i]();
 		};
