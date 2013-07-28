@@ -191,7 +191,7 @@
 			"file": "app/index.html",
 			"settings":
 			{
-				"buffer_size": 4078,
+				"buffer_size": 4102,
 				"line_ending": "Windows"
 			}
 		},
@@ -466,7 +466,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -504,15 +504,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4078,
+						"buffer_size": 4102,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3280,
-								3280
+								3535,
+								3535
 							]
 						],
 						"settings":
@@ -522,7 +522,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 364.0,
+						"translation.y": 420.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -596,8 +596,8 @@
 						"selection":
 						[
 							[
-								1702,
-								1702
+								187,
+								187
 							]
 						],
 						"settings":
