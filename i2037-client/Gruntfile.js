@@ -1,23 +1,51 @@
 module.exports = function(grunt) {
 
-  // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    uglify: {
+    concat: {
       options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+        separator: ';'
       },
       build: {
-        src: 'app/js/app.js',
-        dest: 'build/<%= pkg.name %>.min.js'
+        src: ['app/js/**/*.js'],
+        dest: 'build/<%= pkg.name %>.js'
       }
+    },
+    uglify: {
+      options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+      },
+      build: {
+        files: {
+          'build/<%= pkg.name %>.min.js': ['<%= concat.build.dest %>']
+        }
+      }
+    },
+    jshint: {
+      files: ['gruntfile.js', 'app/js/**/*.js', 'test/**/*.js'],
+      options: {
+        // options here to override JSHint defaults
+        globals: {
+          jQuery: true,
+          console: true,
+          module: true,
+          document: true
+        }
+      }
+    },
+    watch: {
+      files: ['<%= jshint.files %>'],
+      tasks: ['jshint']
     }
   });
 
-  // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-concat');
 
-  // Default task(s).
-  grunt.registerTask('default', ['uglify']);
+  grunt.registerTask('test', ['jshint']);
+
+  grunt.registerTask('default', ['concat', 'uglify']);
 
 };
