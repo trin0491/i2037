@@ -105,11 +105,11 @@ http://www.springframework.org/schema/security/spring-security-3.1.xsd">
   
   <sec:http entry-point-ref="forbiddenEntryPoint">
     <sec:access-denied-handler ref="accessDeniedHandler" /> 
-    <sec:form-login authentication-failure-handler-ref="authFailureHandler" default-target-url="/cxf/session/user"/>    
-    <sec:logout delete-cookies="JSESSIONID" logout-success-url="/cxf/session/loggedout" />
+    <sec:form-login authentication-failure-handler-ref="authFailureHandler" default-target-url="/svc/session/user"/>    
+    <sec:logout delete-cookies="JSESSIONID" logout-success-url="/svc/session/loggedout" />
     <sec:session-management />
-    <sec:intercept-url pattern="/cxf/session/loggedout" access="ROLE_ANONYMOUS,ROLE_USER" />       
-    <sec:intercept-url pattern="/cxf/**" access="ROLE_USER" />   
+    <sec:intercept-url pattern="/svc/session/loggedout" access="ROLE_ANONYMOUS,ROLE_USER" />       
+    <sec:intercept-url pattern="/svc/**" access="ROLE_USER" />   
     <sec:intercept-url pattern="/**" access="ROLE_ANONYMOUS,ROLE_USER" />
   </sec:http>
 

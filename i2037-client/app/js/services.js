@@ -13,27 +13,27 @@ angular.module('i2037.services', ['ngResource'])
 .value('version', '0.1')
 
 .factory('Wine', function($resource) {
-	return $resource('/i2037-webapp/wines/:wineId', 
+	return $resource('svc/wines/:wineId', 
 		{ wineId: '@wineId' }, 
 		{ query: {method:'GET', params:{}, isArray:true } }
 	)
 })  
 
 .factory('Grape', function($resource) {
-  	return $resource('/i2037-webapp/grapes', {}, {
+  	return $resource('svc/grapes', {}, {
   		query: {method:'GET', params:{}, isArray:true}
   	})
 })
 
 .factory('User', function($resource, $http) {
-	var user = $resource('/i2037-webapp/session/user');
+	var user = $resource('svc/session/user');
 
 	user.login = function(userName, password) {
 	    var loginParams = jQuery.param({
 	      j_username: userName,
 	      j_password: password
 	    });		
-	    return $http.post('/i2037-webapp/j_spring_security_check', loginParams, { 
+	    return $http.post('j_spring_security_check', loginParams, { 
 	      headers: {
 	        'Content-Type': 'application/x-www-form-urlencoded'
 	      }
@@ -41,7 +41,7 @@ angular.module('i2037.services', ['ngResource'])
 	};
 
 	user.logout = function() {
-	    return $http.get('/i2037-webapp/j_spring_security_logout');
+	    return $http.get('j_spring_security_logout');
 	};
 
 	return user;
