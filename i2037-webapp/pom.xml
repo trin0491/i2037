@@ -168,7 +168,7 @@
           <webResources>
             <resource>
               <!-- this is relative to the pom.xml directory -->
-              <directory>../i2037-client/build</directory>
+              <directory>../i2037-client/build/release</directory>
             </resource>
           </webResources>
         </configuration>        

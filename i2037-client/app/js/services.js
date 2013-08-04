@@ -2,38 +2,43 @@
 
 /* Services */
 
+angular.module('i2037.services', ['ngResource', 'i2037.environment'])
 
-// Demonstrate how to register services
-// In this case it is a simple value service.
-//angular.module('myApp.services', []).
-//  value('version', '0.1');
+.factory('pathFinder', function(version, svcPrefix) {
+	var my = { };
+	var prefix = svcPrefix;
+	// TODO
+	if (prefix) {
+		prefix += '/';
+	}
+	my.get = function(name) {
+		return prefix + name;
+	};
+	return my;	
+})
 
-angular.module('i2037.services', ['ngResource'])
-
-.value('version', '0.1')
-
-.factory('Wine', function($resource) {
-	return $resource('svc/wines/:wineId', 
+.factory('Wine', function($resource, pathFinder) {
+	return $resource(pathFinder.get('svc/wines/:wineId'), 
 		{ wineId: '@wineId' }, 
 		{ query: {method:'GET', params:{}, isArray:true } }
 	)
 })  
 
-.factory('Grape', function($resource) {
-  	return $resource('svc/grapes', {}, {
+.factory('Grape', function($resource, pathFinder) {
+  	return $resource(pathFinder.get('svc/grapes'), {}, {
   		query: {method:'GET', params:{}, isArray:true}
   	})
 })
 
-.factory('User', function($resource, $http) {
-	var user = $resource('svc/session/user');
+.factory('User', function($resource, $http, pathFinder) {
+	var user = $resource(pathFinder.get('svc/session/user'));
 
 	user.login = function(userName, password) {
 	    var loginParams = jQuery.param({
 	      j_username: userName,
 	      j_password: password
 	    });		
-	    return $http.post('j_spring_security_check', loginParams, { 
+	    return $http.post(pathFinder.get('j_spring_security_check'), loginParams, { 
 	      headers: {
 	        'Content-Type': 'application/x-www-form-urlencoded'
 	      }
@@ -41,7 +46,7 @@ angular.module('i2037.services', ['ngResource'])
 	};
 
 	user.logout = function() {
-	    return $http.get('j_spring_security_logout');
+	    return $http.get(pathFinder.get('j_spring_security_logout'));
 	};
 
 	return user;
