@@ -100,8 +100,8 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      files: ['Gruntfile.js', 'app/**/*.js', 'app/*.html'],
-      tasks: ['env:dev', 'preprocess:dev', 'concat:dev']
+      files: ['Gruntfile.js', 'app/**/*.js', 'app/**/*.html'],
+      tasks: ['env:dev', 'copy:dev', 'preprocess:dev', 'concat:dev']
     }
   });
 
