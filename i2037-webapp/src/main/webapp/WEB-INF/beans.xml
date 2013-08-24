@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-  xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
   xmlns:context="http://www.springframework.org/schema/context"
-  xmlns:tx="http://www.springframework.org/schema/tx" 
-  xmlns:sec="http://www.springframework.org/schema/security"
-  xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:tx="http://www.springframework.org/schema/tx" xmlns:sec="http://www.springframework.org/schema/security"
+  xmlns:p="http://www.springframework.org/schema/p" xmlns:oa="http://www.springframework.org/schema/security/oauth2"
   xsi:schemaLocation="
 http://www.springframework.org/schema/beans 
 http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
@@ -16,11 +14,13 @@ http://cxf.apache.org/schemas/jaxrs.xsd
 http://www.springframework.org/schema/tx 
 http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
 http://www.springframework.org/schema/security
-http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+http://www.springframework.org/schema/security/spring-security-3.1.xsd
+http://www.springframework.org/schema/security/oauth2
+http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
 
   <import resource="classpath:META-INF/cxf/cxf.xml" />
 
-  <context:property-placeholder location="WEB-INF/i2037.properties"/>
+  <context:property-placeholder location="WEB-INF/i2037.properties" />
   <context:annotation-config />
 
   <jaxrs:server id="services" address="/">
@@ -31,10 +31,12 @@ http://www.springframework.org/schema/security/spring-security-3.1.xsd">
       <bean class="net.i2037.cellar.GrapeServiceImpl">
         <property name="grapeDao" ref="grapeDao" />
       </bean>
-      <bean class="net.i2037.cellar.SessionServiceImpl">
-          
+      <bean class="net.i2037.cellar.SessionServiceImpl" />
+      <bean class="net.i2037.moves.MovesServiceImpl">
+        <property name="movesTemplate">
+          <oa:rest-template resource="moves" access-token-provider="accessTokenProviderChain"/>
+        </property>
       </bean>
-      <bean class="net.i2037.go.GoServiceImpl" />
     </jaxrs:serviceBeans>
     <jaxrs:providers>
       <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
@@ -51,12 +53,11 @@ http://www.springframework.org/schema/security/spring-security-3.1.xsd">
   <bean id="cellarDB" class="org.apache.commons.dbcp.BasicDataSource"
     destroy-method="close">
     <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-    <property name="url"
-      value="jdbc:mysql://${i2037.db.host}/i2037" />
+    <property name="url" value="jdbc:mysql://${i2037.db.host}/i2037" />
     <property name="username" value="${i2037.db.username}" />
     <property name="password" value="${i2037.db.password}" />
   </bean>
-  
+
   <bean id="sessionFactory"
     class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
     <property name="dataSource" ref="cellarDB" />
@@ -64,6 +65,7 @@ http://www.springframework.org/schema/security/spring-security-3.1.xsd">
       <list>
         <value>net.i2037.cellar.model.WineImpl</value>
         <value>net.i2037.cellar.model.GrapeImpl</value>
+        <value>net.i2037.oauth2.OAuth2AccessTokenImpl</value>
       </list>
     </property>
     <property name="hibernateProperties">
@@ -86,22 +88,27 @@ http://www.springframework.org/schema/security/spring-security-3.1.xsd">
   <!-- Security -->
   
   <!-- returns 403 Forbidden if the error url is not set -->
-  <bean id="accessDeniedHandler" class="org.springframework.security.web.access.AccessDeniedHandlerImpl" />
+  <bean id="accessDeniedHandler"
+    class="org.springframework.security.web.access.AccessDeniedHandlerImpl" />
   
   <!-- returns 401 Unauthorized if the defaultFailureUrl is not set  -->
-  <bean id="authFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler" />
+  <bean id="authFailureHandler"
+    class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler" />
    
   <!-- returns 403 forbidden -->
-  <bean id="forbiddenEntryPoint" class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint" />
-  
+  <bean id="forbiddenEntryPoint"
+    class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint" />
+
   <sec:http entry-point-ref="forbiddenEntryPoint">
-    <sec:access-denied-handler ref="accessDeniedHandler" /> 
-    <sec:form-login authentication-failure-handler-ref="authFailureHandler" default-target-url="/svc/session/user"/>    
+    <sec:access-denied-handler ref="accessDeniedHandler" />
+    <sec:form-login authentication-failure-handler-ref="authFailureHandler" default-target-url="/svc/session/user" />
     <sec:logout delete-cookies="JSESSIONID" logout-success-url="/svc/session/loggedout" />
     <sec:session-management />
-    <sec:intercept-url pattern="/svc/session/loggedout" access="ROLE_ANONYMOUS,ROLE_USER" />       
-    <sec:intercept-url pattern="/svc/**" access="ROLE_USER" />   
+    <sec:intercept-url pattern="/svc/session/loggedout" access="ROLE_ANONYMOUS,ROLE_USER" />
+    <sec:intercept-url pattern="/svc/**" access="ROLE_USER" />
     <sec:intercept-url pattern="/**" access="ROLE_ANONYMOUS,ROLE_USER" />
+
+    <sec:custom-filter ref="oauth2ClientFilter" after="EXCEPTION_TRANSLATION_FILTER" />
   </sec:http>
 
   <sec:authentication-manager>
@@ -112,5 +119,35 @@ http://www.springframework.org/schema/security/spring-security-3.1.xsd">
       </sec:user-service>
     </sec:authentication-provider>
   </sec:authentication-manager>
+  
+  <!-- spring oauth -->
+  <oa:client id="oauth2ClientFilter" />
 
+  <oa:resource id="moves" type="authorization_code"
+    client-id="${i2037.moves.client-id}"
+    client-secret="${i2037.moves.client-secret}"
+    user-authorization-uri="https://api.moves-app.com/oauth/v1/authorize"
+    access-token-uri="https://api.moves-app.com/oauth/v1/access_token"
+    scope="activity location" client-authentication-scheme="form" />
+
+  <bean id="accessTokenProviderChain"
+    class="org.springframework.security.oauth2.client.token.AccessTokenProviderChain">
+<!-- Redefinition of the default access token providers -->
+    <constructor-arg index="0">
+      <list>
+        <bean class="org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeAccessTokenProvider" />
+        <bean
+          class="org.springframework.security.oauth2.client.token.grant.implicit.ImplicitAccessTokenProvider" />
+        <bean
+          class="org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordAccessTokenProvider" />
+        <bean
+          class="org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsAccessTokenProvider" />
+      </list>
+    </constructor-arg>
+    <property name="clientTokenServices" ref="clientTokenServices" />
+  </bean>
+  
+  <bean id="clientTokenServices" class="net.i2037.oauth2.ClientTokenServicesDao">
+    <property name="sessionFactory" ref="sessionFactory" />      
+  </bean>
 </beans>

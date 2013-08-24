@@ -92,7 +92,7 @@ function WineViewCtrl($scope, $dialog, Wine) {
 
   $scope.winesPerRow = 4;
   $scope.wineCls = 'span3';
-  refresh();
+  $scope.refresh();
 }
 WineViewCtrl.$inject = ['$scope', '$dialog', 'Wine'];
 
@@ -258,37 +258,167 @@ LoginFormCtrl.$inject = ['$scope', 'dialog', 'User', 'userName'];
 
 function HomeCtrl() {}
 HomeCtrl.$inject = [];
+ 
+function DatePickerCtrl($scope, $timeout) {
+  $scope.today = function() {
+    $scope.dt = new Date();
+  };
+  $scope.today();
 
-function SlickgridCtrl($scope) {
-  var grid;
-  var columns = [
-    {id: "title", name: "Title", field: "title"},
-    {id: "duration", name: "Duration", field: "duration"},
-    {id: "%", name: "% Complete", field: "percentComplete"},
-    {id: "start", name: "Start", field: "start"},
-    {id: "finish", name: "Finish", field: "finish"},
-    {id: "effort-driven", name: "Effort Driven", field: "effortDriven"}
-  ];
+  $scope.minDate = '2000-01-01';
+  $scope.maxDate = new Date();
 
-  var options = {
-    enableCellNavigation: true,
-    enableColumnReorder: false
+  $scope.showWeeks = true;
+
+  $scope.disabled = function(date, mode) {
+    return false; // Disable weekend selection ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
   };
 
-  var data = [];
-  for (var i = 0; i < 500; i++) {
-    data[i] = {
-      title: "Task " + i,
-      duration: "5 days",
-      percentComplete: Math.round(Math.random() * 100),
-      start: "01/01/2009",
-      finish: "01/05/2009",
-      effortDriven: (i % 5 == 0)
+  $scope.open = function() {
+    $timeout(function() {
+      $scope.opened = true;
+    });
+  };
+
+  $scope.ok = function() {
+    $scope.queryMoves($scope.dt);
+  };
+
+  $scope.dateOptions = {
+    'year-format': "'yy'",
+    'starting-day': 1
+  };
+};
+DatePickerCtrl.$inject = ['$scope', '$timeout'];
+
+
+function SlickgridCtrl($scope, MovesSummary, MovesPlaces) {
+  var markers = [];
+
+  var mapOptions = {
+    center: new google.maps.LatLng(51.46044, -0.29745),
+    zoom: 12,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  var map = new google.maps.Map(
+      document.getElementById("map-canvas"),
+      mapOptions
+  );
+
+  function drawChart(rows) {
+    var chart = new Highcharts.Chart({
+      chart: {
+        type: 'line',
+        renderTo: 'graph'
+      },
+      title: {
+          text: 'Distance Travelled',
+      },
+      subtitle: {
+          text: 'Source: moves-app.com',
+      },
+      xAxis: {
+          categories: rows.map(function(row) {
+            return row.date;
+          }),
+          // tickInterval: 5
+      },
+      yAxis: {
+          title: {
+              text: 'Distance (m)'
+          },
+      },
+      tooltip: {
+          valueSuffix: 'm'
+      },
+      legend: {
+          layout: 'vertical',
+          align: 'right',
+          verticalAlign: 'middle'
+      },
+      series: [{
+          name: 'Walk',
+          data: rows.map(function(row) {
+            return row.wlk ? row.wlk : 0;
+          })
+      }]      
+    });
+  };
+
+  function drawGraph(response) {
+    var columns = [
+      {id: "date", name: "Date", field: "date", width:100},
+      {id: "walk", name: "Walk (m)", field: "wlk", width:100},
+      {id: "run", name: "Run (m)", field: "run", width:100},
+      {id: "cycle", name: "Cycle (m)", field: "cyc", width:100},
+    ];
+
+    var rows = [];
+    for (var i = 0; i < response.length; i++) {
+      var day = response[i];
+      if (day.summary) {        
+        var row = {date: day.date};
+        for(var n=0;n<day.summary.length;n++) {
+          row[day.summary[n].activity] = day.summary[n].distance;
+        }
+        rows.push(row);
+      }
+    };
+    var grid = new Slick.Grid('#myGrid', rows, columns, {
+      enableCellNavigation: true,
+      enableColumnReorder: false
+    });
+
+    drawChart(rows);    
+  };
+
+  function addMarker(segment) {
+    var lat = segment.place.location.lat;
+    var lon = segment.place.location.lon;
+    var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(lat, lon),
+        map: map,
+        title:"Moves Place"
+    });
+    markers.push(marker);        
+  };
+
+  function setCenter(marker) {
+    map.setCenter(marker.position);
+  };
+
+  $scope.queryMoves = function(dt) {
+    function pad(n){return n<10 ? '0'+n : n};
+    var y = dt.getFullYear().toString();
+    var m = pad(dt.getMonth() + 1).toString();
+    var d = pad(dt.getDate()).toString();
+
+    MovesPlaces.query({date: y + m + d}, function(response) {
+      $scope.clearMap();
+
+      for (var d=0;d<response.length;d++) {
+        var segments = response[d].segments;
+        for (var s=0;s<segments.length;s++) {
+          if (segments[s].type == 'place') {
+            addMarker(segments[s]);
+          }        
+        }
+      }
+      
+      if (markers.length > 0) {
+        setCenter(markers[0]);
+      }
+    });
+
+    $scope.clearMap = function() {
+      for (var i in markers) {
+        markers[i].setMap(null);
+      }
+      markers.length = 0;
     };
   };
-  var grid = new Slick.Grid('#myGrid', data, columns, options);
 }
-SlickgridCtrl.$inject = ['$scope'];
+SlickgridCtrl.$inject = ['$scope', 'MovesSummary', 'MovesPlaces'];
 
 function RecipesCtrl($scope) {
 };

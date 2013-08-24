@@ -1,4 +1,4 @@
-package net.i2037.go;
+package net.i2037.moves;
 
 import java.net.URI;
 
