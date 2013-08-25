@@ -37,4 +37,9 @@ public class MovesServiceImpl implements MovesService {
 	public List<?> getDailyPlaces(String date) {
 		return movesTemplate.getForObject(getUrl("user/places/daily/" + date), List.class);		
 	}
+
+	@Override
+	public List<?> getDailyStoryline(String date) {
+		return movesTemplate.getForObject(getUrl("user/storyline/daily/" + date + "?trackPoints=true"), List.class);
+	}
 }

@@ -25,4 +25,8 @@ public interface MovesService {
 	@GET
 	@Path("/places/daily/{date}")
 	List<?> getDailyPlaces(@PathParam("date") String date);	
+	
+	@GET
+	@Path("/storyline/daily/{date}")
+	List<?> getDailyStoryline(@PathParam("date") String date);
 }

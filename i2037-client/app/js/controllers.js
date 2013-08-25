@@ -292,7 +292,7 @@ function DatePickerCtrl($scope, $timeout) {
 DatePickerCtrl.$inject = ['$scope', '$timeout'];
 
 
-function SlickgridCtrl($scope, MovesSummary, MovesPlaces) {
+function SlickgridCtrl($scope, MovesSummary, MovesPlaces, MovesStoryline) {
   var markers = [];
 
   var mapOptions = {
@@ -375,10 +375,12 @@ function SlickgridCtrl($scope, MovesSummary, MovesPlaces) {
   function addMarker(segment) {
     var lat = segment.place.location.lat;
     var lon = segment.place.location.lon;
+    var name = segment.place.name ? segment.place.name : "Unknown";
+
     var marker = new google.maps.Marker({
         position: new google.maps.LatLng(lat, lon),
         map: map,
-        title:"Moves Place"
+        title: name
     });
     markers.push(marker);        
   };
@@ -388,12 +390,16 @@ function SlickgridCtrl($scope, MovesSummary, MovesPlaces) {
   };
 
   $scope.queryMoves = function(dt) {
+    if (!dt) {
+      return;
+    }
+
     function pad(n){return n<10 ? '0'+n : n};
     var y = dt.getFullYear().toString();
     var m = pad(dt.getMonth() + 1).toString();
     var d = pad(dt.getDate()).toString();
 
-    MovesPlaces.query({date: y + m + d}, function(response) {
+    MovesStoryline.query({date: y + m + d}, function(response) {
       $scope.clearMap();
 
       for (var d=0;d<response.length;d++) {
@@ -404,7 +410,7 @@ function SlickgridCtrl($scope, MovesSummary, MovesPlaces) {
           }        
         }
       }
-      
+
       if (markers.length > 0) {
         setCenter(markers[0]);
       }
@@ -418,7 +424,7 @@ function SlickgridCtrl($scope, MovesSummary, MovesPlaces) {
     };
   };
 }
-SlickgridCtrl.$inject = ['$scope', 'MovesSummary', 'MovesPlaces'];
+SlickgridCtrl.$inject = ['$scope', 'MovesSummary', 'MovesPlaces', 'MovesStoryline'];
 
 function RecipesCtrl($scope) {
 };
