@@ -281,8 +281,13 @@ function DatePickerCtrl($scope, $timeout) {
     });
   };
 
-  $scope.ok = function() {
-    $scope.queryMoves($scope.dt);
+  $scope.submit = function() {
+    if ($scope.dt) {
+      $scope.isLoading = true;
+      $scope.getStoryline($scope.dt, function() {
+        $scope.isLoading = false;
+      });      
+    }
   };
 
   $scope.dateOptions = {
@@ -353,11 +358,7 @@ function MovesCtrl($scope, MovesSummary, MovesPlaces, MovesStoryline) {
     map.setCenter(marker.position);
   };
 
-  $scope.queryMoves = function(dt) {
-    if (!dt) {
-      return;
-    }
-
+  $scope.getStoryline = function(dt, callback) {
     function pad(n){return n<10 ? '0'+n : n};
     var y = dt.getFullYear().toString();
     var m = pad(dt.getMonth() + 1).toString();
@@ -380,18 +381,20 @@ function MovesCtrl($scope, MovesSummary, MovesPlaces, MovesStoryline) {
       if (markers.length > 0) {
         setCenter(markers[0]);
       }
-    });
 
-    $scope.clearMap = function() {
-      for (var i in markers) {
-        markers[i].setMap(null);
-      }
-      markers.length = 0;
-      for (var i in overlays) {
-        overlays[i].setMap(null);
-      }
-      overlays.length = 0;
-    };
+      callback();
+    });
+  };
+
+  $scope.clearMap = function() {
+    for (var i in markers) {
+      markers[i].setMap(null);
+    }
+    markers.length = 0;
+    for (var i in overlays) {
+      overlays[i].setMap(null);
+    }
+    overlays.length = 0;
   };
 }
 MovesCtrl.$inject = ['$scope', 'MovesSummary', 'MovesPlaces', 'MovesStoryline'];

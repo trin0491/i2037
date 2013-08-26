@@ -30,6 +30,10 @@ angular.module('i2037.services', ['ngResource', 'i2037.environment'])
     })
 })
 
+.factory('MovesProfile', function($resource, pathFinder) {
+    return $resource(pathFinder.get('svc/moves/user/profile'));
+})
+
 .factory('MovesSummary', function($resource, pathFinder) {
     return $resource(pathFinder.get('svc/moves/user/summary/daily/:date'));
 })
