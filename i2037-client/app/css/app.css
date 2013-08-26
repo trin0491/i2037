@@ -38,3 +38,7 @@
 .summary {
   padding: 1em;
 }
+
+#map-canvas img {
+  max-width: none;
+}

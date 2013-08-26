@@ -293,7 +293,15 @@ DatePickerCtrl.$inject = ['$scope', '$timeout'];
 
 
 function SlickgridCtrl($scope, MovesSummary, MovesPlaces, MovesStoryline) {
+  var colours = {
+    'wlk': '#FF0000',
+    'run': '#FF0000',    
+    'cyc': '#00FF00',
+    'trp': '#ACACAC'
+  };
+
   var markers = [];
+  var overlays = [];
 
   var mapOptions = {
     center: new google.maps.LatLng(51.46044, -0.29745),
@@ -385,6 +393,29 @@ function SlickgridCtrl($scope, MovesSummary, MovesPlaces, MovesStoryline) {
     markers.push(marker);        
   };
 
+  function addPath(move) {
+    for (var a in move.activities) {
+      var activity = move.activities[a];
+      var points = [];
+      var trackPoints = activity.trackPoints;
+      for (var t in trackPoints) {
+        points.push(
+          new google.maps.LatLng(trackPoints[t].lat, trackPoints[t].lon)
+        );
+      }
+
+      var path = new google.maps.Polyline({
+        path: points,
+        strokeColor: colours[activity.activity],
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+      });
+
+      overlays.push(path);
+      path.setMap(map);      
+    }
+  };
+
   function setCenter(marker) {
     map.setCenter(marker.position);
   };
@@ -407,7 +438,9 @@ function SlickgridCtrl($scope, MovesSummary, MovesPlaces, MovesStoryline) {
         for (var s=0;s<segments.length;s++) {
           if (segments[s].type == 'place') {
             addMarker(segments[s]);
-          }        
+          } else if (segments[s].type == 'move') {
+            addPath(segments[s]);
+          }       
         }
       }
 
@@ -421,6 +454,10 @@ function SlickgridCtrl($scope, MovesSummary, MovesPlaces, MovesStoryline) {
         markers[i].setMap(null);
       }
       markers.length = 0;
+      for (var i in overlays) {
+        overlays[i].setMap(null);
+      }
+      overlays.length = 0;
     };
   };
 }
