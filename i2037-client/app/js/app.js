@@ -9,6 +9,7 @@ i2037.config(function($routeProvider, $httpProvider) {
     $routeProvider.when('/scallops',   {templateUrl: 'partials/recipes.html', controller: RecipesCtrl});
     $routeProvider.when('/wineview',  {templateUrl: 'partials/wineview.html',  controller: WineViewCtrl});
     $routeProvider.when('/cage', {templateUrl: 'partials/slickgrid.html', controller: SlickgridCtrl});
+    $routeProvider.when('/moves', {templateUrl: 'partials/moves.html', controller: MovesCtrl});    
     $routeProvider.otherwise({redirectTo: '/home'});
 
   $httpProvider.responseInterceptors.push(function($q, Session) {

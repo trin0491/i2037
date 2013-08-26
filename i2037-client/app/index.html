@@ -58,6 +58,7 @@
               <li ng-class="{active: $location.path() == '/home'}"><a href="#/home"><i class="icon-home"></i> Home</a></li>
               <li ng-class="{active: $location.path() == '/recipes'}"><a href="#/recipes"><i class="icon-book"></i> Recipes</a></li>              
               <li ng-show="showCellar" ng-class="{active: $location.path() == '/wineview'}"><a href="#/wineview"><i class="icon-book"></i> Cellar</a></li>
+              <li ng-show="showMoves" ng-class="{active: $location.path() == '/moves'}"><a href="#/moves"><i class="icon-book"></i> Moves</a></li>              
               <li ng-show="showCage" ng-class="{active: $location.path() == '/cage'}"><a href="#/cage"><i class="icon-book"></i> Cage</a></li>
             </ul>
           </div><!--/.nav-collapse -->
@@ -82,10 +83,10 @@
 
     <script src="lib/jquery/jquery-1.10.2.min.js"></script>
     <script src="lib/jquery/jquery.cookie.js"></script>
-    <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="lib/slickgrid/jquery.event.drag-2.2.js"></script>
     <script src="lib/slickgrid/slick.core.js"></script>
     <script src="lib/slickgrid/slick.grid.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>    
     <script src="lib/bootstrap/bootstrap.min.js"></script> 
 <!-- @if NODE_ENV == 'DEV' -->  
     <script src="lib/angular/angular.js"></script>
