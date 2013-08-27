@@ -284,7 +284,7 @@ function DatePickerCtrl($scope, $timeout) {
   $scope.submit = function() {
     if ($scope.dt) {
       $scope.isLoading = true;
-      $scope.getStoryline($scope.dt, function() {
+      $scope.getStoryline($scope.dt).then(function() {
         $scope.isLoading = false;
       });      
     }
@@ -297,7 +297,7 @@ function DatePickerCtrl($scope, $timeout) {
 };
 DatePickerCtrl.$inject = ['$scope', '$timeout'];
 
-function MovesCtrl($scope, MovesSummary, MovesPlaces, MovesStoryline) {
+function MovesCtrl($scope, $q, MovesSummary, MovesPlaces, MovesStoryline) {
   var colours = {
     'wlk': '#FF0000',
     'run': '#FF0000',    
@@ -359,6 +359,8 @@ function MovesCtrl($scope, MovesSummary, MovesPlaces, MovesStoryline) {
   };
 
   $scope.getStoryline = function(dt, callback) {
+    var deferred = $q.defer(); 
+
     function pad(n){return n<10 ? '0'+n : n};
     var y = dt.getFullYear().toString();
     var m = pad(dt.getMonth() + 1).toString();
@@ -382,8 +384,11 @@ function MovesCtrl($scope, MovesSummary, MovesPlaces, MovesStoryline) {
         setCenter(markers[0]);
       }
 
-      callback();
+      deferred.resolve("success");
+    }, function(httpResponse) {
+      deferred.reject("failed");
     });
+    return deferred.promise;
   };
 
   $scope.clearMap = function() {
@@ -397,7 +402,7 @@ function MovesCtrl($scope, MovesSummary, MovesPlaces, MovesStoryline) {
     overlays.length = 0;
   };
 }
-MovesCtrl.$inject = ['$scope', 'MovesSummary', 'MovesPlaces', 'MovesStoryline'];
+MovesCtrl.$inject = ['$scope', '$q', 'MovesSummary', 'MovesPlaces', 'MovesStoryline'];
 
 function SlickgridCtrl($scope, MovesSummary, MovesPlaces, MovesStoryline) {
 
