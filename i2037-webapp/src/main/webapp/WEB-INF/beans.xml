@@ -63,6 +63,8 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
     <property name="dataSource" ref="cellarDB" />
     <property name="annotatedClasses">
       <list>
+        <value>net.i2037.cellar.model.UserImpl</value>
+        <value>net.i2037.cellar.model.RoleImpl</value>                  
         <value>net.i2037.cellar.model.WineImpl</value>
         <value>net.i2037.cellar.model.GrapeImpl</value>
         <value>net.i2037.oauth2.OAuth2AccessTokenImpl</value>
@@ -85,6 +87,10 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
     <property name="sessionFactory" ref="sessionFactory" />
   </bean>
 
+  <bean id="userDao" class="net.i2037.cellar.model.UserDaoImpl">
+      <property name="sessionFactory" ref="sessionFactory" />
+  </bean>
+  
   <!-- Security -->
   
   <!-- returns 403 Forbidden if the error url is not set -->
@@ -112,13 +118,20 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
   </sec:http>
 
   <sec:authentication-manager>
-    <sec:authentication-provider>
-      <sec:user-service>
-        <sec:user name="r.priestley@comanduk.co.uk" password="rapier"
-          authorities="ROLE_USER, ROLE_ADMIN" />
-      </sec:user-service>
+    <sec:authentication-provider user-service-ref="userDetailsService">
+        <sec:password-encoder ref="passwordEncoder" />
     </sec:authentication-provider>
   </sec:authentication-manager>
+  
+  <bean id="passwordEncoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder">
+      <constructor-arg>
+          <value>${i2037.password.salt}</value>          
+      </constructor-arg>
+  </bean>
+  
+  <bean id="userDetailsService" class="net.i2037.cellar.UserDetailsServiceImpl">
+      <property name="userDao" ref="userDao" />
+  </bean>
   
   <!-- spring oauth -->
   <oa:client id="oauth2ClientFilter" />
