@@ -34,10 +34,10 @@ angular.module('i2037', [
   $scope.$location = $location;
 
   var menus = [
-    { name: 'Recipes', path: '/recipes', isVisible: true },
-    { name: 'Cellar', path: '/cellar', isVisible: true },
-    { name: 'Moves', path: '/moves' , isVisible: true } ,
-    { name: 'Cage', path: '/cage', isVisible: true}
+    { name: 'Recipes', path: '/recipes', isVisible: false },
+    { name: 'Cellar', path: '/cellar', isVisible: false },
+    { name: 'Moves', path: '/moves' , isVisible: false },
+    { name: 'Cage', path: '/cage', isVisible: false }
   ];
   $scope.menus = menus;
 
@@ -48,7 +48,7 @@ angular.module('i2037', [
     };
   };
 
-  function setAccountLabel(user) {
+  function setAccountMenuLabel(user) {
     if (user && user.userName) {
       $scope.accountMenuLabel = user.userName;      
     } else {
@@ -59,7 +59,7 @@ angular.module('i2037', [
   function onUserUpdate(user) {
       $scope.user = user;
       setMenuVisibility(user);
-      setAccountLabel(user);    
+      setAccountMenuLabel(user);    
   }
 
   Session.on('authFailure', function() {
