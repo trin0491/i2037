@@ -33,13 +33,19 @@ angular.module('i2037', [
     function($scope, $location, $dialog, User, Session) {
   $scope.$location = $location;
 
+  var menus = [
+    { name: 'Recipes', path: '/recipes', isVisible: true },
+    { name: 'Cellar', path: '/cellar', isVisible: true },
+    { name: 'Moves', path: '/moves' , isVisible: true } ,
+    { name: 'Cage', path: '/cage', isVisible: true}
+  ];
+  $scope.menus = menus;
+
   function setMenuVisibility(user) {
     var isLoggedIn = user != null;
-    $scope.showCellar = isLoggedIn;
-    $scope.showCage = isLoggedIn;
-    $scope.showLogin = !isLoggedIn;
-    $scope.showLogout = isLoggedIn;
-    $scope.showMoves = isLoggedIn;
+    for (var i = menus.length - 1; i >= 0; i--) {
+        menus[i].isVisible = isLoggedIn;
+    };
   };
 
   function setAccountLabel(user) {
@@ -93,6 +99,7 @@ angular.module('i2037', [
     }); 
   };
 
+  onUserUpdate(null);
   User.get().then(function(user) {
     onUserUpdate(user);
   });
