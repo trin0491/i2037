@@ -77,6 +77,7 @@ angular.module('i2037.cellar', ['i2037.resources.cellar'])
 
   $scope.delete = function(wine) {
     wine.$delete();
+    refresh();
   };
 
   $scope.refresh = function() {
