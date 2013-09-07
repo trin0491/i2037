@@ -1,4 +1,4 @@
-angular.module('i2037.moves', ['i2037.services'])
+angular.module('i2037.moves', ['i2037.resources.moves'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/moves', {templateUrl: 'partials/moves.html', controller: 'MovesCtrl'});    

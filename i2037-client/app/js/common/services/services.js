@@ -17,35 +17,6 @@ angular.module('i2037.services', ['ngResource', 'i2037.environment'])
   return my;  
 })
 
-.factory('Wine', function($resource, pathFinder) {
-  return $resource(pathFinder.get('svc/wines/:wineId'), 
-    { wineId: '@wineId' }, 
-    { query: {method:'GET', params:{}, isArray:true } }
-  )
-})  
-
-.factory('Grape', function($resource, pathFinder) {
-    return $resource(pathFinder.get('svc/grapes'), {}, {
-      query: {method:'GET', params:{}, isArray:true}
-    })
-})
-
-.factory('MovesProfile', function($resource, pathFinder) {
-    return $resource(pathFinder.get('svc/moves/user/profile'));
-})
-
-.factory('MovesSummary', function($resource, pathFinder) {
-    return $resource(pathFinder.get('svc/moves/user/summary/daily/:date'));
-})
-
-.factory('MovesPlaces', function($resource, pathFinder) {
-    return $resource(pathFinder.get('svc/moves/user/places/daily/:date'));
-})
-
-.factory('MovesStoryline', function($resource, pathFinder) {
-    return $resource(pathFinder.get('svc/moves/user/storyline/daily/:date'));
-})
-
 .factory('User', function($resource, $http, pathFinder) {
   var user = $resource(pathFinder.get('svc/session/user'));
 
