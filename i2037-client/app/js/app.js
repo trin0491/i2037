@@ -35,7 +35,7 @@ angular.module('i2037', [
 
   var menus = [
     { name: 'Recipes', path: '/recipes', isVisible: false },
-    { name: 'Cellar', path: '/cellar', isVisible: false },
+    { name: 'Cellar', path: '/cellar/wines', isVisible: false },
     { name: 'Moves', path: '/moves' , isVisible: false },
     { name: 'Cage', path: '/cage', isVisible: false }
   ];

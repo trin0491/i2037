@@ -3,36 +3,31 @@
 angular.module('i2037.cellar', ['i2037.resources.cellar'])
 
 .config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/cellar',  {templateUrl: 'partials/wineview.html',  controller: 'WineViewCtrl'});
+    $routeProvider.when('/cellar/wines',  {templateUrl: 'partials/wineview.html',  controller: 'WineViewCtrl'});
+    $routeProvider.when('/cellar/wines/new',  {
+      templateUrl: 'partials/wineform.html',
+      controller: 'EditWineCtrl',
+      resolve: {
+        wine: function(Wine) {
+          return new Wine({ rating: 0 });  //TODO default in constructor when replace with $http service
+        }
+      }
+    });
+    $routeProvider.when('/cellar/wines/:wineid',  {
+      templateUrl: 'partials/wineform.html',
+      controller: 'EditWineCtrl',
+      resolve: {
+        wine: function($route, Wine) {
+          return Wine.get({wineId:$route.current.params.wineid});
+        }
+      }
+    });
 }])
 
-.controller('WineViewCtrl', ['$scope', '$dialog', 'Wine', function($scope, $dialog, Wine) {
+.controller('WineViewCtrl', ['$scope', '$location', 'Wine', function($scope, $location, Wine) {
 
   function refresh() {
     $scope.wines = Wine.query();    
-  };
-
-  function createOrUpdate(wine) {
-    var opts = {
-        backdrop: true,
-        keyboard: true,
-        dialogFade: true,
-        backdropClick: true,
-        templateUrl: 'partials/wineform.html', 
-        controller: 'WineFormCtrl',
-        resolve: { 
-          wine: function() { 
-            return wine;
-          }
-        }
-    };
-
-    var d = $dialog.dialog(opts);
-    d.open().then(function(wine){
-      wine.$save({}, function() {
-        refresh();
-      });
-    });
   };
 
   function noRows(wines, winesPerRow) {
@@ -66,18 +61,17 @@ angular.module('i2037.cellar', ['i2037.resources.cellar'])
   };
 
   $scope.edit = function(wine) {
-    var copy = angular.copy(wine);
-    createOrUpdate(copy);
+    $location.path('/cellar/wines/' + wine.wineId);
   };
 
   $scope.add = function() {
-    var wine = new Wine({ rating: 0 });
-    createOrUpdate(wine);
+    $location.path('/cellar/wines/new');
   };
 
   $scope.delete = function(wine) {
-    wine.$delete();
-    refresh();
+    wine.$delete(function() {
+      refresh();      
+    });
   };
 
   $scope.refresh = function() {
@@ -101,7 +95,7 @@ angular.module('i2037.cellar', ['i2037.resources.cellar'])
   $scope.refresh();
 }])
 
-.controller('WineFormCtrl', ['$scope', 'dialog', 'wine', 'Grape', function ($scope, dialog, wine, Grape) {
+.controller('EditWineCtrl', ['$scope', '$location', 'wine', 'Grape', function ($scope, $location, wine, Grape) {
   $scope.wine = wine;
   $scope.isNewGrape = false;
   $scope.grapeName = null;
@@ -142,6 +136,10 @@ angular.module('i2037.cellar', ['i2037.resources.cellar'])
     return rv;    
   };
 
+  function goToWines() {
+    $location.path('/cellar/wines');
+  };
+
   $scope.addGrape = function() {
     if (!$scope.isNewGrape) {
       return;
@@ -153,14 +151,16 @@ angular.module('i2037.cellar', ['i2037.resources.cellar'])
   };
 
   $scope.cancel = function() {
-    dialog.close();
+    goToWines();
   };
 
   $scope.submit = function() {
     if ($scope.isNewGrape) {
       return;
     }
-    dialog.close($scope.wine);
+    $scope.wine.$save({}, function() {
+      goToWines();    
+    });
   }
 }])
 
