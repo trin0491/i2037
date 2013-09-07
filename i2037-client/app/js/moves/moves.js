@@ -4,7 +4,6 @@ angular.module('i2037.moves', ['i2037.services'])
   $routeProvider.when('/moves', {templateUrl: 'partials/moves.html', controller: 'MovesCtrl'});    
 }])
 
-
 .controller('DatePickerCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
   $scope.today = function() {
     $scope.dt = new Date();
@@ -41,7 +40,8 @@ angular.module('i2037.moves', ['i2037.services'])
   };
 }])
 
-.controller('MovesCtrl', ['$scope', '$q', 'MovesSummary', 'MovesStoryline', 'MovesProfile', function($scope, $q, MovesSummary, MovesStoryline, MovesProfile) {
+.controller('MovesCtrl', ['$scope', '$q', 'MovesSummary', 'MovesStoryline', 'MovesProfile',
+ function($scope, $q, MovesSummary, MovesStoryline, MovesProfile) {
   var colours = {
     'wlk': '#FF0000',
     'run': '#FF0000',    
