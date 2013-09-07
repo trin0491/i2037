@@ -1,6 +1,6 @@
 /* Controllers */
 
-angular.module('i2037.cellar', ['i2037.services'])
+angular.module('i2037.cellar', ['i2037.resources.cellar'])
 
 .config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/cellar',  {templateUrl: 'partials/wineview.html',  controller: 'WineViewCtrl'});
