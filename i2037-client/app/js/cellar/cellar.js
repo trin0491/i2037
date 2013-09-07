@@ -60,10 +60,6 @@ angular.module('i2037.cellar', ['i2037.resources.cellar'])
     $scope.winesPerRow = 3;
   };
 
-  $scope.edit = function(wine) {
-    $location.path('/cellar/wines/' + wine.wineId);
-  };
-
   $scope.add = function() {
     $location.path('/cellar/wines/new');
   };

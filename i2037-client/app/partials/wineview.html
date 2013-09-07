@@ -25,7 +25,7 @@
           <img src="img/wine_thumbnail.jpg" class="media-object wine-thumbnail">
         </a>
         <div class="media-body">
-          <a href="#"><h4 class="media-heading">{{wine.name}} ({{wine.vintage}})</h4></a>
+          <a href="#/cellar/wines/{{wine.wineId}}"><h4 class="media-heading">{{wine.name}} ({{wine.vintage}})</h4></a>
           <p>{{wine.description}}</p>
           <p><rating value="wine.rating" max="5" readonly="true"></rating></p>
           <p>
@@ -33,7 +33,7 @@
                 ng-mouseenter="editCls='btn-primary'" 
                 ng-mouseleave="editCls=''" 
                 ng-class="editCls"
-                ng-click="edit(wine)">
+                href="#/cellar/wines/{{wine.wineId}}">
                 <i class="icon-edit"></i> Edit
             </a>
             <a class="btn btn-small" 
