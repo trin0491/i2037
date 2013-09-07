@@ -31,7 +31,6 @@ angular.module('i2037', [
 
 .controller('NavBarCtrl', ['$scope', '$location', '$dialog', 'User', 'Session', 
     function($scope, $location, $dialog, User, Session) {
-  $scope.user = null;
   $scope.$location = $location;
 
   function setMenuVisibility(user) {
@@ -41,9 +40,21 @@ angular.module('i2037', [
     $scope.showLogin = !isLoggedIn;
     $scope.showLogout = isLoggedIn;
     $scope.showMoves = isLoggedIn;
+  };
+
+  function setAccountLabel(user) {
+    if (user && user.userName) {
+      $scope.accountMenuLabel = user.userName;      
+    } else {
+      $scope.accountMenuLabel = 'My Account';      
+    }
+  };
+
+  function onUserUpdate(user) {
+      $scope.user = user;
+      setMenuVisibility(user);
+      setAccountLabel(user);    
   }
-  setMenuVisibility($scope.user);
-  $scope.$watch("user", setMenuVisibility);
 
   Session.on('authFailure', function() {
     $scope.login();
@@ -70,29 +81,21 @@ angular.module('i2037', [
 
     var loginForm = $dialog.dialog(opts);
     loginForm.open().then(function(user){
-      if(user) {        
-        $scope.user = user;
-      }
+        onUserUpdate(user);
     });
   };
 
   $scope.logout = function() {
-    User.logout().success(function(data, status) {
-      $scope.user = null;
-    }).error(function(data, status) {
+    User.logout().then(function(user) {
+        onUserUpdate(user)
+    }, function() {
       alert("Failed to logout");
     }); 
   };
 
-  $scope.getAccountLabel = function() {
-    if ($scope.user && $scope.user.userName) {
-      return $scope.user.userName;      
-    } else {
-      return 'My Account';      
-    }
-  };
-
-  $scope.user = User.get();
+  User.get().then(function(user) {
+    onUserUpdate(user);
+  });
 }])
 
 .controller('LoginFormCtrl', ['$scope', 'dialog', 'User', 'userName',
@@ -118,9 +121,9 @@ angular.module('i2037', [
       $.cookie.removeCookier('userName');
     }
 
-    User.login($scope.userName, $scope.password).success(function(user, status) {
+    User.login($scope.userName, $scope.password).then(function(user) {
       dialog.close(user);
-    }).error(function(data, status) {
+    }, function(data, status) {
       alert("Failed to authenticate");
     });
   }
