@@ -33,11 +33,21 @@ angular.module('i2037', [
     function($scope, $location, $dialog, User, Session) {
   $scope.$location = $location;
 
+  var Menu = function(name, path) {
+    var menu = {
+        name: name,
+        path: path,
+        isVisible: false,
+        isActive: false
+    };
+    return menu;
+  }
+
   var menus = [
-    { name: 'Recipes', path: '/recipes', isVisible: false },
-    { name: 'Cellar', path: '/cellar/wines', isVisible: false },
-    { name: 'Moves', path: '/moves' , isVisible: false },
-    { name: 'Cage', path: '/cage', isVisible: false }
+    new Menu('Recipes', '/recipes'), 
+    new Menu('Cellar', '/cellar'),
+    new Menu('Moves', '/moves'),
+    new Menu('Cage', '/cage')
   ];
   $scope.menus = menus;
 

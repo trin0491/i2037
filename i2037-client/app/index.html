@@ -60,7 +60,7 @@
             </div>
             <ul class="nav">
               <li ng-class="{active: $location.path() == '/home'}"><a href="#/home"><i class="icon-home"></i> Home</a></li>
-              <li ng-show="menu.isVisible" ng-class="{active: $location.path() == menu.path}" ng-repeat="menu in menus" ng-cloak>
+              <li ng-show="menu.isVisible" ng-class="{active: $location.path() == menu.path }" ng-repeat="menu in menus" ng-cloak>
                 <a href="#{{menu.path}}"><i class="icon-book"></i> {{menu.name}}</a>
               </li>
             </ul>

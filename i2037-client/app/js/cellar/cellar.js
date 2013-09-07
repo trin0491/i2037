@@ -3,7 +3,8 @@
 angular.module('i2037.cellar', ['i2037.resources.cellar'])
 
 .config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/cellar/wines',  {templateUrl: 'partials/wineview.html',  controller: 'WineViewCtrl'});
+    $routeProvider.when('/cellar',  { templateUrl: 'partials/wineview.html', controller: 'ListWineCtrl' });
+    $routeProvider.when('/cellar/wines',  { templateUrl: 'partials/wineview.html', controller: 'ListWineCtrl' });
     $routeProvider.when('/cellar/wines/new',  {
       templateUrl: 'partials/wineform.html',
       controller: 'EditWineCtrl',
@@ -22,9 +23,10 @@ angular.module('i2037.cellar', ['i2037.resources.cellar'])
         }
       }
     });
+    $routeProvider.when('/cellar/grapes', { templateUrl: 'partials/grapes.html', controller: 'ListGrapesCtrl' });
 }])
 
-.controller('WineViewCtrl', ['$scope', '$location', 'Wine', function($scope, $location, Wine) {
+.controller('ListWineCtrl', ['$scope', '$location', 'Wine', function($scope, $location, Wine) {
 
   function refresh() {
     $scope.wines = Wine.query();    
@@ -86,8 +88,8 @@ angular.module('i2037.cellar', ['i2037.resources.cellar'])
     layoutGrid($scope.wines, newWinesPerRow);
   }, true);
 
-  $scope.winesPerRow = 4;
-  $scope.wineCls = 'span3';
+  $scope.winesPerRow = 3;
+  $scope.wineCls = 'span4';
   $scope.refresh();
 }])
 
@@ -158,6 +160,10 @@ angular.module('i2037.cellar', ['i2037.resources.cellar'])
       goToWines();    
     });
   }
+}])
+
+.controller('ListGrapesCtrl', ['$scope', '$location', 'Grape', function($scope, $location, Grape) {
+  $scope.grapes = Grape.query();  
 }])
 
 ;
