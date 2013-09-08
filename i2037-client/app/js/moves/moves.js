@@ -1,19 +1,35 @@
 angular.module('i2037.moves', ['i2037.resources.moves'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/moves', {templateUrl: 'partials/moves.html', controller: 'MovesCtrl'});    
+  $routeProvider.when('/moves', {
+    templateUrl: 'partials/moves.html',
+    controller: 'MovesCtrl',
+    resolve: {
+      movesProfile: function($route, MovesProfile) {
+        return MovesProfile.get($route.current.params).then(function (profile) {
+            if (profile.redirectTo) {
+              window.location.replace(profile.redirectTo);
+            } else {
+              return profile;
+            }
+        })
+      } 
+    }
+  });    
 }])
 
 .controller('DatePickerCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
+  $scope.minDate = '2000-01-01';
+  $scope.maxDate = new Date();
+  $scope.showWeeks = true;
+  $scope.dateOptions = {
+    'year-format': "'yy'",
+    'starting-day': 1
+  };
+
   $scope.today = function() {
     $scope.dt = new Date();
   };
-  $scope.today();
-
-  $scope.minDate = '2000-01-01';
-  $scope.maxDate = new Date();
-
-  $scope.showWeeks = true;
 
   $scope.disabled = function(date, mode) {
     return false; // Disable weekend selection ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
@@ -34,14 +50,11 @@ angular.module('i2037.moves', ['i2037.resources.moves'])
     }
   };
 
-  $scope.dateOptions = {
-    'year-format': "'yy'",
-    'starting-day': 1
-  };
+  $scope.today();
 }])
 
-.controller('MovesCtrl', ['$scope', '$q', 'MovesSummary', 'MovesStoryline', 'MovesProfile',
- function($scope, $q, MovesSummary, MovesStoryline, MovesProfile) {
+.controller('MovesCtrl', ['$scope', '$q', '$location', 'MovesStoryline', 'movesProfile',
+ function($scope, $q, $location, MovesStoryline, movesProfile) {
   var colours = {
     'wlk': '#FF0000',
     'run': '#FF0000',    
@@ -51,16 +64,20 @@ angular.module('i2037.moves', ['i2037.resources.moves'])
 
   var markers = [];
   var overlays = [];
+  var map;
 
-  var mapOptions = {
-    center: new google.maps.LatLng(51.46044, -0.29745),
-    zoom: 12,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+  function getMap() {
+    var mapOptions = {
+      center: new google.maps.LatLng(51.46044, -0.29745),
+      zoom: 12,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(
+        document.getElementById("map-canvas"),
+        mapOptions
+    );
+    return map;
   };
-  var map = new google.maps.Map(
-      document.getElementById("map-canvas"),
-      mapOptions
-  );
 
   function addMarker(segment) {
     var lat = segment.place.location.lat;
@@ -101,12 +118,6 @@ angular.module('i2037.moves', ['i2037.resources.moves'])
   function setCenter(marker) {
     map.setCenter(marker.position);
   };
-
-  function getMovesProfile() {
-    $scope.movesprofile = MovesProfile.query();
-  };
-
-  getMovesProfile();
 
   $scope.getStoryline = function(dt, callback) {
     var deferred = $q.defer(); 
@@ -151,4 +162,7 @@ angular.module('i2037.moves', ['i2037.resources.moves'])
     }
     overlays.length = 0;
   };
+
+  $scope.movesprofile = movesProfile;
+  map = getMap();
 }]);
