@@ -141,7 +141,7 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
 
   <oa:resource id="moves" 
     type="authorization_code"
-    pre-established-redirect-uri="${i2037.moves.redirect-ui}"
+    pre-established-redirect-uri="${i2037.moves.redirect-uri}"
     use-current-uri="false"
     client-id="${i2037.moves.client-id}"
     client-secret="${i2037.moves.client-secret}"
