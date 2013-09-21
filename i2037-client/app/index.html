@@ -50,17 +50,21 @@
             <span class="icon-bar"></span>
           </button>
           <a class="brand" href="#">i2037</a>
-          <div class="nav-collapse collapse">
-            <div class="dropdown pull-right navbar-text">
-              <a href="#" class="dropdown-toggle navbar-link" data-toggle="dropdown" ng-cloak>{{accountMenuLabel}}</a>
+          <div class="nav-collapse collapse" ng-switch="state" ng-cloak>
+            <div class="dropdown pull-right navbar-text" ng-switch-when="LOGGED_IN">
+              <a href="#" class="dropdown-toggle navbar-link" data-toggle="dropdown">{{user.userName}}</a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                <li ng-show="!user"><a tabindex="-1" href="#" ng-click="login()">Login</a></li>
                 <li ng-show="user"><a tabindex="-1" href="#" ng-click="logout()">Logout</a></li>
+                <li ng-show="user"><a tabindex="-1" href="#" ng-click="logout()">Change Password</a></li>
               </ul>
             </div>
+            <div class="pull-right" ng-switch-default>
+              <button class="btn btn-primary" ng-click="login()">Log In</button>            
+              <button class="btn btn-warning" ng-click="signUp()">Sign Up</button>            
+            </div>            
             <ul class="nav">
               <li ng-class="{active: $location.path() == '/home'}"><a href="#/home"><i class="icon-home"></i> Home</a></li>
-              <li ng-show="menu.isVisible" ng-class="{active: $location.path() == menu.path }" ng-repeat="menu in menus" ng-cloak>
+              <li ng-show="state == 'LOGGED_IN'" ng-class="{active: $location.path() == menu.path }" ng-repeat="menu in menus" ng-cloak>
                 <a href="#{{menu.path}}"><i class="icon-book"></i> {{menu.name}}</a>
               </li>
             </ul>

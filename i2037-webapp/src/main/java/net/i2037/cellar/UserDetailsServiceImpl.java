@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import net.i2037.cellar.model.Role;
-import net.i2037.cellar.model.User;
 import net.i2037.cellar.model.UserDao;
+import net.i2037.cellar.model.UserImpl;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,13 +18,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-	private static UserDetails newUserDetails(User user) {
+	private static UserDetails newUserDetails(UserImpl user) {
 		Collection<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
 		for (Role role : user.getRoles()) {
 			authorities.add(new SimpleGrantedAuthority(role.getValue()));
 		}
 		UserDetails userDetails = new org.springframework.security.core.userdetails.User(
-				user.getUsername(), user.getPassword(), authorities);
+				user.getUserName(), user.getPassword(), authorities);
 		return userDetails;
 	}
 
@@ -33,7 +33,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
-		User user = userDao.readByUsername(username);
+		UserImpl user = userDao.readByUsername(username);
 		return UserDetailsServiceImpl.newUserDetails(user);
 	}
 

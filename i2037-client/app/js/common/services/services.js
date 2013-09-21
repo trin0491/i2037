@@ -2,7 +2,7 @@
 
 /* Services */
 
-angular.module('i2037.services', ['ngResource', 'i2037.environment'])
+angular.module('i2037.services', ['i2037.environment'])
 
 .factory('pathFinder', function(version, svcPrefix) {
   var my = { };
@@ -15,51 +15,6 @@ angular.module('i2037.services', ['ngResource', 'i2037.environment'])
     return prefix + name;
   };
   return my;  
-})
-
-.factory('User', function($http, pathFinder) {
-
-  var url = pathFinder.get('svc/session/user');
-
-  function getId(user) {
-    return user.userName;
-  };
-
-  var User = function(data) {
-    angular.extend(this, data);
-  };
-
-  User.get = function(params) {
-    return $http.get(url).then(function(response) {
-      return new User(response.data);
-    });
-  };
-
-  User.login = function(userName, password) {
-      var loginParams = jQuery.param({
-        j_username: userName,
-        j_password: password
-      });   
-      return $http.post(pathFinder.get('j_spring_security_check'), loginParams, { 
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      }).then(function(response) {
-        return new User(response.data);
-      });
-  };
-
-  User.logout = function() {
-      return $http.get(pathFinder.get('j_spring_security_logout')).then(function() {
-        return null;
-      });
-  };
-
-  User.prototype.$id = function() {
-    return getId(this);
-  };
-
-  return User;
 })
 
 .factory('Session', function() {

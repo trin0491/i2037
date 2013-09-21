@@ -2,8 +2,10 @@ package net.i2037.cellar.model;
 
 public interface UserDao {
 
-	User readById(Long id);
+	UserImpl readById(Long id);
 	
-	User readByUsername(String username);
+	UserImpl readByUsername(String username);
+
+	void create(UserImpl user);
 
 }

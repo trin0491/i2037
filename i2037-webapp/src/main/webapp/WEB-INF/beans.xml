@@ -32,6 +32,10 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
         <property name="grapeDao" ref="grapeDao" />
       </bean>
       <bean class="net.i2037.cellar.SessionServiceImpl" />
+      <bean class="net.i2037.cellar.UserServiceImpl">
+        <property name="userDao" ref="userDao" />
+        <property name="passwordEncoder" ref="passwordEncoder"/>
+      </bean>
       <bean class="net.i2037.moves.MovesServiceImpl">
         <property name="movesTemplate">
           <oa:rest-template resource="moves" access-token-provider="accessTokenProviderChain"/>
@@ -71,7 +75,7 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
       </list>
     </property>
     <property name="hibernateProperties">
-      <!-- hibernate.hbm2ddl.auto=create -->
+      <!-- hibernate.hbm2ddl.auto=create|update -->
       <value>hibernate.dialect=org.hibernate.dialect.MySQLDialect
         hibernate.show_sql=true
         hibernate.hbm2ddl.auto=update
@@ -92,6 +96,7 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
   </bean>
   
   <!-- Security -->
+  <sec:global-method-security secured-annotations="enabled" />
   
   <!-- returns 403 Forbidden if the error url is not set -->
   <bean id="accessDeniedHandler"
@@ -111,6 +116,7 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
     <sec:logout delete-cookies="JSESSIONID" logout-success-url="/svc/session/loggedout" />
     <sec:session-management />
     <sec:intercept-url pattern="/svc/session/loggedout" access="ROLE_ANONYMOUS,ROLE_USER" />
+    <sec:intercept-url pattern="/svc/user" access="ROLE_ANONYMOUS" method="POST"/>
     <sec:intercept-url pattern="/svc/**" access="ROLE_USER" />
     <sec:intercept-url pattern="/**" access="ROLE_ANONYMOUS,ROLE_USER" />
 

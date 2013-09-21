@@ -2,11 +2,12 @@ package net.i2037.cellar.model;
 
 import java.io.Serializable;
 
-public class UserDto implements Serializable {
+public class UserDto implements Serializable, User {
 
 	private Long userId;
 	private String userName;
 
+	@Override
 	public String getUserName() {
 		return userName;
 	}
@@ -15,11 +16,12 @@ public class UserDto implements Serializable {
 		this.userName = userName;
 	}
 
-	public Long getUserId() {
+	@Override
+	public Long getId() {
 		return userId;
 	}
 
-	public void setUserId(Long userId) {
+	public void setId(Long userId) {
 		this.userId = userId;
 	}
 }

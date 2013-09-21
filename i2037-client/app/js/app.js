@@ -8,7 +8,8 @@ angular.module('i2037', [
     'i2037.cage', 
     'i2037.filters', 
     'i2037.environment', 
-    'i2037.services', 
+    'i2037.services',
+    'i2037.resources.user', 
     'i2037.directives'])
 
 .config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
@@ -33,11 +34,17 @@ angular.module('i2037', [
     function($scope, $location, $dialog, User, Session) {
   $scope.$location = $location;
 
+  var STATES = {
+    LOGGED_OUT: 'LOGGED_OUT',
+    LOGGING_IN: 'LOGGING_IN',
+    LOGGED_IN: 'LOGGED_IN',
+    LOGGING_OUT: 'LOGGING_OUT'
+  }
+
   var Menu = function(name, path) {
     var menu = {
         name: name,
         path: path,
-        isVisible: false,
         isActive: false
     };
     return menu;
@@ -51,32 +58,12 @@ angular.module('i2037', [
   ];
   $scope.menus = menus;
 
-  function setMenuVisibility(user) {
-    var isLoggedIn = user != null;
-    for (var i = menus.length - 1; i >= 0; i--) {
-        menus[i].isVisible = isLoggedIn;
-    };
-  };
-
-  function setAccountMenuLabel(user) {
-    if (user && user.userName) {
-      $scope.accountMenuLabel = user.userName;      
-    } else {
-      $scope.accountMenuLabel = 'My Account';      
-    }
-  };
-
   function onUserUpdate(user) {
-      $scope.user = user;
-      setMenuVisibility(user);
-      setAccountMenuLabel(user);    
+    $scope.state = user != null ? STATES.LOGGED_IN : STATES.LOGGED_OUT;
+    $scope.user = user;
   }
 
-  Session.on('authFailure', function() {
-    $scope.login();
-  });
-
-  $scope.login = function() {
+  function login() {
     var opts = {
         backdrop: true,
         keyboard: true,
@@ -96,23 +83,48 @@ angular.module('i2037', [
     };
 
     var loginForm = $dialog.dialog(opts);
+    var oldState = $scope.state;
+    $scope.state = STATES.LOGGING_IN; // move to service
     loginForm.open().then(function(user){
-        onUserUpdate(user);
+      onUserUpdate(user);
+    }, function(response) {
+      $scope.state = oldState;
+    });    
+  }
+
+  Session.on('authFailure', function() {
+    $location.path('/home');    
+    login();
+  });
+
+  $scope.login = function() {
+    User.get().then(function(user) {
+      onUserUpdate(user);
+    });    
+  };
+
+  $scope.signUp = function() {
+    var signUpForm = $dialog.dialog({
+      templateUrl: 'partials/signupform.html',
+      controller: 'SignUpFormCtrl'
     });
+    signUpForm.open().then(function(user) {
+      onUserUpdate(user);
+    });    
   };
 
   $scope.logout = function() {
+    var oldState = $scope.state;
+    $scope.state = STATES.LOGGING_OUT;
     User.logout().then(function(user) {
         onUserUpdate(user)
     }, function() {
-      alert("Failed to logout");
+      $scope.state = oldState;
+      alert("Failed to logout");      
     }); 
   };
 
   onUserUpdate(null);
-  User.get().then(function(user) {
-    onUserUpdate(user);
-  });
 }])
 
 .controller('LoginFormCtrl', ['$scope', 'dialog', 'User', 'userName',
@@ -135,7 +147,7 @@ angular.module('i2037', [
     if ($scope.rememberMe && $scope.userName) {
       $.cookie('userName', $scope.userName, { expires: 7 });
     } else {
-      $.cookie.removeCookier('userName');
+      $.cookie.removeCookie('userName');
     }
 
     User.login($scope.userName, $scope.password).then(function(user) {
@@ -143,6 +155,48 @@ angular.module('i2037', [
     }, function(data, status) {
       alert("Failed to authenticate");
     });
+  }
+}])
+
+.controller('SignUpFormCtrl', ['$scope', 'dialog', 'User', function($scope, dialog, User) {
+  $scope.user = new User();
+
+  $scope.cancel = function() {
+    dialog.close();
+  };
+
+  $scope.submit = function() {
+    $scope.user.$save().then(function(user) {
+      dialog.close(user);
+    })
+  };
+
+  $scope.getCls = function(ngModelController) {
+    if (!ngModelController) {
+      return {};
+    } else {
+      return {
+        error: ngModelController.$invalid && ngModelController.$dirty,
+        success: ngModelController.$valid && ngModelController.$dirty
+      };      
+    }
+  };
+
+  $scope.showErr = function(ngModelController, validation) {
+    if (ngModelController) {
+      return ngModelController.$dirty && ngModelController.$error[validation];
+    } else {
+      return false;
+    }
+  }
+
+  $scope.passwordsMatch = function() {
+    return $scope.user.password === $scope.password2;
+  }
+
+  $scope.canSubmit = function() {
+    return $scope.signUpForm.$dirty &&
+      $scope.signUpForm.$valid && $scope.passwordsMatch();
   }
 }])
 
