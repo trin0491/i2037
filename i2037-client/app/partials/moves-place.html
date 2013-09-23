@@ -1,0 +1,5 @@
+<div class="well">
+    <h4>{{place.place.name}}</h4>
+    <p>{{place.startTime | date:'HH:mm'}}hrs - {{place.endTime | date:'HH:mm'}}hrs</p>
+    <p ng-show="place.foursquareId">FourSquare: {{place.foursquareId}}</p>
+</div>

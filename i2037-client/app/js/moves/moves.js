@@ -53,18 +53,19 @@ angular.module('i2037.moves', ['i2037.resources.moves'])
   $scope.today();
 }])
 
-.controller('MovesCtrl', ['$scope', '$q', '$location', 'MovesStoryline', 'movesProfile',
- function($scope, $q, $location, MovesStoryline, movesProfile) {
+.controller('MovesCtrl', ['$scope', '$q', '$location', 'MovesStoryline', 'movesProfile', '$compile',
+ function($scope, $q, $location, MovesStoryline, movesProfile, $compile) {
   var colours = {
     'wlk': '#FF0000',
     'run': '#FF0000',    
     'cyc': '#00FF00',
-    'trp': '#ACACAC'
+    'trp': '#585858'
   };
 
   var markers = [];
   var overlays = [];
   var map;
+  var infoWindow = new google.maps.InfoWindow();
 
   function getMap() {
     var mapOptions = {
@@ -89,6 +90,18 @@ angular.module('i2037.moves', ['i2037.resources.moves'])
         map: map,
         title: name
     });
+
+
+    google.maps.event.addListener(marker, 'click', function() {
+      var contentStr = '<div ng-include="\'partials/moves-place.html\'"></div>';
+      var elements = $compile(contentStr)($scope);      
+      $scope.$apply(function(scope) {
+        scope.place = segment;
+      });
+      infoWindow.setContent(elements[0]);
+      infoWindow.open(map, marker);      
+    });
+
     markers.push(marker);        
   };
 
