@@ -27,12 +27,8 @@ angular.module('i2037.moves', ['i2037.resources.moves'])
     'starting-day': 1
   };
 
-  $scope.today = function() {
-    $scope.dt = new Date();
-  };
-
   $scope.disabled = function(date, mode) {
-    return false; // Disable weekend selection ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+    return false; 
   };
 
   $scope.open = function() {
@@ -50,7 +46,18 @@ angular.module('i2037.moves', ['i2037.resources.moves'])
     }
   };
 
-  $scope.today();
+  $scope.dt = new Date();
+}])
+
+.controller('MovesSummaryCtrl', ['$scope', 'MovesSummary', function($scope, MovesSummary) {
+  $scope.summary = MovesSummary.get({date:'20130921'});
+}])
+
+.controller('MovesTimelineCtrl', ['$scope', function($scope) {
+  $scope.entries = [ 
+    {date: new Date(), text: "something"},
+    {date: new Date(), text: "something else"}
+  ];
 }])
 
 .controller('MovesCtrl', ['$scope', '$q', '$location', 'MovesStoryline', 'movesProfile', '$compile',
@@ -178,4 +185,6 @@ angular.module('i2037.moves', ['i2037.resources.moves'])
 
   $scope.movesprofile = movesProfile;
   map = getMap();
-}]);
+}])
+
+;

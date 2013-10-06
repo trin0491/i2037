@@ -162,7 +162,7 @@ angular.module('i2037.cellar', ['i2037.resources.cellar'])
   }
 }])
 
-.controller('ListGrapesCtrl', ['$scope', '$location', 'Grape', function($scope, $location, Grape) {
+.controller('ListGrapesCtrl', ['$scope', 'Grape', function($scope, Grape) {
   $scope.grapes = Grape.query();  
 }])
 

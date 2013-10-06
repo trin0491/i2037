@@ -1,4 +1,7 @@
 <div class="span12">
+    <div class="page-header">
+        <h2>Journal</h2>
+    </div>
     <div class="row-fluid">
         <div class="span6">
             <form class="form-inline" ng-controller="DatePickerCtrl">
@@ -10,15 +13,23 @@
                         show-weeks="false" />               
                     <button class="btn" ng-click="open()"><i class="icon-calendar"></i></button>
                 </div>
-                <button type="submit" class="btn btn-primary" btn-loading="isLoading" data-loading-text="Loading..." ng-click="submit()">Submit</button>
+                <button type="submit" class="btn btn-primary" i2037-loading="isLoading" data-loading-text="Loading..." ng-click="submit()">Submit</button>
             </form>
         </div>
-        <div class="span6"></div>
+        <div class="span6">
+            <table class="table table-bordered table-condensed" ng-controller="MovesSummaryCtrl">
+                <tbody>
+                    <tr ng-repeat="activity in summary.summary"><th>{{activity.activity}}</th><td>{{activity.duration}}</td></tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <div class="row-fluid">
-        <div class="span12">
-            <hr>
+        <div class="span9">
             <div id="map-canvas" style="width:100%;height:600px;"></div>            
+        </div>
+        <div class="span3" ng-controller="MovesTimelineCtrl">
+            <div i2-timeline="entries" i2-selected="selected"></div>
         </div>
     </div>
 </div>

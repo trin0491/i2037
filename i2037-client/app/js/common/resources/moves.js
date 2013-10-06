@@ -20,9 +20,23 @@ angular.module('i2037.resources.moves', ['i2037.services'])
   return Profile;
 }])
 
-.factory('MovesSummary', function($resource, pathFinder) {
-    return $resource(pathFinder.get('svc/moves/user/summary/daily/:date'));
-})
+.factory('MovesSummary', ['$http', 'pathFinder', function($http, pathFinder) {
+
+  var url = pathFinder.get('svc/moves/user/summary/daily/20130908');
+
+  var Summary = function(data) {
+    angular.extend(this, data);
+  };
+
+  Summary.get = function(params) {
+    return $http.get(url).then(function(response) {
+      var summary = new Summary(response.data[0]);
+      return summary;
+    });
+  };
+
+  return Summary;
+}])
 
 .factory('MovesPlaces', function($resource, pathFinder) {
     return $resource(pathFinder.get('svc/moves/user/places/daily/:date'));
