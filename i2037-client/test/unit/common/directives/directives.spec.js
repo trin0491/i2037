@@ -7,7 +7,7 @@ describe('i2037.directives', function() {
     var $scope, element, $compile;
 
     function Entry(text) {
-      this.date = new Date("October 23, 1977 11:13:00");
+      this.date = new Date("October 23, 1977 23:13:00");
       this.text = text;
     }
 
@@ -79,7 +79,7 @@ describe('i2037.directives', function() {
 
     it('should format the date as a time', function() {
       $scope.$digest();
-      expect(element.find('td').eq(0).text()).toEqual("11:13 AM");
+      expect(element.find('td').eq(0).text()).toEqual("23:13hrs");
     });
   })
 

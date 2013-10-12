@@ -18,7 +18,7 @@ angular.module('i2037.moves', ['i2037.resources.moves'])
   });    
 }])
 
-.controller('DatePickerCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
+.controller('DatePickerCtrl', ['$scope', '$rootScope', '$timeout', function ($scope, $rootScope, $timeout) {
   $scope.minDate = '2000-01-01';
   $scope.maxDate = new Date();
   $scope.showWeeks = true;
@@ -39,29 +39,84 @@ angular.module('i2037.moves', ['i2037.resources.moves'])
 
   $scope.submit = function() {
     if ($scope.dt) {
-      $scope.isLoading = true;
-      $scope.getStoryline($scope.dt).then(function() {
-        $scope.isLoading = false;
-      });      
+      $rootScope.$broadcast("DateChanged", $scope.dt);    
     }
   };
+
+  $scope.$on('MovesDataLoading', function() {
+    $scope.isLoading = true;
+  });
+
+  $scope.$on('MovesDataLoaded', function() {
+    $scope.isLoading = false;
+  });
 
   $scope.dt = new Date();
 }])
 
-.controller('MovesSummaryCtrl', ['$scope', 'MovesSummary', function($scope, MovesSummary) {
-  $scope.summary = MovesSummary.get({date:'20130921'});
+.controller('MovesSummaryCtrl', ['$scope', 'Moves', 'MovesSummary', function($scope, Moves, MovesSummary) {  
+  $scope.$on('DateChanged', function(event, date) {
+    var dateStr = Moves.toDateString(date);
+    MovesSummary.get({date: dateStr}).then(function(summary) {
+      $scope.summary = summary;
+    });
+  });
 }])
 
-.controller('MovesTimelineCtrl', ['$scope', function($scope) {
-  $scope.entries = [ 
-    {date: new Date(), text: "something"},
-    {date: new Date(), text: "something else"}
-  ];
+.controller('MovesTimelineCtrl', ['$scope', 'Moves', function($scope, Moves) {
+
+  $scope.$on('MovesStorylineLoaded', function(event, response) {
+    var entries = [];
+    for (var d=0;d<response.length;d++) {
+      var segments = response[d].segments;
+      for (var s=0;s<segments.length;s++) {
+        if (segments[s].type == 'place') {
+          entries.push({ 
+            date: Moves.fromDateString(segments[s].startTime), 
+            text: segments[s].place.name}
+          );          
+        }       
+      }
+    }
+    $scope.entries = entries;
+  });
+
 }])
 
-.controller('MovesCtrl', ['$scope', '$q', '$location', 'MovesStoryline', 'movesProfile', '$compile',
- function($scope, $q, $location, MovesStoryline, movesProfile, $compile) {
+.controller('MovesCtrl', ['$scope', '$rootScope', '$q', 'Moves', 'MovesStoryline', 'movesProfile',
+ function($scope, $rootScope, $q, Moves, MovesStoryline, movesProfile) {
+
+  $scope.movesprofile = movesProfile;
+  
+  function loadStoryLine(dt) {
+    var deferred = $q.defer(); 
+    var dateStr = Moves.toDateString(dt)
+    MovesStoryline.query({date: dateStr}, function(response) {
+      deferred.resolve(response);
+    }, function(httpResponse) {
+      deferred.reject("failed");
+    });
+    return deferred.promise;
+  };
+
+  function onDateChanged(date) {
+    $rootScope.$broadcast('MovesDataLoading');
+    var p = loadStoryLine(date).then(function (storyLine) {
+      $rootScope.$broadcast('MovesStorylineLoaded', storyLine);
+      $rootScope.$broadcast('MovesDataLoaded');      
+    }, function(error) {
+      // TODO error
+      $rootScope.$broadcast('MovesDataLoaded');
+    });
+  }
+
+  $scope.$on('DateChanged', function(event, date) {
+    onDateChanged(date);
+  });
+}])
+
+.controller('MovesMapCtrl', ['$scope', '$q', '$location', '$compile',
+ function($scope, $q, $location, $compile) {
   var colours = {
     'wlk': '#FF0000',
     'run': '#FF0000',    
@@ -97,7 +152,6 @@ angular.module('i2037.moves', ['i2037.resources.moves'])
         map: map,
         title: name
     });
-
 
     google.maps.event.addListener(marker, 'click', function() {
       var contentStr = '<div ng-include="\'partials/moves-place.html\'"></div>';
@@ -139,15 +193,7 @@ angular.module('i2037.moves', ['i2037.resources.moves'])
     map.setCenter(marker.position);
   };
 
-  $scope.getStoryline = function(dt, callback) {
-    var deferred = $q.defer(); 
-
-    function pad(n){return n<10 ? '0'+n : n};
-    var y = dt.getFullYear().toString();
-    var m = pad(dt.getMonth() + 1).toString();
-    var d = pad(dt.getDate()).toString();
-
-    MovesStoryline.query({date: y + m + d}, function(response) {
+  $scope.$on('MovesStorylineLoaded', function(event, response) {
       $scope.clearMap();
 
       for (var d=0;d<response.length;d++) {
@@ -164,13 +210,7 @@ angular.module('i2037.moves', ['i2037.resources.moves'])
       if (markers.length > 0) {
         setCenter(markers[0]);
       }
-
-      deferred.resolve("success");
-    }, function(httpResponse) {
-      deferred.reject("failed");
-    });
-    return deferred.promise;
-  };
+  });
 
   $scope.clearMap = function() {
     for (var i in markers) {
@@ -183,7 +223,6 @@ angular.module('i2037.moves', ['i2037.resources.moves'])
     overlays.length = 0;
   };
 
-  $scope.movesprofile = movesProfile;
   map = getMap();
 }])
 
