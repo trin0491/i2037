@@ -39,6 +39,11 @@
   padding: 1em;
 }
 
-#map-canvas img {
+.i2-map {
+  width: 100%;
+  height: 600px;
+}
+
+.i2-map img {
   max-width: none;
 }

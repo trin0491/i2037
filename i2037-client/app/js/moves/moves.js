@@ -1,4 +1,9 @@
-angular.module('i2037.moves', ['i2037.resources.moves'])
+angular.module('i2037.moves', [
+  'i2037.resources.moves',
+  'i2037.moves.model',
+  'i2037.directives.map',
+  'i2037.directives.timeline'
+])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/moves', {
@@ -16,6 +21,61 @@ angular.module('i2037.moves', ['i2037.resources.moves'])
       } 
     }
   });    
+}])
+
+.controller('MovesCtrl', ['$scope', '$rootScope', '$q', 'Moves', 'MovesStoryline', 'MovesPlacesModel', 'MovesPathsModel', 'movesProfile',
+ function($scope, $rootScope, $q, Moves, MovesStoryline, MovesPlacesModel, MovesPathsModel, movesProfile) {
+
+  $scope.movesprofile = movesProfile;
+  
+  function processResponse(response) {
+    var places = [];
+    var paths = [];
+
+    for (var d=0;d<response.length;d++) {
+      var segments = response[d].segments;
+      for (var s=0;s<segments.length;s++) {
+        if (segments[s].type == 'place') {
+          var place = segments[s].place;
+          place.startTime = segments[s].startTime;
+          place.endTime = segments[s].endTime;
+          places.push(place);
+        } else if (segments[s].type == 'move') {
+          for (var a in segments[s].activities) {
+            var activity = segments[s].activities[a];
+            paths.push(activity);
+          }
+        }       
+      }
+    }
+    MovesPlacesModel.setPlaces(places);
+    MovesPathsModel.setPaths(paths);    
+  }
+
+  function loadStoryLine(dt) {
+    var deferred = $q.defer(); 
+    var dateStr = Moves.toDateString(dt)
+    MovesStoryline.query({date: dateStr}, function(response) {
+      processResponse(response);
+      deferred.resolve(response);
+    }, function(error) {
+      deferred.reject("failed");
+    });
+    return deferred.promise;
+  };
+
+  function onDateChanged(date) {
+    $rootScope.$broadcast('MovesDataLoading');
+    var p = loadStoryLine(date).then(function (storyLine) {
+      $rootScope.$broadcast('MovesDataLoaded');      
+    }, function(error) {
+      $rootScope.$broadcast('MovesDataLoaded');
+    });
+  }
+
+  $scope.$on('DateChanged', function(event, date) {
+    onDateChanged(date);
+  });
 }])
 
 .controller('DatePickerCtrl', ['$scope', '$rootScope', '$timeout', function ($scope, $rootScope, $timeout) {
@@ -63,167 +123,43 @@ angular.module('i2037.moves', ['i2037.resources.moves'])
   });
 }])
 
-.controller('MovesTimelineCtrl', ['$scope', 'Moves', function($scope, Moves) {
+.controller('MovesTimelineCtrl', ['$scope', 'Moves', 'MovesPlacesModel', function($scope, Moves, MovesPlacesModel) {
 
-  $scope.$on('MovesStorylineLoaded', function(event, response) {
+  $scope.$on('MovesPlacesModel::CollectionChange', function(event, model) {
     var entries = [];
-    for (var d=0;d<response.length;d++) {
-      var segments = response[d].segments;
-      for (var s=0;s<segments.length;s++) {
-        if (segments[s].type == 'place') {
-          entries.push({ 
-            date: Moves.fromDateString(segments[s].startTime), 
-            text: segments[s].place.name}
-          );          
-        }       
-      }
+    var places = model.getPlaces();
+    for (var i in places) {
+      entries.push({ 
+        date: Moves.fromDateString(places[i].startTime), 
+        text: places[i].name,
+        place: places[i]
+      });          
     }
     $scope.entries = entries;
   });
 
-}])
-
-.controller('MovesCtrl', ['$scope', '$rootScope', '$q', 'Moves', 'MovesStoryline', 'movesProfile',
- function($scope, $rootScope, $q, Moves, MovesStoryline, movesProfile) {
-
-  $scope.movesprofile = movesProfile;
-  
-  function loadStoryLine(dt) {
-    var deferred = $q.defer(); 
-    var dateStr = Moves.toDateString(dt)
-    MovesStoryline.query({date: dateStr}, function(response) {
-      deferred.resolve(response);
-    }, function(httpResponse) {
-      deferred.reject("failed");
-    });
-    return deferred.promise;
-  };
-
-  function onDateChanged(date) {
-    $rootScope.$broadcast('MovesDataLoading');
-    var p = loadStoryLine(date).then(function (storyLine) {
-      $rootScope.$broadcast('MovesStorylineLoaded', storyLine);
-      $rootScope.$broadcast('MovesDataLoaded');      
-    }, function(error) {
-      // TODO error
-      $rootScope.$broadcast('MovesDataLoaded');
-    });
-  }
-
-  $scope.$on('DateChanged', function(event, date) {
-    onDateChanged(date);
-  });
-}])
-
-.controller('MovesMapCtrl', ['$scope', '$q', '$location', '$compile',
- function($scope, $q, $location, $compile) {
-  var colours = {
-    'wlk': '#FF0000',
-    'run': '#FF0000',    
-    'cyc': '#00FF00',
-    'trp': '#585858'
-  };
-
-  var markers = [];
-  var overlays = [];
-  var map;
-  var infoWindow = new google.maps.InfoWindow();
-
-  function getMap() {
-    var mapOptions = {
-      center: new google.maps.LatLng(51.46044, -0.29745),
-      zoom: 12,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    var map = new google.maps.Map(
-        document.getElementById("map-canvas"),
-        mapOptions
-    );
-    return map;
-  };
-
-  function addMarker(segment) {
-    var lat = segment.place.location.lat;
-    var lon = segment.place.location.lon;
-    var name = segment.place.name ? segment.place.name : "Unknown";
-
-    var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(lat, lon),
-        map: map,
-        title: name
-    });
-
-    google.maps.event.addListener(marker, 'click', function() {
-      var contentStr = '<div ng-include="\'partials/moves-place.html\'"></div>';
-      var elements = $compile(contentStr)($scope);      
-      $scope.$apply(function(scope) {
-        scope.place = segment;
-      });
-      infoWindow.setContent(elements[0]);
-      infoWindow.open(map, marker);      
-    });
-
-    markers.push(marker);        
-  };
-
-  function addPath(move) {
-    for (var a in move.activities) {
-      var activity = move.activities[a];
-      var points = [];
-      var trackPoints = activity.trackPoints;
-      for (var t in trackPoints) {
-        points.push(
-          new google.maps.LatLng(trackPoints[t].lat, trackPoints[t].lon)
-        );
-      }
-
-      var path = new google.maps.Polyline({
-        path: points,
-        strokeColor: colours[activity.activity],
-        strokeOpacity: 1.0,
-        strokeWeight: 2
-      });
-
-      overlays.push(path);
-      path.setMap(map);      
+  $scope.$watch('selected', function(newSelection, oldSelection) {
+    if (newSelection) {
+      MovesPlacesModel.setSelected(newSelection.place);      
+    } else {
+      MovesPlacesModel.setSelected(undefined);
     }
-  };
-
-  function setCenter(marker) {
-    map.setCenter(marker.position);
-  };
-
-  $scope.$on('MovesStorylineLoaded', function(event, response) {
-      $scope.clearMap();
-
-      for (var d=0;d<response.length;d++) {
-        var segments = response[d].segments;
-        for (var s=0;s<segments.length;s++) {
-          if (segments[s].type == 'place') {
-            addMarker(segments[s]);
-          } else if (segments[s].type == 'move') {
-            addPath(segments[s]);
-          }       
-        }
-      }
-
-      if (markers.length > 0) {
-        setCenter(markers[0]);
-      }
   });
 
-  $scope.clearMap = function() {
-    for (var i in markers) {
-      markers[i].setMap(null);
-    }
-    markers.length = 0;
-    for (var i in overlays) {
-      overlays[i].setMap(null);
-    }
-    overlays.length = 0;
-  };
+}])
 
-  map = getMap();
+.controller('MovesMapCtrl', ['$scope', 'MovesPlacesModel', function($scope, MovesPlacesModel) {
+  $scope.$on('MovesPlacesModel::CollectionChange', function(e, model) {
+    $scope.places = model.getPlaces();
+  });
+
+  $scope.$on('MovesPathsModel::CollectionChange', function(e, model) {
+    $scope.paths = model.getPaths();
+  });
+
+  $scope.$on('MovesPlacesModel::SelectedChange', function(e, model) {
+    $scope.selected = model.getSelected();
+  })
 }])
 
 ;
