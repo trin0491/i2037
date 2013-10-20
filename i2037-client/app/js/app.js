@@ -13,19 +13,19 @@ angular.module('i2037', [
     'i2037.directives'])
 
 .config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
-    $routeProvider.when('/home',      {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
+    $routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
     $routeProvider.otherwise({redirectTo: '/home'});
 
   $httpProvider.responseInterceptors.push(function($q, Session) {
     return function(promise) {
-        return promise.then(function(response) {
-          return response;
-        }, function(response) {
+      return promise.then(function(response) {
+        return response;
+      }, function(response) {
         if (response && response.status == 403) {         
-            Session.raiseAuthFailure();
+            Session.onAuthFailure();
         }
         return $q.reject(response);
-        });
+      });
     }
   });       
 }])
@@ -92,7 +92,7 @@ angular.module('i2037', [
     });    
   }
 
-  Session.on('authFailure', function() {
+  $scope.$on('SessionService::AuthRequired', function(e) {
     $location.path('/home');    
     login();
   });

@@ -17,23 +17,15 @@ angular.module('i2037.services', ['i2037.environment'])
   return my;  
 })
 
-.factory('Session', function() {
+.factory('Session', ['$rootScope', function($rootScope) {
   var my = {};
 
-  var handlers = [];
-
-  my.on = function(name, callback) {
-    handlers.push(callback);
-  };
-
-  my.raiseAuthFailure = function() {
-    for (var i = 0; i < handlers.length; i++) {
-      handlers[i]();
-    };
+  my.onAuthFailure = function() {
+    $rootScope.$broadcast('SessionService::AuthRequired');
   };
 
   return my;
-})
+}])
 
 ;
 
