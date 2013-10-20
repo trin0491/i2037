@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('i2037', [
-    'ui.bootstrap', 
+    'ui.bootstrap',
     'i2037.recipes',
     'i2037.cellar', 
     'i2037.moves', 

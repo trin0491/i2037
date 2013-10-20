@@ -13,6 +13,7 @@ angular.module('i2037.directives.map', [])
     replace: false,
 
     link: function(scope, element, attrs) {
+      // TODO pass in styles
       var colours = {
         'wlk': '#FF0000',
         'run': '#FF0000',    
@@ -56,13 +57,7 @@ angular.module('i2037.directives.map', [])
         });
 
         google.maps.event.addListener(marker, 'click', function() {
-          var contentStr = '<div ng-include="\'partials/moves-place.html\'"></div>';
-          var elements = $compile(contentStr)(scope);      
-          scope.$apply(function(scope) {
-            scope.selected = place;
-          });
-          infoWindow.setContent(elements[0]);
-          infoWindow.open(map, marker);      
+          scope.onMarkerClick(marker, place);
         });
 
         markers.push(marker);
@@ -92,6 +87,16 @@ angular.module('i2037.directives.map', [])
         var latlng = getLatLng(place);
         map.setCenter(latlng);
       };
+
+      scope.onMarkerClick = function(marker, place) {
+          var contentStr = '<div ng-include="\'partials/moves-place.html\'"></div>';
+          var elements = $compile(contentStr)(scope);      
+          scope.$apply(function(scope) {
+            scope.selected = place;
+          });
+          infoWindow.setContent(elements[0]);
+          infoWindow.open(map, marker);        
+      }
 
       scope.$watch('places', function(newPlaces, oldPlaces) {
         for (var i in markers) {

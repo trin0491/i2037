@@ -1,0 +1,50 @@
+angular.module('i2037.directives.button', [])
+
+.directive("i2Button", [function() {
+  return {
+    restrict: 'E',
+    template: '<button class="btn"' 
+      + 'i2-spin-opts="options"'
+      + 'i2-spin-show="showSpinner" ng-transclude>'
+      + '</button>',
+    replace: true,
+    transclude: true,
+    link: function(scope, element, attrs){
+      scope.options = {radius:6, width:3, length: 4, lines:11, hwaccel:'on'};
+      if (attrs.type == 'submit') {
+        element.addClass('btn-primary');
+        scope.options.color = '#FFFFFF';
+      }
+
+      function getContent() {
+        return element.find('span').eq(0);
+      }
+
+      function loading() {
+        scope.showSpinner = true;
+        getContent().css('visibility', 'hidden');
+      }
+
+      function reset() {
+        scope.showSpinner = false;
+        getContent().css('visibility', 'visible');        
+      }
+
+      function setState(state) {
+        switch (state) {
+          case 'LOADING':
+            loading();
+            break;
+          default:
+            reset();
+            break;
+        }
+      }
+
+      scope.$watch(attrs.i2State, function(newState, oldState) {
+        setState(newState);
+      }, true);
+    }
+  } 
+}])
+;

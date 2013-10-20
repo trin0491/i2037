@@ -2,7 +2,9 @@ angular.module('i2037.moves', [
   'i2037.resources.moves',
   'i2037.moves.model',
   'i2037.directives.map',
-  'i2037.directives.timeline'
+  'i2037.directives.timeline',
+  'i2037.directives.spinner',
+  'i2037.directives.button'
 ])
 
 .config(['$routeProvider', function($routeProvider) {
@@ -104,11 +106,11 @@ angular.module('i2037.moves', [
   };
 
   $scope.$on('MovesDataLoading', function() {
-    $scope.isLoading = true;
+    $scope.state = 'LOADING';
   });
 
   $scope.$on('MovesDataLoaded', function() {
-    $scope.isLoading = false;
+    $scope.state = 'default';
   });
 
   $scope.dt = new Date();
