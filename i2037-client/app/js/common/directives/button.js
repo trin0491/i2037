@@ -27,13 +27,24 @@ angular.module('i2037.directives.button', [])
 
       function reset() {
         scope.showSpinner = false;
+        element.removeClass('disabled');
+        element.prop('disabled', false);
         getContent().css('visibility', 'visible');        
+      }
+
+      function disabled() {
+        element.addClass('disabled');
+        element.prop('disabled', true);
       }
 
       function setState(state) {
         switch (state) {
           case 'LOADING':
             loading();
+            break;
+          case 'DISABLED':
+            reset();
+            disabled();
             break;
           default:
             reset();

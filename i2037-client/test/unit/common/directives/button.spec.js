@@ -38,6 +38,18 @@ describe('i2037.directives.button', function() {
       expect(element.children('span').text()).toEqual('Submit');
     })
 
+    it('should hava disabled state', function() {
+      var element = compile('<i2-button i2-state="state">Submit</button>');
+      $scope.state = 'DISABLED';
+      $scope.$digest();
+      expect(element.hasClass('disabled')).toBe(true);
+      expect(element.prop('disabled')).toBe(true);
+      $scope.state = 'default';
+      $scope.$digest();
+      expect(element.hasClass('disabled')).toBe(false);
+      expect(element.prop('disabled')).toBe(false);      
+    })
+
   });
 
 });
