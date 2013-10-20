@@ -24,6 +24,11 @@ describe('i2037.directives.timeline', function() {
       });
     });
 
+    function getCell(col, row) {
+      var tr = element.find('tr').eq(row);
+      return tr.children('td').eq(col);
+    }
+
     it('should have same no of rows as entries', function() {
       $scope.$digest();
 
@@ -77,9 +82,9 @@ describe('i2037.directives.timeline', function() {
       expect(element.find('tr').eq(0).hasClass('info')).toBeFalsy();
     });
 
-    it('should format the date as a time', function() {
+    it('should format the date', function() {
       $scope.$digest();
-      expect(element.find('td').eq(0).text()).toEqual("23:13hrs");
+      expect(getCell(0,0).text()).toEqual("23/10/77 23:13hrs");
     });
   })
 

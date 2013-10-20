@@ -40,6 +40,7 @@ angular.module('i2037.directives.button', [])
       function setState(state) {
         switch (state) {
           case 'LOADING':
+            reset();
             loading();
             break;
           case 'DISABLED':

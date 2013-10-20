@@ -53,7 +53,7 @@ angular.module('i2037', [
   var menus = [
     new Menu('Recipes', '/recipes'), 
     new Menu('Cellar', '/cellar'),
-    new Menu('Moves', '/moves'),
+    new Menu('Journal', '/journal'),
     new Menu('Cage', '/cage')
   ];
   $scope.menus = menus;

@@ -8,7 +8,7 @@ angular.module('i2037.moves', [
 ])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/moves', {
+  $routeProvider.when('/journal', {
     templateUrl: 'partials/moves.html',
     controller: 'MovesCtrl',
     resolve: {

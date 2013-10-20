@@ -9,7 +9,7 @@ angular.module('i2037.directives.timeline', [])
     },
     template: '<table class="table table-bordered"><tbody>'
       + '<tr ng-repeat="entry in entries" ng-class="{info: isSelected(entry)}" ng-click="onClick(entry)">'
-      + '<td>{{entry.date | date:"HH:mm"}}hrs</td><td>{{entry.text}}</td>'
+      + '<td>{{entry.date | date:"dd/MM/yy HH:mm"}}hrs</td><td>{{entry.text}}</td>'
       + '</tr></tbody></table>',
 
     link: function(scope, element, attrs) {
