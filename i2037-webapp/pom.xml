@@ -153,8 +153,8 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <configuration>
-            <source>1.6</source>
-            <target>1.6</target>
+            <source>1.7</source>
+            <target>1.7</target>
           </configuration>
         </plugin>
         <plugin>
@@ -166,6 +166,33 @@
             <wtpapplicationxml>true</wtpapplicationxml>
             <wtpversion>2.0</wtpversion>
           </configuration>
+        </plugin>
+        <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+        <plugin>
+        	<groupId>org.eclipse.m2e</groupId>
+        	<artifactId>lifecycle-mapping</artifactId>
+        	<version>1.0.0</version>
+        	<configuration>
+        		<lifecycleMappingMetadata>
+        			<pluginExecutions>
+        				<pluginExecution>
+        					<pluginExecutionFilter>
+        						<groupId>org.codehaus.mojo</groupId>
+        						<artifactId>
+        							build-helper-maven-plugin
+        						</artifactId>
+        						<versionRange>[1.5,)</versionRange>
+        						<goals>
+        							<goal>reserve-network-port</goal>
+        						</goals>
+        					</pluginExecutionFilter>
+        					<action>
+        						<ignore></ignore>
+        					</action>
+        				</pluginExecution>
+        			</pluginExecutions>
+        		</lifecycleMappingMetadata>
+        	</configuration>
         </plugin>
       </plugins>
     </pluginManagement>
