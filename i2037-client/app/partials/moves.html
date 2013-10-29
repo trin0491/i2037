@@ -21,17 +21,13 @@
         <div class="span3" ng-controller="MovesTimelineCtrl">
             <div i2-timeline="entries" i2-selected="selected">
                 <div ng-controller="TimelineEntryCtrl">
-                    <a ng-click="toggleCollapse()">{{entry.text}}</a>
+                    <a ng-click="toggleCollapse(entry)">{{entry.text}}</a>
                     <div collapse="isCollapsed">
                         <div class="well" i2-spin-show="showSpinner">
-                            <a ng-href="{{entry.venue.canonicalUrl}}">Foursquare</a>
+                            <a ng-href="{{entry.venue.canonicalUrl}}">Provided by {{entry.venue.type}}</a>
                             <address>
-                                {{entry.venue.location.address}},
-                                {{entry.venue.location.city}},
-                                {{entry.venue.location.state}},
-                                {{entry.venue.location.postalCode}},
-                                {{entry.venue.location.country}}<br>
-                                <abr title="Telephone">T: </abr><a ng-href="tel:{{entry.venue.contact.phone}">{{entry.venue.contact.formattedPhone}}</a>
+                                {{entry.venue.address}}<br>
+                                <abr title="Telephone">T: </abr><a ng-href="tel:{{entry.venue.phone}">{{entry.venue.formattedPhone}}</a>
                             </address>
                         </div>                        
                         <ul class="media-list">

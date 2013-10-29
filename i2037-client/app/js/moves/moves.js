@@ -157,16 +157,34 @@ angular.module('i2037.moves', [
 .controller('TimelineEntryCtrl', ['$scope', 'FourSquareVenue', function($scope, FourSquareVenue) {
   $scope.isCollapsed = true;
   $scope.showSpinner = false;
-  $scope.toggleCollapse = function() {
+
+  $scope.toggleCollapse = function(entry) {
     $scope.isCollapsed = !$scope.isCollapsed;
-    if(!$scope.isCollapsed && $scope.entry.place.type == 'foursquare') {
-      $scope.showSpinner = true;
-      FourSquareVenue.get().then(function(venue) {
-        $scope.entry.venue = venue
-        $scope.showSpinner = false;          
-      }, function(error) {
-        $scope.showSpinner = false;
-      });        
+    if(entry.place.type == 'foursquare') {
+      if (!entry.venue) {
+        $scope.showSpinner = true;
+        FourSquareVenue.get(entry.place.foursquareId).then(function(venue) {
+          entry.venue = {
+            type: 'Foursquare',
+            phone: venue.contact.phone,
+            formattedPhone: venue.contact.formattedPhone,
+            canonicalUrl: venue.canonicalUrl
+          }
+          var location = venue.location;
+          if (location) {
+            var a = ['address', 'city', 'state', 'postalCode', 'country'];
+            var addr = a.map(function(property) { if (location.hasOwnProperty(property)) return location[property] });
+            entry.venue.address = addr.join(', ');
+          }        
+          $scope.showSpinner = false;          
+        }, function(error) {
+          $scope.showSpinner = false;
+        });
+      }        
+    } else {
+      entry.venue = {
+        type: 'Moves'
+      };
     }
   }
 }])
