@@ -12,7 +12,7 @@ describe('i2037.directives.timeline', function() {
     }
 
     beforeEach(function() {
-      var html = '<div i2-timeline="entries" i2-selected="selected"></div>';
+      var html = '<div i2-timeline="entries" i2-selected="selected"><div id="contents"></div></div>';
 
       inject(function(_$compile_, _$rootScope_) {
         $scope = _$rootScope_;
@@ -30,13 +30,12 @@ describe('i2037.directives.timeline', function() {
     }
 
     it('should have the first row with the date', function() {
-      $scope.$digest();
+      $scope.$digest();      
       expect(getCell(0, 0).text()).toEqual('Sunday 23 October');
     });
 
     it('should have a header row if all entries are on the same day', function() {
       $scope.$digest();
-
       expect(element.find('tr').length).toEqual(2);
 
       $scope.entries.push(new Entry("another entry"));
@@ -104,6 +103,11 @@ describe('i2037.directives.timeline', function() {
       $scope.$digest();
       expect(getCell(0,1).text()).toEqual("23:13");
     });
+
+    it('should tranclude the content', function() {
+      $scope.$digest();
+      expect(element.find('div').length).toEqual(1);
+    })
   })
 
 });

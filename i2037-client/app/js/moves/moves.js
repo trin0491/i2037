@@ -1,5 +1,6 @@
 angular.module('i2037.moves', [
   'i2037.resources.moves',
+  'i2037.resources.foursquare',
   'i2037.moves.model',
   'i2037.directives.map',
   'i2037.directives.timeline',
@@ -131,11 +132,14 @@ angular.module('i2037.moves', [
     var entries = [];
     var places = model.getPlaces();
     for (var i in places) {
-      entries.push({ 
+      var place = places[i];
+      var entry = { 
         date: Moves.fromDateString(places[i].startTime), 
-        text: places[i].name,
-        place: places[i]
-      });          
+        text: place.name,
+        place: place,
+        comments: []
+      };
+      entries.push(entry);          
     }
     $scope.entries = entries;
   });
@@ -148,6 +152,23 @@ angular.module('i2037.moves', [
     }
   });
 
+}])
+
+.controller('TimelineEntryCtrl', ['$scope', 'FourSquareVenue', function($scope, FourSquareVenue) {
+  $scope.isCollapsed = true;
+  $scope.showSpinner = false;
+  $scope.toggleCollapse = function() {
+    $scope.isCollapsed = !$scope.isCollapsed;
+    if(!$scope.isCollapsed && $scope.entry.place.type == 'foursquare') {
+      $scope.showSpinner = true;
+      FourSquareVenue.get().then(function(venue) {
+        $scope.entry.venue = venue
+        $scope.showSpinner = false;          
+      }, function(error) {
+        $scope.showSpinner = false;
+      });        
+    }
+  }
 }])
 
 .controller('MovesMapCtrl', ['$scope', 'MovesPlacesModel', function($scope, MovesPlacesModel) {

@@ -41,6 +41,11 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
           <oa:rest-template resource="moves" access-token-provider="accessTokenProviderChain"/>
         </property>
       </bean>
+      <bean class="net.i2037.foursquare.FourSquareServiceImpl">
+          <property name="fourSquareTemplate">
+              <bean class="org.springframework.web.client.RestTemplate" />
+          </property>
+      </bean>
     </jaxrs:serviceBeans>
     <jaxrs:providers>
       <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
