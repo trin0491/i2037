@@ -178,7 +178,8 @@ angular.module('i2037.moves', [
             type: 'Foursquare',
             phone: venue.contact.phone,
             formattedPhone: venue.contact.formattedPhone,
-            canonicalUrl: venue.canonicalUrl
+            canonicalUrl: venue.canonicalUrl,
+            url: venue.url
           }
           var location = venue.location;
           if (location) {
