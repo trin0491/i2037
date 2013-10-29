@@ -16,6 +16,10 @@ angular.module('i2037.directives.button', [])
         scope.options.color = '#FFFFFF';
       }
 
+      if (attrs.size) {
+        element.addClass('btn-' + attrs.size);
+      }
+
       function getContent() {
         return element.find('span').eq(0);
       }

@@ -1,4 +1,4 @@
-describe('i2037.directives.button', function() {
+ddescribe('i2037.directives.button', function() {
 
   beforeEach(module('i2037.directives.button'));
 
@@ -31,6 +31,11 @@ describe('i2037.directives.button', function() {
     it('should have btn-primary class if it is submit', function() {
       var element = compile('<i2-button type="submit">Submit</button>');
       expect(element.hasClass('btn-primary')).toBe(true);
+    })
+
+    it('should set the size class if size is specified', function() {
+      var element = compile('<i2-button size="large">Submit</button>');
+      expect(element.hasClass('btn-large')).toBe(true);      
     })
 
     it('should transclude the content', function() {
