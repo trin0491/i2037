@@ -144,6 +144,16 @@ angular.module('i2037.moves', [
     $scope.entries = entries;
   });
 
+  $scope.$on('MovesPlacesModel::SelectedChange', function(e, model) {
+    var selectedPlace = model.getSelected();
+    $scope.entries.some
+    for (var i=0;i<$scope.entries.length;++i) {
+      if ($scope.entries[i].place === selectedPlace) {
+        $scope.selected = $scope.entries[i];        
+      }
+    }
+  })
+
   $scope.$watch('selected', function(newSelection, oldSelection) {
     if (newSelection) {
       MovesPlacesModel.setSelected(newSelection.place);      
@@ -200,6 +210,14 @@ angular.module('i2037.moves', [
 
   $scope.$on('MovesPlacesModel::SelectedChange', function(e, model) {
     $scope.selected = model.getSelected();
+  })
+
+  $scope.$watch('selected', function(newSelection, oldSelection) {
+    if (newSelection) {
+      MovesPlacesModel.setSelected(newSelection);
+    } else {
+      MovesPlacesModel.setSelected(undefined);
+    }
   })
 }])
 

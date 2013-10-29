@@ -89,13 +89,13 @@ angular.module('i2037.directives.map', [])
       };
 
       scope.onMarkerClick = function(marker, place) {
-          var contentStr = '<div ng-include="\'partials/moves-place.html\'"></div>';
-          var elements = $compile(contentStr)(scope);      
           scope.$apply(function(scope) {
             scope.selected = place;
-          });
-          infoWindow.setContent(elements[0]);
-          infoWindow.open(map, marker);        
+          });        
+          // var contentStr = '<div ng-include="\'partials/moves-place.html\'"></div>';
+          // var elements = $compile(contentStr)(scope);      
+          // infoWindow.setContent(elements[0]);
+          // infoWindow.open(map, marker);        
       }
 
       scope.$watch('places', function(newPlaces, oldPlaces) {

@@ -1,4 +1,4 @@
-ddescribe('i2037.directives.button', function() {
+describe('i2037.directives.button', function() {
 
   beforeEach(module('i2037.directives.button'));
 

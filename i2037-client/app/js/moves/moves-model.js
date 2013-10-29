@@ -18,8 +18,11 @@ angular.module('i2037.moves.model', ['i2037.resources.moves'])
   }
 
   this.setSelected = function(place) {
+    var hasChanged = (selected !== place);
     selected = place;
-    $rootScope.$broadcast('MovesPlacesModel::SelectedChange', this);
+    if (hasChanged) {
+      $rootScope.$broadcast('MovesPlacesModel::SelectedChange', this);    
+    }
   }
 
   return this;

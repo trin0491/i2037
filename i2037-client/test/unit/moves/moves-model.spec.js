@@ -33,6 +33,12 @@ describe('i2037.moves.model', function() {
         .toHaveBeenCalledWith('MovesPlacesModel::SelectedChange', model);
       expect(model.getSelected()).toBe(place);      
     });
+
+    it('should not raise selection change if it hasnot changed', function() {
+      model.setSelected(place);
+      model.setSelected(place);
+      expect($rootScope.$broadcast.call.length).toBe(1);      
+    });
   });
 
   describe('MovesPathsModel', function() {
