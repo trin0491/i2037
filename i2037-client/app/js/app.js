@@ -63,7 +63,7 @@ angular.module('i2037', [
     $scope.user = user;
   }
 
-  function login() {
+  function showLoginForm() {
     var opts = {
         backdrop: true,
         keyboard: true,
@@ -94,7 +94,7 @@ angular.module('i2037', [
 
   $scope.$on('SessionService::AuthRequired', function(e) {
     $location.path('/home');    
-    login();
+    showLoginForm();
   });
 
   $scope.login = function() {
@@ -124,7 +124,7 @@ angular.module('i2037', [
     }); 
   };
 
-  onUserUpdate(null);
+  $scope.login();
 }])
 
 .controller('LoginFormCtrl', ['$scope', 'dialog', 'User', 'userName',
