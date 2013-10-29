@@ -29,39 +29,57 @@ describe('i2037.directives.timeline', function() {
       return tr.children('td').eq(col);
     }
 
-    it('should have same no of rows as entries', function() {
+    it('should have the first row with the date', function() {
       $scope.$digest();
+      expect(getCell(0, 0).text()).toEqual('Sunday 23 October');
+    });
 
-      expect(element.find('tr').length).toEqual(1);
-
-      $scope.entries.push(new Entry("another entry"));
+    it('should have a header row if all entries are on the same day', function() {
       $scope.$digest();
 
       expect(element.find('tr').length).toEqual(2);
 
+      $scope.entries.push(new Entry("another entry"));
+      $scope.$digest();
+
+      expect(element.find('tr').length).toEqual(3);
+
       $scope.entries.pop();
       $scope.$digest();
 
-      expect(element.find('tr').length).toEqual(1);
+      expect(element.find('tr').length).toEqual(2);
+    });
+
+    it('should create a new header row for the next day', function() {
+      $scope.$digest();
+      expect(element.find('tr').length).toEqual(2);
+
+      var nextDay = new Entry("another entry");
+      nextDay.date = new Date("October 24, 1977 23:13:00")
+      $scope.entries.push(nextDay);
+      $scope.$digest();
+
+      expect(element.find('tr').length).toEqual(4);
+      expect(getCell(0, 2).text()).toEqual('Monday 24 October');
     });
 
     it('should have an optional selected entry', function() {
       element = $compile('<div i2-timeline="entries"></div>')($scope);
       $scope.$digest();
-      expect(element.find('tr').eq(0).hasClass('info')).toBeFalsy();
+      expect(element.find('tr').eq(1).hasClass('info')).toBeFalsy();
     });
 
     it('should highlight the selected entry when scope is updated', function() {
       $scope.$digest();
-      expect(element.find('tr').eq(0).hasClass('info')).toBeTruthy();
+      expect(element.find('tr').eq(1).hasClass('info')).toBeTruthy();
 
       $scope.entries.push(new Entry("not selected"));
       $scope.$digest();
-      expect(element.find('tr').eq(1).hasClass('info')).toBeFalsy();
+      expect(element.find('tr').eq(2).hasClass('info')).toBeFalsy();
 
       $scope.selected = $scope.entries[1];
       $scope.$digest();
-      expect(element.find('tr').eq(1).hasClass('info')).toBeTruthy();      
+      expect(element.find('tr').eq(2).hasClass('info')).toBeTruthy();      
     });
 
     it('should update selected when a row is clicked', function() {
@@ -70,21 +88,21 @@ describe('i2037.directives.timeline', function() {
       $scope.$digest();
       expect($scope.selected).toBeUndefined();
 
-      element.find('tr').eq(0).click();
-      expect(element.find('tr').eq(0).hasClass('info')).toBeTruthy();
+      element.find('tr').eq(1).click();
+      expect(element.find('tr').eq(1).hasClass('info')).toBeTruthy();
       expect($scope.selected).toEqual($scope.entries[0]);
     });
 
     it('should unselect an entry when it is clicked twice', function() {
       $scope.$digest();
-      expect(element.find('tr').eq(0).hasClass('info')).toBeTruthy();
-      element.find('tr').eq(0).click();
-      expect(element.find('tr').eq(0).hasClass('info')).toBeFalsy();
+      expect(element.find('tr').eq(1).hasClass('info')).toBeTruthy();
+      element.find('tr').eq(1).click();
+      expect(element.find('tr').eq(1).hasClass('info')).toBeFalsy();
     });
 
-    it('should format the date', function() {
+    it('should format entry date as a time', function() {
       $scope.$digest();
-      expect(getCell(0,0).text()).toEqual("23/10/77 23:13hrs");
+      expect(getCell(0,1).text()).toEqual("23:13");
     });
   })
 

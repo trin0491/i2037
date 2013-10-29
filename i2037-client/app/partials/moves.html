@@ -22,12 +22,12 @@
             <div i2-map i2-places="places" i2-paths="paths" i2-selected="selected"></div>
         </div>
         <div class="span3" ng-controller="MovesTimelineCtrl">
+            <div i2-timeline="entries" i2-selected="selected"></div>
             <table class="table table-bordered table-condensed" ng-controller="MovesSummaryCtrl">
                 <tbody>
                     <tr ng-repeat="activity in summary.summary"><th>{{activity.activity | activity }}</th><td>{{activity.duration}}</td></tr>
                 </tbody>
             </table>            
-            <div i2-timeline="entries" i2-selected="selected"></div>
         </div>
     </div>
 </div>
