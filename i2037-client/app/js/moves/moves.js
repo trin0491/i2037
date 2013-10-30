@@ -24,7 +24,7 @@ angular.module('i2037.moves', [
       } 
     }
   });
-  $routeProvider.when('/journal/:date', {
+  $routeProvider.when('/journal/date/:date', {
     templateUrl: 'partials/journal-date.html',
     controller: 'DateJournalCtrl',
     resolve: {
@@ -44,7 +44,7 @@ angular.module('i2037.moves', [
 
 .controller('CalendarJournalCtrl', ['$scope', '$location', 'Moves', function($scope, $location, Moves) {
   $scope.$on('DateChanged', function(event, date) {
-    $location.path('/journal/'+ Moves.toDateString(date));
+    $location.path('/journal/date/'+ Moves.toDateString(date));
   });
 }])
 
