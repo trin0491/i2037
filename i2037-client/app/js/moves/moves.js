@@ -10,8 +10,8 @@ angular.module('i2037.moves', [
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/journal', {
-    templateUrl: 'partials/moves.html',
-    controller: 'MovesCtrl',
+    templateUrl: 'partials/journal-calendar.html',
+    controller: 'CalendarJournalCtrl',
     resolve: {
       movesProfile: function($route, MovesProfile) {
         return MovesProfile.get($route.current.params).then(function (profile) {
@@ -23,13 +23,33 @@ angular.module('i2037.moves', [
         })
       } 
     }
-  });    
+  });
+  $routeProvider.when('/journal/:date', {
+    templateUrl: 'partials/journal-date.html',
+    controller: 'DateJournalCtrl',
+    resolve: {
+      movesProfile: function($route, MovesProfile) {
+        return MovesProfile.get($route.current.params).then(function (profile) {
+            if (profile.redirectTo) {
+              window.location.replace(profile.redirectTo);
+            } else {
+              return profile;
+            }
+        })
+      },
+      date: function($route) { return $route.current.params.date } 
+    }
+  })    
 }])
 
-.controller('MovesCtrl', ['$scope', '$rootScope', '$q', 'Moves', 'MovesStoryline', 'MovesPlacesModel', 'MovesPathsModel', 'movesProfile',
- function($scope, $rootScope, $q, Moves, MovesStoryline, MovesPlacesModel, MovesPathsModel, movesProfile) {
+.controller('CalendarJournalCtrl', ['$scope', '$location', 'Moves', function($scope, $location, Moves) {
+  $scope.$on('DateChanged', function(event, date) {
+    $location.path('/journal/'+ Moves.toDateString(date));
+  });
+}])
 
-  $scope.movesprofile = movesProfile;
+.controller('DateJournalCtrl', ['$scope', '$rootScope', '$q', 'date', 'MovesStoryline', 'MovesPlacesModel', 'MovesPathsModel',
+ function($scope, $rootScope, $q, date, MovesStoryline, MovesPlacesModel, MovesPathsModel) {
   
   function processResponse(response) {
     var places = [];
@@ -57,8 +77,7 @@ angular.module('i2037.moves', [
 
   function loadStoryLine(dt) {
     var deferred = $q.defer(); 
-    var dateStr = Moves.toDateString(dt)
-    MovesStoryline.query({date: dateStr}, function(response) {
+    MovesStoryline.query({date: dt}, function(response) {
       processResponse(response);
       deferred.resolve(response);
     }, function(error) {
@@ -76,9 +95,7 @@ angular.module('i2037.moves', [
     });
   }
 
-  $scope.$on('DateChanged', function(event, date) {
-    onDateChanged(date);
-  });
+  onDateChanged(date);
 }])
 
 .controller('DatePickerCtrl', ['$scope', '$rootScope', '$timeout', function ($scope, $rootScope, $timeout) {
@@ -146,11 +163,12 @@ angular.module('i2037.moves', [
 
   $scope.$on('MovesPlacesModel::SelectedChange', function(e, model) {
     var selectedPlace = model.getSelected();
-    $scope.entries.some
-    for (var i=0;i<$scope.entries.length;++i) {
-      if ($scope.entries[i].place === selectedPlace) {
-        $scope.selected = $scope.entries[i];        
-      }
+    if ($scope.entries) {
+      for (var i=0;i<$scope.entries.length;++i) {
+        if ($scope.entries[i].place === selectedPlace) {
+          $scope.selected = $scope.entries[i];        
+        }
+      }      
     }
   })
 

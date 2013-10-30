@@ -1,0 +1,20 @@
+<div class="span12">
+    <div class="page-header">
+        <h2>Journal</h2>
+    </div>
+    <div class="row-fluid">
+        <div class="span6">
+            <form class="form-inline" ng-controller="DatePickerCtrl">
+                <div class="input-append">
+                    <input type="text" datepicker-popup="dd-MMMM-yyyy" ng-model="dt" open="opened" min="minDate" max="maxDate" 
+                        datepicker-options="dateOptions" 
+                        date-disabled="disabled(date, mode)" 
+                        ng-required="true"
+                        show-weeks="false" />               
+                    <button class="btn" ng-click="open()"><i class="icon-calendar"></i></button>
+                </div>
+                <i2-button i2-state="state" type="submit" ng-click="submit()">Submit</i2-button> 
+            </form>
+        </div>
+    </div>
+</div>
