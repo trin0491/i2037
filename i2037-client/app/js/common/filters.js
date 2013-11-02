@@ -31,4 +31,18 @@ angular.module('i2037.filters', [])
   }
 }])
 
+.filter('trim', ['limitToFilter', function(limitToFilter) {
+    return function(input, limit) {
+      if (!angular.isString(input) || limit < 3) {
+        return input;
+      }
+      if (input.length <= limit) {
+        return input;
+      } else {
+        limit = limit - 3;
+        return limitToFilter(input.split(''), limit).join('') + '...';
+      }
+    }
+ }])
+
 ;

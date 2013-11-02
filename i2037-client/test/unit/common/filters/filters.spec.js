@@ -54,4 +54,39 @@ describe('filter', function() {
     })
   });
 
+  describe('trim', function() {
+    var filter, input;
+    beforeEach(function() {
+      input = "The rain in Spain falls";
+      inject(function(_trimFilter_) {
+        filter = _trimFilter_;
+      });
+    });
+
+    it ('should ignore input unless it is a string', function() {
+      var input = ['a', 'b'];
+      expect(filter(input, 1)).toEqual(input);
+    })
+
+    it('should ignore input if limit is less than zero', function() {
+      expect(filter(input, -1)).toEqual(input);
+    })
+
+    it('should ignore input if limit is zero', function() {
+      expect(filter(input, 0)).toEqual(input);
+    })
+
+    it('should return the original string if it is shorter than the limit', function() {
+      expect(filter(input, 24)).toEqual(input);
+    });
+
+    it('should return the original string if it is equal to the limit', function() {
+      expect(filter(input, 23)).toEqual(input);
+    });
+
+    it('should return an elipse if it is less than the limit', function() {
+      expect(filter(input, 22)).toEqual('The rain in Spain f...');
+    })
+  })
+
 });
