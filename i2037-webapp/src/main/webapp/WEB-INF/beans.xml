@@ -46,6 +46,9 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
               <bean class="org.springframework.web.client.RestTemplate" />
           </property>
       </bean>
+      <bean class="net.i2037.journal.CommentServiceImpl">
+      	<property name="commentDao" ref="commentDao" />
+      </bean>
     </jaxrs:serviceBeans>
     <jaxrs:providers>
       <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
@@ -77,6 +80,7 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
         <value>net.i2037.cellar.model.WineImpl</value>
         <value>net.i2037.cellar.model.GrapeImpl</value>
         <value>net.i2037.oauth2.OAuth2AccessTokenImpl</value>
+        <value>net.i2037.journal.model.CommentImpl</value>
       </list>
     </property>
     <property name="hibernateProperties">
@@ -98,6 +102,10 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
 
   <bean id="userDao" class="net.i2037.cellar.model.UserDaoImpl">
       <property name="sessionFactory" ref="sessionFactory" />
+  </bean>
+  
+  <bean id="commentDao" class="net.i2037.journal.model.CommentDaoImpl">
+  	<property name="sessionFactory" ref="sessionFactory" />
   </bean>
   
   <!-- Security -->
