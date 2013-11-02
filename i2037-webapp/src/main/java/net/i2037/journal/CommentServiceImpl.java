@@ -1,6 +1,7 @@
 package net.i2037.journal;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -31,6 +32,7 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public void create(CommentDto comment) {
 		LOGGER.info("Create comment: {}", comment);
+		enrichComment(comment);
 		commentDao.create(comment);
 	}
 
@@ -44,7 +46,12 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public void update(CommentDto comment) {
 		LOGGER.info("Update comment: {}", comment);
+		enrichComment(comment);
 		commentDao.update(comment);
+	}
+
+	private void enrichComment(CommentDto comment) {
+		comment.setLastUpdateTime(new Date());
 	}
 
 	@Override
