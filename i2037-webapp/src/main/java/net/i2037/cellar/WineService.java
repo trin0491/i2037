@@ -16,7 +16,6 @@ import net.i2037.cellar.model.WineDto;
 
 @Path("/wines")
 @Produces("application/json")
-@Consumes({"application/json", "application/xml"})
 public interface WineService {
 
     @GET

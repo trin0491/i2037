@@ -7,7 +7,6 @@ import javax.ws.rs.Produces;
 
 @Path("/session")
 @Produces("application/json")
-@Consumes({"application/json", "application/xml"})
 public interface SessionService {
 	
 	@GET

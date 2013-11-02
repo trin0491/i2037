@@ -14,7 +14,6 @@ import net.i2037.cellar.model.GrapeDto;
 
 @Path("/grapes")
 @Produces("application/json")
-@Consumes("application/json")
 public interface GrapeService {
 
 	@GET

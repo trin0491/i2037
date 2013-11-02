@@ -12,7 +12,6 @@ import net.i2037.cellar.model.UserDto;
 
 @Path("/user")
 @Produces("application/json")
-@Consumes({"application/json", "application/xml"})
 public interface UserService {
 
 	@GET

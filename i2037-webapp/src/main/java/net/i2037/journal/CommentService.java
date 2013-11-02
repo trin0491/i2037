@@ -15,7 +15,6 @@ import net.i2037.journal.model.CommentDto;
 
 @Path("/comments")
 @Produces("application/json")
-@Consumes({"application/json", "application/xml"})
 public interface CommentService {
 	
 	@GET
