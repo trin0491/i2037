@@ -1,6 +1,7 @@
 angular.module('i2037.moves', [
   'i2037.resources.moves',
   'i2037.resources.foursquare',
+  'i2037.resources.comments',
   'i2037.moves.model',
   'i2037.directives.map',
   'i2037.directives.timeline',
@@ -11,22 +12,7 @@ angular.module('i2037.moves', [
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/journal', {
     templateUrl: 'partials/journal-calendar.html',
-    controller: 'CalendarJournalCtrl',
-    resolve: {
-      movesProfile: function($route, MovesProfile) {
-        return MovesProfile.get($route.current.params).then(function (profile) {
-            if (profile.redirectTo) {
-              window.location.replace(profile.redirectTo);
-            } else {
-              return profile;
-            }
-        })
-      } 
-    }
-  });
-  $routeProvider.when('/journal/date/:date', {
-    templateUrl: 'partials/journal-date.html',
-    controller: 'DateJournalCtrl',
+    controller: 'JournalCtrl',
     resolve: {
       movesProfile: function($route, MovesProfile) {
         return MovesProfile.get($route.current.params).then(function (profile) {
@@ -37,26 +23,33 @@ angular.module('i2037.moves', [
             }
         })
       },
-      date: function($route) { return $route.current.params.date } 
+      date: function() {
+        return new Date();
+      } 
+    }
+  });
+  $routeProvider.when('/journal/date/:date', {
+    templateUrl: 'partials/journal-date.html',
+    controller: 'JournalCtrl',
+    resolve: {
+      date: function($route, Moves) { 
+        return Moves.toDate($route.current.params.date); 
+      } 
     }
   })    
 }])
 
-.controller('CalendarJournalCtrl', ['$scope', '$location', 'Moves', function($scope, $location, Moves) {
-  $scope.$on('DateChanged', function(event, date) {
-    $location.path('/journal/date/'+ Moves.toDateString(date));
-  });
-}])
-
-.controller('DateJournalCtrl', ['$scope', '$rootScope', '$q', 'date', 'MovesStoryline', 'MovesPlacesModel', 'MovesPathsModel',
- function($scope, $rootScope, $q, date, MovesStoryline, MovesPlacesModel, MovesPathsModel) {
+.controller('JournalCtrl', ['$scope', '$rootScope', 'date', 'MovesStoryline', 'MovesPlacesModel', 'MovesPathsModel',
+ function($scope, $rootScope, date, MovesStoryline, MovesPlacesModel, MovesPathsModel) {
   
-  function processResponse(response) {
+  $scope.date = date;
+
+  function processResponse(storylines) {
     var places = [];
     var paths = [];
 
-    for (var d=0;d<response.length;d++) {
-      var segments = response[d].segments;
+    for (var day=0;day<storylines.length;day++) {
+      var segments = storylines[day].segments;
       for (var s=0;s<segments.length;s++) {
         if (segments[s].type == 'place') {
           var place = segments[s].place;
@@ -76,14 +69,9 @@ angular.module('i2037.moves', [
   }
 
   function loadStoryLine(dt) {
-    var deferred = $q.defer(); 
-    MovesStoryline.query({date: dt}, function(response) {
-      processResponse(response);
-      deferred.resolve(response);
-    }, function(error) {
-      deferred.reject("failed");
+    return MovesStoryline.query({date: dt}).then(function(storylines) {
+      processResponse(storylines);
     });
-    return deferred.promise;
   };
 
   function onDateChanged(date) {
@@ -98,7 +86,8 @@ angular.module('i2037.moves', [
   onDateChanged(date);
 }])
 
-.controller('DatePickerCtrl', ['$scope', '$rootScope', '$timeout', function ($scope, $rootScope, $timeout) {
+.controller('DatePickerCtrl', ['$scope', '$timeout', '$location', 'Moves', function ($scope, $timeout, $location, Moves) {
+  $scope.dt = $scope.date;  
   $scope.minDate = '2000-01-01';
   $scope.maxDate = new Date();
   $scope.showWeeks = true;
@@ -119,7 +108,7 @@ angular.module('i2037.moves', [
 
   $scope.submit = function() {
     if ($scope.dt) {
-      $rootScope.$broadcast("DateChanged", $scope.dt);    
+      $location.path('/journal/date/'+ Moves.toDateString($scope.dt));          
     }
   };
 
@@ -130,11 +119,10 @@ angular.module('i2037.moves', [
   $scope.$on('MovesDataLoaded', function() {
     $scope.state = 'default';
   });
-
-  $scope.dt = new Date();
 }])
 
-.controller('MovesSummaryCtrl', ['$scope', 'Moves', 'MovesSummary', function($scope, Moves, MovesSummary) {  
+.controller('MovesSummaryCtrl', ['$scope', 'Moves', 'MovesSummary', function($scope, Moves, MovesSummary) {
+  // date change is no longer raised  
   $scope.$on('DateChanged', function(event, date) {
     var dateStr = Moves.toDateString(date);
     MovesSummary.get({date: dateStr}).then(function(summary) {
@@ -143,7 +131,20 @@ angular.module('i2037.moves', [
   });
 }])
 
-.controller('MovesTimelineCtrl', ['$scope', 'Moves', 'MovesPlacesModel', function($scope, Moves, MovesPlacesModel) {
+.controller('TimelineCtrl', ['$scope', 'MovesPlacesModel', function($scope, MovesPlacesModel) {
+
+  function toDate(str) {
+      var r = /(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})Z/;
+      var matches = r.exec(str);
+      var d = new Date();
+      d.setUTCFullYear(+matches[1]);
+      d.setUTCMonth(+matches[2]-1); // Careful, month starts at 0!
+      d.setUTCDate(+matches[3]);
+      d.setUTCHours(+matches[4]);
+      d.setUTCMinutes(+matches[5]);
+      d.setUTCSeconds(+matches[6]);
+      return d;    
+  }
 
   $scope.$on('MovesPlacesModel::CollectionChange', function(event, model) {
     var entries = [];
@@ -151,7 +152,7 @@ angular.module('i2037.moves', [
     for (var i in places) {
       var place = places[i];
       var entry = { 
-        date: Moves.fromDateString(places[i].startTime), 
+        date: toDate(places[i].startTime), 
         text: place.name,
         place: place,
         comments: []
@@ -182,29 +183,51 @@ angular.module('i2037.moves', [
 
 }])
 
-.controller('TimelineEntryCtrl', ['$scope', 'FourSquareVenue', function($scope, FourSquareVenue) {
+.controller('TimelineEntryCtrl', ['$scope', 'FourSquareVenue', 'Comment', function($scope, FourSquareVenue, Comment) {
   $scope.isCollapsed = true;
   $scope.showSpinner = false;
+ 
+  var CommentPM = function CommentPM(comment) {
+    this.model = comment;
+    this.isEditable = false;
+    this.img = 'https://pbs.twimg.com/profile_images/1411601479/2600_joystick_45_normal.jpg';
+    this.author =  'Richard Priestley'; 
+  }
+
+  function loadComments(entry) {
+    return Comment.query({entryId: 'abc'}).then(function(comments) {
+      return comments.map(function(comment){ 
+        return new CommentPM(comment);
+      });
+    });
+  }
+
+  function loadVenue(foursquareId) {
+    return FourSquareVenue.get(foursquareId).then(function(fsqVenue) {
+      var venue = {
+        type: 'Foursquare',
+        phone: fsqVenue.contact.phone,
+        formattedPhone: fsqVenue.contact.formattedPhone,
+        canonicalUrl: fsqVenue.canonicalUrl,
+        url: fsqVenue.url
+      };
+      var location = fsqVenue.location;
+      if (location) {
+        var properties = ['address', 'city', 'state', 'postalCode', 'country'];
+        var lines = properties.map(function(p) { if (location.hasOwnProperty(p)) return location[p] });
+        venue.address = lines.join(', ');
+      }
+      return venue; 
+    })           
+  }
 
   $scope.toggleCollapse = function(entry) {
     $scope.isCollapsed = !$scope.isCollapsed;
     if(entry.place.type == 'foursquare') {
       if (!entry.venue) {
-        $scope.showSpinner = true;
-        FourSquareVenue.get(entry.place.foursquareId).then(function(venue) {
-          entry.venue = {
-            type: 'Foursquare',
-            phone: venue.contact.phone,
-            formattedPhone: venue.contact.formattedPhone,
-            canonicalUrl: venue.canonicalUrl,
-            url: venue.url
-          }
-          var location = venue.location;
-          if (location) {
-            var a = ['address', 'city', 'state', 'postalCode', 'country'];
-            var addr = a.map(function(property) { if (location.hasOwnProperty(property)) return location[property] });
-            entry.venue.address = addr.join(', ');
-          }        
+        $scope.showSpinner = true;        
+        loadVenue(entry.place.foursquareId).then(function(venue) {
+          entry.venue = venue;
           $scope.showSpinner = false;          
         }, function(error) {
           $scope.showSpinner = false;
@@ -215,6 +238,31 @@ angular.module('i2037.moves', [
         type: 'Moves'
       };
     }
+    loadComments(entry).then(function(comments) {
+      entry.comments = comments;
+    });
+  }
+
+  function newComment() {
+    $scope.newComment = new CommentPM(new Comment());
+  }
+  newComment();
+
+  $scope.addComment = function(entry) {
+    $scope.newComment.model.$save().then(function() {
+      loadComments(entry).then(function(comments) {
+        entry.comments = comments;
+      })
+      newComment();
+    });
+  }
+
+  $scope.deleteComment = function(entry, comment) {
+    comment.model.$delete().then(function() {
+      loadComments(entry).then(function(comments) {
+        entry.comments = comments;
+      })
+    });
   }
 }])
 

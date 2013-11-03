@@ -13,16 +13,16 @@ angular.module('i2037.resources.moves', ['i2037.services', 'i2037.moves.filters'
       return y + m + d;
     }
 
-    me.fromDateString = function(str) {
-      var r = /(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})Z/;
+    me.toDate = function(str) {
+      var r = /(\d{4})(\d{2})(\d{2})/;
       var matches = r.exec(str);
       var d = new Date();
       d.setUTCFullYear(+matches[1]);
       d.setUTCMonth(+matches[2]-1); // Careful, month starts at 0!
       d.setUTCDate(+matches[3]);
-      d.setUTCHours(+matches[4]);
-      d.setUTCMinutes(+matches[5]);
-      d.setUTCSeconds(+matches[6]);
+      d.setUTCHours(0);
+      d.setUTCMinutes(0);
+      d.setUTCSeconds(0);
       return d;
     }
 
@@ -66,10 +66,43 @@ angular.module('i2037.resources.moves', ['i2037.services', 'i2037.moves.filters'
   return Summary;
 }])
 
-.factory('MovesPlaces', function($resource, pathFinder) {
-    return $resource(pathFinder.get('svc/moves/user/places/daily/:date'));
-})
+.factory('MovesPlaces', ['$http', 'pathFinder', 'Moves', function($http, pathFinder, Moves) {
 
-.factory('MovesStoryline', function($resource, pathFinder) {
-    return $resource(pathFinder.get('svc/moves/user/storyline/daily/:date'));
-});
+  var url = pathFinder.get('svc/moves/user/places/daily/');
+
+  var Places = function(data) {
+    angular.extend(this, data);
+  }
+
+  Path.get = function(params) {
+    var dateStr = Moves.toDateString(params['date']);
+    return $http.get(url+dateStr).then(function(response) {
+      var places = new Places(response.data);
+      return places;
+    });    
+  }
+
+  return Places;
+}])
+
+.factory('MovesStoryline', ['$http', 'pathFinder', 'Moves', function($http, pathFinder, Moves) {
+
+  var url = pathFinder.get('svc/moves/user/storyline/daily/');
+
+  var Storyline = function(data) {
+    angular.extend(this, data);
+  }
+
+  Storyline.query = function(params) {
+    var dateStr = Moves.toDateString(params['date']);
+    return $http.get(url+dateStr).then(function(response) {
+      var storylines = [];
+      angular.forEach(response.data, function(day) {
+        storylines.push(new Storyline(day));      
+      })
+      return storylines;
+    });
+  }
+  
+  return Storyline;
+}]);

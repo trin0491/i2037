@@ -17,4 +17,11 @@
             </form>
         </div>
     </div>
+    <div class="row-fluid">
+        <table class="table table-bordered table-condensed" ng-controller="MovesSummaryCtrl">
+            <tbody>
+                <tr ng-repeat="activity in summary.summary"><th>{{activity.activity | activity }}</th><td>{{activity.duration}}</td></tr>
+            </tbody>
+        </table>            
+    </div>
 </div>
