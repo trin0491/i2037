@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('i2037', [
+    'ngCookies',
     'ui.bootstrap',
     'i2037.recipes',
     'i2037.cellar', 
@@ -30,8 +31,8 @@ angular.module('i2037', [
   });       
 }])
 
-.controller('NavBarCtrl', ['$scope', '$location', '$dialog', 'User', 'Session', 
-    function($scope, $location, $dialog, User, Session) {
+.controller('NavBarCtrl', ['$scope', '$location', '$modal', 'User', 'Session', 
+    function($scope, $location, $modal, User, Session) {
   $scope.$location = $location;
 
   var STATES = {
@@ -65,10 +66,7 @@ angular.module('i2037', [
 
   function showLoginForm() {
     var opts = {
-        backdrop: true,
         keyboard: true,
-        dialogFade: true,
-        backdropClick: true,
         templateUrl: 'partials/loginform.html', 
         controller: 'LoginFormCtrl',
         resolve: {
@@ -82,10 +80,10 @@ angular.module('i2037', [
         }
     };
 
-    var loginForm = $dialog.dialog(opts);
     var oldState = $scope.state;
     $scope.state = STATES.LOGGING_IN; // move to service
-    loginForm.open().then(function(user){
+    var loginForm = $modal.open(opts);
+    loginForm.result.then(function(user){
       onUserUpdate(user);
     }, function(response) {
       $scope.state = oldState;
@@ -104,11 +102,11 @@ angular.module('i2037', [
   };
 
   $scope.signUp = function() {
-    var signUpForm = $dialog.dialog({
+    var signUpForm = $modal.open({
       templateUrl: 'partials/signupform.html',
       controller: 'SignUpFormCtrl'
     });
-    signUpForm.open().then(function(user) {
+    signUpForm.result.then(function(user) {
       onUserUpdate(user);
     });    
   };
@@ -117,7 +115,7 @@ angular.module('i2037', [
     var oldState = $scope.state;
     $scope.state = STATES.LOGGING_OUT;
     User.logout().then(function(user) {
-        onUserUpdate(user)
+      onUserUpdate(user)
     }, function() {
       $scope.state = oldState;
       alert("Failed to logout");      
@@ -127,47 +125,55 @@ angular.module('i2037', [
   $scope.login();
 }])
 
-.controller('LoginFormCtrl', ['$scope', 'dialog', 'User', 'userName',
-    function ($scope, dialog, User, userName) {
-  $scope.rememberMe = true;
+.controller('LoginFormCtrl', ['$scope', '$modalInstance', 'User', 'userName',
+    function ($scope, $modalInstance, User, userName) {
+
+  var authDetails = {    
+    userName: userName,
+    password: '',
+    rememberMe: true,    
+    userNameReadonly: false,
+  }
+
   if (userName) {
     $scope.title = 'Change Password'
-    $scope.userName = userName;
-    $scope.userNameReadonly = true;
+    authDetails.userNameReadonly = true;
   } else {
     $scope.title = 'Login';
-    $scope.userName = $.cookie('userName');
+    authDetails.userName = $.cookie('userName');
   }
 
   $scope.cancel = function(){
-    dialog.close();
+    $modalInstance.close();
   };
 
   $scope.submit = function() {
-    if ($scope.rememberMe && $scope.userName) {
-      $.cookie('userName', $scope.userName, { expires: 7 });
+    if (authDetails.rememberMe && authDetails.userName) {
+      $.cookie('userName', authDetails.userName, { expires: 7 });
     } else {
       $.cookie.removeCookie('userName');
     }
 
-    User.login($scope.userName, $scope.password).then(function(user) {
-      dialog.close(user);
+    User.login(authDetails.userName, authDetails.password).then(function(user) {
+      $modalInstance.close(user);
     }, function(data, status) {
       alert("Failed to authenticate");
     });
   }
+
+  $scope.authDetails = authDetails;  
 }])
 
-.controller('SignUpFormCtrl', ['$scope', 'dialog', 'User', function($scope, dialog, User) {
+.controller('SignUpFormCtrl', ['$scope', '$modalInstance', 'User', function($scope, $modalInstance, User) {
   $scope.user = new User();
 
   $scope.cancel = function() {
-    dialog.close();
+    $modalInstance.close();
   };
 
   $scope.submit = function() {
     $scope.user.$save().then(function(user) {
-      dialog.close(user);
+      $modalInstance.close(user);
     })
   };
 

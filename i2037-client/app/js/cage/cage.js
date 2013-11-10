@@ -1,4 +1,4 @@
-angular.module('i2037.cage', ['i2037.services'])
+angular.module('i2037.cage', ['ngRoute', 'i2037.services'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/cage', {templateUrl: 'partials/slickgrid.html', controller: 'SlickgridCtrl'});

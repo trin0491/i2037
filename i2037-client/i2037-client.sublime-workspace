@@ -4,12 +4,48 @@
 		"selected_items":
 		[
 			[
-				"Moves",
-				"MovesPlacesModel"
+				"eq",
+				"toEqual"
+			],
+			[
+				"com",
+				"comments"
+			],
+			[
+				"comment",
+				"comment"
 			],
 			[
 				"new",
-				"newSelection"
+				"newComment"
+			],
+			[
+				"to",
+				"toEqual"
+			],
+			[
+				"li",
+				"limitToFilter"
+			],
+			[
+				"fours",
+				"foursquareId"
+			],
+			[
+				"Moves",
+				"Moves"
+			],
+			[
+				"route",
+				"routeProvider"
+			],
+			[
+				"url",
+				"url"
+			],
+			[
+				"sel",
+				"selectedPlace"
 			],
 			[
 				"pro",
@@ -20,34 +56,42 @@
 	"buffers":
 	[
 		{
-			"file": "app/partials/moves.html",
+			"file": "app/index.html",
 			"settings":
 			{
-				"buffer_size": 2880,
+				"buffer_size": 4263,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "test/unit/common/directives/map.spec.js",
+			"file": "/Users/richard/src/angular-app/client/gruntFile.js",
 			"settings":
 			{
-				"buffer_size": 658,
+				"buffer_size": 5448,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/app.js",
+			"settings":
+			{
+				"buffer_size": 5214,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/js/moves/moves-model.js",
+			"file": "app/partials/loginform.html",
 			"settings":
 			{
-				"buffer_size": 923,
+				"buffer_size": 1399,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/js/common/directives/map.js",
+			"file": "app/partials/signupform.html",
 			"settings":
 			{
-				"buffer_size": 3264,
+				"buffer_size": 3212,
 				"line_ending": "Unix"
 			}
 		},
@@ -55,7 +99,31 @@
 			"file": "app/js/moves/moves.js",
 			"settings":
 			{
-				"buffer_size": 6325,
+				"buffer_size": 8334,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/partials/journal-date.html",
+			"settings":
+			{
+				"buffer_size": 3328,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/js/cellar/cellar.js",
+			"settings":
+			{
+				"buffer_size": 4211,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/partials/wineview.html",
+			"settings":
+			{
+				"buffer_size": 2430,
 				"line_ending": "Unix"
 			}
 		}
@@ -88,12 +156,55 @@
 	},
 	"file_history":
 	[
+		"/Users/richard/src/i2037/i2037-client/config/karma.conf.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/moves/moves.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/cage/cage.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/cellar/cellar.js",
+		"/Users/richard/src/i2037/i2037-client/app/lib/ui-bootstrap/ui-bootstrap-tpls.js",
+		"/Users/richard/src/i2037/i2037-client/app/lib/ui-bootstrap/ui-bootstrap-tpls-0.5.0.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/recipes/recipes.js",
+		"/Users/richard/src/i2037/i2037-client/test/unit/cellar/cellar.spec.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/cellar.js",
+		"/Users/richard/src/i2037/i2037-client/package.json",
+		"/Users/richard/src/i2037/i2037-client/Gruntfile.js",
+		"/Users/richard/src/i2037/i2037-client/app/partials/journal-date.html",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/timeline.js",
+		"/Users/richard/src/i2037/i2037-client/test/unit/common/directives/button.spec.js",
+		"/Users/richard/src/i2037/i2037-client/test/unit/common/directives/timeline.spec.js",
+		"/Users/richard/src/i2037/i2037-client/test/unit/moves/journal-directives.spec.js",
+		"/Users/richard/src/i2037/i2037-client/build/tmp/js/dev/moves/journal-directives.js",
+		"/Users/richard/src/i2037/i2037-client/app/partials/journal-comment.tpl.html",
+		"/Users/richard/src/i2037/i2037-client/app/js/moves/journal-directives.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/button.js",
+		"/Users/richard/src/i2037/i2037-client/app/lib/angular/angular.js",
+		"/Users/richard/src/i2037/i2037-client/test/lib/angular/angular-mocks.js",
+		"/Users/richard/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/richard/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/richard/Library/Application Support/Sublime Text 3/Packages/User/HTML.sublime-settings",
+		"/Users/richard/src/i2037/i2037-client/app/partials/journal-comment.html",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/comments.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/filters.js",
+		"/Users/richard/src/i2037/i2037-client/test/unit/common/filters/filters.spec.js",
+		"/Users/richard/src/i2037/i2037-client/app/partials/wineform.html",
+		"/Users/richard/src/i2037/i2037-client/app/partials/journal-calendar.html",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/moves.js",
+		"/Users/richard/src/i2037/i2037-client/build/dev/js/dev/i2037-client.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/spinner.js",
+		"/Users/richard/src/i2037/i2037-client/app/partials/slickgrid.html",
+		"/Users/richard/src/i2037/i2037-client/app/lib/angular/angular-resource.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/foursquare.js",
-		"/Users/richard/src/i2037/i2037-client/config/karma.conf.js"
+		"/Users/richard/src/i2037/i2037-client/test/unit/moves/moves-model.spec.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/moves/moves-model.js",
+		"/Users/richard/src/i2037/i2037-client/app/index.html",
+		"/Users/richard/src/i2037/i2037-client/app/js/app.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/map.js",
+		"/Users/richard/src/i2037/i2037-client/test/unit/common/directives/map.spec.js",
+		"/Users/richard/src/i2037/i2037-client/app/partials/moves.html",
+		"/Users/richard/src/i2037/i2037-client/scripts/test.sh"
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -107,6 +218,56 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"range",
+			"loginPM",
+			"loginModel",
+			"dialog",
+			"$dialog",
+			"text",
+			"acomment",
+			"module",
+			"Enter",
+			"comment",
+			"id",
+			"limitToFilter",
+			"_elipsisFilter_",
+			"short",
+			"2013",
+			"d",
+			"response",
+			"Response",
+			"response",
+			"$q",
+			"MovesPlaces",
+			"MovesStoryline",
+			"date",
+			"Date",
+			"date",
+			"Summary",
+			"summary",
+			"Moves",
+			"fromDateString",
+			" '$",
+			"DateChanged",
+			"data",
+			"resource",
+			"$resource",
+			"venue",
+			"Venue",
+			"venue",
+			"addr",
+			"property",
+			"Property",
+			"property",
+			"a",
+			"Moves",
+			"dateStr",
+			"Moves",
+			"movesProfile",
+			"MovesCtrl",
+			"login",
+			"Login",
+			"login",
 			"changed"
 		],
 		"highlight": true,
@@ -125,24 +286,198 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 8,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app/partials/moves.html",
+					"file": "app/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2880,
+						"buffer_size": 4263,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1325,
-								1325
+								4030,
+								4030
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 672.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/Users/richard/src/angular-app/client/gruntFile.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5448,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3091,
+								3091
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1167.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/js/app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5214,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3352,
+								3352
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1765.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/partials/loginform.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1399,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								559,
+								559
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/partials/signupform.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3212,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3212,
+								3212
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 12.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/js/moves/moves.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8334,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1123.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/partials/journal-date.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3328,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								549,
+								549
 							]
 						],
 						"settings":
@@ -158,55 +493,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "test/unit/common/directives/map.spec.js",
+					"buffer": 7,
+					"file": "app/js/cellar/cellar.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 658,
+						"buffer_size": 4211,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								658,
-								658
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 2,
-			"sheets":
-			[
-				{
-					"buffer": 2,
-					"file": "app/js/moves/moves-model.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 923,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								766,
-								766
+								0,
+								0
 							]
 						],
 						"settings":
@@ -222,59 +522,30 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "app/js/common/directives/map.js",
+					"buffer": 8,
+					"file": "app/partials/wineview.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3264,
+						"buffer_size": 2430,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1005,
-								1005
+								1625,
+								1627
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 566.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "app/js/moves/moves.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6325,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4220,
-								4220
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 79.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -288,7 +559,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 31.0
 	},
 	"layout":
 	{
@@ -299,18 +570,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.5,
 			1.0
 		],
 		"rows":
@@ -323,7 +587,7 @@
 	"project": "i2037-client.sublime-project",
 	"replace":
 	{
-		"height": 64.0
+		"height": 42.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -331,6 +595,182 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"cellar",
+				"app/js/cellar/cellar.js"
+			],
+			[
+				"journal",
+				"app/partials/journal-date.html"
+			],
+			[
+				"moves.js",
+				"app/js/moves/moves.js"
+			],
+			[
+				"signup",
+				"app/partials/signupform.html"
+			],
+			[
+				"loginform",
+				"app/partials/loginform.html"
+			],
+			[
+				"cellar.js",
+				"app/js/cellar/cellar.js"
+			],
+			[
+				"cellar.spec",
+				"test/unit/cellar/cellar.spec.js"
+			],
+			[
+				"app.js",
+				"app/js/app.js"
+			],
+			[
+				"karm",
+				"config/karma.conf.js"
+			],
+			[
+				"inde",
+				"app/index.html"
+			],
+			[
+				"pack",
+				"package.json"
+			],
+			[
+				"grunt",
+				"Gruntfile.js"
+			],
+			[
+				"journal-dire",
+				"build/tmp/js/dev/moves/journal-directives.js"
+			],
+			[
+				"timeline.spec",
+				"test/unit/common/directives/timeline.spec.js"
+			],
+			[
+				"timeline",
+				"app/js/common/directives/timeline.js"
+			],
+			[
+				"button",
+				"app/js/common/directives/button.js"
+			],
+			[
+				"button.spe",
+				"test/unit/common/directives/button.spec.js"
+			],
+			[
+				"journal-date",
+				"app/partials/journal-date.html"
+			],
+			[
+				"moves",
+				"app/js/moves/moves.js"
+			],
+			[
+				"angular-mocks",
+				"test/lib/angular/angular-mocks.js"
+			],
+			[
+				"angular",
+				"app/lib/angular/angular.js"
+			],
+			[
+				"time",
+				"app/js/common/directives/timeline.js"
+			],
+			[
+				"wine",
+				"app/partials/wineform.html"
+			],
+			[
+				"cellar.",
+				"app/js/common/resources/cellar.js"
+			],
+			[
+				"comment.j",
+				"app/js/common/resources/comments.js"
+			],
+			[
+				"move.j",
+				"app/js/moves/moves.js"
+			],
+			[
+				"i2037-",
+				"build/dev/js/dev/i2037-client.js"
+			],
+			[
+				"filter",
+				"app/js/common/filters.js"
+			],
+			[
+				"comments",
+				"app/js/common/resources/comments.js"
+			],
+			[
+				"moves.",
+				"app/js/common/resources/moves.js"
+			],
+			[
+				"journa",
+				"app/partials/journal-calendar.html"
+			],
+			[
+				"jour",
+				"app/partials/journal-date.html"
+			],
+			[
+				"spinner",
+				"app/js/common/directives/spinner.js"
+			],
+			[
+				"button.sp",
+				"test/unit/common/directives/button.spec.js"
+			],
+			[
+				"butt",
+				"app/js/common/directives/button.js"
+			],
+			[
+				"slick",
+				"app/partials/slickgrid.html"
+			],
+			[
+				"angular-",
+				"app/lib/angular/angular-resource.js"
+			],
+			[
+				"four",
+				"app/js/common/resources/foursquare.js"
+			],
+			[
+				"journal-date.h",
+				"app/partials/journal-date.html"
+			],
+			[
+				"index",
+				"app/index.html"
+			],
+			[
+				"journal-",
+				"app/partials/journal-calendar.html"
+			],
+			[
+				"test.sh",
+				"scripts/test.sh"
+			],
+			[
+				"kar",
+				"config/karma.conf.js"
+			],
+			[
+				"moves-mode",
+				"test/unit/moves/moves-model.spec.js"
+			],
 			[
 				"map.spe",
 				"test/unit/common/directives/map.spec.js"
@@ -342,10 +782,6 @@
 			[
 				"movesmo",
 				"app/js/moves/moves-model.js"
-			],
-			[
-				"four",
-				"app/js/common/resources/foursquare.js"
 			],
 			[
 				"moves.html",
@@ -385,11 +821,11 @@
 	"settings":
 	{
 	},
-	"show_minimap": true,
+	"show_minimap": false,
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 228.0,
+	"side_bar_width": 189.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
