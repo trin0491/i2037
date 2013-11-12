@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"ang",
+				"angular"
+			],
+			[
+				"bower",
+				"bower_components"
+			],
+			[
 				"eq",
 				"toEqual"
 			],
@@ -56,14 +64,6 @@
 	"buffers":
 	[
 		{
-			"file": "app/index.html",
-			"settings":
-			{
-				"buffer_size": 4263,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "/Users/richard/src/angular-app/client/gruntFile.js",
 			"settings":
 			{
@@ -72,58 +72,18 @@
 			}
 		},
 		{
-			"file": "app/js/app.js",
+			"file": "Gruntfile.js",
 			"settings":
 			{
-				"buffer_size": 5214,
+				"buffer_size": 4416,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/partials/loginform.html",
+			"file": "app/index.html",
 			"settings":
 			{
-				"buffer_size": 1399,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/partials/signupform.html",
-			"settings":
-			{
-				"buffer_size": 3212,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/js/moves/moves.js",
-			"settings":
-			{
-				"buffer_size": 8334,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/partials/journal-date.html",
-			"settings":
-			{
-				"buffer_size": 3328,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/js/cellar/cellar.js",
-			"settings":
-			{
-				"buffer_size": 4211,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/partials/wineview.html",
-			"settings":
-			{
-				"buffer_size": 2430,
+				"buffer_size": 4263,
 				"line_ending": "Unix"
 			}
 		}
@@ -156,10 +116,16 @@
 	},
 	"file_history":
 	[
-		"/Users/richard/src/i2037/i2037-client/config/karma.conf.js",
+		"/Users/richard/src/i2037/i2037-client/app/index.html",
+		"/Users/richard/src/i2037/i2037-client/app/js/app.js",
+		"/Users/richard/src/i2037/i2037-client/app/partials/loginform.html",
+		"/Users/richard/src/i2037/i2037-client/app/partials/signupform.html",
 		"/Users/richard/src/i2037/i2037-client/app/js/moves/moves.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/cage/cage.js",
+		"/Users/richard/src/i2037/i2037-client/app/partials/journal-date.html",
 		"/Users/richard/src/i2037/i2037-client/app/js/cellar/cellar.js",
+		"/Users/richard/src/i2037/i2037-client/app/partials/wineview.html",
+		"/Users/richard/src/i2037/i2037-client/config/karma.conf.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/cage/cage.js",
 		"/Users/richard/src/i2037/i2037-client/app/lib/ui-bootstrap/ui-bootstrap-tpls.js",
 		"/Users/richard/src/i2037/i2037-client/app/lib/ui-bootstrap/ui-bootstrap-tpls-0.5.0.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/recipes/recipes.js",
@@ -167,7 +133,6 @@
 		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/cellar.js",
 		"/Users/richard/src/i2037/i2037-client/package.json",
 		"/Users/richard/src/i2037/i2037-client/Gruntfile.js",
-		"/Users/richard/src/i2037/i2037-client/app/partials/journal-date.html",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/timeline.js",
 		"/Users/richard/src/i2037/i2037-client/test/unit/common/directives/button.spec.js",
 		"/Users/richard/src/i2037/i2037-client/test/unit/common/directives/timeline.spec.js",
@@ -195,8 +160,6 @@
 		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/foursquare.js",
 		"/Users/richard/src/i2037/i2037-client/test/unit/moves/moves-model.spec.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/moves/moves-model.js",
-		"/Users/richard/src/i2037/i2037-client/app/index.html",
-		"/Users/richard/src/i2037/i2037-client/app/js/app.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/map.js",
 		"/Users/richard/src/i2037/i2037-client/test/unit/common/directives/map.spec.js",
 		"/Users/richard/src/i2037/i2037-client/app/partials/moves.html",
@@ -286,40 +249,11 @@
 	"groups":
 	[
 		{
-			"selected": 8,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app/index.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4263,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4030,
-								4030
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 672.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "/Users/richard/src/angular-app/client/gruntFile.js",
 					"semi_transient": false,
 					"settings":
@@ -331,8 +265,8 @@
 						"selection":
 						[
 							[
-								3091,
-								3091
+								3897,
+								3922
 							]
 						],
 						"settings":
@@ -342,55 +276,55 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1167.0,
+						"translation.y": 1350.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Gruntfile.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4416,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2826,
+								2826
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 695.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "app/js/app.js",
+					"file": "app/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5214,
+						"buffer_size": 4263,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3352,
-								3352
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1765.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "app/partials/loginform.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1399,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								559,
-								559
+								3397,
+								3427
 							]
 						],
 						"settings":
@@ -400,152 +334,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "app/partials/signupform.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3212,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3212,
-								3212
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 12.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "app/js/moves/moves.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8334,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1123.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "app/partials/journal-date.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3328,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								549,
-								549
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "app/js/cellar/cellar.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4211,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "app/partials/wineview.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2430,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1625,
-								1627
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 79.0,
+						"translation.y": 739.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -596,6 +385,14 @@
 		"selected_items":
 		[
 			[
+				"inde",
+				"app/index.html"
+			],
+			[
+				"grun",
+				"Gruntfile.js"
+			],
+			[
 				"cellar",
 				"app/js/cellar/cellar.js"
 			],
@@ -630,10 +427,6 @@
 			[
 				"karm",
 				"config/karma.conf.js"
-			],
-			[
-				"inde",
-				"app/index.html"
 			],
 			[
 				"pack",
@@ -824,7 +617,7 @@
 	"show_minimap": false,
 	"show_open_files": false,
 	"show_tabs": true,
-	"side_bar_visible": true,
+	"side_bar_visible": false,
 	"side_bar_width": 189.0,
 	"status_bar_visible": true,
 	"template_settings":

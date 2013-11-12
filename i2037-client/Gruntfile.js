@@ -2,12 +2,12 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-    // i2037 dirs 
-    dirs: {
-      dev: 'build/dev',
-      release: 'build/release',
-      tmp: 'build/tmp'
-    }, 
+    // i2037 dir 
+    dir: {
+      dist: 'build/dev',
+      tmp: 'build/tmp',
+      bower: 'bower_components',
+    },
     clean: [ 'build/**' ],
     env: {
       dev: {
@@ -22,86 +22,118 @@ module.exports = function(grunt) {
       }
     },
     copy: {
-      dev: {
+      static: {
         files: [
-          {expand:true, cwd: 'app', src:['lib/**'], dest: '<%= dirs.dev %>/'},
-          {expand:true, cwd: 'app', src:['img/**'], dest: '<%= dirs.dev %>/'},
-          {expand:true, cwd: 'app', src:['partials/**'], dest: '<%= dirs.dev %>/'},
-          {expand:true, cwd: 'app', src:['css/**'], dest: '<%= dirs.dev %>/'},          
+          {expand:true, cwd: 'app', src:['img/**'], dest: '<%= dir.dist %>/'},
+          {expand:true, cwd: 'app', src:['partials/**'], dest: '<%= dir.dist %>/'},
+          {expand:true, cwd: 'app', src:['css/**'], dest: '<%= dir.dist %>/'},          
         ]
       },
-      release: {
-        files: [
-          {expand:true, cwd: 'app', src:['lib/**'], dest: '<%= dirs.release %>/'},
-          {expand:true, cwd: 'app', src:['img/**'], dest: '<%= dirs.release %>/'},
-          {expand:true, cwd: 'app', src:['partials/**'], dest: '<%= dirs.release %>/'},
-          {expand:true, cwd: 'app', src:['css/**'], dest: '<%= dirs.release %>/'},          
-        ]
-      }      
     },
     preprocess: {
         dev: {
           files: [
-            { '<%= dirs.dev %>/index.html' : 'app/index.html' },
-            { expand:true, cwd: 'app/js', src:'**/*.js', dest: '<%= dirs.tmp %>/js/dev/'} 
+            { '<%= dir.dist %>/index.html' : 'app/index.html' },
+            { expand:true, cwd: 'app/js', src:'**/*.js', dest: '<%= dir.tmp %>/js/dev/'} 
           ]
         },
         release: {
-            options: {
-                context: {
-                    name: '<%= pkg.name %>',
-                    now: '<%= now %>',
-                }
-            },
-            files: [
-              {'<%= dirs.release %>/index.html': 'app/index.html' },
-              { expand:true, cwd: 'app/js', src:'**/*.js', dest: '<%= dirs.tmp %>/js/<%= pkg.version %>/'} 
-            ]          
+          options: {
+            context: {
+              name: '<%= pkg.name %>',
+              now: '<%= now %>',
+            }
+          },
+          files: [
+            {'<%= dir.dist %>/index.html': 'app/index.html' },
+            { expand:true, cwd: 'app/js', src:'**/*.js', dest: '<%= dir.tmp %>/js/<%= pkg.version %>/'} 
+          ]          
         }
     },        
     concat: {
       options: {
         separator: ';'
       },
-      dev: {
-        src:'<%= dirs.tmp %>/js/dev/**/*.js', 
-        dest: '<%= dirs.dev %>/js/dev/<%= pkg.name %>.js'
+      app: {
+        src:  '<%= dir.tmp %>/js/dev/**/*.js', 
+        dest: '<%= dir.dist %>/js/dev/<%= pkg.name %>.js'
       },
-      release: {
-        src:'<%= dirs.tmp %>/js/<%= pkg.version %>/**/*.js', 
-        dest: '<%= dirs.release %>/js/<%= pkg.version %>/<%= pkg.name %>.js'        
+      angular: {
+        src:[ 
+          '<%= dir.bower %>/angular/angular.js', 
+          '<%= dir.bower %>/angular-route/angular-route.js',
+          '<%= dir.bower %>/angular-resource/angular-resource.js',
+          '<%= dir.bower %>/angular-cookies/angular-cookies.js',          
+          '<%= dir.bower %>/angular-bootstrap/ui-bootstrap-tpls.js'
+        ],
+        dest: '<%= dir.dist %>/js/angular.js'
+      },
+      jquery: {
+        src: [
+          '<%= dir.bower %>/jquery/jquery.js',
+          '<%= dir.bower %>/jquery.cookie/jquery.cookie.js'          
+        ],
+        dest: '<%= dir.dist %>/js/jquery.js'
+      },
+      spinjs: {
+        src: [ '<%= dir.bower %>/spinjs/spin.js' ],
+        dest: '<%= dir.dist %>/js/spin.js'
+      },
+      bootstrap: {
+        src: [ 
+          '<%= dir.bower %>/bootstrap/js/bootstrap-modal.js',
+          '<%= dir.bower %>/bootstrap/js/bootstrap-typeahead.js'
+        ],
+        dest: '<%= dir.dist %>/js/bootstrap.js'
       }
     },
     uglify: {
       options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+        banner: '/*! <%= pkg.name %> <%= pkg.version %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
       },
-      dev: {
-        files: {
-          '<%= dirs.dev %>/js/dev/<%= pkg.name %>.min.js': ['<%= concat.dev.dest %>']
-        }
+      app: {
+        src: ['<%= concat.app.src %>'],
+        dest: '<%= dir.dist %>/js/<%= pkg.version %>/<%= pkg.name %>.min.js' 
       },
-      release: {
-        files: {
-          'build/release/js/<%= pkg.version %>/<%= pkg.name %>.min.js': ['<%= concat.release.dest %>']
-        }
-      }      
+      // release: {
+      //   src: ['<%= concat.dev.src %>'],
+      //   dest: '<%= dir.release %>/<%= pkg.version %>/<%= pkg.name %>.min.js'
+      // },
+      angular: {
+        src: ['<%= concat.angular.src %>'],
+        dest: '<%= dir.dist %>/js/angular.min.js'
+      },
+      jquery: {
+        src: [ '<%= concat.jquery.src %>'],
+        dest: '<%= dir.dist %>/js/jquery.min.js'
+      },
+      spinjs: {
+        src: [ '<%= concat.spinjs.src %>' ],
+        dest: '<%= dir.dist %>/js/spin.min.js'
+      },
+      bootstrap: {
+        src: [ '<%= concat.bootstrap.src %>'],
+        dest: '<%= dir.dist %>/js/bootstrap.min.js'
+      }            
     },
     jshint: {
-      files: ['Gruntfile.js', '<%= concat.dev.dest %>'],
-      options: {
-        // options here to override JSHint defaults
-        globals: {
-          jQuery: true,
-          console: true,
-          module: true,
-          document: true
-        }
-      }
+      files: ['Gruntfile.js', '<%= concat.app.src %>'],
+      options:{
+        curly:true,
+        eqeqeq:true,
+        immed:true,
+        latedef:true,
+        newcap:true,
+        noarg:true,
+        sub:true,
+        boss:true,
+        eqnull:true,
+        globals:{}
+      }      
     },
     watch: {
       files: ['Gruntfile.js', 'app/**/*.js', 'app/**/*.html'],
-      tasks: ['env:dev', 'copy:dev', 'preprocess:dev', 'concat:dev']
+      tasks: ['config_dev', 'env:dev', 'copy', 'preprocess:dev', 'concat']
     }
   });
 
@@ -113,9 +145,17 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-preprocess');
   grunt.loadNpmTasks('grunt-env');
+
+  grunt.registerTask('config_dev', 'Prepare for dev build', function() {
+    grunt.config.set('dir.dist', 'build/dev');
+  });
+
+  grunt.registerTask('config_release', 'Prepare for release build', function() {
+    grunt.config.set('dir.dist', 'build/release');
+  });
   
   grunt.registerTask('test', ['jshint']);
 
-  grunt.registerTask('default', ['clean', 'env:dev', 'copy:dev', 'preprocess:dev', 'concat:dev', 'uglify:dev']);
-  grunt.registerTask('release', ['default', 'env:release', 'copy:release', 'preprocess:release', 'concat:release', 'uglify:release']);
+  grunt.registerTask('default', ['clean', 'config_dev', 'env:dev', 'copy', 'preprocess:dev', 'concat']);
+  grunt.registerTask('release', ['default', 'config_release', 'env:release', 'copy', 'preprocess:release', 'uglify']);
 };
