@@ -86,14 +86,17 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
 
+<!-- @if NODE_ENV == 'DEV' -->  
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/spin.js"></script> 
-<!-- @if NODE_ENV == 'DEV' -->  
     <script src="js/angular.js"></script>
     <script src="js/dev/i2037-client.js"></script>
 <!-- @endif -->
 <!-- @if NODE_ENV == 'PROD' -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/spin.min.js"></script> 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
     <script src="js/<!-- @echo i2037_VERSION -->/i2037-client.js"></script>
 <!-- @endif -->
