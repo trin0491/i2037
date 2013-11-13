@@ -117,7 +117,7 @@ module.exports = function(grunt) {
       }            
     },
     jshint: {
-      files: ['Gruntfile.js', '<%= concat.app.src %>'],
+      files: ['Gruntfile.js', 'app/**/*.js'],
       options:{
         curly:true,
         eqeqeq:true,
@@ -133,7 +133,7 @@ module.exports = function(grunt) {
     },
     watch: {
       files: ['Gruntfile.js', 'app/**/*.js', 'app/**/*.html'],
-      tasks: ['config_dev', 'env:dev', 'copy', 'preprocess:dev', 'concat']
+      tasks: ['jshint', 'config_dev', 'env:dev', 'copy', 'preprocess:dev', 'concat']
     }
   });
 

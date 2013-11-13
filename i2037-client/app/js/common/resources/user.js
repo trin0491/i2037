@@ -6,7 +6,7 @@ angular.module('i2037.resources.user', ['i2037.services'])
 
   function getId(user) {
     return user.userName;
-  };
+  }
 
   var User = function(data) {
     angular.extend(this, data);
@@ -25,7 +25,7 @@ angular.module('i2037.resources.user', ['i2037.services'])
   User.save = function(data) {
     return $http.post(url, data).then(function(response) {
       return new User(data);
-    })
+    });
   };
 
   User.prototype.$save = function() {

@@ -15,7 +15,7 @@ angular.module('i2037.resources.foursquare', ['i2037.services'])
     return $http.get(url, { params: params }).then(function(rv) {
       var venue = new Venue(rv.data.response.venue);
       return venue;
-    })
+    });
   };
 
   return Venue;

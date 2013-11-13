@@ -3,15 +3,15 @@ angular.module('i2037.directives.button', [])
 .directive("i2Button", [function() {
   return {
     restrict: 'E',
-    template: '<button class="btn"' 
-      + 'i2-spin-opts="options"'
-      + 'i2-spin-show="showSpinner" ng-transclude>'
-      + '</button>',
+    template: '<button class="btn"' +
+      'i2-spin-opts="options"' +
+      'i2-spin-show="showSpinner" ng-transclude>' +
+      '</button>',
     replace: true,
     transclude: true,
     link: function(scope, element, attrs){
       scope.options = {radius:6, width:3, length: 4, lines:11, hwaccel:'on'};
-      if (attrs.type == 'submit') {
+      if (attrs.type === 'submit') {
         element.addClass('btn-primary');
         scope.options.color = '#FFFFFF';
       }
@@ -59,6 +59,6 @@ angular.module('i2037.directives.button', [])
         setState(newState);
       }, true);
     }
-  } 
+  }; 
 }])
 ;

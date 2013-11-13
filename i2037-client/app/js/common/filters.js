@@ -1,3 +1,4 @@
+(function() {
 'use strict';
 
 /* Filters */
@@ -6,7 +7,7 @@ angular.module('i2037.filters', [])
 .filter('interpolate', ['version', function(version) {
     return function(text) {
       return String(text).replace(/\%VERSION\%/mg, version);
-    }
+    };
  }])
 
 .filter('dateSequence', ['dateFilter', function(dateFilter) {
@@ -28,7 +29,7 @@ angular.module('i2037.filters', [])
       last = input[i];
     }
     return copy;     
-  }
+  };
 }])
 
 .filter('trim', ['limitToFilter', function(limitToFilter) {
@@ -42,7 +43,8 @@ angular.module('i2037.filters', [])
         limit = limit - 3;
         return limitToFilter(input.split(''), limit).join('') + '...';
       }
-    }
+    };
  }])
-
 ;
+}());
+

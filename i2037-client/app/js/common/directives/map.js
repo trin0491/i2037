@@ -1,4 +1,5 @@
-'use strict';
+(function() {
+  'use strict';
 
 angular.module('i2037.directives.map', [])
 
@@ -61,7 +62,7 @@ angular.module('i2037.directives.map', [])
         });
 
         markers.push(marker);
-      };
+      }
 
       function addPolyLine(path) {
         var points = [];
@@ -81,12 +82,12 @@ angular.module('i2037.directives.map', [])
 
         polylines.push(polyline);
         polyline.setMap(map);      
-      };
+      }
 
       function setCenter(place) {
         var latlng = getLatLng(place);
         map.setCenter(latlng);
-      };
+      }
 
       scope.onMarkerClick = function(marker, place) {
           scope.$apply(function(scope) {
@@ -96,25 +97,25 @@ angular.module('i2037.directives.map', [])
           // var elements = $compile(contentStr)(scope);      
           // infoWindow.setContent(elements[0]);
           // infoWindow.open(map, marker);        
-      }
+      };
 
       scope.$watch('places', function(newPlaces, oldPlaces) {
         for (var i in markers) {
           markers[i].setMap(null);
         }
         markers.length = 0;
-        for (var i in newPlaces) {
-          addMarker(newPlaces[i]);
+        for (var n in newPlaces) {
+          addMarker(newPlaces[n]);
         }
       });
 
       scope.$watch('paths', function(newPaths, oldPaths) {
-        for (var i in polylines) {
-          polylines[i].setMap(null);
+        for (var p in polylines) {
+          polylines[p].setMap(null);
         }
         polylines.length = 0;
-        for (var i in newPaths) {
-          addPolyLine(newPaths[i]);
+        for (var n in newPaths) {
+          addPolyLine(newPaths[n]);
         }
       });
 
@@ -126,7 +127,8 @@ angular.module('i2037.directives.map', [])
 
       setupMap();
     }
-  }
+  };
 })
 ;
 
+}());

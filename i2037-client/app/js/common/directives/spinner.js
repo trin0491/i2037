@@ -38,6 +38,6 @@ angular.module('i2037.directives.spinner', [])
     scope.$on('$destroy', function() {
       stop();
     });
-  }
+  };
 }])
 ;

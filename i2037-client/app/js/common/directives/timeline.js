@@ -31,7 +31,7 @@ angular.module('i2037.directives.timeline', [])
 
         scope.isSelected = function(entry) {
           return entry === scope.selected;
-        }
+        };
 
         scope.onClick = function(entry) {
           if (scope.isSelected(entry)) {
@@ -39,14 +39,14 @@ angular.module('i2037.directives.timeline', [])
           } else {
             scope.selected = entry;
           }
-        }
+        };
 
         function isNewDay(prevEntry, nextDate) {
           if (!prevEntry) {
             return true;
           }
           // assumes that dates are in order otherwise this won't work
-          if (nextDate.getDate() != prevEntry.getDate()) {
+          if (nextDate.getDate() !== prevEntry.getDate()) {
             return true;
           } else {
             return false;
@@ -76,7 +76,7 @@ angular.module('i2037.directives.timeline', [])
             theirScope['entry'] = entry;
             linker(theirScope, function(clone) {
               tr.find('td').eq(1).append(clone);
-            })
+            });
             lastRows.push(new Row(tr, [childscope, theirScope]));                                  
           });
         }
@@ -87,7 +87,7 @@ angular.module('i2037.directives.timeline', [])
             for (var s=0;s<s.length;++s) {
               row[r].scopes[s].$destroy();              
             }
-          };
+          }
           rows.length = 0;          
         }
 
@@ -102,9 +102,9 @@ angular.module('i2037.directives.timeline', [])
             appendEntryRow(entry);
             prevDate = entry.date;
           });
-        })       
-      }
+        });       
+      };
     }
-  }
+  };
 }])
 ;

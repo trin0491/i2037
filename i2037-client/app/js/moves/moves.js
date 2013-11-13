@@ -22,7 +22,7 @@ angular.module('i2037.moves', [
             } else {
               return profile;
             }
-        })
+        });
       },
       date: function() {
         return new Date();
@@ -37,7 +37,7 @@ angular.module('i2037.moves', [
         return Moves.toDate($route.current.params.date); 
       } 
     }
-  })    
+  });    
 }])
 
 .controller('JournalCtrl', ['$scope', '$rootScope', 'date', 'MovesStoryline', 'MovesPlacesModel', 'MovesPathsModel',
@@ -52,12 +52,12 @@ angular.module('i2037.moves', [
     for (var day=0;day<storylines.length;day++) {
       var segments = storylines[day].segments;
       for (var s=0;s<segments.length;s++) {
-        if (segments[s].type == 'place') {
+        if (segments[s].type === 'place') {
           var place = segments[s].place;
           place.startTime = segments[s].startTime;
           place.endTime = segments[s].endTime;
           places.push(place);
-        } else if (segments[s].type == 'move') {
+        } else if (segments[s].type === 'move') {
           for (var a in segments[s].activities) {
             var activity = segments[s].activities[a];
             paths.push(activity);
@@ -73,7 +73,7 @@ angular.module('i2037.moves', [
     return MovesStoryline.query({date: dt}).then(function(storylines) {
       processResponse(storylines);
     });
-  };
+  }
 
   function onDateChanged(date) {
     $rootScope.$broadcast('MovesDataLoading');
@@ -172,7 +172,7 @@ angular.module('i2037.moves', [
         }
       }      
     }
-  })
+  });
 
   $scope.$watch('selected', function(newSelection, oldSelection) {
     if (newSelection) {
@@ -193,7 +193,7 @@ angular.module('i2037.moves', [
     this.isEditable = false;
     this.img = 'https://pbs.twimg.com/profile_images/1411601479/2600_joystick_45_normal.jpg';
     this.author =  'Richard Priestley'; 
-  }
+  };
 
   function loadComments(entry) {
     return Comment.query({entryId: 'abc'}).then(function(comments) {
@@ -215,16 +215,16 @@ angular.module('i2037.moves', [
       var location = fsqVenue.location;
       if (location) {
         var properties = ['address', 'city', 'state', 'postalCode', 'country'];
-        var lines = properties.map(function(p) { if (location.hasOwnProperty(p)) return location[p] });
+        var lines = properties.map(function(p) { if (location.hasOwnProperty(p)) {return location[p];} });
         venue.address = lines.join(', ');
       }
       return venue; 
-    })           
+    });           
   }
 
   $scope.toggleCollapse = function(entry) {
     $scope.isCollapsed = !$scope.isCollapsed;
-    if(entry.place.type == 'foursquare') {
+    if(entry.place.type === 'foursquare') {
       if (!entry.venue) {
         $scope.showSpinner = true;        
         loadVenue(entry.place.foursquareId).then(function(venue) {
@@ -242,7 +242,7 @@ angular.module('i2037.moves', [
     loadComments(entry).then(function(comments) {
       entry.comments = comments;
     });
-  }
+  };
 
   function newComment() {
     $scope.newComment = new CommentPM(new Comment());
@@ -253,18 +253,18 @@ angular.module('i2037.moves', [
     $scope.newComment.model.$save().then(function() {
       loadComments(entry).then(function(comments) {
         entry.comments = comments;
-      })
+      });
       newComment();
     });
-  }
+  };
 
   $scope.deleteComment = function(entry, comment) {
     comment.model.$delete().then(function() {
       loadComments(entry).then(function(comments) {
         entry.comments = comments;
-      })
+      });
     });
-  }
+  };
 }])
 
 .controller('MovesMapCtrl', ['$scope', 'MovesPlacesModel', function($scope, MovesPlacesModel) {
@@ -278,7 +278,7 @@ angular.module('i2037.moves', [
 
   $scope.$on('MovesPlacesModel::SelectedChange', function(e, model) {
     $scope.selected = model.getSelected();
-  })
+  });
 
   $scope.$watch('selected', function(newSelection, oldSelection) {
     if (newSelection) {
@@ -286,7 +286,7 @@ angular.module('i2037.moves', [
     } else {
       MovesPlacesModel.setSelected(undefined);
     }
-  })
+  });
 }])
 
 ;

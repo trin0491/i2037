@@ -30,7 +30,7 @@ angular.module('i2037.cellar', ['ngRoute', 'i2037.resources.cellar'])
 
   function refresh() {
     $scope.wines = Wine.query();    
-  };
+  }
 
   function noRows(wines, winesPerRow) {
     if (wines && winesPerRow) {
@@ -38,7 +38,7 @@ angular.module('i2037.cellar', ['ngRoute', 'i2037.resources.cellar'])
     } else {
       return 0;
     }
-  };
+  }
 
   function layoutGrid(wines, winesPerRow) {
     var winePM = [];
@@ -50,7 +50,7 @@ angular.module('i2037.cellar', ['ngRoute', 'i2037.resources.cellar'])
       }
     }
     $scope.wineGrid = winePM;
-  };
+  }
 
   $scope.smallThumbnails = function() {
     $scope.wineCls = 'span3';
@@ -101,7 +101,7 @@ angular.module('i2037.cellar', ['ngRoute', 'i2037.resources.cellar'])
 
   $scope.$watch("grapes.length", function(length) {
     angular.forEach($scope.grapes, function(grape) {
-      if (wine.grapeId == grape.grapeId) {
+      if (wine.grapeId === grape.grapeId) {
         $scope.grapeName = grape.name;
       }
     });
@@ -122,21 +122,21 @@ angular.module('i2037.cellar', ['ngRoute', 'i2037.resources.cellar'])
       wine.grapeId = undefined;
       $scope.isNewGrape = true;
     }      
-  };
+  }
 
   function findGrape(grapeName) {
     var rv;
     angular.forEach($scope.grapes, function(grape) {
-      if (grape.name == grapeName) {
+      if (grape.name === grapeName) {
          rv = grape;
       }
     });
     return rv;    
-  };
+  }
 
   function goToWines() {
     $location.path('/cellar/wines');
-  };
+  }
 
   $scope.addGrape = function() {
     if (!$scope.isNewGrape) {
@@ -159,7 +159,7 @@ angular.module('i2037.cellar', ['ngRoute', 'i2037.resources.cellar'])
     $scope.wine.$save({}, function() {
       goToWines();    
     });
-  }
+  };
 }])
 
 .controller('ListGrapesCtrl', ['$scope', 'Grape', function($scope, Grape) {

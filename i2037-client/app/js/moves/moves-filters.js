@@ -13,7 +13,7 @@ angular.module('i2037.moves.filters', [])
       } else {
         return text;
       }
-    }
+    };
  }])
 
 ;

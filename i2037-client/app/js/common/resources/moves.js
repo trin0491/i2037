@@ -4,14 +4,14 @@ angular.module('i2037.resources.moves', ['i2037.services', 'i2037.moves.filters'
 .factory('Moves', function() {
     var me = {};
 
-    function pad(n){return n<10 ? '0'+n : n};
+    function pad(n){return n<10 ? '0'+n : n;}
 
     me.toDateString = function(dt) {
       var y = dt.getFullYear().toString();
       var m = pad(dt.getMonth() + 1).toString();
       var d = pad(dt.getDate()).toString();
       return y + m + d;
-    }
+    };
 
     me.toDate = function(str) {
       var r = /(\d{4})(\d{2})(\d{2})/;
@@ -24,7 +24,7 @@ angular.module('i2037.resources.moves', ['i2037.services', 'i2037.moves.filters'
       d.setUTCMinutes(0);
       d.setUTCSeconds(0);
       return d;
-    }
+    };
 
     return me;
 })
@@ -42,7 +42,7 @@ angular.module('i2037.resources.moves', ['i2037.services', 'i2037.moves.filters'
     return $http.get(url, { params: params }).then(function(response) {
       var profile = new Profile(response.data);
       return profile;
-    })
+    });
   };
 
   return Profile;
@@ -72,7 +72,7 @@ angular.module('i2037.resources.moves', ['i2037.services', 'i2037.moves.filters'
 
   var Places = function(data) {
     angular.extend(this, data);
-  }
+  };
 
   Path.get = function(params) {
     var dateStr = Moves.toDateString(params['date']);
@@ -80,7 +80,7 @@ angular.module('i2037.resources.moves', ['i2037.services', 'i2037.moves.filters'
       var places = new Places(response.data);
       return places;
     });    
-  }
+  };
 
   return Places;
 }])
@@ -91,7 +91,7 @@ angular.module('i2037.resources.moves', ['i2037.services', 'i2037.moves.filters'
 
   var Storyline = function(data) {
     angular.extend(this, data);
-  }
+  };
 
   Storyline.query = function(params) {
     var dateStr = Moves.toDateString(params['date']);
@@ -99,10 +99,10 @@ angular.module('i2037.resources.moves', ['i2037.services', 'i2037.moves.filters'
       var storylines = [];
       angular.forEach(response.data, function(day) {
         storylines.push(new Storyline(day));      
-      })
+      });
       return storylines;
     });
-  }
+  };
   
   return Storyline;
 }]);

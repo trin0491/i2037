@@ -45,7 +45,7 @@ angular.module('i2037.cage', ['ngRoute', 'i2037.services'])
           })
       }]      
     });
-  };
+  }
 
   function drawGraph(response) {
     var columns = [
@@ -65,13 +65,13 @@ angular.module('i2037.cage', ['ngRoute', 'i2037.services'])
         }
         rows.push(row);
       }
-    };
+    }
     var grid = new Slick.Grid('#myGrid', rows, columns, {
       enableCellNavigation: true,
       enableColumnReorder: false
     });
 
     drawChart(rows);    
-  };
+  }
 
 }]);
