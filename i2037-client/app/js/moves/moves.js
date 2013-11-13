@@ -15,7 +15,7 @@ angular.module('i2037.moves', [
     templateUrl: 'partials/journal-calendar.html',
     controller: 'JournalCtrl',
     resolve: {
-      movesProfile: function($route, MovesProfile) {
+      movesProfile: ['$route', 'MovesProfile', function($route, MovesProfile) {
         return MovesProfile.get($route.current.params).then(function (profile) {
             if (profile.redirectTo) {
               window.location.replace(profile.redirectTo);
@@ -23,7 +23,7 @@ angular.module('i2037.moves', [
               return profile;
             }
         });
-      },
+      }],
       date: function() {
         return new Date();
       } 
@@ -33,9 +33,9 @@ angular.module('i2037.moves', [
     templateUrl: 'partials/journal-date.html',
     controller: 'JournalCtrl',
     resolve: {
-      date: function($route, Moves) { 
+      date: ['$route', 'Moves', function($route, Moves) { 
         return Moves.toDate($route.current.params.date); 
-      } 
+      }] 
     }
   });    
 }])

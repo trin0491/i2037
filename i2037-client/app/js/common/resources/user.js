@@ -1,6 +1,6 @@
 angular.module('i2037.resources.user', ['i2037.services'])
 
-.factory('User', function($http, pathFinder) {
+.factory('User', ['$http', 'pathFinder', function($http, pathFinder) {
 
   var url = pathFinder.get('svc/user');
 
@@ -53,6 +53,6 @@ angular.module('i2037.resources.user', ['i2037.services'])
   };
 
   return User;
-})
+}])
 
 ;

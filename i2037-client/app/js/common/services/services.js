@@ -3,7 +3,7 @@
 
   angular.module('i2037.services', ['i2037.environment'])
 
-  .factory('pathFinder', function(version, svcPrefix) {
+  .factory('pathFinder', ['version', 'svcPrefix', function(version, svcPrefix) {
     var my = { };
     var prefix = svcPrefix;
     // TODO
@@ -14,7 +14,7 @@
       return prefix + name;
     };
     return my;  
-  })
+  }])
 
   .factory('Session', ['$rootScope', function($rootScope) {
     var my = {};

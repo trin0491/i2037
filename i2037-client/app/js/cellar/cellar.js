@@ -9,18 +9,18 @@ angular.module('i2037.cellar', ['ngRoute', 'i2037.resources.cellar'])
       templateUrl: 'partials/wineform.html',
       controller: 'EditWineCtrl',
       resolve: {
-        wine: function(Wine) {
+        wine: ['Wine', function(Wine) {
           return new Wine({ rating: 0 });  //TODO default in constructor when replace with $http service
-        }
+        }]
       }
     });
     $routeProvider.when('/cellar/wines/:wineid',  {
       templateUrl: 'partials/wineform.html',
       controller: 'EditWineCtrl',
       resolve: {
-        wine: function($route, Wine) {
+        wine: ['$route', 'Wine', function($route, Wine) {
           return Wine.get({wineId:$route.current.params.wineid});
-        }
+        }]
       }
     });
     $routeProvider.when('/cellar/grapes', { templateUrl: 'partials/grapes.html', controller: 'ListGrapesCtrl' });
