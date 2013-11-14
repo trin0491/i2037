@@ -46,7 +46,7 @@ module.exports = function(grunt) {
           },
           files: [
             {'<%= dir.dist %>/index.html': 'app/index.html' },
-            { expand:true, cwd: 'app/js', src:'**/*.js', dest: '<%= dir.tmp %>/js/<%= pkg.version %>/'} 
+            { expand:true, cwd: 'app/js', src:'**/*.js', dest: '<%= dir.tmp %>/js/dev/'} 
           ]          
         }
     },        
