@@ -18,7 +18,7 @@
       $routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
       $routeProvider.otherwise({redirectTo: '/home'});
 
-    $httpProvider.responseInterceptors.push(function($q, Session) {
+    $httpProvider.responseInterceptors.push(['$q', 'Session', function($q, Session) {
       return function(promise) {
         return promise.then(function(response) {
           return response;
@@ -29,7 +29,7 @@
           return $q.reject(response);
         });
       };
-    });       
+    }]);       
   }])
 
   .controller('NavBarCtrl', ['$scope', '$location', '$modal', 'User', 'Session', 
