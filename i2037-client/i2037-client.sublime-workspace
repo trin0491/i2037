@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"js",
+				"jshint"
+			],
+			[
+				"bo",
+				"bootstrap"
+			],
+			[
 				"ang",
 				"angular"
 			],
@@ -64,18 +72,18 @@
 	"buffers":
 	[
 		{
-			"file": "/Users/richard/src/angular-app/client/gruntFile.js",
-			"settings":
-			{
-				"buffer_size": 5448,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "Gruntfile.js",
 			"settings":
 			{
-				"buffer_size": 4416,
+				"buffer_size": 4936,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/js/cellar/cellar.js",
+			"settings":
+			{
+				"buffer_size": 4238,
 				"line_ending": "Unix"
 			}
 		},
@@ -83,7 +91,39 @@
 			"file": "app/index.html",
 			"settings":
 			{
-				"buffer_size": 4263,
+				"buffer_size": 3982,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/js/common/directives/map.js",
+			"settings":
+			{
+				"buffer_size": 3285,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/js/app.js",
+			"settings":
+			{
+				"buffer_size": 5625,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/js/common/directives/directives.js",
+			"settings":
+			{
+				"buffer_size": 248,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/js/common/services/environment.js",
+			"settings":
+			{
+				"buffer_size": 213,
 				"line_ending": "Unix"
 			}
 		}
@@ -116,51 +156,58 @@
 	},
 	"file_history":
 	[
-		"/Users/richard/src/i2037/i2037-client/app/index.html",
+		"/Users/richard/src/i2037/i2037-client/build/release/js/1.0.0/i2037-client.min.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/cellar.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/user.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/services/services.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/moves/moves.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/app.js",
+		"/Users/richard/src/i2037/i2037-client/app/index.html",
+		"/Users/richard/src/i2037/i2037-client/config/karma.conf.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/moves.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/comments.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/timeline.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/button.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/cellar/cellar.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/cage/cage.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/directives.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/map.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/spinner.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/filters.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/foursquare.js",
+		"/Users/richard/src/i2037/i2037-client/test/unit/moves/moves-model.spec.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/moves/moves-filters.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/moves/journal-directives.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/services/environment.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/recipes/recipes.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/moves/moves-model.js",
+		"/Users/richard/src/i2037/i2037-client/app/partials/journal-calendar.html",
+		"/Users/richard/src/angular-app/client/gruntFile.js",
+		"/Users/richard/src/i2037/i2037-client/app/partials/journal-date.html",
 		"/Users/richard/src/i2037/i2037-client/app/partials/loginform.html",
 		"/Users/richard/src/i2037/i2037-client/app/partials/signupform.html",
-		"/Users/richard/src/i2037/i2037-client/app/js/moves/moves.js",
-		"/Users/richard/src/i2037/i2037-client/app/partials/journal-date.html",
-		"/Users/richard/src/i2037/i2037-client/app/js/cellar/cellar.js",
 		"/Users/richard/src/i2037/i2037-client/app/partials/wineview.html",
-		"/Users/richard/src/i2037/i2037-client/config/karma.conf.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/cage/cage.js",
 		"/Users/richard/src/i2037/i2037-client/app/lib/ui-bootstrap/ui-bootstrap-tpls.js",
 		"/Users/richard/src/i2037/i2037-client/app/lib/ui-bootstrap/ui-bootstrap-tpls-0.5.0.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/recipes/recipes.js",
 		"/Users/richard/src/i2037/i2037-client/test/unit/cellar/cellar.spec.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/cellar.js",
 		"/Users/richard/src/i2037/i2037-client/package.json",
 		"/Users/richard/src/i2037/i2037-client/Gruntfile.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/timeline.js",
 		"/Users/richard/src/i2037/i2037-client/test/unit/common/directives/button.spec.js",
 		"/Users/richard/src/i2037/i2037-client/test/unit/common/directives/timeline.spec.js",
 		"/Users/richard/src/i2037/i2037-client/test/unit/moves/journal-directives.spec.js",
 		"/Users/richard/src/i2037/i2037-client/build/tmp/js/dev/moves/journal-directives.js",
 		"/Users/richard/src/i2037/i2037-client/app/partials/journal-comment.tpl.html",
-		"/Users/richard/src/i2037/i2037-client/app/js/moves/journal-directives.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/button.js",
 		"/Users/richard/src/i2037/i2037-client/app/lib/angular/angular.js",
 		"/Users/richard/src/i2037/i2037-client/test/lib/angular/angular-mocks.js",
 		"/Users/richard/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/Users/richard/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
 		"/Users/richard/Library/Application Support/Sublime Text 3/Packages/User/HTML.sublime-settings",
 		"/Users/richard/src/i2037/i2037-client/app/partials/journal-comment.html",
-		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/comments.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/common/filters.js",
 		"/Users/richard/src/i2037/i2037-client/test/unit/common/filters/filters.spec.js",
 		"/Users/richard/src/i2037/i2037-client/app/partials/wineform.html",
-		"/Users/richard/src/i2037/i2037-client/app/partials/journal-calendar.html",
-		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/moves.js",
 		"/Users/richard/src/i2037/i2037-client/build/dev/js/dev/i2037-client.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/spinner.js",
 		"/Users/richard/src/i2037/i2037-client/app/partials/slickgrid.html",
 		"/Users/richard/src/i2037/i2037-client/app/lib/angular/angular-resource.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/foursquare.js",
-		"/Users/richard/src/i2037/i2037-client/test/unit/moves/moves-model.spec.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/moves/moves-model.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/map.js",
 		"/Users/richard/src/i2037/i2037-client/test/unit/common/directives/map.spec.js",
 		"/Users/richard/src/i2037/i2037-client/app/partials/moves.html",
 		"/Users/richard/src/i2037/i2037-client/scripts/test.sh"
@@ -181,6 +228,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"environment",
+			"Envrionment",
+			"dirs",
+			"dirs.dev",
 			"range",
 			"loginPM",
 			"loginModel",
@@ -249,24 +300,24 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 6,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/Users/richard/src/angular-app/client/gruntFile.js",
+					"file": "Gruntfile.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5448,
+						"buffer_size": 4936,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3897,
-								3922
+								1407,
+								1407
 							]
 						],
 						"settings":
@@ -276,26 +327,26 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1350.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "Gruntfile.js",
+					"file": "app/js/cellar/cellar.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4416,
+						"buffer_size": 4238,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2826,
-								2826
+								665,
+								665
 							]
 						],
 						"settings":
@@ -305,7 +356,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 695.0,
+						"translation.y": 22.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -316,15 +367,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4263,
+						"buffer_size": 3982,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3397,
-								3427
+								3324,
+								3324
 							]
 						],
 						"settings":
@@ -334,7 +385,119 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 739.0,
+						"translation.y": 679.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/js/common/directives/map.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3285,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1092.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/js/app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5625,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								970,
+								970
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 7.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/js/common/directives/directives.js",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 248,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/js/common/services/environment.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 213,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -385,8 +548,136 @@
 		"selected_items":
 		[
 			[
+				"i2037-client",
+				"build/release/js/1.0.0/i2037-client.min.js"
+			],
+			[
+				"env",
+				"app/js/common/services/environment.js"
+			],
+			[
+				"app.js",
+				"app/js/app.js"
+			],
+			[
+				"map.",
+				"app/js/common/directives/map.js"
+			],
+			[
 				"inde",
 				"app/index.html"
+			],
+			[
+				"comment.js",
+				"app/js/common/resources/comments.js"
+			],
+			[
+				"cage.js",
+				"app/js/cage/cage.js"
+			],
+			[
+				"cellar.j",
+				"app/js/cellar/cellar.js"
+			],
+			[
+				"direc",
+				"app/js/common/directives/directives.js"
+			],
+			[
+				"map.js",
+				"app/js/common/directives/map.js"
+			],
+			[
+				"button.js",
+				"app/js/common/directives/button.js"
+			],
+			[
+				"spinn",
+				"app/js/common/directives/spinner.js"
+			],
+			[
+				"timeline",
+				"app/js/common/directives/timeline.js"
+			],
+			[
+				"timel",
+				"app/js/common/directives/timeline.js"
+			],
+			[
+				"filter",
+				"app/js/common/filters.js"
+			],
+			[
+				"cellar.js",
+				"app/js/common/resources/cellar.js"
+			],
+			[
+				"comments",
+				"app/js/common/resources/comments.js"
+			],
+			[
+				"four",
+				"app/js/common/resources/foursquare.js"
+			],
+			[
+				"moves.js",
+				"app/js/common/resources/moves.js"
+			],
+			[
+				"user.j",
+				"app/js/common/resources/user.js"
+			],
+			[
+				"environ",
+				"app/js/common/services/environment.js"
+			],
+			[
+				"serv",
+				"app/js/common/services/services.js"
+			],
+			[
+				"journal-dir",
+				"app/js/moves/journal-directives.js"
+			],
+			[
+				"moves-fil",
+				"app/js/moves/moves-filters.js"
+			],
+			[
+				"moves-model",
+				"app/js/moves/moves-model.js"
+			],
+			[
+				"moves",
+				"app/js/moves/moves.js"
+			],
+			[
+				"recipie",
+				"app/js/recipes/recipes.js"
+			],
+			[
+				"karm",
+				"config/karma.conf.js"
+			],
+			[
+				"index",
+				"app/index.html"
+			],
+			[
+				"index.html",
+				"app/index.html"
+			],
+			[
+				"inde.ht",
+				"app/index.html"
+			],
+			[
+				"journal-date",
+				"app/partials/journal-date.html"
+			],
+			[
+				"journal",
+				"app/partials/journal-calendar.html"
 			],
 			[
 				"grun",
@@ -397,14 +688,6 @@
 				"app/js/cellar/cellar.js"
 			],
 			[
-				"journal",
-				"app/partials/journal-date.html"
-			],
-			[
-				"moves.js",
-				"app/js/moves/moves.js"
-			],
-			[
 				"signup",
 				"app/partials/signupform.html"
 			],
@@ -413,20 +696,8 @@
 				"app/partials/loginform.html"
 			],
 			[
-				"cellar.js",
-				"app/js/cellar/cellar.js"
-			],
-			[
 				"cellar.spec",
 				"test/unit/cellar/cellar.spec.js"
-			],
-			[
-				"app.js",
-				"app/js/app.js"
-			],
-			[
-				"karm",
-				"config/karma.conf.js"
 			],
 			[
 				"pack",
@@ -445,24 +716,12 @@
 				"test/unit/common/directives/timeline.spec.js"
 			],
 			[
-				"timeline",
-				"app/js/common/directives/timeline.js"
-			],
-			[
 				"button",
 				"app/js/common/directives/button.js"
 			],
 			[
 				"button.spe",
 				"test/unit/common/directives/button.spec.js"
-			],
-			[
-				"journal-date",
-				"app/partials/journal-date.html"
-			],
-			[
-				"moves",
-				"app/js/moves/moves.js"
 			],
 			[
 				"angular-mocks",
@@ -497,14 +756,6 @@
 				"build/dev/js/dev/i2037-client.js"
 			],
 			[
-				"filter",
-				"app/js/common/filters.js"
-			],
-			[
-				"comments",
-				"app/js/common/resources/comments.js"
-			],
-			[
 				"moves.",
 				"app/js/common/resources/moves.js"
 			],
@@ -537,16 +788,8 @@
 				"app/lib/angular/angular-resource.js"
 			],
 			[
-				"four",
-				"app/js/common/resources/foursquare.js"
-			],
-			[
 				"journal-date.h",
 				"app/partials/journal-date.html"
-			],
-			[
-				"index",
-				"app/index.html"
 			],
 			[
 				"journal-",
@@ -617,7 +860,7 @@
 	"show_minimap": false,
 	"show_open_files": false,
 	"show_tabs": true,
-	"side_bar_visible": false,
+	"side_bar_visible": true,
 	"side_bar_width": 189.0,
 	"status_bar_visible": true,
 	"template_settings":
