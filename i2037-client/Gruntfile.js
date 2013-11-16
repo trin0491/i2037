@@ -1,4 +1,32 @@
 module.exports = function(grunt) {
+
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-preprocess');
+  grunt.loadNpmTasks('grunt-env');
+  grunt.loadNpmTasks('grunt-karma');
+
+  grunt.registerTask('config_dev', 'Prepare for dev build', function() {
+    grunt.config.set('dir.dist', 'build/dev');
+  });
+
+  grunt.registerTask('config_release', 'Prepare for release build', function() {
+    grunt.config.set('dir.dist', 'build/release');
+  });
+  
+  grunt.registerTask('default', ['clean', 'config_dev', 'env:dev', 'copy', 'preprocess:dev', 'concat']);
+  grunt.registerTask('release', ['default', 'config_release', 'env:release', 'copy', 'preprocess:release', 'uglify']);
+
+  var karmaConfig = function(configFile, customOptions) {
+    var options = { configFile: configFile, keepalive: true };
+    var travisOptions = process.env.TRAVIS && { browsers: ['Firefox'], reporters: 'dots' };
+    return grunt.util._.extend(options, customOptions, travisOptions);
+  };
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
@@ -29,7 +57,7 @@ module.exports = function(grunt) {
           {expand:true, cwd: 'app', src:['css/**'], dest: '<%= dir.dist %>/'},          
         ]
       },
-    },
+    },    
     preprocess: {
         dev: {
           files: [
@@ -95,10 +123,6 @@ module.exports = function(grunt) {
         src: ['<%= concat.app.src %>'],
         dest: '<%= dir.dist %>/js/<%= pkg.version %>/<%= pkg.name %>.min.js' 
       },
-      // release: {
-      //   src: ['<%= concat.dev.src %>'],
-      //   dest: '<%= dir.release %>/<%= pkg.version %>/<%= pkg.name %>.min.js'
-      // },
       angular: {
         src: ['<%= concat.angular.src %>'],
         dest: '<%= dir.dist %>/js/angular.min.js'
@@ -116,6 +140,10 @@ module.exports = function(grunt) {
         dest: '<%= dir.dist %>/js/bootstrap.min.js'
       }            
     },
+    karma: {
+      unit: { options: karmaConfig('config/karma.conf.js', { singleRun:true, autoWatch: false}) },
+      watch: { options: karmaConfig('config/karma.conf.js', { singleRun:false, autoWatch: true}) }
+    },    
     jshint: {
       files: ['Gruntfile.js', 'app/**/*.js'],
       options:{
@@ -136,26 +164,4 @@ module.exports = function(grunt) {
       tasks: ['jshint', 'config_dev', 'env:dev', 'copy', 'preprocess:dev', 'concat']
     }
   });
-
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-preprocess');
-  grunt.loadNpmTasks('grunt-env');
-
-  grunt.registerTask('config_dev', 'Prepare for dev build', function() {
-    grunt.config.set('dir.dist', 'build/dev');
-  });
-
-  grunt.registerTask('config_release', 'Prepare for release build', function() {
-    grunt.config.set('dir.dist', 'build/release');
-  });
-  
-  grunt.registerTask('test', ['jshint']);
-
-  grunt.registerTask('default', ['clean', 'config_dev', 'env:dev', 'copy', 'preprocess:dev', 'concat']);
-  grunt.registerTask('release', ['default', 'config_release', 'env:release', 'copy', 'preprocess:release', 'uglify']);
 };
