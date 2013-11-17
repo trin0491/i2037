@@ -20,8 +20,8 @@ module.exports = function(grunt) {
   });
   
   grunt.registerTask('build', ['clean', 'jshint', 'html2js', 'config_dev', 'env:dev', 'copy', 'preprocess', 'concat']);
-  grunt.registerTask('release', ['build', 'karma:unit', 'config_release', 'env:release', 'copy', 'preprocess', 'uglify']);
-  grunt.registerTask('default', ['build']);
+  grunt.registerTask('release', ['build', 'config_release', 'env:release', 'copy', 'preprocess', 'uglify']);
+  grunt.registerTask('default', ['build', 'karma:unit']);
 
   var karmaConfig = function(configFile, customOptions) {
     var options = { configFile: configFile, keepalive: true };
