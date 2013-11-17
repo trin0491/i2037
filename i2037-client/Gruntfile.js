@@ -9,6 +9,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-preprocess');
   grunt.loadNpmTasks('grunt-env');
   grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-html2js');
 
   grunt.registerTask('config_dev', 'Prepare for dev build', function() {
     grunt.config.set('dir.dist', 'build/dev');
@@ -18,8 +19,9 @@ module.exports = function(grunt) {
     grunt.config.set('dir.dist', 'build/release');
   });
   
-  grunt.registerTask('default', ['clean', 'config_dev', 'env:dev', 'copy', 'preprocess:dev', 'concat']);
-  grunt.registerTask('release', ['default', 'config_release', 'env:release', 'copy', 'preprocess:release', 'uglify']);
+  grunt.registerTask('build', ['clean', 'jshint', 'html2js', 'config_dev', 'env:dev', 'copy', 'preprocess', 'concat']);
+  grunt.registerTask('release', ['build', 'karma:unit', 'config_release', 'env:release', 'copy', 'preprocess', 'uglify']);
+  grunt.registerTask('default', ['build']);
 
   var karmaConfig = function(configFile, customOptions) {
     var options = { configFile: configFile, keepalive: true };
@@ -57,15 +59,19 @@ module.exports = function(grunt) {
           {expand:true, cwd: 'app', src:['css/**'], dest: '<%= dir.dist %>/'},          
         ]
       },
-    },    
-    preprocess: {
-        dev: {
-          files: [
-            { '<%= dir.dist %>/index.html' : 'app/index.html' },
-            { expand:true, cwd: 'app/js', src:'**/*.js', dest: '<%= dir.tmp %>/js/dev/'} 
-          ]
+    },
+    html2js: {
+      app: {
+        options: {
+          base: 'app/js'
         },
-        release: {
+        src: ['app/**/*.tpl.html'],
+        dest: '<%= dir.tmp %>/templates/app.js',
+        module: 'templates.app'
+      }
+    },        
+    preprocess: {
+        app: {
           options: {
             context: {
               name: '<%= pkg.name %>',
@@ -83,7 +89,7 @@ module.exports = function(grunt) {
         separator: ';'
       },
       app: {
-        src:  '<%= dir.tmp %>/js/dev/**/*.js', 
+        src:  ['<%= dir.tmp %>/js/dev/**/*.js', '<%= dir.tmp %>/templates/app.js'], 
         dest: '<%= dir.dist %>/js/dev/<%= pkg.name %>.js'
       },
       angular: {
@@ -161,7 +167,7 @@ module.exports = function(grunt) {
     },
     watch: {
       files: ['Gruntfile.js', 'app/**/*.js', 'app/**/*.html'],
-      tasks: ['jshint', 'config_dev', 'env:dev', 'copy', 'preprocess:dev', 'concat']
+      tasks: ['build']
     }
   });
 };

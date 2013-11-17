@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('i2037.journal.directives', [])
+  angular.module('i2037.journal.directives', ['moves/journal-directives.tpl.html'])
 
   .directive('i2Comment', function() {
     return {
@@ -11,15 +11,7 @@
         delete: '&i2Delete',
         reply: '&'
       },
-      template: '<a class="pull-right">' +
-        '<img class="media-object" ng-src="{{comment.img}}">' +
-        '<button ng-click="delete()" class="close">&times;</button>' +
-        '</a>' +
-        '<div class="media-body">' +
-        '<h5 class="media-heading">{{comment.author}}</h5>' +
-        '<div class="media">{{comment.text}}</div>' +
-        '<p><small>{{comment.lastUpdateTime | date:"d/M/yy H:mm"}}</small></p>' +
-        '</div>',
+      templateUrl: 'moves/journal-directives.tpl.html',
       replace: false,
       link: function(scope, element, attrs) {
         element.addClass('media');

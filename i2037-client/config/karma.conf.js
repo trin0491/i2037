@@ -9,7 +9,8 @@ module.exports = function(config){
       'bower_components/angular-mocks/angular-mocks.js',
       'https://maps.googleapis.com/maps/api/js?key=AIzaSyD1XkZF2vEwPUZeFfadDMe76ozKhrk-mXE&sensor=false',
       'app/js/**/*.js',
-      'test/unit/**/*.spec.js'
+      'test/unit/**/*.spec.js',
+      'build/tmp/templates/app.js'
     ],
 
     autoWatch : true,
