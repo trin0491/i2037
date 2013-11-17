@@ -4,6 +4,20 @@ angular.module('i2037.cage', ['ngRoute', 'i2037.services'])
   $routeProvider.when('/cage', {templateUrl: 'partials/slickgrid.html', controller: 'SlickgridCtrl'});
 }])
 
+.controller('CommentTestCtrl', ['$scope', function($scope) {
+  $scope.state = 'edit';
+  $scope.textRows = 1;
+  $scope.editLabel = 'Update';
+
+  $scope.addComment = function(entry) {
+    $scope.state = 'read';
+  };
+
+  $scope.onTextAreaFocus = function() {
+    $scope.textRows = 3;
+  }; 
+}])
+
 .controller('SlickgridCtrl', ['$scope', 'MovesSummary', 'MovesPlaces', 'MovesStoryline',
   function ($scope, MovesSummary, MovesPlaces, MovesStoryline) {
 
