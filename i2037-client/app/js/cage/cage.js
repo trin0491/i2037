@@ -1,7 +1,7 @@
 angular.module('i2037.cage', ['ngRoute', 'i2037.services'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/cage', {templateUrl: 'partials/slickgrid.html', controller: 'SlickgridCtrl'});
+  $routeProvider.when('/cage', {templateUrl: 'partials/cage.html', controller: 'CageCtrl'});
 }])
 
 .controller('CommentTestCtrl', ['$scope', function($scope) {
@@ -18,7 +18,7 @@ angular.module('i2037.cage', ['ngRoute', 'i2037.services'])
   }; 
 }])
 
-.controller('SlickgridCtrl', ['$scope', 'MovesSummary', 'MovesPlaces', 'MovesStoryline',
+.controller('CageCtrl', ['$scope', 'MovesSummary', 'MovesPlaces', 'MovesStoryline',
   function ($scope, MovesSummary, MovesPlaces, MovesStoryline) {
 
   function drawChart(rows) {
