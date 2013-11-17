@@ -74,7 +74,7 @@ angular.module('i2037.resources.moves', ['i2037.services', 'i2037.moves.filters'
     angular.extend(this, data);
   };
 
-  Path.get = function(params) {
+  Places.get = function(params) {
     var dateStr = Moves.toDateString(params['date']);
     return $http.get(url+dateStr).then(function(response) {
       var places = new Places(response.data);
