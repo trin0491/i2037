@@ -1,4 +1,4 @@
-angular.module('i2037.cage', ['ngRoute', 'i2037.services'])
+angular.module('i2037.cage', ['ngRoute', 'i2037.services', 'i2037.journal.directives'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/cage', {templateUrl: 'partials/cage.html', controller: 'CageCtrl'});
@@ -6,16 +6,20 @@ angular.module('i2037.cage', ['ngRoute', 'i2037.services'])
 
 .controller('CommentTestCtrl', ['$scope', function($scope) {
   $scope.state = 'edit';
-  $scope.textRows = 1;
-  $scope.editLabel = 'Update';
+  $scope.comment = {
+    text: 'A really interesting comment',
+    author: 'Richard Priestley',
 
-  $scope.addComment = function(entry) {
-    $scope.state = 'read';
+    isNew: function() {
+      return false;
+    },
+    canSave: function() {
+      return true;
+    },
+    canDelete: function() {
+      return true;
+    }
   };
-
-  $scope.onTextAreaFocus = function() {
-    $scope.textRows = 3;
-  }; 
 }])
 
 .controller('CageCtrl', ['$scope', 'MovesSummary', 'MovesPlaces', 'MovesStoryline',

@@ -1,11 +1,35 @@
-<div switch="state">
-  <a class="pull-right">
-    <img class="media-object" ng-src="{{comment.img}}">
-    <button ng-click="delete()" class="close">&times;</button>
-  </a>
-  <div class="media-body" >
-    <h5 class="media-heading">{{comment.author}}</h5>
-    <div class="media">{{comment.text}}</div>
-    <p><small>{{comment.lastUpdateTime | date:"d/M/yy H:mm"}}</small></p>
+<div ng-switch on="state">
+  <div class="media" ng-switch-default>
+    <div class="pull-right">
+      <a><img class="media-object" ng-src="{{comment.img}}"></a>
+      <button ng-click="delete()" ng-disabled="!comment.canDelete()" class="close">&times;</button>          
+    </div>
+    <div class="media-body">
+      <h5 class="media-heading">{{comment.author}}</h5>
+      <div ng-click="edit()">{{comment.text}}</div>
+      <p><small>{{comment.lastUpdateTime | date:"d/M/yy H:mm"}}</small></p>
+    </div>
+  </div>
+  <div ng-switch-when="edit">
+    <textarea style="width:100%" placeholder="Enter comment..."    
+      rows="{{textRows}}" 
+      ng-focus="onTextFocus()"
+      ng-model="commentCopy.text"></textarea>
+    <div ng-show="showActions">
+      <button class="btn btn-mini btn-primary" 
+        ng-click="save()"
+        ng-disabled="!commentCopy.canSave()">
+        <i class="icon-comment icon-white"></i> {{saveLabel}}</button>
+      <button class="btn btn-mini" 
+        ng-click="cancel()"
+        ng-disabled="!canCancel">Cancel</button>        
+      <button class="btn btn-mini pull-right" 
+        ng-disabled="!commentCopy.canDelete()" 
+        ng-click="delete()"
+        ng-mouseenter="deleteCls='btn-danger'" 
+        ng-mouseleave="deleteCls=''" 
+        ng-class="deleteCls">
+        <i class="icon-remove"></i> Delete</button>      
+    </div>
   </div>
 </div>

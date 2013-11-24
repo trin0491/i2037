@@ -23,33 +23,8 @@
                     <address>Lerchenfelder Strasse 1-3, Wien, Wien, Austria</address>
                   </div>
                   <ul class="media-list">
-                      <li class="media">
-                          <a class="pull-right"><img class="media-object" ng-src="{{media.url}}"></a>
-                          <div class="media-body">
-                              <h4 class="media-heading"><h4>Heading</h4>
-                              <div class="media">Here's some comments</div>
-                          </div>
-                      </li>
-                      <li class="media" ng-controller="CommentTestCtrl">
-                        <div ng-switch on="state">
-                          <div class="pull-right">
-                            <a><img class="media-object" ng-src="{{comment.img}}"></a>
-                            <button ng-click="delete()" class="close">&times;</button>
-                          </div>
-                          <div class="media-body" ng-switch-default>
-                            <h5 class="media-heading">Richard Priestley</h5>
-                            <div class="media">Here's another comment</div>
-                            <p><small>23/10/77 08:15</small></p>
-                          </div>
-                          <div ng-switch-when="edit">
-                            <textarea rows="{{textRows}}" placeholder="Enter comment..."
-                              ng-focus="onTextAreaFocus()"></textarea>
-                            <div>
-                              <button class="btn btn-mini" ng-click="addComment(entry)">
-                              <i class="icon-comment"></i> {{editLabel}}</button>
-                            </div>
-                          </div>
-                        </div>
+                      <li ng-controller="CommentTestCtrl">
+                        <div i2-comment="comment"></div>
                       </li>
                   </ul>
               </div>
