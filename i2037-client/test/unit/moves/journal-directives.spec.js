@@ -61,12 +61,12 @@ describe('i2037.journal.directives', function() {
       return element.find('button').eq(2);
     }
 
-    it('should replace the element', function() {
-      expect(element.eq(0).is('div')).toBe(true);
+    it('should not replace the element', function() {
+      expect(element.eq(0).is('li')).toBe(true);
     })
 
     it('should add a media element', function() {
-      expect(element.find('div.media').length).toBe(1);
+      expect(element.hasClass('media')).toBe(true);
     });
 
     it('should have a media body', function() {
@@ -128,9 +128,13 @@ describe('i2037.journal.directives', function() {
       comment.isNew(true);
       $scope.$digest();
       expect(getTextArea().attr('rows')).toEqual('3');
+    })
+
+    it('should have 1 row when no text', function() {
+      comment.isNew(true);
       comment.text = '';
       $scope.$digest();      
-      expect(getTextArea().attr('rows')).toEqual('1');      
+      expect(getTextArea().attr('rows')).toEqual('1');            
     })
 
     it('should not show the actions for new comment with no text', function() {

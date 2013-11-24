@@ -190,10 +190,22 @@ angular.module('i2037.moves', [
  
   var CommentPM = function CommentPM(comment) {
     this.model = comment;
-    this.isEditable = false;
     this.img = 'https://pbs.twimg.com/profile_images/1411601479/2600_joystick_45_normal.jpg';
     this.author =  'Richard Priestley'; 
-  };
+    this.text = comment.text;
+    this.lastUpdateTime = comment.lastUpdateTime;
+    this.isNew = function() {
+      return this.model.commentId === undefined;
+    };
+
+    this.canDelete = function() {
+      return ! this.isNew();
+    };
+
+    this.canSave = function() {
+      return true;
+    };
+  };  
 
   function loadComments(entry) {
     return Comment.query({entryId: 'abc'}).then(function(comments) {
@@ -245,7 +257,8 @@ angular.module('i2037.moves', [
   };
 
   function newComment() {
-    $scope.newComment = new CommentPM(new Comment());
+    var comment = new Comment();
+    $scope.newComment = new CommentPM(comment);
   }
   newComment();
 

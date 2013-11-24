@@ -1,5 +1,5 @@
 <div ng-switch on="state">
-  <div class="media" ng-switch-default>
+  <div ng-switch-default>
     <div class="pull-right">
       <a><img class="media-object" ng-src="{{comment.img}}"></a>
       <button ng-click="delete()" ng-disabled="!comment.canDelete()" class="close">&times;</button>          
@@ -11,7 +11,7 @@
     </div>
   </div>
   <div ng-switch-when="edit">
-    <textarea style="width:100%" placeholder="Enter comment..."    
+    <textarea style="width:95%" placeholder="Enter comment..."    
       rows="{{textRows}}" 
       ng-focus="onTextFocus()"
       ng-model="commentCopy.text"></textarea>

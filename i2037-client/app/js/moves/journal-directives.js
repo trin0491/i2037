@@ -11,8 +11,10 @@
         deleteFn: '&i2Delete',
       },
       templateUrl: 'moves/journal-directives.tpl.html',
-      replace: true,
+      replace: false,
       link: function($scope, element, attrs) {
+        element.addClass('media');
+
         $scope.textRows = 1;
         $scope.saveLabel = 'Update';
 
@@ -39,13 +41,16 @@
         };
 
         $scope.cancel = function() {
-          $scope.state = 'read';
-          $scope.showActions = false;
-          $scope.commentCopy = null;
+          if ($scope.canCancel()) {
+            $scope.state = 'read';
+            $scope.showActions = false;
+            $scope.commentCopy = null;            
+          }
         };
 
         $scope.onTextFocus = function() {
           $scope.textRows = 3;
+          $scope.showActions = true;
         };
 
         function evalState(isNew) {
@@ -81,7 +86,7 @@
           evalSaveLabel(isNew);
         }, true);
 
-        $scope.$watch('comment.text', function(text) {
+        $scope.$watch('commentCopy.text', function(text) {
           evalTextRows(text);
           evalShowActions($scope.comment.isNew(), text);
         }, true);

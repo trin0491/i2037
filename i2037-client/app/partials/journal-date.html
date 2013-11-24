@@ -32,22 +32,10 @@
                             </address>
                             <a ng-href="{{entry.venue.url}}">{{entry.venue.url | trim:30 }}</a>
                         </div>
-                        <div>
-                            <textarea row="1" placeholder="Enter comment..." ng-model="newComment.model.text"></textarea>
-                            <button class="btn btn-mini" ng-click="addComment(entry)"><i class="icon-comment"></i> Comment</button>
-                        </div>                         
+                        <div i2-comment="newComment" i2-save="addComment(comment)"></div>
+                        <hr>    
                         <ul class="media-list">
-                            <li class="media" ng-repeat="comment in entry.comments">                                
-                                <a class="pull-right">
-                                    <img class="media-object" ng-src="{{comment.img}}">
-                                    <button ng-click="deleteComment(entry, comment)" class="close">&times;</button>
-                                </a>
-                                <div class="media-body">
-                                    <h5 class="media-heading">{{comment.author}}</h5>
-                                    <div class="media">{{comment.model.text}}</div>
-                                    <p><small>{{comment.model.lastUpdateTime | date:'d/M/yy H:mm'}}</small></p>
-                                </div>
-                            </li>
+                            <li i2-comment="comment" ng-repeat="comment in entry.comments" i2-delete="deleteComment(comment)"></li>
                         </ul>
                     </div>
                 </div>
