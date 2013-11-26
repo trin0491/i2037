@@ -26,7 +26,7 @@
 
         $scope.save = function() {
           if ($scope.commentCopy.canSave && $scope.commentCopy.canSave()) {
-            $scope.saveFn($scope.commentCopy);
+            $scope.saveFn({comment:$scope.commentCopy});
           }
         };
 
@@ -90,7 +90,6 @@
           evalTextRows(text);
           evalShowActions($scope.comment.isNew(), text);
         }, true);
-
       }
     };
   });

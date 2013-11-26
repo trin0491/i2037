@@ -262,16 +262,19 @@ angular.module('i2037.moves', [
   }
   newComment();
 
-  $scope.addComment = function(entry) {
-    $scope.newComment.model.$save().then(function() {
+  $scope.addComment = function(comment, entry) {
+    var model = comment.model;
+    model.text = comment.text;
+    model.$save().then(function() {
       loadComments(entry).then(function(comments) {
         entry.comments = comments;
-      });
+      });      
+      // entry.comments.push(comment);
       newComment();
     });
   };
 
-  $scope.deleteComment = function(entry, comment) {
+  $scope.deleteComment = function(comment, entry) {
     comment.model.$delete().then(function() {
       loadComments(entry).then(function(comments) {
         entry.comments = comments;

@@ -91,11 +91,6 @@ describe('i2037.journal.directives', function() {
       expect(element.find('small').text()).toEqual('23/10/13 17:15');
     })
 
-    it('should call deleteFn when the button is clicked', function() {
-      element.find('button.close').click();
-      expect($scope.delete).toHaveBeenCalled();
-    })
-
     it('should disable delete for new comment', function() {
       comment.isNew(true);
       $scope.$digest();
@@ -207,6 +202,26 @@ describe('i2037.journal.directives', function() {
       $scope.$digest();
       var saveBtn = getSaveBtn();
       expect(saveBtn.filter(':contains(Update)').length).toBe(1);
+    })
+
+    it('should update if the comment is updated', function() {
+      expect(getText().length).toBe(1);
+      var newComment = {
+        text: '',
+        isNew: function(val) {
+          return true;
+        },
+        canDelete: function() {
+          return false;
+        },
+        canSave: function() {
+          return true;
+        }        
+      };
+      $scope.comment = newComment;
+      $scope.$digest();
+      expect(getText().length).toBe(0);
+      expect(getTextArea().val()).toBe('');
     })
   });
 
