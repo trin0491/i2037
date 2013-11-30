@@ -36,7 +36,7 @@ angular.module('i2037.resources.comments', ['i2037.services'])
 
   Comment.query = function(params) {
     var url = baseUrl;
-    return $http.get(url, params).then(function (response) {
+    return $http.get(url, {params: params}).then(function (response) {
       var comments = [];
       angular.forEach(response.data, function(commentData) {
         comments.push(new Comment(commentData));
