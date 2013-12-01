@@ -1,0 +1,139 @@
+package net.i2037.journal;
+
+import static org.junit.Assert.*;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import mockit.Expectations;
+import mockit.Mocked;
+import mockit.NonStrictExpectations;
+import mockit.Verifications;
+import mockit.integration.junit4.JMockit;
+import net.i2037.journal.model.EntryType;
+import net.i2037.journal.model.TimeLineEntry;
+import net.i2037.journal.model.TimeLineEntryDao;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+@RunWith(JMockit.class)
+public class TimeLineFeedLoaderTest {
+
+	private static final Date START = new Date();
+	private static final Date END = new Date();
+	
+	private TimeLineFeedLoader loader;
+	
+	private ExecutorService executorService;
+	
+	@Mocked
+	private TimeLineEntryDao mockTimeLineEntryDao;
+		
+	@Mocked
+	private TimeLineFeed mockFeed1;
+	
+	@Mocked
+	private TimeLineFeed mockFeed2;
+	
+	@Before
+	public void setUp() throws Exception {
+		executorService = Executors.newSingleThreadExecutor();		
+		loader = new TimeLineFeedLoader();
+		loader.setExecutorService(executorService);
+		loader.setTimeLineEntryDao(mockTimeLineEntryDao);
+		loader.setTimeLineFeeds(Arrays.asList(mockFeed1, mockFeed2));
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void testStartDateIsNull() throws InterruptedException {
+		loader.load(null, new Date());
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testEndDateIsNull() throws Exception {
+		loader.load(new Date(), null);
+	}
+	
+	@Test
+	public void testFeedsReturnNothing() throws Exception {
+		new NonStrictExpectations() {{
+			mockTimeLineEntryDao.queryByDateRange(START, END); result = Collections.emptyList();
+			mockFeed1.load(START, END); result = Collections.emptyList();
+			mockFeed2.load(START, END); result = Collections.emptyList();
+		}};
+		
+		List<TimeLineEntry> entries = loader.load(START, END);
+		assertNotNull(entries);
+		assertTrue(entries.isEmpty());
+	}
+	
+	@Test
+	public void testFeedsReturnNothingOldDataShouldBeDeleted() throws Exception {
+		final TimeLineEntry entry = newTimeLineEntry(new Date());
+		final Collection<TimeLineEntry> existingEntries = Arrays.asList(entry);
+		new NonStrictExpectations() {{
+			mockTimeLineEntryDao.queryByDateRange(START, END); result = existingEntries;
+			mockFeed1.load(START, END); result = Collections.emptyList();
+			mockFeed2.load(START, END); result = Collections.emptyList();			
+		}};
+		
+		List<TimeLineEntry> entries = loader.load(START, END);
+		assertNotNull(entries);
+		assertTrue(entries.isEmpty());
+		
+		new Verifications() {{
+			mockTimeLineEntryDao.delete(entry);
+		}};
+	}
+	
+	@Test
+	public void testFeedsReturnAnEntryThatDoesNotExist() throws Exception {
+		final TimeLineEntry entry = newTimeLineEntry(new Date());
+		final Collection<TimeLineEntry> existingEntries = Collections.emptyList();
+		new NonStrictExpectations() {{
+			mockTimeLineEntryDao.queryByDateRange(START, END); result = existingEntries;
+			mockFeed1.load(START, END); result = Collections.emptyList();
+			mockFeed2.load(START, END); result = Arrays.asList(entry);			
+		}};
+		
+		List<TimeLineEntry> entries = loader.load(START, END);
+		assertNotNull(entries);
+		assertEquals(1, entries.size());
+		assertEquals(entry, entries.get(0));
+		
+		new Verifications() {{
+			mockTimeLineEntryDao.create(entry);
+		}};		
+	}
+
+	@Test
+	public void testFeedsRetrurnAnEntryThatExists() throws Exception {
+		final TimeLineEntry entry = newTimeLineEntry(new Date());
+		final Collection<TimeLineEntry> existingEntries = Arrays.asList(entry);
+		new Expectations() {{
+			mockTimeLineEntryDao.queryByDateRange(START, END); result = existingEntries;
+			mockFeed1.load(START, END); result = Arrays.asList(entry);
+			mockFeed2.load(START, END); result = Collections.emptyList();			
+		}};
+		
+		List<TimeLineEntry> entries = loader.load(START, END);
+		assertNotNull(entries);
+		assertEquals(1, entries.size());
+		assertEquals(entry, entries.get(0));
+	}
+	
+	private TimeLineEntry newTimeLineEntry(Date date) {
+		TimeLineEntry entry = new TimeLineEntry();
+		entry.setEntryId(date.getTime());
+		entry.setTime(date);
+		entry.setType(EntryType.MOVES);
+		return entry;
+	}
+}
