@@ -3,17 +3,18 @@ package net.i2037.journal.model;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+@Repository
+@Transactional(readOnly=true)
 public class TimeLineEntryDaoImpl implements TimeLineEntryDao {
 
 	private SessionFactory sessionFactory;
 	
-	@Override
-	public TimeLineEntry getReference(Long id) {
-		return (TimeLineEntry) sessionFactory.getCurrentSession().byId(TimeLineEntry.class).getReference(id);
-	}
-
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
@@ -24,32 +25,37 @@ public class TimeLineEntryDaoImpl implements TimeLineEntryDao {
 
 	@Override
 	public TimeLineEntry newEntity() {
-		// TODO Auto-generated method stub
-		return null;
+		return new TimeLineEntry();
 	}
 
 	@Override
+	public TimeLineEntry getReference(Long id) {
+		return (TimeLineEntry) sessionFactory.getCurrentSession().byId(TimeLineEntry.class).getReference(id);
+	}
+
+	@Override
+	@Transactional(readOnly=false)
 	public void create(TimeLineEntry entry) {
-		// TODO Auto-generated method stub
-		
+		sessionFactory.getCurrentSession().save(entry);
 	}
 
 	@Override
+	@Transactional(readOnly=false)	
 	public void delete(TimeLineEntry entry) {
-		// TODO Auto-generated method stub
-		
+		sessionFactory.getCurrentSession().delete(entry);
 	}
 
 	@Override
+	@Transactional(readOnly=false)	
 	public void update(TimeLineEntry entry) {
-		// TODO Auto-generated method stub
-		
+		sessionFactory.getCurrentSession().update(entry);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TimeLineEntry> queryByDateRange(Date start, Date end) {
-		// TODO Auto-generated method stub
-		return null;
+		Criteria crit = sessionFactory.getCurrentSession().createCriteria(TimeLineEntry.class);
+		crit.add( Restrictions.between("time", start, end));
+		return crit.list();
 	}
-
 }
