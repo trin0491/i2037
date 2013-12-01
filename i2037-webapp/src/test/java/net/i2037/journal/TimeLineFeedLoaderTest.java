@@ -27,7 +27,7 @@ import org.junit.runner.RunWith;
 public class TimeLineFeedLoaderTest {
 
 	private static final Date START = new Date();
-	private static final Date END = new Date();
+	private static final Date END = new Date(START.getTime() + 1);
 	
 	private TimeLineFeedLoader loader;
 	
@@ -127,6 +127,24 @@ public class TimeLineFeedLoaderTest {
 		assertNotNull(entries);
 		assertEquals(1, entries.size());
 		assertEquals(entry, entries.get(0));
+	}
+	
+	@Test
+	public void testEntriesAreSorted() throws Exception {
+		final TimeLineEntry entry1 = newTimeLineEntry(START);
+		final TimeLineEntry entry2 = newTimeLineEntry(END);
+		final Collection<TimeLineEntry> existingEntries = Arrays.asList(entry1, entry2);
+		new Expectations() {{
+			mockTimeLineEntryDao.queryByDateRange(START, END); result = existingEntries;
+			mockFeed1.load(START, END); result = Arrays.asList(entry2, entry1);
+			mockFeed2.load(START, END); result = Collections.emptyList();			
+		}};
+		
+		List<TimeLineEntry> entries = loader.load(START, END);
+		assertNotNull(entries);
+		assertEquals(2, entries.size());
+		assertEquals(entry1, entries.get(0));
+		assertEquals(entry2, entries.get(1));				
 	}
 	
 	private TimeLineEntry newTimeLineEntry(Date date) {
