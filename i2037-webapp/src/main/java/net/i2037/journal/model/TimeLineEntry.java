@@ -17,6 +17,7 @@ public class TimeLineEntry implements Serializable {
 	private Long entryId;
 	private EntryType type;
 	private Date time;
+	private String refId;
 
 	@Id
 	@GeneratedValue(generator = "increment")
@@ -45,6 +46,14 @@ public class TimeLineEntry implements Serializable {
 		this.time = entryTime;
 	}
 
+	public String getRefId() {
+		return refId;
+	}
+
+	public void setRefId(String refId) {
+		this.refId = refId;
+	}	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

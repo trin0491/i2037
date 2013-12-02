@@ -24,34 +24,35 @@ public class TimeLineFeedLoader {
 	private ExecutorService executorService;
 	private Collection<TimeLineFeed> timeLineFeeds;
 	private TimeLineEntryDao timeLineEntryDao;
-	private final Comparator<? super TimeLineEntry> timeLineEntryComparator;
+	private final Comparator<? super TimeLineEntryDto> timeLineEntryComparator;
 	
 	public TimeLineFeedLoader() {
-		timeLineEntryComparator = new TimeLineEntryComparator();
+		timeLineEntryComparator = new TimeLineEntryDtoComparator();
 	}
 	
-	public List<TimeLineEntry> load(Date start, Date end) throws InterruptedException {
+	public List<TimeLineEntryDto> load(Date start, Date end) throws InterruptedException {
 		if (start == null || end == null) {
 			throw new IllegalArgumentException("start and end time must not be null");
 		}
 		return doLoad(start, end);		
 	}
 	
-	private List<TimeLineEntry> doLoad(final Date start, final Date end) throws InterruptedException {		
-		CompletionService<Collection<TimeLineEntry>> ecs = loadEntries(start, end);
+	private List<TimeLineEntryDto> doLoad(final Date start, final Date end) throws InterruptedException {		
+		CompletionService<Collection<TimeLineEntryDto>> ecs = loadEntries(start, end);
 		
 		Set<TimeLineEntry> existingEntries = loadExistingEntries(start, end);
 		
-		List<TimeLineEntry> entries = new ArrayList<TimeLineEntry>();
+		List<TimeLineEntryDto> entries = new ArrayList<TimeLineEntryDto>();
 		int n = timeLineFeeds.size();
 		for (int i=0; i < n; ++i) {
-			Collection<TimeLineEntry> feedResults;
+			Collection<TimeLineEntryDto> feedResults;
 			try {
 				feedResults = ecs.take().get();
 			} catch (ExecutionException e) {
 				throw new FeedException(e.getCause());
 			}
-			for (TimeLineEntry entry : feedResults) {
+			for (TimeLineEntryDto dto : feedResults) {
+				TimeLineEntry entry = toTimeLineEntry(dto);
 				// if existing entries didn't contain it then we need to create it
 				if (!existingEntries.remove(entry)) {
 					timeLineEntryDao.create(entry);
@@ -70,6 +71,15 @@ public class TimeLineFeedLoader {
 		return entries;
 	}
 
+	private TimeLineEntry toTimeLineEntry(TimeLineEntryDto dto) {
+		TimeLineEntry entry = new TimeLineEntry();
+		entry.setEntryId(dto.getEntryId());
+		entry.setRefId(dto.getRefId());
+		entry.setTime(dto.getTime());
+		entry.setType(dto.getType());
+		return entry;
+	}
+
 	private Set<TimeLineEntry> loadExistingEntries(final Date start,
 			final Date end) {
 		Set<TimeLineEntry> existingEntries = new HashSet<TimeLineEntry>();
@@ -79,12 +89,12 @@ public class TimeLineFeedLoader {
 		return existingEntries;
 	}
 
-	private CompletionService<Collection<TimeLineEntry>> loadEntries(final Date start, final Date end) {
-		CompletionService<Collection<TimeLineEntry>> ecs = newCompletionService();
+	private CompletionService<Collection<TimeLineEntryDto>> loadEntries(final Date start, final Date end) {
+		CompletionService<Collection<TimeLineEntryDto>> ecs = newCompletionService();
 		for (final TimeLineFeed feed : getTimeLineFeeds()) {			
-			ecs.submit(new Callable<Collection<TimeLineEntry>>() {
+			ecs.submit(new Callable<Collection<TimeLineEntryDto>>() {
 				@Override
-				public Collection<TimeLineEntry> call() throws Exception {
+				public Collection<TimeLineEntryDto> call() throws Exception {
 					return feed.load(start, end);
 				}
 			});
@@ -92,12 +102,12 @@ public class TimeLineFeedLoader {
 		return ecs;
 	}
 
-	private void sortEntries(List<TimeLineEntry> entries) {
+	private void sortEntries(List<TimeLineEntryDto> entries) {
 		Collections.sort(entries, timeLineEntryComparator);
 	}
 
-	private CompletionService<Collection<TimeLineEntry>> newCompletionService() {
-		return new ExecutorCompletionService<Collection<TimeLineEntry>>(getExecutorService());
+	private CompletionService<Collection<TimeLineEntryDto>> newCompletionService() {
+		return new ExecutorCompletionService<Collection<TimeLineEntryDto>>(getExecutorService());
 	}
 
 	public TimeLineEntryDao getTimeLineEntryDao() {

@@ -51,6 +51,15 @@ public class TimeLineFeedLoaderTest {
 		loader.setTimeLineFeeds(Arrays.asList(mockFeed1, mockFeed2));
 	}
 
+	private TimeLineEntryDto toDto(TimeLineEntry entry) {
+		TimeLineEntryDto dto = new TimeLineEntryDto();
+		dto.setEntryId(entry.getEntryId());
+		dto.setRefId(entry.getRefId());
+		dto.setTime(entry.getTime());
+		dto.setType(entry.getType());
+		return dto;
+	};
+		
 	@Test(expected=IllegalArgumentException.class)
 	public void testStartDateIsNull() throws InterruptedException {
 		loader.load(null, new Date());
@@ -69,7 +78,7 @@ public class TimeLineFeedLoaderTest {
 			mockFeed2.load(START, END); result = Collections.emptyList();
 		}};
 		
-		List<TimeLineEntry> entries = loader.load(START, END);
+		List<TimeLineEntryDto> entries = loader.load(START, END);
 		assertNotNull(entries);
 		assertTrue(entries.isEmpty());
 	}
@@ -84,7 +93,7 @@ public class TimeLineFeedLoaderTest {
 			mockFeed2.load(START, END); result = Collections.emptyList();			
 		}};
 		
-		List<TimeLineEntry> entries = loader.load(START, END);
+		List<TimeLineEntryDto> entries = loader.load(START, END);
 		assertNotNull(entries);
 		assertTrue(entries.isEmpty());
 		
@@ -96,17 +105,18 @@ public class TimeLineFeedLoaderTest {
 	@Test
 	public void testFeedsReturnAnEntryThatDoesNotExist() throws Exception {
 		final TimeLineEntry entry = newTimeLineEntry(new Date());
+		final TimeLineEntryDto dto = toDto(entry);
 		final Collection<TimeLineEntry> existingEntries = Collections.emptyList();
 		new NonStrictExpectations() {{
 			mockTimeLineEntryDao.queryByDateRange(START, END); result = existingEntries;
 			mockFeed1.load(START, END); result = Collections.emptyList();
-			mockFeed2.load(START, END); result = Arrays.asList(entry);			
+			mockFeed2.load(START, END); result = Arrays.asList(dto);			
 		}};
 		
-		List<TimeLineEntry> entries = loader.load(START, END);
+		List<TimeLineEntryDto> entries = loader.load(START, END);
 		assertNotNull(entries);
 		assertEquals(1, entries.size());
-		assertEquals(entry, entries.get(0));
+		assertEquals(dto, entries.get(0));
 		
 		new Verifications() {{
 			mockTimeLineEntryDao.create(entry);
@@ -116,35 +126,38 @@ public class TimeLineFeedLoaderTest {
 	@Test
 	public void testFeedsRetrurnAnEntryThatExists() throws Exception {
 		final TimeLineEntry entry = newTimeLineEntry(new Date());
+		final TimeLineEntryDto dto = toDto(entry);
 		final Collection<TimeLineEntry> existingEntries = Arrays.asList(entry);
 		new Expectations() {{
 			mockTimeLineEntryDao.queryByDateRange(START, END); result = existingEntries;
-			mockFeed1.load(START, END); result = Arrays.asList(entry);
+			mockFeed1.load(START, END); result = Arrays.asList(dto);
 			mockFeed2.load(START, END); result = Collections.emptyList();			
 		}};
-		
-		List<TimeLineEntry> entries = loader.load(START, END);
+
+		List<TimeLineEntryDto> entries = loader.load(START, END);
 		assertNotNull(entries);
 		assertEquals(1, entries.size());
-		assertEquals(entry, entries.get(0));
+		assertEquals(dto, entries.get(0));
 	}
 	
 	@Test
 	public void testEntriesAreSorted() throws Exception {
 		final TimeLineEntry entry1 = newTimeLineEntry(START);
 		final TimeLineEntry entry2 = newTimeLineEntry(END);
+		final TimeLineEntryDto dto1 = toDto(entry1);
+		final TimeLineEntryDto dto2 = toDto(entry2);
 		final Collection<TimeLineEntry> existingEntries = Arrays.asList(entry1, entry2);
 		new Expectations() {{
 			mockTimeLineEntryDao.queryByDateRange(START, END); result = existingEntries;
-			mockFeed1.load(START, END); result = Arrays.asList(entry2, entry1);
+			mockFeed1.load(START, END); result = Arrays.asList(dto2, dto1);
 			mockFeed2.load(START, END); result = Collections.emptyList();			
 		}};
 		
-		List<TimeLineEntry> entries = loader.load(START, END);
+		List<TimeLineEntryDto> entries = loader.load(START, END);
 		assertNotNull(entries);
 		assertEquals(2, entries.size());
-		assertEquals(entry1, entries.get(0));
-		assertEquals(entry2, entries.get(1));				
+		assertEquals(dto1, entries.get(0));
+		assertEquals(dto2, entries.get(1));				
 	}
 	
 	private TimeLineEntry newTimeLineEntry(Date date) {
