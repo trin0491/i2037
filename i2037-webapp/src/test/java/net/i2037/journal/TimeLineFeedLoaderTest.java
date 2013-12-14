@@ -128,7 +128,7 @@ public class TimeLineFeedLoaderTest {
 		final TimeLineEntry entry = newTimeLineEntry(new Date());
 		final TimeLineEntryDto dto = toDto(entry);
 		final Collection<TimeLineEntry> existingEntries = Arrays.asList(entry);
-		new Expectations() {{
+		new NonStrictExpectations() {{
 			mockTimeLineEntryDao.queryByDateRange(START, END); result = existingEntries;
 			mockFeed1.load(START, END); result = Arrays.asList(dto);
 			mockFeed2.load(START, END); result = Collections.emptyList();			
@@ -147,7 +147,7 @@ public class TimeLineFeedLoaderTest {
 		final TimeLineEntryDto dto1 = toDto(entry1);
 		final TimeLineEntryDto dto2 = toDto(entry2);
 		final Collection<TimeLineEntry> existingEntries = Arrays.asList(entry1, entry2);
-		new Expectations() {{
+		new NonStrictExpectations() {{
 			mockTimeLineEntryDao.queryByDateRange(START, END); result = existingEntries;
 			mockFeed1.load(START, END); result = Arrays.asList(dto2, dto1);
 			mockFeed2.load(START, END); result = Collections.emptyList();			
