@@ -12,44 +12,45 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly=true)
 public class CommentDaoImpl implements CommentDao {
 
-	private static final String ALL_COMMENTS_QUERY = "from net.i2037.journal.model.CommentImpl";
+	public Comment newEntity() {
+		return new Comment();
+	}
+	
+	private static final String QUERY_BY_ENTITY = "select c from net.i2037.journal.model.Comment as c"
+			+ " inner join c.timeLineEntry as t where t.refId = :refId and t.type = :entryType";
+	
 	private SessionFactory sessionFactory;
-
-	private CommentImpl toEntity(Comment comment) {
-		return new CommentImpl(comment);
-	}	
 	
 	@Override
 	@Transactional(readOnly=false)
 	public void create(Comment comment) {
-		CommentImpl entity = toEntity(comment);
-		sessionFactory.getCurrentSession().save(entity);
+		sessionFactory.getCurrentSession().save(comment);
 	}
 
 	@Override
 	@Transactional(readOnly=false)
 	public void update(Comment comment) {
-		CommentImpl entity = toEntity(comment);
-		sessionFactory.getCurrentSession().update(entity);
+		sessionFactory.getCurrentSession().update(comment);
 	}
 
 	@Override
 	@Transactional(readOnly=false)
 	public void delete(Comment comment) {
-		CommentImpl entity = toEntity(comment);
-		sessionFactory.getCurrentSession().delete(entity);
+		sessionFactory.getCurrentSession().delete(comment);
 	}
 
 	@Override
-	public Comment readById(Long id) {
-		Session session = sessionFactory.getCurrentSession();
-		return (Comment) session.get(CommentImpl.class, id);
+	public Comment readById(long id) {
+		Session session = sessionFactory.getCurrentSession();		
+		return (Comment) session.byId(TimeLineEntry.class).load(id);
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Comment> query(String entryId) {
-		Query query = sessionFactory.getCurrentSession().createQuery(ALL_COMMENTS_QUERY);
+	public List<Comment> queryByTimelineEntry(String refId, EntryType type) {
+		Query query = sessionFactory.getCurrentSession().createQuery(QUERY_BY_ENTITY);
+		query.setString("refId", refId);
+		query.setParameter("entryType", type);
 		return query.list();
 	}
 

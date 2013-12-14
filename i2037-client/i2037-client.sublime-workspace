@@ -4,6 +4,54 @@
 		"selected_items":
 		[
 			[
+				"entry",
+				"entryId"
+			],
+			[
+				"getText",
+				"getTextArea"
+			],
+			[
+				"toBe",
+				"toBeTruthy"
+			],
+			[
+				"dele",
+				"deleteBtn"
+			],
+			[
+				"getT",
+				"getText"
+			],
+			[
+				"eval",
+				"evalShowActions"
+			],
+			[
+				"can",
+				"canDelete"
+			],
+			[
+				"save",
+				"saveBtn"
+			],
+			[
+				"get",
+				"getSaveBtn"
+			],
+			[
+				"media",
+				"media-body"
+			],
+			[
+				"cl",
+				"click"
+			],
+			[
+				"te",
+				"textRows"
+			],
+			[
 				"js",
 				"jshint"
 			],
@@ -72,26 +120,58 @@
 	"buffers":
 	[
 		{
-			"file": "Gruntfile.js",
+			"file": "app/js/moves/journal-directives.js",
 			"settings":
 			{
-				"buffer_size": 5292,
+				"buffer_size": 2546,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "config/karma.conf.js",
+			"file": "app/js/moves/journal-directives.tpl.html",
 			"settings":
 			{
-				"buffer_size": 771,
+				"buffer_size": 1260,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/js/cellar/cellar.js",
+			"file": "app/partials/journal-date.html",
 			"settings":
 			{
-				"buffer_size": 4238,
+				"buffer_size": 2432,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/js/moves/moves.js",
+			"settings":
+			{
+				"buffer_size": 8913,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/js/common/resources/comments.js",
+			"settings":
+			{
+				"buffer_size": 1358,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "test/unit/moves/journal-directives.spec.js",
+			"settings":
+			{
+				"buffer_size": 6735,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/js/common/resources/moves.js",
+			"settings":
+			{
+				"buffer_size": 2709,
 				"line_ending": "Unix"
 			}
 		}
@@ -124,7 +204,18 @@
 	},
 	"file_history":
 	[
+		"/Users/richard/src/i2037/i2037-client/Gruntfile.js",
+		"/Users/richard/src/i2037/i2037-client/app/partials/wineform.html",
+		"/Users/richard/src/i2037/i2037-client/app/partials/wineview.html",
+		"/Users/richard/src/i2037/i2037-client/app/partials/cage.html",
+		"/Users/richard/src/i2037/i2037-client/app/js/cage/cage.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/cellar/cellar.js",
+		"/Users/richard/src/i2037/i2037-client/app/partials/journal-date.html",
+		"/Users/richard/src/i2037/i2037-client/config/karma.conf.js",
+		"/Users/richard/src/i2037/i2037-client/app/partials/slickgrid.html",
+		"/Users/richard/src/i2037/i2037-client/build/dev/templates/app.js",
 		"/Users/richard/src/i2037/i2037-client/package.json",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/moves.js",
 		"/Users/richard/src/i2037/i2037-client/app/index.html",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/map.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/app.js",
@@ -135,12 +226,8 @@
 		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/user.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/services/services.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/moves/moves.js",
-		"/Users/richard/src/i2037/i2037-client/config/karma.conf.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/moves.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/timeline.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/button.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/cellar/cellar.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/cage/cage.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/directives.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/spinner.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/filters.js",
@@ -152,14 +239,11 @@
 		"/Users/richard/src/i2037/i2037-client/app/js/moves/moves-model.js",
 		"/Users/richard/src/i2037/i2037-client/app/partials/journal-calendar.html",
 		"/Users/richard/src/angular-app/client/gruntFile.js",
-		"/Users/richard/src/i2037/i2037-client/app/partials/journal-date.html",
 		"/Users/richard/src/i2037/i2037-client/app/partials/loginform.html",
 		"/Users/richard/src/i2037/i2037-client/app/partials/signupform.html",
-		"/Users/richard/src/i2037/i2037-client/app/partials/wineview.html",
 		"/Users/richard/src/i2037/i2037-client/app/lib/ui-bootstrap/ui-bootstrap-tpls.js",
 		"/Users/richard/src/i2037/i2037-client/app/lib/ui-bootstrap/ui-bootstrap-tpls-0.5.0.js",
 		"/Users/richard/src/i2037/i2037-client/test/unit/cellar/cellar.spec.js",
-		"/Users/richard/src/i2037/i2037-client/Gruntfile.js",
 		"/Users/richard/src/i2037/i2037-client/test/unit/common/directives/button.spec.js",
 		"/Users/richard/src/i2037/i2037-client/test/unit/common/directives/timeline.spec.js",
 		"/Users/richard/src/i2037/i2037-client/test/unit/moves/journal-directives.spec.js",
@@ -172,9 +256,7 @@
 		"/Users/richard/Library/Application Support/Sublime Text 3/Packages/User/HTML.sublime-settings",
 		"/Users/richard/src/i2037/i2037-client/app/partials/journal-comment.html",
 		"/Users/richard/src/i2037/i2037-client/test/unit/common/filters/filters.spec.js",
-		"/Users/richard/src/i2037/i2037-client/app/partials/wineform.html",
 		"/Users/richard/src/i2037/i2037-client/build/dev/js/dev/i2037-client.js",
-		"/Users/richard/src/i2037/i2037-client/app/partials/slickgrid.html",
 		"/Users/richard/src/i2037/i2037-client/app/lib/angular/angular-resource.js",
 		"/Users/richard/src/i2037/i2037-client/test/unit/common/directives/map.spec.js",
 		"/Users/richard/src/i2037/i2037-client/app/partials/moves.html",
@@ -196,6 +278,24 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"MovesStoryline",
+			"Cancel",
+			"close",
+			"comment",
+			"evalShowActions",
+			"text",
+			"getText",
+			"comment",
+			"element.find('button').eq(0)",
+			"      var saveBtn = element.find('button').eq(0);\n",
+			"element.find('button').eq(1)",
+			"updateLabel",
+			"newValue",
+			"scope",
+			"element.find('textarea')",
+			"isNew",
+			"SlickgridCtrl",
+			"karma",
 			"environment",
 			"Envrionment",
 			"dirs",
@@ -268,24 +368,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "Gruntfile.js",
+					"file": "app/js/moves/journal-directives.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5292,
+						"buffer_size": 2546,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5217,
-								5217
+								2442,
+								2442
 							]
 						],
 						"settings":
@@ -295,33 +395,31 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1594.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "config/karma.conf.js",
+					"file": "app/js/moves/journal-directives.tpl.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 771,
+						"buffer_size": 1260,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								413,
-								413
+								147,
+								147
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/HTML/HTML.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -331,19 +429,77 @@
 				},
 				{
 					"buffer": 2,
-					"file": "app/js/cellar/cellar.js",
+					"file": "app/partials/journal-date.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4238,
+						"buffer_size": 2432,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								944,
-								944
+								1901,
+								1901
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/js/moves/moves.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8913,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2197,
+								2211
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 537.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/js/common/resources/comments.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1358,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								962,
+								962
 							]
 						],
 						"settings":
@@ -354,6 +510,99 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 5,
+					"file": "test/unit/moves/journal-directives.spec.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6735,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1025.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/js/common/resources/comments.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1358,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/js/common/resources/moves.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2709,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2125,
+								2139
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 709.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -378,11 +627,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.548403532609,
 			1.0
 		],
 		"rows":
@@ -404,20 +660,96 @@
 		"selected_items":
 		[
 			[
-				"",
+				"moves",
+				"app/js/common/resources/moves.js"
+			],
+			[
+				"comment",
+				"app/js/common/resources/comments.js"
+			],
+			[
+				"journal-date",
+				"app/partials/journal-date.html"
+			],
+			[
+				"moves.js",
+				"app/js/moves/moves.js"
+			],
+			[
+				"grun",
+				"Gruntfile.js"
+			],
+			[
+				"wineform",
+				"app/partials/wineform.html"
+			],
+			[
+				"wine",
+				"app/partials/wineview.html"
+			],
+			[
+				"cellar.j",
 				"app/js/cellar/cellar.js"
+			],
+			[
+				"cage.ht",
+				"app/partials/cage.html"
+			],
+			[
+				"cage.js",
+				"app/js/cage/cage.js"
+			],
+			[
+				"journal",
+				"app/partials/journal-date.html"
+			],
+			[
+				"cage.h",
+				"app/partials/cage.html"
+			],
+			[
+				"app.js",
+				"build/dev/templates/app.js"
+			],
+			[
+				"karm",
+				"config/karma.conf.js"
 			],
 			[
 				"pack",
 				"package.json"
 			],
 			[
-				"grunt",
-				"Gruntfile.js"
+				"journal.",
+				"app/partials/journal-date.html"
 			],
 			[
-				"comment",
-				"app/js/common/resources/comments.js"
+				"slic",
+				"app/partials/slickgrid.html"
+			],
+			[
+				"slicg",
+				"app/partials/slickgrid.html"
+			],
+			[
+				"cage",
+				"app/js/cage/cage.js"
+			],
+			[
+				"journal-dire",
+				"test/unit/moves/journal-directives.spec.js"
+			],
+			[
+				"journ",
+				"app/js/moves/journal-directives.js"
+			],
+			[
+				"",
+				"app/js/cellar/cellar.js"
+			],
+			[
+				"grunt",
+				"Gruntfile.js"
 			],
 			[
 				"i2037-client",
@@ -426,10 +758,6 @@
 			[
 				"env",
 				"app/js/common/services/environment.js"
-			],
-			[
-				"app.js",
-				"app/js/app.js"
 			],
 			[
 				"map.",
@@ -442,14 +770,6 @@
 			[
 				"comment.js",
 				"app/js/common/resources/comments.js"
-			],
-			[
-				"cage.js",
-				"app/js/cage/cage.js"
-			],
-			[
-				"cellar.j",
-				"app/js/cellar/cellar.js"
 			],
 			[
 				"direc",
@@ -492,10 +812,6 @@
 				"app/js/common/resources/foursquare.js"
 			],
 			[
-				"moves.js",
-				"app/js/common/resources/moves.js"
-			],
-			[
 				"user.j",
 				"app/js/common/resources/user.js"
 			],
@@ -520,16 +836,8 @@
 				"app/js/moves/moves-model.js"
 			],
 			[
-				"moves",
-				"app/js/moves/moves.js"
-			],
-			[
 				"recipie",
 				"app/js/recipes/recipes.js"
-			],
-			[
-				"karm",
-				"config/karma.conf.js"
 			],
 			[
 				"index",
@@ -542,18 +850,6 @@
 			[
 				"inde.ht",
 				"app/index.html"
-			],
-			[
-				"journal-date",
-				"app/partials/journal-date.html"
-			],
-			[
-				"journal",
-				"app/partials/journal-calendar.html"
-			],
-			[
-				"grun",
-				"Gruntfile.js"
 			],
 			[
 				"cellar",
@@ -570,10 +866,6 @@
 			[
 				"cellar.spec",
 				"test/unit/cellar/cellar.spec.js"
-			],
-			[
-				"journal-dire",
-				"build/tmp/js/dev/moves/journal-directives.js"
 			],
 			[
 				"timeline.spec",
@@ -598,10 +890,6 @@
 			[
 				"time",
 				"app/js/common/directives/timeline.js"
-			],
-			[
-				"wine",
-				"app/partials/wineform.html"
 			],
 			[
 				"cellar.",
@@ -720,7 +1008,7 @@
 	"show_minimap": false,
 	"show_open_files": false,
 	"show_tabs": true,
-	"side_bar_visible": true,
+	"side_bar_visible": false,
 	"side_bar_width": 189.0,
 	"status_bar_visible": true,
 	"template_settings":

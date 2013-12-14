@@ -12,20 +12,23 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
 import net.i2037.journal.model.CommentDto;
+import net.i2037.journal.model.EntryType;
 
 @Path("/comments")
 @Produces("application/json")
 public interface CommentService {
 	
 	@GET
-	List<CommentDto> query(@QueryParam("entryId") String entryId);
+	List<CommentDto> queryByTimelineEntry(
+			@QueryParam("refId") String refId, 
+			@QueryParam("entryType") EntryType type);
 	
 	@POST
 	void create(CommentDto comment);
 	
 	@GET
 	@Path("/{id}")
-	CommentDto readById(@PathParam("id") Long id);
+	CommentDto readById(@PathParam("id") long id);
 	
 	@POST
 	@Path("/{id}")
@@ -33,5 +36,5 @@ public interface CommentService {
 	
 	@DELETE
 	@Path("/{id}")
-	void delete(@PathParam("id") Long id);
+	void delete(@PathParam("id") long id);
 }

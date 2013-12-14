@@ -49,21 +49,16 @@ angular.module('i2037.moves', [
     var places = [];
     var paths = [];
 
-    for (var day=0;day<storylines.length;day++) {
-      var segments = storylines[day].segments;
-      for (var s=0;s<segments.length;s++) {
-        if (segments[s].type === 'place') {
-          var place = segments[s].place;
-          place.startTime = segments[s].startTime;
-          place.endTime = segments[s].endTime;
-          places.push(place);
-        } else if (segments[s].type === 'move') {
-          for (var a in segments[s].activities) {
-            var activity = segments[s].activities[a];
-            paths.push(activity);
-          }
-        }       
-      }
+    for (var entry=0;entry<storylines.length;entry++) {
+      var payload = storylines[entry].payload;
+      if (payload.type === 'place') {
+        places.push(storylines[entry]);
+      } else if (payload.type === 'move') {
+        for (var a in payload.activities) {
+          var activity = payload.activities[a];
+          paths.push(activity);
+        }
+      }       
     }
     MovesPlacesModel.setPlaces(places);
     MovesPathsModel.setPaths(paths);    
@@ -94,7 +89,7 @@ angular.module('i2037.moves', [
   $scope.showWeeks = true;
   $scope.dateOptions = {
     'year-format': "'yy'",
-    'starting-day': 1
+    'starting-entry': 1
   };
 
   $scope.disabled = function(date, mode) {
@@ -134,33 +129,24 @@ angular.module('i2037.moves', [
 
 .controller('TimelineCtrl', ['$scope', 'MovesPlacesModel', function($scope, MovesPlacesModel) {
 
-  function toDate(str) {
-      var r = /(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})Z/;
-      var matches = r.exec(str);
-      var d = new Date();
-      d.setUTCFullYear(+matches[1]);
-      d.setUTCMonth(+matches[2]-1); // Careful, month starts at 0!
-      d.setUTCDate(+matches[3]);
-      d.setUTCHours(+matches[4]);
-      d.setUTCMinutes(+matches[5]);
-      d.setUTCSeconds(+matches[6]);
-      return d;    
-  }
+  var PlacePM = function(entry) {
+    this.entry = entry;
+    this.refId = entry.refId;
+    this.type = entry.type; 
+    this.date = new Date(entry.time); 
+    this.text = entry.payload.place.name;
+    this.place = entry.payload.place;
+    this.comments = [ ];
+  };
 
   $scope.$on('MovesPlacesModel::CollectionChange', function(event, model) {
-    var entries = [];
+    var placePMs = [];
     var places = model.getPlaces();
     for (var i in places) {
-      var place = places[i];
-      var entry = { 
-        date: toDate(places[i].startTime), 
-        text: place.name,
-        place: place,
-        comments: []
-      };
-      entries.push(entry);          
+      var placePM = new PlacePM(places[i]);
+      placePMs.push(placePM);          
     }
-    $scope.entries = entries;
+    $scope.entries = placePMs;
   });
 
   $scope.$on('MovesPlacesModel::SelectedChange', function(e, model) {
@@ -176,7 +162,7 @@ angular.module('i2037.moves', [
 
   $scope.$watch('selected', function(newSelection, oldSelection) {
     if (newSelection) {
-      MovesPlacesModel.setSelected(newSelection.place);      
+      MovesPlacesModel.setSelected(newSelection.entry);      
     } else {
       MovesPlacesModel.setSelected(undefined);
     }
@@ -188,7 +174,7 @@ angular.module('i2037.moves', [
   $scope.isCollapsed = true;
   $scope.showSpinner = false;
  
-  var CommentPM = function CommentPM(comment) {
+  var CommentPM = function(comment) {
     this.model = comment;
     this.img = 'https://pbs.twimg.com/profile_images/1411601479/2600_joystick_45_normal.jpg';
     this.author =  'Richard Priestley'; 
@@ -208,7 +194,7 @@ angular.module('i2037.moves', [
   };  
 
   function loadComments(entry) {
-    return Comment.query({entryId: 'abc'}).then(function(comments) {
+    return Comment.query({refId: entry.refId, entryType: entry.type}).then(function(comments) {
       return comments.map(function(comment){ 
         return new CommentPM(comment);
       });
@@ -262,14 +248,16 @@ angular.module('i2037.moves', [
   }
   newComment();
 
-  $scope.addComment = function(comment, entry) {
-    var model = comment.model;
-    model.text = comment.text;
-    model.$save().then(function() {
+  $scope.saveComment = function(commentPM, entry) {
+    var comment = commentPM.model;
+    comment.text = commentPM.text;
+    comment.refId = entry.refId;
+    comment.entryType = entry.type;
+
+    comment.$save().then(function() {
       loadComments(entry).then(function(comments) {
         entry.comments = comments;
       });      
-      // entry.comments.push(comment);
       newComment();
     });
   };
@@ -284,8 +272,20 @@ angular.module('i2037.moves', [
 }])
 
 .controller('MovesMapCtrl', ['$scope', 'MovesPlacesModel', function($scope, MovesPlacesModel) {
+
+  function PlacePM(entry) {
+    this.name = entry.payload.place.name;
+    this.lat = entry.payload.place.location.lat;
+    this.lon = entry.payload.place.location.lon;    
+  }
+
   $scope.$on('MovesPlacesModel::CollectionChange', function(e, model) {
-    $scope.places = model.getPlaces();
+    var placePMs = [];
+    var places = model.getPlaces();
+    for (var i in places) {
+      placePMs.push(new PlacePM(places[i]));
+    }
+    $scope.places = placePMs;
   });
 
   $scope.$on('MovesPathsModel::CollectionChange', function(e, model) {
@@ -293,14 +293,9 @@ angular.module('i2037.moves', [
   });
 
   $scope.$on('MovesPlacesModel::SelectedChange', function(e, model) {
-    $scope.selected = model.getSelected();
-  });
-
-  $scope.$watch('selected', function(newSelection, oldSelection) {
-    if (newSelection) {
-      MovesPlacesModel.setSelected(newSelection);
-    } else {
-      MovesPlacesModel.setSelected(undefined);
+    var place = model.getSelected();
+    if (place) {
+      $scope.selected = new PlacePM(place);   
     }
   });
 }])

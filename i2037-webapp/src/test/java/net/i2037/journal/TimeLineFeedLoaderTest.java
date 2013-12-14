@@ -78,7 +78,7 @@ public class TimeLineFeedLoaderTest {
 			mockFeed2.load(START, END); result = Collections.emptyList();
 		}};
 		
-		List<TimeLineEntryDto> entries = loader.load(START, END);
+		List<? extends TimeLineEntryDto> entries = loader.load(START, END);
 		assertNotNull(entries);
 		assertTrue(entries.isEmpty());
 	}
@@ -93,7 +93,7 @@ public class TimeLineFeedLoaderTest {
 			mockFeed2.load(START, END); result = Collections.emptyList();			
 		}};
 		
-		List<TimeLineEntryDto> entries = loader.load(START, END);
+		List<? extends TimeLineEntryDto> entries = loader.load(START, END);
 		assertNotNull(entries);
 		assertTrue(entries.isEmpty());
 		
@@ -113,7 +113,7 @@ public class TimeLineFeedLoaderTest {
 			mockFeed2.load(START, END); result = Arrays.asList(dto);			
 		}};
 		
-		List<TimeLineEntryDto> entries = loader.load(START, END);
+		List<? extends TimeLineEntryDto> entries = loader.load(START, END);
 		assertNotNull(entries);
 		assertEquals(1, entries.size());
 		assertEquals(dto, entries.get(0));
@@ -134,7 +134,7 @@ public class TimeLineFeedLoaderTest {
 			mockFeed2.load(START, END); result = Collections.emptyList();			
 		}};
 
-		List<TimeLineEntryDto> entries = loader.load(START, END);
+		List<? extends TimeLineEntryDto> entries = loader.load(START, END);
 		assertNotNull(entries);
 		assertEquals(1, entries.size());
 		assertEquals(dto, entries.get(0));
@@ -153,7 +153,7 @@ public class TimeLineFeedLoaderTest {
 			mockFeed2.load(START, END); result = Collections.emptyList();			
 		}};
 		
-		List<TimeLineEntryDto> entries = loader.load(START, END);
+		List<? extends TimeLineEntryDto> entries = loader.load(START, END);
 		assertNotNull(entries);
 		assertEquals(2, entries.size());
 		assertEquals(dto1, entries.get(0));
@@ -164,7 +164,7 @@ public class TimeLineFeedLoaderTest {
 		TimeLineEntry entry = new TimeLineEntry();
 		entry.setEntryId(date.getTime());
 		entry.setTime(date);
-		entry.setType(EntryType.MOVES);
+		entry.setType(EntryType.MOVES_PLACE);
 		return entry;
 	}
 }

@@ -2,13 +2,19 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
   xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:util="http://www.springframework.org/schema/util"
+  xmlns:task="http://www.springframework.org/schema/task"
   xmlns:tx="http://www.springframework.org/schema/tx" xmlns:sec="http://www.springframework.org/schema/security"
-  xmlns:p="http://www.springframework.org/schema/p" xmlns:oa="http://www.springframework.org/schema/security/oauth2"
+  xmlns:p="http://www.springframework.org/schema/p" xmlns:oa="http://www.springframework.org/schema/security/oauth2"  
   xsi:schemaLocation="
 http://www.springframework.org/schema/beans 
 http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 http://www.springframework.org/schema/context 
 http://www.springframework.org/schema/context/spring-context-3.1.xsd
+http://www.springframework.org/schema/util 
+http://www.springframework.org/schema/util/spring-util-3.1.xsd
+http://www.springframework.org/schema/task 
+http://www.springframework.org/schema/task/spring-task-3.1.xsd
 http://cxf.apache.org/jaxrs
 http://cxf.apache.org/schemas/jaxrs.xsd
 http://www.springframework.org/schema/tx 
@@ -36,10 +42,9 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
         <property name="userDao" ref="userDao" />
         <property name="passwordEncoder" ref="passwordEncoder"/>
       </bean>
-      <bean class="net.i2037.moves.MovesServiceImpl">
-        <property name="movesTemplate">
-          <oa:rest-template resource="moves" access-token-provider="accessTokenProviderChain"/>
-        </property>
+      <ref bean="movesService"/>
+      <bean class="net.i2037.journal.TimeLineServiceImpl">
+        <property name="loader" ref="timeLineFeedLoader" />
       </bean>
       <bean class="net.i2037.foursquare.FourSquareServiceImpl">
           <property name="fourSquareTemplate">
@@ -48,6 +53,7 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
       </bean>
       <bean class="net.i2037.journal.CommentServiceImpl">
       	<property name="commentDao" ref="commentDao" />
+      	<property name="timeLineEntryDao" ref="timeLineEntryDao" />
       </bean>
     </jaxrs:serviceBeans>
     <jaxrs:providers>
@@ -60,6 +66,29 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
     <property name="sessionFactory" ref="sessionFactory" />
   </bean>
 
+  <bean id="timeLineFeedLoader" class="net.i2037.journal.TimeLineFeedLoader">
+    <property name="executorService" ref="feedLoaderExecutorService"/>
+    <property name="timeLineFeeds" ref="feeds" />
+    <property name="timeLineEntryDao" ref="timeLineEntryDao"/>
+  </bean>
+
+  <util:list id="feeds">
+    <ref bean="movesService" />
+  </util:list>
+  
+  <task:executor id="feedLoaderExecutorService"
+                 pool-size="5-25"
+                 queue-capacity="100"/>
+
+  <bean id="movesService" class="net.i2037.moves.MovesServiceImpl">
+    <property name="movesTemplate">
+      <oa:rest-template resource="moves" access-token-provider="accessTokenProviderChain"/>
+    </property>
+    <property name="parser" ref="storylineSegmentParser" />
+  </bean>
+
+  <bean id="storylineSegmentParser" class="net.i2037.moves.StorylineSegmentParser" />
+ 
   <tx:annotation-driven />
 
   <bean id="cellarDB" class="org.apache.commons.dbcp.BasicDataSource"
@@ -80,7 +109,8 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
         <value>net.i2037.cellar.model.WineImpl</value>
         <value>net.i2037.cellar.model.GrapeImpl</value>
         <value>net.i2037.oauth2.OAuth2AccessTokenImpl</value>
-        <value>net.i2037.journal.model.CommentImpl</value>
+        <value>net.i2037.journal.model.TimeLineEntry</value>
+        <value>net.i2037.journal.model.Comment</value>
       </list>
     </property>
     <property name="hibernateProperties">
@@ -105,6 +135,10 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
   </bean>
   
   <bean id="commentDao" class="net.i2037.journal.model.CommentDaoImpl">
+  	<property name="sessionFactory" ref="sessionFactory" />
+  </bean>
+  
+  <bean id="timeLineEntryDao" class="net.i2037.journal.model.TimeLineEntryDaoImpl">
   	<property name="sessionFactory" ref="sessionFactory" />
   </bean>
   

@@ -87,7 +87,7 @@ angular.module('i2037.resources.moves', ['i2037.services', 'i2037.moves.filters'
 
 .factory('MovesStoryline', ['$http', 'pathFinder', 'Moves', function($http, pathFinder, Moves) {
 
-  var url = pathFinder.get('svc/moves/user/storyline/daily/');
+  var url = pathFinder.get('svc/timeline/daily/');
 
   var Storyline = function(data) {
     angular.extend(this, data);

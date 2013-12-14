@@ -17,15 +17,6 @@ angular.module('i2037.directives.timeline', [])
       var entryLinker = $compile('<tr ng-class="{info: isSelected(entry)}" ng-click="onClick(entry)"><td>{{entry.date | date:"HH:mm"}}</td><td></td></tr>');
 
       return function postLink(scope, element, attrs) {
-        // var expression = attrs.i2Timeline;
-        // var match = expression.match(/^\s*(.+)\s+in\s+(.*)\s*$/), lhs, rhs;
-        // if (! match) {
-        //   throw Error("Expected i2Timeline in form of '_item_ in _collection_' but got '" +
-        //     expression + "'.");
-        // }
-        // lhs = match[1];
-        // rhs = match[2];
-
         var tbody = element.find('tbody');
         var lastRows = [];
 

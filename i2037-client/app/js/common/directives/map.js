@@ -42,8 +42,8 @@ angular.module('i2037.directives.map', [])
       }
 
       function getLatLng(place) {
-        var lat = place.location.lat;
-        var lon = place.location.lon;
+        var lat = place.lat;
+        var lon = place.lon;
         return new google.maps.LatLng(lat, lon);  
       }
 

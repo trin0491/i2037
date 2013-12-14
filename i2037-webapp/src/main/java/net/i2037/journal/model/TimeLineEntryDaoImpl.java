@@ -29,8 +29,13 @@ public class TimeLineEntryDaoImpl implements TimeLineEntryDao {
 	}
 
 	@Override
-	public TimeLineEntry getReference(Long id) {
-		return (TimeLineEntry) sessionFactory.getCurrentSession().byId(TimeLineEntry.class).getReference(id);
+	public TimeLineEntry readByReference(String id, EntryType type) {
+		TimeLineEntry entry = (TimeLineEntry) sessionFactory.getCurrentSession()
+			.createCriteria(TimeLineEntry.class)
+			.add(Restrictions.naturalId()
+					.set("refId", id)
+					.set("type", type)).uniqueResult();
+		return (TimeLineEntry) entry;
 	}
 
 	@Override
@@ -57,5 +62,10 @@ public class TimeLineEntryDaoImpl implements TimeLineEntryDao {
 		Criteria crit = sessionFactory.getCurrentSession().createCriteria(TimeLineEntry.class);
 		crit.add( Restrictions.between("time", start, end));
 		return crit.list();
+	}
+
+	@Override
+	public TimeLineEntry readById(Long entryId) {
+		return (TimeLineEntry) sessionFactory.getCurrentSession().byId(TimeLineEntry.class).getReference(entryId);
 	}
 }

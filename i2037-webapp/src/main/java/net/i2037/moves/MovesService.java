@@ -9,6 +9,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+import org.codehaus.jackson.JsonNode;
+
 @Path("/moves/user/")
 @Produces("application/json")
 @Consumes("application/json")
@@ -28,5 +30,5 @@ public interface MovesService {
 	
 	@GET
 	@Path("/storyline/daily/{date}")
-	List<?> getDailyStoryline(@PathParam("date") String date);
+	JsonNode getDailyStoryline(@PathParam("date") String date);
 }

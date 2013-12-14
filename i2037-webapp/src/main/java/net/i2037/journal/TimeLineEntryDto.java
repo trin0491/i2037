@@ -7,9 +7,9 @@ import net.i2037.journal.model.EntryType;
 public class TimeLineEntryDto {
 
 	private Long entryId;
+	private String refId;	
 	private EntryType type;
 	private Date time;
-	private String refId;
 	private Object payload;
 	
 	public Long getEntryId() {
@@ -50,5 +50,12 @@ public class TimeLineEntryDto {
 
 	public void setPayload(Object payload) {
 		this.payload = payload;
+	}
+
+	@Override
+	public String toString() {
+		return "TimeLineEntryDto [entryId=" + entryId + ", type=" + type
+				+ ", time=" + time + ", refId=" + refId + ", payload="
+				+ payload + "]";
 	}
 }

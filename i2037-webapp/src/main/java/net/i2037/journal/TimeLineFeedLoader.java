@@ -12,16 +12,17 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.CompletionService;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorCompletionService;
-import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executor;
 
 import org.springframework.beans.factory.annotation.Required;
 
+import net.i2037.cellar.util.RequestAwareCallable;
 import net.i2037.journal.model.TimeLineEntry;
 import net.i2037.journal.model.TimeLineEntryDao;
 
 public class TimeLineFeedLoader {
 
-	private ExecutorService executorService;
+	private Executor executorService;
 	private Collection<TimeLineFeed> timeLineFeeds;
 	private TimeLineEntryDao timeLineEntryDao;
 	private final Comparator<? super TimeLineEntryDto> timeLineEntryComparator;
@@ -30,14 +31,14 @@ public class TimeLineFeedLoader {
 		timeLineEntryComparator = new TimeLineEntryDtoComparator();
 	}
 	
-	public List<TimeLineEntryDto> load(Date start, Date end) throws InterruptedException {
+	public List<? extends TimeLineEntryDto> load(Date start, Date end) throws InterruptedException {
 		if (start == null || end == null) {
 			throw new IllegalArgumentException("start and end time must not be null");
 		}
 		return doLoad(start, end);		
 	}
 	
-	private List<TimeLineEntryDto> doLoad(final Date start, final Date end) throws InterruptedException {		
+	private List<? extends TimeLineEntryDto> doLoad(final Date start, final Date end) throws InterruptedException {		
 		CompletionService<Collection<TimeLineEntryDto>> ecs = loadEntries(start, end);
 		
 		Set<TimeLineEntry> existingEntries = loadExistingEntries(start, end);
@@ -92,9 +93,9 @@ public class TimeLineFeedLoader {
 	private CompletionService<Collection<TimeLineEntryDto>> loadEntries(final Date start, final Date end) {
 		CompletionService<Collection<TimeLineEntryDto>> ecs = newCompletionService();
 		for (final TimeLineFeed feed : getTimeLineFeeds()) {			
-			ecs.submit(new Callable<Collection<TimeLineEntryDto>>() {
+			ecs.submit(new RequestAwareCallable<Collection<TimeLineEntryDto>>() {
 				@Override
-				public Collection<TimeLineEntryDto> call() throws Exception {
+				public Collection<TimeLineEntryDto> doCall() throws Exception {
 					return feed.load(start, end);
 				}
 			});
@@ -119,12 +120,12 @@ public class TimeLineFeedLoader {
 		this.timeLineEntryDao = timeLineEntryDao;
 	}
 
-	public ExecutorService getExecutorService() {
+	public Executor getExecutorService() {
 		return executorService;
 	}
 
 	@Required
-	public void setExecutorService(ExecutorService executorService) {
+	public void setExecutorService(Executor executorService) {
 		this.executorService = executorService;
 	}
 

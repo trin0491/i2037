@@ -5,7 +5,8 @@ import java.util.List;
 
 public interface TimeLineEntryDao {
 	TimeLineEntry newEntity();
-	TimeLineEntry getReference(Long id);
+	TimeLineEntry readByReference(String refId, EntryType type);
+	TimeLineEntry readById(Long entryId);	
 	void create(TimeLineEntry entry);
 	void delete(TimeLineEntry entry);
 	void update(TimeLineEntry entry);

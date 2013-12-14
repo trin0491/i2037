@@ -9,19 +9,23 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NaturalId;
 
 @Entity
 @Table(name="time_line_entry")
 public class TimeLineEntry implements Serializable {
-	
-	private Long entryId;
-	private EntryType type;
-	private Date time;
-	private String refId;
 
 	@Id
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
+	private Long entryId;
+	private Date time;
+	
+	@NaturalId
+	private EntryType type;
+	@NaturalId
+	private String refId;
+
 	public Long getEntryId() {
 		return entryId;
 	}
@@ -53,12 +57,19 @@ public class TimeLineEntry implements Serializable {
 	public void setRefId(String refId) {
 		this.refId = refId;
 	}	
-	
+
+	@Override
+	public String toString() {
+		return "TimeLineEntry [entryId=" + entryId + ", type=" + type
+				+ ", time=" + time + "]";
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((entryId == null) ? 0 : entryId.hashCode());
+		result = prime * result + ((refId == null) ? 0 : refId.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 
@@ -71,17 +82,13 @@ public class TimeLineEntry implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		TimeLineEntry other = (TimeLineEntry) obj;
-		if (entryId == null) {
-			if (other.entryId != null)
+		if (refId == null) {
+			if (other.refId != null)
 				return false;
-		} else if (!entryId.equals(other.entryId))
+		} else if (!refId.equals(other.refId))
+			return false;
+		if (type != other.type)
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "TimeLineEntry [entryId=" + entryId + ", type=" + type
-				+ ", time=" + time + "]";
 	}
 }
