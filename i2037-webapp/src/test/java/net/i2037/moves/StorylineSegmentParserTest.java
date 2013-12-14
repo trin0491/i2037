@@ -19,8 +19,8 @@ import org.junit.Test;
 
 public class StorylineSegmentParserTest {
 
-	private static final String BAD_JSON = "StorylineBad.json";
-	private static final String GOOD_JSON = "Storyline.json";
+	private static final String BAD_JSON = "/net/i2037/moves/StorylineBad.json";
+	private static final String GOOD_JSON = "/net/i2037/moves/Storyline.json";
 	private StorylineSegmentParser parser;
 	private JsonNode rootNode;
 	
