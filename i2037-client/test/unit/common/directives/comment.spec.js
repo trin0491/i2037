@@ -1,6 +1,6 @@
-describe('i2037.journal.directives', function() {
+describe('i2037.directives.comment', function() {
 
-  beforeEach(module('i2037.journal.directives'));
+  beforeEach(module('i2037.directives.comment'));
 
   describe('i2Comment', function() {
     var $scope, $compile, comment, element;

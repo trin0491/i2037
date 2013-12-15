@@ -1,4 +1,4 @@
-angular.module('i2037.cage', ['ngRoute', 'i2037.services', 'i2037.journal.directives'])
+angular.module('i2037.cage', ['ngRoute', 'i2037.services', 'i2037.directives.comment'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/cage', {templateUrl: 'partials/cage.html', controller: 'CageCtrl'});

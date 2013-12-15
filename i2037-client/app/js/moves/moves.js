@@ -7,7 +7,8 @@ angular.module('i2037.moves', [
   'i2037.directives.map',
   'i2037.directives.timeline',
   'i2037.directives.spinner',
-  'i2037.directives.button'
+  'i2037.directives.button',
+  'i2037.directives.comment'
 ])
 
 .config(['$routeProvider', function($routeProvider) {

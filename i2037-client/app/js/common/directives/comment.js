@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('i2037.journal.directives', ['moves/journal-directives.tpl.html'])
+  angular.module('i2037.directives.comment', ['common/directives/comment.tpl.html'])
 
   .directive('i2Comment', function() {
     return {
@@ -10,7 +10,7 @@
         saveFn: '&i2Save',
         deleteFn: '&i2Delete',
       },
-      templateUrl: 'moves/journal-directives.tpl.html',
+      templateUrl: 'common/directives/comment.tpl.html',
       replace: false,
       link: function($scope, element, attrs) {
         element.addClass('media');
