@@ -71,6 +71,7 @@
         $scope.onTextFocus = function() {
           $scope.textRows = 3;
           $scope.showActions = true;
+          momento = angular.copy($scope.comment);
         };
 
         function evalState(isNew) {
