@@ -106,6 +106,9 @@ describe('i2037.directives.timeline', function() {
 
     it('should tranclude the content', function() {
       $scope.$digest();
+      expect(element.find('div').length).toEqual(0);
+      element.find('a').eq(0).click();
+      $scope.$digest();      
       expect(element.find('div').length).toEqual(1);
     })
   })

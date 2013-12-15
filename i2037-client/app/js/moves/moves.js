@@ -172,7 +172,6 @@ angular.module('i2037.moves', [
 }])
 
 .controller('TimelineEntryCtrl', ['$scope', 'FourSquareVenue', 'Comment', function($scope, FourSquareVenue, Comment) {
-  $scope.isCollapsed = true;
   $scope.showSpinner = false;
  
   var CommentPM = function(comment) {
@@ -221,8 +220,7 @@ angular.module('i2037.moves', [
     });           
   }
 
-  $scope.toggleCollapse = function(entry) {
-    $scope.isCollapsed = !$scope.isCollapsed;
+  function load(entry) {
     if(entry.place.type === 'foursquare') {
       if (!entry.venue) {
         $scope.showSpinner = true;        
@@ -241,13 +239,12 @@ angular.module('i2037.moves', [
     loadComments(entry).then(function(comments) {
       entry.comments = comments;
     });
-  };
-
+  }
+ 
   function newComment() {
     var comment = new Comment();
     $scope.newComment = new CommentPM(comment);
   }
-  newComment();
 
   $scope.saveComment = function(commentPM, entry) {
     var comment = commentPM.model;
@@ -270,6 +267,9 @@ angular.module('i2037.moves', [
       });
     });
   };
+
+  load($scope.entry);
+  newComment();  
 }])
 
 .controller('MovesMapCtrl', ['$scope', 'MovesPlacesModel', function($scope, MovesPlacesModel) {
