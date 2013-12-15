@@ -258,8 +258,8 @@ angular.module('i2037.moves', [
       loadComments(entry).then(function(comments) {
         entry.comments = comments;
       });      
-      newComment();
     });
+    newComment();    
   };
 
   $scope.deleteComment = function(comment, entry) {
@@ -280,12 +280,9 @@ angular.module('i2037.moves', [
   }
 
   $scope.$on('MovesPlacesModel::CollectionChange', function(e, model) {
-    var placePMs = [];
-    var places = model.getPlaces();
-    for (var i in places) {
-      placePMs.push(new PlacePM(places[i]));
-    }
-    $scope.places = placePMs;
+    $scope.places = model.getPlaces().map(function(place) {
+      return new PlacePM(place);
+    });
   });
 
   $scope.$on('MovesPathsModel::CollectionChange', function(e, model) {
@@ -296,6 +293,8 @@ angular.module('i2037.moves', [
     var place = model.getSelected();
     if (place) {
       $scope.selected = new PlacePM(place);   
+    } else {
+      $scope.selected = null;
     }
   });
 }])

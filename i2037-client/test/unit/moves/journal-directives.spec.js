@@ -45,7 +45,7 @@ describe('i2037.journal.directives', function() {
       return element;
     }
 
-    function getText() {
+    function getTextDiv() {
       return element.find('div.media-body > div');
     }
 
@@ -55,6 +55,10 @@ describe('i2037.journal.directives', function() {
 
     function getSaveBtn() {
       return element.find('button').eq(0);
+    }
+
+    function getCancelBtn() {
+      return element.find('button').eq(1);
     }
 
     function getDeleteBtn() {
@@ -84,7 +88,7 @@ describe('i2037.journal.directives', function() {
     })
 
     it('should display the comment', function() {
-      expect(element.find('div.media-body > div').text()).toEqual('An important comment');
+      expect(getTextDiv().text()).toEqual('An important comment');
     })
 
     it('should display the update time with a format', function() {
@@ -94,7 +98,7 @@ describe('i2037.journal.directives', function() {
     it('should disable delete for new comment', function() {
       comment.isNew(true);
       $scope.$digest();
-      var deleteBtn = getDeleteBtn(); 
+      var deleteBtn = getDeleteBtn();
       expect(deleteBtn.attr('disabled')).toBeTruthy();
       deleteBtn.click();
       expect($scope.delete).not.toHaveBeenCalled();
@@ -102,7 +106,7 @@ describe('i2037.journal.directives', function() {
 
     it('should enable delete for existing comment', function() {
       comment.isNew(false);
-      getText().click();
+      getTextDiv().click();
       $scope.$digest();
       var deleteBtn = getDeleteBtn();
       expect(deleteBtn.attr('disabled')).toBeFalsy();
@@ -114,12 +118,12 @@ describe('i2037.journal.directives', function() {
       comment.isNew(true);
       comment.text = '';
       $scope.$digest();
-      expect(element.find('div.media').length).toBe(0);
+      expect(getTextDiv().length).toBe(0);
       var t = getTextArea();
       expect(t.val()).toEqual('');
     })
 
-    it('should have 3 rows when text and 1 when no text', function() {
+    it('should have 3 rows when text', function() {
       comment.isNew(true);
       $scope.$digest();
       expect(getTextArea().attr('rows')).toEqual('3');
@@ -158,8 +162,7 @@ describe('i2037.journal.directives', function() {
       comment.isNew(true);
       comment.text = 'text to save';
       $scope.$digest();            
-      var saveBtn = getSaveBtn();
-      saveBtn.click();
+      getSaveBtn().click();
       $scope.$digest();
       expect($scope.save).toHaveBeenCalled();
       expect($scope.save.mostRecentCall.args[0].text).toEqual('text to save');
@@ -169,7 +172,7 @@ describe('i2037.journal.directives', function() {
       comment.isNew(false);
       comment.text ='Some text';
       $scope.$digest();
-      var text = getText();
+      var text = getTextDiv();
       expect(text.length).toBe(1);
       text.click();
       $scope.$digest();
@@ -177,11 +180,35 @@ describe('i2037.journal.directives', function() {
       expect(text.length).toBe(1);
     })
 
-    it('should show the actions when switched to edit mode if there is text', function() {
+    it('should switch to read mode when cancel is clicked for an exiting comment', function() {
       comment.isNew(false);
       comment.text ='Some text';
       $scope.$digest();
-      var text = getText();
+      getTextDiv().click();
+      $scope.$digest();
+      getTextArea().val('Some text we do not want');
+      getCancelBtn().click();
+      $scope.$digest();
+      expect(getTextDiv().text()).toEqual('Some text');            
+    })    
+
+    xit('should clear edit text when cancel is clicked for a new comment', function() {
+      comment.isNew(true);
+      comment.text ='A new comment';
+      $scope.$digest();
+      expect(getTextArea().val()).toEqual('A new comment');         
+      getTextArea().val('');
+      $scope.$digest();
+      getCancelBtn().click();
+      $scope.$digest();
+      expect(getTextArea().text()).toEqual('A new comment');            
+    })    
+
+    it('should show the actions in edit mode if there is text', function() {
+      comment.isNew(false);
+      comment.text ='Some text';
+      $scope.$digest();
+      var text = getTextDiv();
       text.click();
       $scope.$digest();
       expect(element.find('button').length).toBe(3);
@@ -198,14 +225,16 @@ describe('i2037.journal.directives', function() {
     it('should show Update action for an existing comment', function() {
       comment.isNew(false);
       comment.text = 'a comment';
-      getText().click();
+      $scope.$digest();
+      getTextDiv().click();
       $scope.$digest();
       var saveBtn = getSaveBtn();
       expect(saveBtn.filter(':contains(Update)').length).toBe(1);
     })
 
-    it('should update if the comment is updated', function() {
-      expect(getText().length).toBe(1);
+    it('should change to edit mode when the comment is updated', function() {
+      $scope.$digest();
+      expect(getTextDiv().length).toBe(1);
       var newComment = {
         text: '',
         isNew: function(val) {
@@ -220,8 +249,53 @@ describe('i2037.journal.directives', function() {
       };
       $scope.comment = newComment;
       $scope.$digest();
-      expect(getText().length).toBe(0);
+      expect(getTextDiv().length).toBe(0);
       expect(getTextArea().val()).toBe('');
+    })
+
+    it('should change to read mode when the comment is updated', function() {
+      comment.isNew(true);
+      comment.text = '';
+      $scope.$digest();
+      expect(getTextArea().length).toBe(1);
+      var existingComment = {
+        text: 'an existing comment',
+        isNew: function(val) {
+          return false;
+        },
+        canDelete: function() {
+          return true;
+        },
+        canSave: function() {
+          return true;
+        }        
+      };
+      $scope.comment = existingComment;
+      $scope.$digest();
+      expect(getTextDiv().length).toBe(1);
+      expect(getTextDiv().text()).toBe('an existing comment');
+    })
+
+    it('should reset the text when a new comment is updated', function() {
+      comment.isNew(true);
+      comment.text = '';
+      $scope.$digest();
+      expect(getTextArea().val()).toBe('');
+      var newComment = {
+        text: 'different text',
+        isNew: function(val) {
+          return true;
+        },
+        canDelete: function() {
+          return false;
+        },
+        canSave: function() {
+          return true;
+        }        
+      };
+      $scope.comment = newComment;
+      $scope.$digest();
+      expect(getTextArea().val()).toBe('different text');
     })
   });
 

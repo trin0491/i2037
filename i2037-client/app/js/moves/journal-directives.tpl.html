@@ -13,17 +13,17 @@
     <textarea style="width:95%" placeholder="Enter comment..."    
       rows="{{textRows}}" 
       ng-focus="onTextFocus()"
-      ng-model="commentCopy.text"></textarea>
+      ng-model="comment.text"></textarea>
     <div ng-show="showActions">
       <button class="btn btn-mini btn-primary" 
         ng-click="save()"
-        ng-disabled="!commentCopy.canSave()">
+        ng-disabled="!canSave()">
         <i class="icon-comment icon-white"></i> {{saveLabel}}</button>
       <button class="btn btn-mini" 
         ng-click="cancel()"
         ng-disabled="!canCancel">Cancel</button>        
       <button class="btn btn-mini pull-right" 
-        ng-disabled="!commentCopy.canDelete()" 
+        ng-disabled="!canDelete()" 
         ng-click="delete()"
         ng-mouseenter="deleteCls='btn-danger'" 
         ng-mouseleave="deleteCls=''" 

@@ -5,21 +5,30 @@ angular.module('i2037.cage', ['ngRoute', 'i2037.services', 'i2037.journal.direct
 }])
 
 .controller('CommentTestCtrl', ['$scope', function($scope) {
-  $scope.state = 'edit';
-  $scope.comment = {
-    text: 'A really interesting comment',
-    author: 'Richard Priestley',
 
-    isNew: function() {
+  function Comment() {
+    this.text = 'A new comment';
+    this.author = 'Richard Priestley';
+    this.isNew = function() {
+      return true;
+    };
+    this.canSave = function() {
+      return true;
+    };
+    this.canDelete = function() {
       return false;
-    },
-    canSave: function() {
-      return true;
-    },
-    canDelete: function() {
-      return true;
-    }
+    };
+  }
+
+  function makeComment() {
+    return new Comment();
+  }
+
+  $scope.newComment = function() {
+    $scope.comment = makeComment();
   };
+
+  $scope.comment = makeComment();
 }])
 
 .controller('CageCtrl', ['$scope', 'MovesSummary', 'MovesPlaces', 'MovesStoryline',

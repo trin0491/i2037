@@ -15,36 +15,56 @@
       link: function($scope, element, attrs) {
         element.addClass('media');
 
+        $scope.state = 'read';
         $scope.textRows = 1;
         $scope.saveLabel = 'Update';
+        var momento = null;
+
+        $scope.canDelete = function() {
+          if ($scope.comment && $scope.comment.canDelete) {
+            return $scope.comment.canDelete();
+          } else {
+            return false;
+          }
+        };
 
         $scope.delete = function() {
-          if ($scope.comment.canDelete && $scope.comment.canDelete()) {
-            $scope.deleteFn();          
+          if ($scope.canDelete()) {
+            $scope.deleteFn();
+            momento = null;          
+          }
+        };
+
+        $scope.canSave = function() {
+          if ($scope.comment && $scope.comment.canSave) {
+            return $scope.comment.canSave();          
+          } else {
+            return false;
           }
         };
 
         $scope.save = function() {
-          if ($scope.commentCopy.canSave && $scope.commentCopy.canSave()) {
-            $scope.saveFn({comment:$scope.commentCopy});
+          if ($scope.canSave()) {
+            $scope.saveFn({comment:$scope.comment});
+            momento = null;
           }
         };
 
         $scope.edit = function() {
-          $scope.commentCopy = angular.copy($scope.comment);
-          $scope.state = 'edit';
-          evalShowActions($scope.commentCopy.isNew(), $scope.commentCopy.text);
+          toEditState();
         };
 
         $scope.canCancel = function() {
-          return ! $scope.comment.isNew() ;
+          return momento !== null;
         };
 
         $scope.cancel = function() {
           if ($scope.canCancel()) {
-            $scope.state = 'read';
-            $scope.showActions = false;
-            $scope.commentCopy = null;            
+            if (momento) {
+              $scope.comment = momento;              
+            }
+            evalState($scope.comment.isNew());
+            evalTextRows($scope.comment.text);
           }
         };
 
@@ -54,11 +74,28 @@
         };
 
         function evalState(isNew) {
-          if (isNew) {
-            $scope.edit();
-          } else {
-            $scope.state = 'read';
-          }                   
+          switch ($scope.state) {
+            case 'read':
+              if (isNew) { toEditState(); }
+              break;
+            case 'edit':
+              if (!isNew) { toReadState(); }
+              break;
+            default:            
+              break;
+          }
+        }
+
+        function toEditState() {
+          $scope.state = 'edit';          
+          momento = angular.copy($scope.comment);
+          evalShowActions($scope.comment.isNew(), $scope.comment.text);
+        }
+
+        function toReadState() {
+          $scope.state = 'read';
+          $scope.momento = null;
+          evalShowActions($scope.comment.isNew(), $scope.comment.text);                                  
         }
 
         function evalShowActions(isNew, text) {
@@ -81,14 +118,14 @@
           $scope.saveLabel = isNew ? 'Create' : 'Update';         
         }
 
-        $scope.$watch('comment.isNew()', function(isNew) {
-          evalState(isNew);
-          evalSaveLabel(isNew);
+        $scope.$watch('comment.isNew()', function(newVal, oldVal) {
+          evalState(newVal);
+          evalSaveLabel(newVal);
         }, true);
 
-        $scope.$watch('commentCopy.text', function(text) {
-          evalTextRows(text);
-          evalShowActions($scope.comment.isNew(), text);
+        $scope.$watch('comment.text', function(newText, oldText) {
+          evalTextRows(newText);
+          evalShowActions($scope.comment.isNew(), newText);
         }, true);
       }
     };
