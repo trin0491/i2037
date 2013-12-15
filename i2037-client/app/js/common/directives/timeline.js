@@ -1,5 +1,5 @@
 
-angular.module('i2037.directives.timeline', [])
+angular.module('i2037.directives.timeline', ['common/directives/timeline.tpl.html'])
 
 .directive('i2Timeline', ['$compile', function($compile) {
   return {
@@ -9,7 +9,7 @@ angular.module('i2037.directives.timeline', [])
       selected: '=i2Selected',
       timeline: '=i2Timeline'
     },
-    template: '<table class="table"><tbody></tbody></table>',
+    templateUrl: 'common/directives/timeline.tpl.html',
 
     compile: function(element, attrs, linker) {
 
