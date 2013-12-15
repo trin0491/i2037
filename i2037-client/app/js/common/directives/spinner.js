@@ -28,12 +28,14 @@ angular.module('i2037.directives.spinner', [])
       }
     });
 
-    scope.$watch(attrs.i2SpinOpts, function(options) {
-      if (spinner) {
-        stop();
-        start(options);
-      }
-    });
+    if (attrs.i2SpinOpts) {
+      scope.$watch(attrs.i2SpinOpts, function(options) {
+        if (spinner) {
+          stop();
+          start(options);
+        }
+      });      
+    }
 
     scope.$on('$destroy', function() {
       stop();
