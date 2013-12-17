@@ -116,7 +116,9 @@ module.exports = function(grunt) {
       bootstrap: {
         src: [ 
           '<%= dir.bower %>/bootstrap/js/bootstrap-modal.js',
-          '<%= dir.bower %>/bootstrap/js/bootstrap-typeahead.js'
+          '<%= dir.bower %>/bootstrap/js/bootstrap-typeahead.js',
+          '<%= dir.bower %>/bootstrap/js/bootstrap-collapse.js',
+          '<%= dir.bower %>/bootstrap/js/bootstrap-transition.js',          
         ],
         dest: '<%= dir.dist %>/js/bootstrap.js'
       }
