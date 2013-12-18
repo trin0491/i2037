@@ -65,6 +65,7 @@
             }
             evalState($scope.comment.isNew());
             evalTextRows($scope.comment.text);
+            evalShowActions($scope.comment.isNew(), $scope.comment.text);
           }
         };
 
