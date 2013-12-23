@@ -14,6 +14,8 @@ angular.module('i2037.directives.button', [])
       if (attrs.type === 'submit') {
         element.addClass('btn-primary');
         scope.options.color = '#FFFFFF';
+      } else {
+        element.addClass('btn-default');
       }
 
       if (attrs.size) {

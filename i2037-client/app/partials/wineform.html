@@ -12,21 +12,21 @@
     <h2>Wine</h2>
   </div>
   <form name="wineform" class="form-horizontal">
-    <div class="control-group" ng-class="{ error: wineform.name.$invalid &amp;&amp; wineform.name.$dirty }">
+    <div class="form-group" ng-class="{ error: wineform.name.$invalid &amp;&amp; wineform.name.$dirty }">
       <label class="control-label" for="inputName">Name</label>
       <div class="controls">
         <input type="text" id="inputName" name="name" placeholder="Name" ng-model="wine.name" required>
         <span class="error" ng-show="wineform.name.$error.required &amp;&amp; wineform.name.$dirty">Required</span>
       </div>  
     </div>
-    <div class="control-group" ng-class="{ error: wineform.vintage.$invalid &amp;&amp; wineform.vintage.$dirty }">
+    <div class="form-group" ng-class="{ error: wineform.vintage.$invalid &amp;&amp; wineform.vintage.$dirty }">
       <label class="control-label" for="inputVintage">Vintage</label>
       <div class="controls">
         <input type="text" id="inputVintage" name="vintage" placeholder="Vintage" ng-model="wine.vintage" ng-pattern="/\d{4}/" required>
         <span class="error" ng-show="wineform.vintage.$error.pattern &amp;&amp; wineform.vintage.$dirty">Year</span>
       </div>  
     </div>    
-    <div class="control-group" ng-class="{ error: wineform.grape.$invalid &amp;&amp; wineform.grape.$dirty }">
+    <div class="form-group" ng-class="{ error: wineform.grape.$invalid &amp;&amp; wineform.grape.$dirty }">
       <label class="control-label" for="inputGrape">Grape</label>
       <div class="controls">
         <div class="input-append">
@@ -41,13 +41,13 @@
         </div>
       </div>
     </div>
-    <div class="control-group">
+    <div class="form-group">
       <label class="control-label" for="inputDescription">Description</label>
       <div class="controls">
         <textarea id="inputDescription" placeholder="Description" ng-model="wine.description" rows="5"></textarea>
       </div>
     </div>
-    <div class="control-group">
+    <div class="form-group">
       <label class="control-label" for="inputRating">Rating</label>
       <div class="controls">
         <rating value="wine.rating" max="5" readonly="false"></rating>

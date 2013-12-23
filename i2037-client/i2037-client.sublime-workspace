@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"eval",
+				"evalShowActions"
+			],
+			[
+				"i2",
+				"i2SpinOpts"
+			],
+			[
+				"comment",
+				"commentCopy"
+			],
+			[
 				"entry",
 				"entryId"
 			],
@@ -22,10 +34,6 @@
 			[
 				"getT",
 				"getText"
-			],
-			[
-				"eval",
-				"evalShowActions"
 			],
 			[
 				"can",
@@ -76,10 +84,6 @@
 				"comments"
 			],
 			[
-				"comment",
-				"comment"
-			],
-			[
 				"new",
 				"newComment"
 			],
@@ -120,26 +124,42 @@
 	"buffers":
 	[
 		{
-			"file": "app/js/moves/journal-directives.js",
+			"file": "app/js/common/directives/timeline.js",
 			"settings":
 			{
-				"buffer_size": 2546,
+				"buffer_size": 1137,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/js/moves/journal-directives.tpl.html",
+			"file": "app/js/common/directives/timeline.tpl.html",
 			"settings":
 			{
-				"buffer_size": 1260,
+				"buffer_size": 531,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/partials/journal-date.html",
+			"file": "test/unit/common/directives/timeline.spec.js",
 			"settings":
 			{
-				"buffer_size": 2432,
+				"buffer_size": 3680,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/js/common/directives/comment.js",
+			"settings":
+			{
+				"buffer_size": 3642,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/js/common/directives/comment.tpl.html",
+			"settings":
+			{
+				"buffer_size": 1232,
 				"line_ending": "Unix"
 			}
 		},
@@ -147,31 +167,7 @@
 			"file": "app/js/moves/moves.js",
 			"settings":
 			{
-				"buffer_size": 8913,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/js/common/resources/comments.js",
-			"settings":
-			{
-				"buffer_size": 1358,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "test/unit/moves/journal-directives.spec.js",
-			"settings":
-			{
-				"buffer_size": 6735,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/js/common/resources/moves.js",
-			"settings":
-			{
-				"buffer_size": 2709,
+				"buffer_size": 8478,
 				"line_ending": "Unix"
 			}
 		}
@@ -204,39 +200,44 @@
 	},
 	"file_history":
 	[
+		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/comments.js",
+		"/Users/richard/src/i2037/i2037-client/test/unit/common/directives/comment.spec.js",
+		"/Users/richard/src/i2037/i2037-client/node_modules/grunt-contrib-clean/docs/clean-options.md",
+		"/Users/richard/src/i2037/i2037-client/app/js/cage/cage.js",
+		"/Users/richard/src/i2037/i2037-client/node_modules/grunt-contrib-concat/tasks/lib/comment.js",
+		"/Users/richard/src/i2037/i2037-client/app/partials/journal-date.html",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/spinner.js",
+		"/Users/richard/src/i2037/i2037-client/app/index.html",
 		"/Users/richard/src/i2037/i2037-client/Gruntfile.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/moves/journal-directives.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/moves/journal-directives.tpl.html",
+		"/Users/richard/src/i2037/i2037-client/test/unit/moves/journal-directives.spec.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/moves/moves.js",
+		"/Users/richard/src/i2037/i2037-client/app/partials/cage.html",
+		"/Users/richard/src/i2037/i2037-client/app/js/moves/moves-model.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/timeline.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/moves.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/map.js",
 		"/Users/richard/src/i2037/i2037-client/app/partials/wineform.html",
 		"/Users/richard/src/i2037/i2037-client/app/partials/wineview.html",
-		"/Users/richard/src/i2037/i2037-client/app/partials/cage.html",
-		"/Users/richard/src/i2037/i2037-client/app/js/cage/cage.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/cellar/cellar.js",
-		"/Users/richard/src/i2037/i2037-client/app/partials/journal-date.html",
 		"/Users/richard/src/i2037/i2037-client/config/karma.conf.js",
 		"/Users/richard/src/i2037/i2037-client/app/partials/slickgrid.html",
 		"/Users/richard/src/i2037/i2037-client/build/dev/templates/app.js",
 		"/Users/richard/src/i2037/i2037-client/package.json",
-		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/moves.js",
-		"/Users/richard/src/i2037/i2037-client/app/index.html",
-		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/map.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/app.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/comments.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/services/environment.js",
 		"/Users/richard/src/i2037/i2037-client/build/release/js/1.0.0/i2037-client.min.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/cellar.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/user.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/services/services.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/moves/moves.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/timeline.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/button.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/directives.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/spinner.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/filters.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/foursquare.js",
 		"/Users/richard/src/i2037/i2037-client/test/unit/moves/moves-model.spec.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/moves/moves-filters.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/moves/journal-directives.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/recipes/recipes.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/moves/moves-model.js",
 		"/Users/richard/src/i2037/i2037-client/app/partials/journal-calendar.html",
 		"/Users/richard/src/angular-app/client/gruntFile.js",
 		"/Users/richard/src/i2037/i2037-client/app/partials/loginform.html",
@@ -246,7 +247,6 @@
 		"/Users/richard/src/i2037/i2037-client/test/unit/cellar/cellar.spec.js",
 		"/Users/richard/src/i2037/i2037-client/test/unit/common/directives/button.spec.js",
 		"/Users/richard/src/i2037/i2037-client/test/unit/common/directives/timeline.spec.js",
-		"/Users/richard/src/i2037/i2037-client/test/unit/moves/journal-directives.spec.js",
 		"/Users/richard/src/i2037/i2037-client/build/tmp/js/dev/moves/journal-directives.js",
 		"/Users/richard/src/i2037/i2037-client/app/partials/journal-comment.tpl.html",
 		"/Users/richard/src/i2037/i2037-client/app/lib/angular/angular.js",
@@ -278,6 +278,35 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"expand",
+			"momento",
+			"Copy",
+			"getText()",
+			"element.find('div.media-body > div')",
+			"getText",
+			";//!",
+			"MovesPlacesModel",
+			"comment",
+			"model",
+			"comment",
+			"Comment",
+			"comment",
+			"place",
+			"entry",
+			"place",
+			"places",
+			"Places",
+			"places",
+			"entries",
+			"entry",
+			"EntryPM",
+			"place",
+			",",
+			"segments[s]",
+			"day",
+			"MovesStoryline",
+			"MovesSummary",
+			"DateChanged",
 			"MovesStoryline",
 			"Cancel",
 			"close",
@@ -373,19 +402,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "app/js/moves/journal-directives.js",
+					"file": "app/js/common/directives/timeline.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2546,
+						"buffer_size": 1137,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2442,
-								2442
+								545,
+								545
 							]
 						],
 						"settings":
@@ -398,108 +427,144 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "app/js/moves/journal-directives.tpl.html",
+					"file": "app/js/common/directives/timeline.tpl.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1260,
+						"buffer_size": 531,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								147,
-								147
+								382,
+								382
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "app/partials/journal-date.html",
+					"file": "test/unit/common/directives/timeline.spec.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2432,
+						"buffer_size": 3680,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1901,
-								1901
+								413,
+								413
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 829.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/js/common/directives/comment.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3642,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1840,
+								1840
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 671.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/js/common/directives/comment.tpl.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1232,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								451,
+								451
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 5,
 					"file": "app/js/moves/moves.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8913,
+						"buffer_size": 8478,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2197,
-								2211
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 537.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "app/js/common/resources/comments.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1358,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								962,
-								962
+								6938,
+								6938
 							]
 						],
 						"settings":
@@ -512,99 +577,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 2,
-			"sheets":
-			[
-				{
-					"buffer": 5,
-					"file": "test/unit/moves/journal-directives.spec.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6735,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1025.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "app/js/common/resources/comments.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1358,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "app/js/common/resources/moves.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2709,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2125,
-								2139
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 709.0,
-						"zoom_level": 1.0
-					},
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -627,18 +600,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.548403532609,
 			1.0
 		],
 		"rows":
@@ -648,6 +614,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
 	"project": "i2037-client.sublime-project",
 	"replace":
 	{
@@ -660,20 +630,72 @@
 		"selected_items":
 		[
 			[
-				"moves",
-				"app/js/common/resources/moves.js"
+				"comment.tpl",
+				"app/js/common/directives/comment.tpl.html"
 			],
 			[
 				"comment",
-				"app/js/common/resources/comments.js"
+				"app/js/common/directives/comment.js"
+			],
+			[
+				"gru",
+				"Gruntfile.js"
+			],
+			[
+				"index.",
+				"app/index.html"
+			],
+			[
+				"commet",
+				"test/unit/common/directives/comment.spec.js"
+			],
+			[
+				"spin",
+				"app/js/common/directives/spinner.js"
+			],
+			[
+				"journal",
+				"app/partials/journal-date.html"
+			],
+			[
+				"moves",
+				"app/js/moves/moves.js"
 			],
 			[
 				"journal-date",
 				"app/partials/journal-date.html"
 			],
 			[
+				"journal-",
+				"app/js/moves/journal-directives.js"
+			],
+			[
+				"timeline",
+				"test/unit/common/directives/timeline.spec.js"
+			],
+			[
+				"time",
+				"app/js/common/directives/timeline.js"
+			],
+			[
+				"cage",
+				"app/js/cage/cage.js"
+			],
+			[
+				"jour",
+				"app/js/moves/journal-directives.tpl.html"
+			],
+			[
+				"map",
+				"app/js/common/directives/map.js"
+			],
+			[
 				"moves.js",
 				"app/js/moves/moves.js"
+			],
+			[
+				"journa",
+				"app/partials/journal-date.html"
 			],
 			[
 				"grun",
@@ -698,10 +720,6 @@
 			[
 				"cage.js",
 				"app/js/cage/cage.js"
-			],
-			[
-				"journal",
-				"app/partials/journal-date.html"
 			],
 			[
 				"cage.h",
@@ -730,10 +748,6 @@
 			[
 				"slicg",
 				"app/partials/slickgrid.html"
-			],
-			[
-				"cage",
-				"app/js/cage/cage.js"
 			],
 			[
 				"journal-dire",
@@ -786,10 +800,6 @@
 			[
 				"spinn",
 				"app/js/common/directives/spinner.js"
-			],
-			[
-				"timeline",
-				"app/js/common/directives/timeline.js"
 			],
 			[
 				"timel",
@@ -888,10 +898,6 @@
 				"app/lib/angular/angular.js"
 			],
 			[
-				"time",
-				"app/js/common/directives/timeline.js"
-			],
-			[
 				"cellar.",
 				"app/js/common/resources/cellar.js"
 			],
@@ -910,14 +916,6 @@
 			[
 				"moves.",
 				"app/js/common/resources/moves.js"
-			],
-			[
-				"journa",
-				"app/partials/journal-calendar.html"
-			],
-			[
-				"jour",
-				"app/partials/journal-date.html"
 			],
 			[
 				"spinner",
@@ -944,10 +942,6 @@
 				"app/partials/journal-date.html"
 			],
 			[
-				"journal-",
-				"app/partials/journal-calendar.html"
-			],
-			[
 				"test.sh",
 				"scripts/test.sh"
 			],
@@ -962,10 +956,6 @@
 			[
 				"map.spe",
 				"test/unit/common/directives/map.spec.js"
-			],
-			[
-				"map",
-				"app/js/common/directives/map.js"
 			],
 			[
 				"movesmo",

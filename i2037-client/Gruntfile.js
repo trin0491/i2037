@@ -59,6 +59,12 @@ module.exports = function(grunt) {
           {expand:true, cwd: 'app', src:['css/**'], dest: '<%= dir.dist %>/'},          
         ]
       },
+      bootstrap: {
+        files: [
+          {expand:true, cwd: '<%= dir.bower %>/bootstrap/dist', src:['css/**'], dest: '<%= dir.dist %>/'},
+          {expand:true, cwd: '<%= dir.bower %>/bootstrap/dist', src:['fonts/**'], dest: '<%= dir.dist %>/'}                    
+        ]
+      }
     },
     html2js: {
       app: {
@@ -98,7 +104,8 @@ module.exports = function(grunt) {
           '<%= dir.bower %>/angular-route/angular-route.js',
           '<%= dir.bower %>/angular-resource/angular-resource.js',
           '<%= dir.bower %>/angular-cookies/angular-cookies.js',          
-          '<%= dir.bower %>/angular-bootstrap/ui-bootstrap-tpls.js'
+          // '<%= dir.bower %>/angular-bootstrap/ui-bootstrap-tpls.js',
+          '<%= dir.bower %>/angular-bootstrap/ui-bootstrap-tpls-0.7.0.js'
         ],
         dest: '<%= dir.dist %>/js/angular.js'
       },
@@ -115,10 +122,11 @@ module.exports = function(grunt) {
       },
       bootstrap: {
         src: [ 
-          '<%= dir.bower %>/bootstrap/js/bootstrap-modal.js',
-          '<%= dir.bower %>/bootstrap/js/bootstrap-typeahead.js',
-          '<%= dir.bower %>/bootstrap/js/bootstrap-collapse.js',
-          '<%= dir.bower %>/bootstrap/js/bootstrap-transition.js',          
+          '<%= dir.bower %>/bootstrap/js/modal.js',
+//          '<%= dir.bower %>/bootstrap/js/typeahead.js',
+          '<%= dir.bower %>/bootstrap/js/collapse.js',
+          '<%= dir.bower %>/bootstrap/js/transition.js',
+          '<%= dir.bower %>/bootstrap/js/dropdown.js',                              
         ],
         dest: '<%= dir.dist %>/js/bootstrap.js'
       }

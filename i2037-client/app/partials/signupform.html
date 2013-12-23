@@ -3,7 +3,7 @@
 </div>
 <div class="modal-body">
   <form name="signUpForm" class="form-horizontal" novalidate>
-    <div class="control-group" ng-class="getCls(signUpForm.userName)">
+    <div class="form-group" ng-class="getCls(signUpForm.userName)">
       <label class="control-label" for="inputUsername">Email</label>
       <div class="controls">
         <div class="input-prepend">
@@ -14,7 +14,7 @@
         <span class="help-inline" ng-show="showErr(signUpForm.userName, 'required')">Username is required</span>                                    
       </div>  
     </div>    
-    <div class="control-group" ng-class="getCls(signUpForm.foreName)">
+    <div class="form-group" ng-class="getCls(signUpForm.foreName)">
       <label class="control-label" for="inputForename">First Name</label>
       <div class="controls">
         <div class="input-prepend">
@@ -23,7 +23,7 @@
         </div>              
       </div>  
     </div>
-    <div class="control-group" ng-class="getCls(signUpForm.lastName)">
+    <div class="form-group" ng-class="getCls(signUpForm.lastName)">
       <label class="control-label" for="inputLastname">Last Name</label>
       <div class="controls">
         <div class="input-prepend">
@@ -32,7 +32,7 @@
         </div>              
       </div>  
     </div>            
-    <div class="control-group" ng-class="getCls(signUpForm.password)">
+    <div class="form-group" ng-class="getCls(signUpForm.password)">
       <label class="control-label" for="inputPassword">Password</label>
       <div class="controls">
         <div class="input-prepend">
@@ -43,7 +43,7 @@
         <span class="help-inline" ng-show="showErr(signUpForm.password, 'minlength')">Paasword must have at least 6 chars</span>                                                  
       </div>
     </div>
-    <div class="control-group" ng-class="getCls(signUpForm.password2)">
+    <div class="form-group" ng-class="getCls(signUpForm.password2)">
       <label class="control-label" for="inputPassword2">Confirm Password</label>
       <div class="controls">
         <div class="input-prepend">

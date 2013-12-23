@@ -28,6 +28,11 @@ describe('i2037.directives.button', function() {
       expect(element.hasClass('btn')).toBe(true);
     })
 
+    it('should have the btn-default class if not submit', function() {
+      var element = compile('<i2-button>Submit</button>');
+      expect(element.hasClass('btn-default')).toBe(true);      
+    })
+
     it('should have btn-primary class if it is submit', function() {
       var element = compile('<i2-button type="submit">Submit</button>');
       expect(element.hasClass('btn-primary')).toBe(true);

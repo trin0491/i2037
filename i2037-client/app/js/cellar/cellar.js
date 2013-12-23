@@ -1,4 +1,4 @@
-/* Controllers */
+ /* Controllers */
 
 angular.module('i2037.cellar', ['ngRoute', 'i2037.resources.cellar'])
 
@@ -53,12 +53,12 @@ angular.module('i2037.cellar', ['ngRoute', 'i2037.resources.cellar'])
   }
 
   $scope.smallThumbnails = function() {
-    $scope.wineCls = 'span3';
+    $scope.wineCls = 'col-md-3';
     $scope.winesPerRow = 4;
   };
 
   $scope.largeThumbnails = function() {
-    $scope.wineCls = 'span4';
+    $scope.wineCls = 'col-md-4';
     $scope.winesPerRow = 3;
   };
 
@@ -89,7 +89,7 @@ angular.module('i2037.cellar', ['ngRoute', 'i2037.resources.cellar'])
   }, true);
 
   $scope.winesPerRow = 3;
-  $scope.wineCls = 'span4';
+  $scope.wineCls = 'col-md-4';
   $scope.refresh();
 }])
 
