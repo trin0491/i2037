@@ -183,8 +183,8 @@
         return {};
       } else {
         return {
-          error: ngModelController.$invalid && ngModelController.$dirty,
-          success: ngModelController.$valid && ngModelController.$dirty
+          'has-error': ngModelController.$invalid && ngModelController.$dirty,
+          'has-success': ngModelController.$valid && ngModelController.$dirty
         };      
       }
     };
