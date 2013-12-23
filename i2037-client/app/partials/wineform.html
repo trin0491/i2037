@@ -1,63 +1,64 @@
-<div class="span2">
-  <div class="well sidebar-nav">
-    <ul class="nav nav-list">
-      <li class="nav-header">Cellar</li>
-      <li class="active"><a href="#/cellar/wines">Wines</a></li>
-      <li><a href="#/cellar/grapes">Grapes</a></li>
-    </ul>
-  </div>  
+<div class="col-md-2">
+  <ul class="nav nav-pills nav-stacked">
+    <li class="active"><a href="#/cellar/wines">Wines</a></li>
+    <li><a href="#/cellar/grapes">Grapes</a></li>
+  </ul>
 </div>
-<div class="span10">
+<div class="col-md-10">
   <div class="page-header">
     <h2>Wine</h2>
   </div>
   <form name="wineform" class="form-horizontal">
-    <div class="form-group" ng-class="{ error: wineform.name.$invalid &amp;&amp; wineform.name.$dirty }">
-      <label class="control-label" for="inputName">Name</label>
-      <div class="controls">
-        <input type="text" id="inputName" name="name" placeholder="Name" ng-model="wine.name" required>
-        <span class="error" ng-show="wineform.name.$error.required &amp;&amp; wineform.name.$dirty">Required</span>
-      </div>  
+    <div class="form-group" ng-class="getCls(wineform.name)">
+      <label class="control-label col-md-2" for="inputName">Name</label>
+      <div class="col-md-4">
+        <input type="text" class="form-control" id="inputName" name="name" placeholder="Name" ng-model="wine.name" required>
+      </div>
+      <p class="help-block col-md-offset-2" ng-show="showErr(wineform.name, 'required')">Name is required</p>
     </div>
-    <div class="form-group" ng-class="{ error: wineform.vintage.$invalid &amp;&amp; wineform.vintage.$dirty }">
-      <label class="control-label" for="inputVintage">Vintage</label>
-      <div class="controls">
-        <input type="text" id="inputVintage" name="vintage" placeholder="Vintage" ng-model="wine.vintage" ng-pattern="/\d{4}/" required>
-        <span class="error" ng-show="wineform.vintage.$error.pattern &amp;&amp; wineform.vintage.$dirty">Year</span>
-      </div>  
+    <div class="form-group" ng-class="getCls(wineform.vintage)">
+      <label class="control-label col-md-2" for="inputVintage">Vintage</label>
+      <div class="col-md-4">
+        <input type="text" class="form-control" id="inputVintage" name="vintage" placeholder="Vintage" ng-model="wine.vintage" ng-pattern="/\d{4}/" required>
+      </div>
+      <p class="help-block col-md-offset-2" ng-show="showErr(wineform.vintage, 'pattern')">Vintage must be a year</p>
     </div>    
-    <div class="form-group" ng-class="{ error: wineform.grape.$invalid &amp;&amp; wineform.grape.$dirty }">
-      <label class="control-label" for="inputGrape">Grape</label>
-      <div class="controls">
-        <div class="input-append">
-          <input type="text" id="inputGrape" name="grape" ng-model="grapeName" 
+    <div class="form-group" ng-class="getCls(wineform.grape)">
+      <label class="control-label col-md-2" for="inputGrape">Grape</label>
+      <div class="col-md-4">
+        <div class="input-group">
+          <input type="text" class="form-control" id="inputGrape" name="grape" ng-model="grapeName" 
             ng-change="onGrapeChange()" 
             typeahead="grape.name for grape in grapes | filter: $viewValue" 
             placeholder="Grape" required>
-          <button class="btn" 
-            ng-disabled="!isNewGrape" 
-            ng-class="{ disabled: !isNewGrape }" 
-            ng-click="addGrape()" type="button"><i class="icon-plus-sign"></i></button>
+          <span class="input-group-btn">
+            <button class="btn btn-default" 
+              ng-disabled="!isNewGrape" 
+              ng-class="{ disabled: !isNewGrape }" 
+              ng-click="addGrape()" type="button"><span class="glyphicon glyphicon-plus-sign"></span></button>
+          </span>
         </div>
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label" for="inputDescription">Description</label>
-      <div class="controls">
-        <textarea id="inputDescription" placeholder="Description" ng-model="wine.description" rows="5"></textarea>
+      <label class="control-label col-md-2" for="inputDescription">Description</label>
+      <div class="col-md-4">
+        <textarea id="inputDescription" class="form-control" placeholder="Description" ng-model="wine.description" rows="5"></textarea>
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label" for="inputRating">Rating</label>
-      <div class="controls">
+      <label class="control-label col-md-2" for="inputRating">Rating</label>
+      <div class="col-md-4">
         <rating value="wine.rating" max="5" readonly="false"></rating>
       </div>
     </div>
-    <div class="form-actions">
-      <button ng-click="submit()" 
-        class="btn btn-primary" 
-        ng-disabled="wineform.$invalid || isNewGrape">Save</button>
-      <button ng-click="cancel()" class="btn">Cancel</button>  
+    <div class="form-group">
+      <div class="col-md-offset-2 col-md-4">
+        <button ng-click="submit()" 
+          class="btn btn-primary" 
+          ng-disabled="!canSubmit()">Save</button>
+        <button ng-click="cancel()" class="btn">Cancel</button>  
+      </div>
     </div>  
   </form>
 </div>

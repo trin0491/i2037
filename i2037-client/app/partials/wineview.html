@@ -1,34 +1,34 @@
-<div class="span2">
-  <div class="well sidebar-nav">
-    <ul class="nav nav-list">
-      <li class="nav-header">Cellar</li>
-      <li class="active"><a href="#/cellar/wines">Wines</a></li>
-      <li><a href="#/cellar/grapes">Grapes</a></li>
-    </ul>
-  </div>  
+<div class="col-md-2">
+  <ul class="nav nav-pills nav-stacked">
+    <li class="active"><a href="#/cellar/wines">Wines</a></li>
+    <li><a href="#/cellar/grapes">Grapes</a></li>
+  </ul>
 </div>
-<div class="span10">
+<div class="col-md-10">
   <div class="page-header">
     <h2>Wines</h2>
   </div>
   <div class="row">
     <div class="col-md-4">
       <div class="btn-group">
-        <button id="addWine" class="btn" ng-click="add()"><i class="icon-plus-sign"></i></button>
-        <button class="btn" ng-click="smallThumbnails()"><i class="icon-th"></i></button>
-        <button class="btn" ng-click="largeThumbnails()"><i class="icon-th-large"></i></button>
-        <button class="btn" ng-click="refresh()"><i class="icon-refresh"></i></button>
+        <button id="addWine" class="btn btn-default" ng-click="add()"><span class="glyphicon glyphicon-plus-sign"></span></button>
+        <button class="btn btn-default" ng-click="smallThumbnails()"><span class="glyphicon glyphicon-th"></span></button>
+        <button class="btn btn-default" ng-click="largeThumbnails()"><span class="glyphicon glyphicon-th-large"></span></button>
+        <button class="btn btn-default" ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span></button>
       </div>
     </div>
     <div class="col-md-4 col-md-offset-4">
-      <form class="form-search pull-right">
-        <div class="input-append">
-          <input type="text" class="search-query">
-          <button type="submit" class="btn">Search</button>
+      <form class="form-inline pull-right">
+        <div class="form-group">
+          <div class="col-md-8">
+            <input type="search" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-default col-md-4">Search</button>
         </div>       
       </form>
     </div>
   </div> 
+  <hr>
   <div class="row">
     <ul class="thumbnails" ng-repeat="row in wineGrid">
       <li ng-class="wineCls" ng-repeat="wine in row">
@@ -41,19 +41,19 @@
             <p>{{wine.description}}</p>
             <p><rating value="wine.rating" max="5" readonly="true"></rating></p>
             <p>
-              <a class="btn btn-small" 
+              <a class="btn btn-xs btn-default" 
                   ng-mouseenter="editCls='btn-primary'" 
                   ng-mouseleave="editCls=''" 
                   ng-class="editCls"
                   href="#/cellar/wines/{{wine.wineId}}">
-                  <i class="icon-edit"></i> Edit
+                  <span class="glyphicon glyphicon-edit"></span> Edit
               </a>
-              <a class="btn btn-small" 
+              <a class="btn btn-xs btn-default" 
                  ng-mouseenter="deleteCls='btn-danger'" 
                  ng-mouseleave="deleteCls=''" 
                  ng-class="deleteCls"
                  ng-click="delete(wine)">
-                 <i class="icon-trash"></i> Delete
+                 <span class="glyphicon glyphicon-trash"></span> Delete
               </a>                        
             </p>
           </div>
