@@ -47,3 +47,7 @@
 .i2-map img {
   max-width: none;
 }
+
+.i2-comment {
+  padding-bottom: 0.4em;
+}

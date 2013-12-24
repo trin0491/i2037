@@ -10,10 +10,13 @@
     </div>
   </div>
   <div ng-switch-when="edit">
+    <div class="i2-comment">
     <textarea class="form-control" placeholder="Enter comment..."    
       rows="{{textRows}}" 
       ng-focus="onTextFocus()"
-      ng-model="comment.text"></textarea>
+      ng-model="comment.text">
+    </textarea>
+    </div>
     <div ng-show="showActions">
       <button class="btn btn-xs btn-primary" 
         ng-click="save()"
