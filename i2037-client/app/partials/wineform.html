@@ -1,64 +1,68 @@
-<div class="col-md-2">
-  <ul class="nav nav-pills nav-stacked">
-    <li class="active"><a href="#/cellar/wines">Wines</a></li>
-    <li><a href="#/cellar/grapes">Grapes</a></li>
-  </ul>
-</div>
-<div class="col-md-10">
+<div class="col-md-12">
   <div class="page-header">
     <h2>Wine</h2>
   </div>
-  <form name="wineform" class="form-horizontal">
-    <div class="form-group" ng-class="getCls(wineform.name)">
-      <label class="control-label col-md-2" for="inputName">Name</label>
-      <div class="col-md-4">
-        <input type="text" class="form-control" id="inputName" name="name" placeholder="Name" ng-model="wine.name" required>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="list-group">
+        <a class="active list-group-item" href="#/cellar/wines">Wines</a>
+        <a class="list-group-item" href="#/cellar/grapes">Grapes</a>
       </div>
-      <p class="help-block col-md-offset-2" ng-show="showErr(wineform.name, 'required')">Name is required</p>
     </div>
-    <div class="form-group" ng-class="getCls(wineform.vintage)">
-      <label class="control-label col-md-2" for="inputVintage">Vintage</label>
-      <div class="col-md-4">
-        <input type="text" class="form-control" id="inputVintage" name="vintage" placeholder="Vintage" ng-model="wine.vintage" ng-pattern="/\d{4}/" required>
-      </div>
-      <p class="help-block col-md-offset-2" ng-show="showErr(wineform.vintage, 'pattern')">Vintage must be a year</p>
-    </div>    
-    <div class="form-group" ng-class="getCls(wineform.grape)">
-      <label class="control-label col-md-2" for="inputGrape">Grape</label>
-      <div class="col-md-4">
-        <div class="input-group">
-          <input type="text" class="form-control" id="inputGrape" name="grape" ng-model="grapeName" 
-            ng-change="onGrapeChange()" 
-            typeahead="grape.name for grape in grapes | filter: $viewValue" 
-            placeholder="Grape" required>
-          <span class="input-group-btn">
-            <button class="btn btn-default" 
-              ng-disabled="!isNewGrape" 
-              ng-class="{ disabled: !isNewGrape }" 
-              ng-click="addGrape()" type="button"><span class="glyphicon glyphicon-plus-sign"></span></button>
-          </span>
+    <div class="col-md-10">
+      <form name="wineform" class="form-horizontal">
+        <div class="form-group" ng-class="getCls(wineform.name)">
+          <label class="control-label col-md-2" for="inputName">Name</label>
+          <div class="col-md-4">
+            <input type="text" class="form-control" id="inputName" name="name" placeholder="Name" ng-model="wine.name" required>
+          </div>
+          <p class="help-block col-md-offset-2" ng-show="showErr(wineform.name, 'required')">Name is required</p>
         </div>
-      </div>
+        <div class="form-group" ng-class="getCls(wineform.vintage)">
+          <label class="control-label col-md-2" for="inputVintage">Vintage</label>
+          <div class="col-md-4">
+            <input type="text" class="form-control" id="inputVintage" name="vintage" placeholder="Vintage" ng-model="wine.vintage" ng-pattern="/\d{4}/" required>
+          </div>
+          <p class="help-block col-md-offset-2" ng-show="showErr(wineform.vintage, 'pattern')">Vintage must be a year</p>
+        </div>    
+        <div class="form-group" ng-class="getCls(wineform.grape)">
+          <label class="control-label col-md-2" for="inputGrape">Grape</label>
+          <div class="col-md-4">
+            <div class="input-group">
+              <input type="text" class="form-control" id="inputGrape" name="grape" ng-model="grapeName" 
+                ng-change="onGrapeChange()" 
+                typeahead="grape.name for grape in grapes | filter: $viewValue" 
+                placeholder="Grape" required>
+              <span class="input-group-btn">
+                <button class="btn btn-default" 
+                  ng-disabled="!isNewGrape" 
+                  ng-class="{ disabled: !isNewGrape }" 
+                  ng-click="addGrape()" type="button"><span class="glyphicon glyphicon-plus-sign"></span></button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-2" for="inputDescription">Description</label>
+          <div class="col-md-4">
+            <textarea id="inputDescription" class="form-control" placeholder="Description" ng-model="wine.description" rows="5"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-2" for="inputRating">Rating</label>
+          <div class="col-md-4">
+            <rating value="wine.rating" max="5" readonly="false"></rating>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-4">
+            <button ng-click="submit()" 
+              class="btn btn-primary" 
+              ng-disabled="!canSubmit()">Save</button>
+            <button ng-click="cancel()" class="btn">Cancel</button>  
+          </div>
+        </div>  
+      </form>
     </div>
-    <div class="form-group">
-      <label class="control-label col-md-2" for="inputDescription">Description</label>
-      <div class="col-md-4">
-        <textarea id="inputDescription" class="form-control" placeholder="Description" ng-model="wine.description" rows="5"></textarea>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-md-2" for="inputRating">Rating</label>
-      <div class="col-md-4">
-        <rating value="wine.rating" max="5" readonly="false"></rating>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-md-offset-2 col-md-4">
-        <button ng-click="submit()" 
-          class="btn btn-primary" 
-          ng-disabled="!canSubmit()">Save</button>
-        <button ng-click="cancel()" class="btn">Cancel</button>  
-      </div>
-    </div>  
-  </form>
+  </div>
 </div>
