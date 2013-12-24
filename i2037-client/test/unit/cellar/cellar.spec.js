@@ -47,14 +47,14 @@ describe('i2037.cellar', function() {
       expect(scope.smallThumbnails).toBeDefined();
       expect(scope.smallThumbnails()).toBeUndefined();
       expect(scope.noRows()).toEqual(0);
-      expect(scope.wineCls).toEqual('span3');    
+      expect(scope.wineCls).toEqual('col-md-3');    
     });
 
     it('should have large thumbnails method', function() {
       expect(scope.largeThumbnails).toBeDefined();
       expect(scope.largeThumbnails()).toBeUndefined();
       expect(scope.noRows()).toEqual(0);
-      expect(scope.wineCls).toEqual('span4');
+      expect(scope.wineCls).toEqual('col-md-4');
     });
 
     it('should have an add wine method', function() {

@@ -6,73 +6,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/app.css">
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">	
+    <link href="css/bootstrap.min.css" rel="stylesheet">	
     <style>
      body {
         padding-top: 60px;
         padding-bottom: 40px;
       }
-      .sidebar-nav {
-        padding: 9px 0;
-      }
-
-      @media (max-width: 980px) {
-        /* Enable use of floated navbar text */
-        .navbar-text.pull-right {
-          float: none;
-          padding-left: 5px;
-          padding-right: 5px;
-        }
-      }
-
       [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
         display: none !important;
       }
     </style>
-
-
-    <link href="css/bootstrap-responsive.css" rel="stylesheet">
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-      <script src="../assets/js/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 </head>
 <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top" ng-controller="NavBarCtrl">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+    <nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="NavBarCtrl">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#i2037-navbar-collapse">
+            <span class="sr-only">Toggle Navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="#">i2037</a>
-          <div class="nav-collapse collapse" ng-switch="state" ng-cloak>
-            <div class="dropdown pull-right navbar-text" ng-switch-when="LOGGED_IN">
-              <a href="#" class="dropdown-toggle navbar-link" data-toggle="dropdown">{{user.userName}}</a>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+          <a class="navbar-brand" href="#">i2037</a>        
+        </div>
+
+        <div class="navbar-collapse collapse" id="i2037-navbar-collapse" ng-switch="state" ng-cloak>
+          <ul class="nav navbar-nav navbar-right" ng-switch-when="LOGGED_IN">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{user.userName}} <b class="caret"></b></a>
+              <ul class="dropdown-menu" role="menu">
                 <li ng-show="user"><a tabindex="-1" href="#" ng-click="logout()">Logout</a></li>
                 <li ng-show="user"><a tabindex="-1" href="#" ng-click="logout()">Change Password</a></li>
               </ul>
-            </div>
-            <div class="pull-right" ng-switch-default>
-              <button class="btn btn-primary" ng-click="login()">Log In</button>            
-              <button class="btn btn-warning" ng-click="signUp()">Sign Up</button>            
-            </div>            
-            <ul class="nav">
-              <li ng-class="{active: $location.path() == '/home'}"><a href="#/home"><i class="icon-home"></i> Home</a></li>
-              <li ng-show="state == 'LOGGED_IN'" ng-class="{active: $location.path().indexOf(menu.path) > -1}" ng-repeat="menu in menus" ng-cloak>
-                <a href="#{{menu.path}}"><i class="icon-book"></i> {{menu.name}}</a>
-              </li>
-            </ul>
-          </div><!--/.nav-collapse -->
+            </li>
+          </ul>
+          <div class="nav navbar-nav navbar-right" ng-switch-default>
+            <button type="button" class="btn btn-primary navbar-btn" ng-click="login()">Log In</button>            
+            <button type="button" class="btn btn-warning navbar-btn" ng-click="signUp()">Sign Up</button>            
+          </div>            
+          <ul class="nav navbar-nav">
+            <li ng-class="{active: $location.path() == '/home'}"><a href="#/home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+            <li ng-show="state == 'LOGGED_IN'" ng-class="{active: $location.path().indexOf(menu.path) > -1}" ng-repeat="menu in menus" ng-cloak>
+              <a href="#{{menu.path}}"><span class="glyphicon glyphicon-book"></span> {{menu.name}}</a>
+            </li>
+          </ul>
         </div>
       </div>
-    </div>
+    </nav>
 
-    <div class="container-fluid">
-      <div class="row-fluid" ng-view></div>
+    <div class="container">
+      <div class="row" ng-view></div>
 
       <hr>
 
@@ -80,11 +70,7 @@
         <p class="text-center">&copy; Comand UK 2013</p>
       </footer>
 
-    </div><!--/.fluid-container-->
-
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+    </div>
 
 <!-- @if NODE_ENV == 'DEV' -->  
     <script src="js/jquery.js"></script>

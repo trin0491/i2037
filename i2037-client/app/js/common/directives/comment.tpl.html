@@ -10,25 +10,28 @@
     </div>
   </div>
   <div ng-switch-when="edit">
-    <textarea style="width:95%" placeholder="Enter comment..."    
+    <div class="i2-comment">
+    <textarea class="form-control" placeholder="Enter comment..."    
       rows="{{textRows}}" 
       ng-focus="onTextFocus()"
-      ng-model="comment.text"></textarea>
+      ng-model="comment.text">
+    </textarea>
+    </div>
     <div ng-show="showActions">
-      <button class="btn btn-mini btn-primary" 
+      <button class="btn btn-xs btn-primary" 
         ng-click="save()"
         ng-disabled="!canSave()">
-        <i class="icon-comment icon-white"></i> {{saveLabel}}</button>
-      <button class="btn btn-mini" 
+        <span class="glyphicon glyphicon-comment glyphicon-white"></span> {{saveLabel}}</button>
+      <button class="btn btn-xs btn-default" 
         ng-click="cancel()"
         ng-disabled="!canCancel">Cancel</button>        
-      <button class="btn btn-mini pull-right" 
+      <button class="btn btn-xs btn-default pull-right" 
         ng-disabled="!canDelete()" 
         ng-click="delete()"
         ng-mouseenter="deleteCls='btn-danger'" 
-        ng-mouseleave="deleteCls=''" 
+        ng-mouseleave="deleteCls='btn-default'" 
         ng-class="deleteCls">
-        <i class="icon-remove"></i> Delete</button>      
+        <span class="glyphicon glyphicon-remove"></span> Delete</button>      
     </div>
   </div>
 </div>

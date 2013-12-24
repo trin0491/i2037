@@ -1,24 +1,33 @@
-<div class="span12">
+<div class="col-md-12">
     <div class="page-header">
         <h2>Journal</h2>
     </div>
-    <div class="row-fluid">
-        <div class="span6">
-            <form class="form-inline" ng-controller="DatePickerCtrl">
-                <div class="input-append">
-                    <input type="text" datepicker-popup="dd-MMMM-yyyy" ng-model="dt" is-open="opened" min="minDate" max="maxDate" 
+    <div class="row">
+        <form class="form-inline" role="form" ng-controller="DatePickerCtrl">
+            <div class="form-group col-md-3">
+                <label class="sr-only" for="calendar">Calendar</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="calendar" 
+                        datepicker-popup="dd-MMMM-yyyy" 
+                        ng-model="dt" 
+                        is-open="opened" 
+                        min="minDate" 
+                        max="maxDate" 
                         datepicker-options="dateOptions" 
                         date-disabled="disabled(date, mode)" 
                         ng-required="true"
-                        show-weeks="false" />               
-                    <button class="btn" ng-click="open()"><i class="icon-calendar"></i></button>
+                        show-weeks="false" />
+                    <span class="input-group-btn">               
+                        <button class="btn btn-default" ng-click="open()"><span class="glyphicon glyphicon-calendar"></span></button>
+                    </span>
                 </div>
-                <i2-button i2-state="state" type="submit" ng-click="submit()">Submit</i2-button> 
-            </form>
-        </div>
-    </div>    
-    <div class="row-fluid">
-        <div class="span3" ng-controller="TimelineCtrl">
+            </div>
+            <i2-button i2-state="state" type="submit" ng-click="submit()">Submit</i2-button>                                 
+        </form>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-3" ng-controller="TimelineCtrl">
             <div i2-timeline="entries" i2-selected="selected">
                 <div ng-controller="TimelineEntryCtrl">
                     <div class="well" i2-spin-show="showSpinner">
@@ -39,7 +48,7 @@
                 </div>
             </div>
         </div>        
-        <div class="span9" ng-controller="MovesMapCtrl">
+        <div class="col-md-9" ng-controller="MovesMapCtrl">
             <div i2-map i2-places="places" i2-paths="paths" i2-selected="selected"></div>
         </div>
     </div>

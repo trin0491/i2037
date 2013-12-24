@@ -2,34 +2,36 @@
   <h3>{{title}}</h3>
 </div>
 <div class="modal-body">
-  <form name="login" class="form-horizontal">
-    <div class="control-group">
-      <label class="control-label" for="inputUsername">Email</label>
-      <div class="controls">
-        <div class="input-prepend">
-          <span class="add-on"><i class="icon-envelope"></i></span>
-          <input type="text" id="inputUsername" placeholder="Username" ng-model="authDetails.userName" ng-readonly="authDetails.userNameReadonly" required>
-        </div>              
-      </div>  
-    </div>
-    <div class="control-group">
-      <label class="control-label" for="inputPassword">Password</label>
-      <div class="controls">
-        <div class="input-prepend">
-          <span class="add-on"><i class="icon-lock"></i></span>
-          <input type="password" id="inputPassword" placeholder="Password" ng-model="authDetails.password" required>
-        </div>      
+  <form name="loginForm" class="form-horizontal" role="form">
+    <div class="form-group" ng-class="getCls(loginForm.username)">
+      <label class="control-label col-md-3" for="inputUsername">Email</label>
+      <div class="input-group col-md-6">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+        <input type="email" class="form-control" id="inputUsername" name="username" placeholder="Username" ng-model="authDetails.userName" ng-readonly="authDetails.userNameReadonly" required>
       </div>
+      <p class="help-block col-md-offset-3" ng-show="showErr(loginForm.username, 'email')">Username must be an email address</p>
+      <p class="help-block col-md-offset-3" ng-show="showErr(loginForm.username, 'required')">Username is required</p>  
     </div>
-    <div class="control-group">
-      <label class="control-label" for="inputRememberMe">Remember Me</label>
-      <div class="controls">
-        <input type="checkbox" id="inputRememberMe" ng-model="authDetails.rememberMe">
+    <div class="form-group" ng-class="getCls(loginForm.password)">
+      <label class="control-label col-md-3" for="inputPassword">Password</label>
+      <div class="input-group col-md-6">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+        <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" ng-model="authDetails.password" required>
+      </div>
+      <p class="help-block col-md-offset-3" ng-show="showErr(loginForm.password, 'required')">Password is required</p>              
+    </div>
+    <div class="form-group">
+      <div class="col-md-offset-3 col-md-6">
+        <div class="checkbox">
+          <label for="inputRememberMe">
+            <input type="checkbox" id="inputRememberMe" ng-model="authDetails.rememberMe"> Remember me
+          </label>        
+        </div>
       </div>
     </div>    
   </form>
 </div>
 <div class="modal-footer">
   <button ng-click="submit()" class="btn btn-primary">Submit</button>
-  <button ng-click="cancel()" class="btn">Cancel</button>  
+  <button ng-click="cancel()" class="btn btn-default">Cancel</button>  
 </div>

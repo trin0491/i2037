@@ -144,6 +144,25 @@
       authDetails.userName = $.cookie('userName');
     }
 
+    $scope.getCls = function(ngModelController) {
+      if (!ngModelController) {
+        return {};
+      } else {
+        return {
+          'has-error': ngModelController.$invalid && ngModelController.$dirty,
+          'has-success': ngModelController.$valid && ngModelController.$dirty
+        };      
+      }
+    };
+
+    $scope.showErr = function(ngModelController, validation) {
+      if (ngModelController) {
+        return ngModelController.$dirty && ngModelController.$error[validation];
+      } else {
+        return false;
+      }
+    };
+
     $scope.cancel = function(){
       $modalInstance.close();
     };
@@ -183,8 +202,8 @@
         return {};
       } else {
         return {
-          error: ngModelController.$invalid && ngModelController.$dirty,
-          success: ngModelController.$valid && ngModelController.$dirty
+          'has-error': ngModelController.$invalid && ngModelController.$dirty,
+          'has-success': ngModelController.$valid && ngModelController.$dirty
         };      
       }
     };
