@@ -26,36 +26,38 @@
 <body>
 
     <nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="NavBarCtrl">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#i2037-navbar-collapse">
-          <span class="sr-only">Toggle Navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">i2037</a>        
-      </div>
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#i2037-navbar-collapse">
+            <span class="sr-only">Toggle Navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">i2037</a>        
+        </div>
 
-      <div class="navbar-collapse collapse" id="i2037-navbar-collapse" ng-switch="state" ng-cloak>
-        <ul class="nav navbar-nav navbar-right" ng-switch-when="LOGGED_IN">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{user.userName}} <b class="caret"></b></a>
-            <ul class="dropdown-menu" role="menu">
-              <li ng-show="user"><a tabindex="-1" href="#" ng-click="logout()">Logout</a></li>
-              <li ng-show="user"><a tabindex="-1" href="#" ng-click="logout()">Change Password</a></li>
-            </ul>
-          </li>
-        </ul>
-        <div class="nav navbar-nav navbar-right" ng-switch-default>
-          <button type="button" class="btn btn-primary navbar-btn" ng-click="login()">Log In</button>            
-          <button type="button" class="btn btn-warning navbar-btn" ng-click="signUp()">Sign Up</button>            
-        </div>            
-        <ul class="nav navbar-nav">
-          <li ng-class="{active: $location.path() == '/home'}"><a href="#/home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-          <li ng-show="state == 'LOGGED_IN'" ng-class="{active: $location.path().indexOf(menu.path) > -1}" ng-repeat="menu in menus" ng-cloak>
-            <a href="#{{menu.path}}"><span class="glyphicon glyphicon-book"></span> {{menu.name}}</a>
-          </li>
-        </ul>
+        <div class="navbar-collapse collapse" id="i2037-navbar-collapse" ng-switch="state" ng-cloak>
+          <ul class="nav navbar-nav navbar-right" ng-switch-when="LOGGED_IN">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{user.userName}} <b class="caret"></b></a>
+              <ul class="dropdown-menu" role="menu">
+                <li ng-show="user"><a tabindex="-1" href="#" ng-click="logout()">Logout</a></li>
+                <li ng-show="user"><a tabindex="-1" href="#" ng-click="logout()">Change Password</a></li>
+              </ul>
+            </li>
+          </ul>
+          <div class="nav navbar-nav navbar-right" ng-switch-default>
+            <button type="button" class="btn btn-primary navbar-btn" ng-click="login()">Log In</button>            
+            <button type="button" class="btn btn-warning navbar-btn" ng-click="signUp()">Sign Up</button>            
+          </div>            
+          <ul class="nav navbar-nav">
+            <li ng-class="{active: $location.path() == '/home'}"><a href="#/home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+            <li ng-show="state == 'LOGGED_IN'" ng-class="{active: $location.path().indexOf(menu.path) > -1}" ng-repeat="menu in menus" ng-cloak>
+              <a href="#{{menu.path}}"><span class="glyphicon glyphicon-book"></span> {{menu.name}}</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
 
