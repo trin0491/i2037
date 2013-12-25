@@ -1,6 +1,4 @@
 build/*
 node_modules/*
 logs/*
-i2037.sublime-workspace
-i2037.sublime-project
 !.gitkeep
