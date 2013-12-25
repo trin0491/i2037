@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"padd",
+				"padding"
+			],
+			[
+				"padding-",
+				"padding-bottom"
+			],
+			[
 				"eval",
 				"evalShowActions"
 			],
@@ -124,26 +132,10 @@
 	"buffers":
 	[
 		{
-			"file": "app/js/common/directives/timeline.js",
+			"file": "app/partials/recipes.html",
 			"settings":
 			{
-				"buffer_size": 1137,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/js/common/directives/timeline.tpl.html",
-			"settings":
-			{
-				"buffer_size": 531,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "test/unit/common/directives/timeline.spec.js",
-			"settings":
-			{
-				"buffer_size": 3680,
+				"buffer_size": 3566,
 				"line_ending": "Unix"
 			}
 		},
@@ -159,15 +151,39 @@
 			"file": "app/js/common/directives/comment.tpl.html",
 			"settings":
 			{
-				"buffer_size": 1232,
+				"buffer_size": 1356,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/js/moves/moves.js",
+			"file": "app/css/app.css",
 			"settings":
 			{
-				"buffer_size": 8478,
+				"buffer_size": 221,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/partials/home.html",
+			"settings":
+			{
+				"buffer_size": 687,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/partials/wineview.html",
+			"settings":
+			{
+				"buffer_size": 2947,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/partials/wineform.html",
+			"settings":
+			{
+				"buffer_size": 3182,
 				"line_ending": "Unix"
 			}
 		}
@@ -200,58 +216,90 @@
 	},
 	"file_history":
 	[
-		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/comments.js",
+		"/Users/richard/src/i2037/i2037-client/app/partials/cage.html",
+		"/Users/richard/src/i2037/i2037-client/app/index.html",
+		"/Users/richard/src/i2037/i2037-client/app/partials/moves-place.html",
+		"/Users/richard/src/i2037/i2037-client/app/js/app.js",
 		"/Users/richard/src/i2037/i2037-client/test/unit/common/directives/comment.spec.js",
 		"/Users/richard/src/i2037/i2037-client/node_modules/grunt-contrib-clean/docs/clean-options.md",
 		"/Users/richard/src/i2037/i2037-client/app/js/cage/cage.js",
 		"/Users/richard/src/i2037/i2037-client/node_modules/grunt-contrib-concat/tasks/lib/comment.js",
+		"/Users/richard/src/i2037/i2037-client/build/tmp/js/dev/common/directives/comment.js",
+		"/Users/richard/src/i2037/i2037-client/node_modules/grunt-recess/node_modules/recess/node_modules/less/lib/less/tree/comment.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/comments.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/comment.js",
+		"/Users/richard/src/i2037/i2037-client/app/partials/journal-calendar.html",
 		"/Users/richard/src/i2037/i2037-client/app/partials/journal-date.html",
+		"/Users/richard/src/i2037/i2037-client/app/partials/wineform.html",
+		"/Users/richard/src/i2037/i2037-client/app/partials/grapes.html",
+		"/Users/richard/src/i2037/i2037-client/app/partials/wineview.html",
+		"/Users/richard/src/i2037/i2037-client/app/partials/loginform.html",
+		"/Users/richard/src/i2037/i2037-client/node_modules/grunt/node_modules/iconv-lite/generation/generate-singlebyte.js",
+		"/Users/richard/src/i2037/i2037-client/node_modules/grunt-contrib-nodeunit/node_modules/nodeunit/node_modules/tap/node_modules/runforcover/node_modules/bunker/example/tiny.js",
+		"/Users/richard/src/i2037/i2037-client/node_modules/grunt-recess/node_modules/recess/node_modules/less/lib/less/tree/ratio.js",
+		"/Users/richard/src/i2037/i2037-client/node_modules/grunt-contrib-watch/node_modules/gaze/test/watch_race_test.js",
+		"/Users/richard/src/i2037/i2037-client/node_modules/grunt/node_modules/coffee-script/Rakefile",
+		"/Users/richard/src/i2037/i2037-client/app/partials/recipes.html",
+		"/Users/richard/src/i2037/i2037-client/app/js/cellar/cellar.js",
+		"/Users/richard/src/i2037/i2037-client/app/partials/signupform.html",
+		"/Users/richard/src/i2037/i2037-client/app/index-async.html",
+		"/Users/richard/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/spinner.js",
-		"/Users/richard/src/i2037/i2037-client/app/index.html",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/cellar.js",
+		"/Users/richard/src/i2037/i2037-client/node_modules/grunt-recess/node_modules/recess/node_modules/less/node_modules/ycssmin/tests/files/dollar-header.css",
+		"/Users/richard/src/i2037/i2037-client/node_modules/grunt-contrib-nodeunit/node_modules/nodeunit/deps/ejs/node_modules/expresso/deps/jscoverage/doc/example-jsunit/jsunit/app/main-loader.html",
+		"/Users/richard/src/i2037/i2037-client/app/js/recipes/recipes.js",
+		"/Users/richard/src/i2037/i2037-client/node_modules/grunt-contrib-nodeunit/node_modules/nodeunit/deps/ejs/node_modules/expresso/deps/jscoverage/tests/recursive-exclude.sh",
 		"/Users/richard/src/i2037/i2037-client/Gruntfile.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/comment.tpl.html",
+		"/Users/richard/src/i2037/i2037-client/test/unit/cellar/cellar.spec.js",
+		"/Users/richard/src/i2037/i2037-client/test/unit/common/directives/button.spec.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/button.js",
+		"/Users/richard/src/i2037/i2037-client/bower_components/bootstrap/less/button-groups.less",
+		"/Users/richard/src/i2037/i2037-client/bower_components/angular-bootstrap/ui-bootstrap-tpls-0.7.0.js",
+		"/Users/richard/src/i2037/i2037-client/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js",
+		"/Users/richard/src/i2037/i2037-client/bower_components/angular-bootstrap/ui-bootstrap.min.js",
+		"/Users/richard/src/i2037/i2037-client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js",
+		"/Users/richard/src/i2037/i2037-client/bower_components/angular-bootstrap/ui-bootstrap.js",
+		"/Users/richard/src/i2037/i2037-client/node_modules/grunt-contrib-nodeunit/node_modules/nodeunit/node_modules/tap/test/undefined_indented.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/user.js",
+		"/Users/richard/src/i2037/i2037-client/bower_components/angular-bootstrap/ui-bootstrap-tpls-0.8.0-SNAPSHOT.js",
+		"/Users/richard/src/i2037/i2037-client/package.json",
+		"/Users/richard/src/i2037/i2037-client/.gitignore",
+		"/Users/richard/src/i2037/i2037-client/app/css/app.css",
+		"/Users/richard/src/i2037/i2037-client/node_modules/grunt/node_modules/js-yaml/node_modules/argparse/lib/argument_parser.js",
+		"/Users/richard/src/i2037/i2037-client/node_modules/grunt/AUTHORS",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/timeline.js",
+		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/timeline.tpl.html",
+		"/Users/richard/src/i2037/i2037-client/test/unit/common/directives/timeline.spec.js",
+		"/Users/richard/src/i2037/i2037-client/app/partials/home.html",
+		"/Users/richard/src/i2037/i2037-client/node_modules/grunt-contrib-uglify/test/fixtures/expected/compress_mangle_except.js",
+		"/Users/richard/src/i2037/i2037-client/bower_components/jquery/component.json",
+		"/Users/richard/src/i2037/i2037-client/app/js/moves/moves.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/moves/journal-directives.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/moves/journal-directives.tpl.html",
 		"/Users/richard/src/i2037/i2037-client/test/unit/moves/journal-directives.spec.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/moves/moves.js",
-		"/Users/richard/src/i2037/i2037-client/app/partials/cage.html",
 		"/Users/richard/src/i2037/i2037-client/app/js/moves/moves-model.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/timeline.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/moves.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/map.js",
-		"/Users/richard/src/i2037/i2037-client/app/partials/wineform.html",
-		"/Users/richard/src/i2037/i2037-client/app/partials/wineview.html",
-		"/Users/richard/src/i2037/i2037-client/app/js/cellar/cellar.js",
 		"/Users/richard/src/i2037/i2037-client/config/karma.conf.js",
 		"/Users/richard/src/i2037/i2037-client/app/partials/slickgrid.html",
 		"/Users/richard/src/i2037/i2037-client/build/dev/templates/app.js",
-		"/Users/richard/src/i2037/i2037-client/package.json",
-		"/Users/richard/src/i2037/i2037-client/app/js/app.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/services/environment.js",
 		"/Users/richard/src/i2037/i2037-client/build/release/js/1.0.0/i2037-client.min.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/cellar.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/user.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/services/services.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/button.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/directives/directives.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/filters.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/common/resources/foursquare.js",
 		"/Users/richard/src/i2037/i2037-client/test/unit/moves/moves-model.spec.js",
 		"/Users/richard/src/i2037/i2037-client/app/js/moves/moves-filters.js",
-		"/Users/richard/src/i2037/i2037-client/app/js/recipes/recipes.js",
-		"/Users/richard/src/i2037/i2037-client/app/partials/journal-calendar.html",
 		"/Users/richard/src/angular-app/client/gruntFile.js",
-		"/Users/richard/src/i2037/i2037-client/app/partials/loginform.html",
-		"/Users/richard/src/i2037/i2037-client/app/partials/signupform.html",
 		"/Users/richard/src/i2037/i2037-client/app/lib/ui-bootstrap/ui-bootstrap-tpls.js",
 		"/Users/richard/src/i2037/i2037-client/app/lib/ui-bootstrap/ui-bootstrap-tpls-0.5.0.js",
-		"/Users/richard/src/i2037/i2037-client/test/unit/cellar/cellar.spec.js",
-		"/Users/richard/src/i2037/i2037-client/test/unit/common/directives/button.spec.js",
-		"/Users/richard/src/i2037/i2037-client/test/unit/common/directives/timeline.spec.js",
 		"/Users/richard/src/i2037/i2037-client/build/tmp/js/dev/moves/journal-directives.js",
 		"/Users/richard/src/i2037/i2037-client/app/partials/journal-comment.tpl.html",
 		"/Users/richard/src/i2037/i2037-client/app/lib/angular/angular.js",
 		"/Users/richard/src/i2037/i2037-client/test/lib/angular/angular-mocks.js",
-		"/Users/richard/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/Users/richard/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
 		"/Users/richard/Library/Application Support/Sublime Text 3/Packages/User/HTML.sublime-settings",
 		"/Users/richard/src/i2037/i2037-client/app/partials/journal-comment.html",
@@ -271,6 +319,7 @@
 		"height": 93.0,
 		"where_history":
 		[
+			"/Users/richard/src/i2037/i2037-client/app"
 		]
 	},
 	"find_state":
@@ -278,6 +327,43 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"View details",
+			"<a ",
+			"</li>",
+			"<li>",
+			"ul",
+			" \n",
+			"btn-small",
+			"</i>",
+			"<i ",
+			"signUpForm",
+			"span",
+			"\n          ",
+			"col-md-9",
+			"col-md-3",
+			"col-md-9",
+			"class=\"input-group\"",
+			"input-group",
+			"icon-",
+			"</i>",
+			"<i ",
+			"i",
+			"input-group-add-on",
+			"add-on",
+			"input-prepend",
+			"help-inline",
+			"span3",
+			"mini",
+			"                 ",
+			"modal",
+			"span",
+			"span4",
+			"offset4",
+			"offset",
+			"control-group",
+			"toggle",
+			"row-fluid",
+			"container-fluid",
 			"expand",
 			"momento",
 			"Copy",
@@ -368,18 +454,7 @@
 			"venue",
 			"addr",
 			"property",
-			"Property",
-			"property",
-			"a",
-			"Moves",
-			"dateStr",
-			"Moves",
-			"movesProfile",
-			"MovesCtrl",
-			"login",
-			"Login",
-			"login",
-			"changed"
+			"Property"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -387,6 +462,11 @@
 		"regex": false,
 		"replace_history":
 		[
+			"col-md-4",
+			"col-md-offset-4",
+			"form-group",
+			"row",
+			"container"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -397,29 +477,29 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app/js/common/directives/timeline.js",
+					"file": "app/partials/recipes.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1137,
+						"buffer_size": 3566,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								545,
-								545
+								3559,
+								3559
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
@@ -427,71 +507,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "app/js/common/directives/timeline.tpl.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 531,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								382,
-								382
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "test/unit/common/directives/timeline.spec.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3680,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								413,
-								413
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 829.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "app/js/common/directives/comment.js",
 					"semi_transient": false,
 					"settings":
@@ -503,8 +523,8 @@
 						"selection":
 						[
 							[
-								1840,
-								1840
+								0,
+								0
 							]
 						],
 						"settings":
@@ -514,27 +534,115 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 671.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 2,
 					"file": "app/js/common/directives/comment.tpl.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1232,
+						"buffer_size": 1356,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								451,
-								451
+								483,
+								483
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/css/app.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 221,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								30,
+								30
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/partials/home.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 687,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								150,
+								150
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/partials/wineview.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2947,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1713,
+								1713
 							]
 						],
 						"settings":
@@ -551,25 +659,25 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "app/js/moves/moves.js",
+					"buffer": 6,
+					"file": "app/partials/wineform.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8478,
+						"buffer_size": 3182,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6938,
-								6938
+								312,
+								126
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
@@ -577,7 +685,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 6,
 					"type": "text"
 				}
 			]
@@ -621,7 +729,7 @@
 	"project": "i2037-client.sublime-project",
 	"replace":
 	{
-		"height": 42.0
+		"height": 64.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -630,12 +738,132 @@
 		"selected_items":
 		[
 			[
+				"recip",
+				"app/partials/recipes.html"
+			],
+			[
+				"app.html",
+				"app/partials/home.html"
+			],
+			[
+				"wineview",
+				"app/partials/wineview.html"
+			],
+			[
+				"app.css",
+				"app/css/app.css"
+			],
+			[
+				"comment.tp",
+				"app/js/common/directives/comment.tpl.html"
+			],
+			[
+				"comment.j",
+				"app/js/common/directives/comment.js"
+			],
+			[
+				"wineform",
+				"app/partials/wineform.html"
+			],
+			[
+				"winevie",
+				"app/partials/wineview.html"
+			],
+			[
+				"journal-date",
+				"app/partials/journal-date.html"
+			],
+			[
+				"in",
+				"app/index.html"
+			],
+			[
+				"journal",
+				"app/partials/journal-calendar.html"
+			],
+			[
+				"login",
+				"app/partials/loginform.html"
+			],
+			[
+				"index",
+				"app/index.html"
+			],
+			[
+				"journam",
+				"app/partials/journal-calendar.html"
+			],
+			[
+				"signup",
+				"app/partials/signupform.html"
+			],
+			[
+				"app.js",
+				"app/js/app.js"
+			],
+			[
+				"cellar.j",
+				"app/js/cellar/cellar.js"
+			],
+			[
+				"sign",
+				"app/partials/signupform.html"
+			],
+			[
+				"cellar.",
+				"app/js/cellar/cellar.js"
+			],
+			[
+				"cellar.spe",
+				"test/unit/cellar/cellar.spec.js"
+			],
+			[
 				"comment.tpl",
 				"app/js/common/directives/comment.tpl.html"
 			],
 			[
+				"comment.sp",
+				"test/unit/common/directives/comment.spec.js"
+			],
+			[
 				"comment",
 				"app/js/common/directives/comment.js"
+			],
+			[
+				"button.",
+				"test/unit/common/directives/button.spec.js"
+			],
+			[
+				"button",
+				"app/js/common/directives/button.js"
+			],
+			[
+				"ui-bo",
+				"bower_components/angular-bootstrap/ui-bootstrap-tpls-0.7.0.js"
+			],
+			[
+				".g",
+				".gitignore"
+			],
+			[
+				"pack",
+				"package.json"
+			],
+			[
+				"grunt",
+				"Gruntfile.js"
+			],
+			[
+				"cellar.js",
+				"app/js/cellar/cellar.js"
+			],
+			[
+				"inde",
+				"app/index.html"
+			],
+			[
+				"comment.spec",
+				"test/unit/common/directives/comment.spec.js"
 			],
 			[
 				"gru",
@@ -654,16 +882,8 @@
 				"app/js/common/directives/spinner.js"
 			],
 			[
-				"journal",
-				"app/partials/journal-date.html"
-			],
-			[
 				"moves",
 				"app/js/moves/moves.js"
-			],
-			[
-				"journal-date",
-				"app/partials/journal-date.html"
 			],
 			[
 				"journal-",
@@ -702,16 +922,8 @@
 				"Gruntfile.js"
 			],
 			[
-				"wineform",
-				"app/partials/wineform.html"
-			],
-			[
 				"wine",
 				"app/partials/wineview.html"
-			],
-			[
-				"cellar.j",
-				"app/js/cellar/cellar.js"
 			],
 			[
 				"cage.ht",
@@ -726,16 +938,8 @@
 				"app/partials/cage.html"
 			],
 			[
-				"app.js",
-				"build/dev/templates/app.js"
-			],
-			[
 				"karm",
 				"config/karma.conf.js"
-			],
-			[
-				"pack",
-				"package.json"
 			],
 			[
 				"journal.",
@@ -762,10 +966,6 @@
 				"app/js/cellar/cellar.js"
 			],
 			[
-				"grunt",
-				"Gruntfile.js"
-			],
-			[
 				"i2037-client",
 				"build/release/js/1.0.0/i2037-client.min.js"
 			],
@@ -776,10 +976,6 @@
 			[
 				"map.",
 				"app/js/common/directives/map.js"
-			],
-			[
-				"inde",
-				"app/index.html"
 			],
 			[
 				"comment.js",
@@ -808,10 +1004,6 @@
 			[
 				"filter",
 				"app/js/common/filters.js"
-			],
-			[
-				"cellar.js",
-				"app/js/common/resources/cellar.js"
 			],
 			[
 				"comments",
@@ -850,10 +1042,6 @@
 				"app/js/recipes/recipes.js"
 			],
 			[
-				"index",
-				"app/index.html"
-			],
-			[
 				"index.html",
 				"app/index.html"
 			],
@@ -864,10 +1052,6 @@
 			[
 				"cellar",
 				"app/js/cellar/cellar.js"
-			],
-			[
-				"signup",
-				"app/partials/signupform.html"
 			],
 			[
 				"loginform",
@@ -882,10 +1066,6 @@
 				"test/unit/common/directives/timeline.spec.js"
 			],
 			[
-				"button",
-				"app/js/common/directives/button.js"
-			],
-			[
 				"button.spe",
 				"test/unit/common/directives/button.spec.js"
 			],
@@ -896,14 +1076,6 @@
 			[
 				"angular",
 				"app/lib/angular/angular.js"
-			],
-			[
-				"cellar.",
-				"app/js/common/resources/cellar.js"
-			],
-			[
-				"comment.j",
-				"app/js/common/resources/comments.js"
 			],
 			[
 				"move.j",
@@ -998,7 +1170,7 @@
 	"show_minimap": false,
 	"show_open_files": false,
 	"show_tabs": true,
-	"side_bar_visible": false,
+	"side_bar_visible": true,
 	"side_bar_width": 189.0,
 	"status_bar_visible": true,
 	"template_settings":

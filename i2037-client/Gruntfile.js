@@ -62,7 +62,8 @@ module.exports = function(grunt) {
       bootstrap: {
         files: [
           {expand:true, cwd: '<%= dir.bower %>/bootstrap/dist', src:['css/**'], dest: '<%= dir.dist %>/'},
-          {expand:true, cwd: '<%= dir.bower %>/bootstrap/dist', src:['fonts/**'], dest: '<%= dir.dist %>/'}                    
+          {expand:true, cwd: '<%= dir.bower %>/bootstrap/dist', src:['fonts/**'], dest: '<%= dir.dist %>/'},
+          {expand:true, cwd: '<%= dir.bower %>/bootstrap/dist', src:['js/**'], dest: '<%= dir.dist %>/'}                    
         ]
       }
     },
@@ -120,16 +121,6 @@ module.exports = function(grunt) {
         src: [ '<%= dir.bower %>/spinjs/spin.js' ],
         dest: '<%= dir.dist %>/js/spin.js'
       },
-      bootstrap: {
-        src: [ 
-          '<%= dir.bower %>/bootstrap/js/modal.js',
-//          '<%= dir.bower %>/bootstrap/js/typeahead.js',
-          '<%= dir.bower %>/bootstrap/js/collapse.js',
-          '<%= dir.bower %>/bootstrap/js/transition.js',
-          '<%= dir.bower %>/bootstrap/js/dropdown.js',                              
-        ],
-        dest: '<%= dir.dist %>/js/bootstrap.js'
-      }
     },
     uglify: {
       options: {
@@ -150,11 +141,7 @@ module.exports = function(grunt) {
       spinjs: {
         src: [ '<%= concat.spinjs.src %>' ],
         dest: '<%= dir.dist %>/js/spin.min.js'
-      },
-      bootstrap: {
-        src: [ '<%= concat.bootstrap.src %>'],
-        dest: '<%= dir.dist %>/js/bootstrap.min.js'
-      }            
+      }          
     },
     karma: {
       unit: { options: karmaConfig('config/karma.conf.js', { singleRun:true, autoWatch: false}) },
