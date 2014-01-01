@@ -227,5 +227,21 @@
   }])
 
   .controller('HomeCtrl', [function () {}])
+
+  .controller('ViewChangeCtrl', ['$scope', function($scope) {
+
+    $scope.$on('$routeChangeStart', function() {
+      $scope.showSpinner = true;
+    });
+
+    $scope.$on('$routeChangeSuccess', function() {
+      $scope.showSpinner = false;
+    });
+
+    $scope.$on('$routeChangeError', function() {
+      $scope.showSpinner = false;
+    });
+
+  }])
   ;
 }());
