@@ -2,28 +2,27 @@
     <div class="page-header">
         <h2>Journal</h2>
     </div>
-    <div class="row">
-        <form class="form-inline" role="form" ng-controller="DatePickerCtrl">
-            <div class="form-group col-md-3">
-                <label class="sr-only" for="calendar">Calendar</label>
-                <div class="input-group">
-                    <input type="text" class="form-control" id="calendar" 
-                        datepicker-popup="dd-MMMM-yyyy" 
-                        ng-model="dt" 
-                        is-open="opened" 
-                        min="minDate" 
-                        max="maxDate" 
-                        datepicker-options="dateOptions" 
-                        date-disabled="disabled(date, mode)" 
-                        ng-required="true"
-                        show-weeks="false" />
-                    <span class="input-group-btn">               
-                        <button class="btn btn-default" ng-click="open()"><span class="glyphicon glyphicon-calendar"></span></button>
-                    </span>
-                </div>
+    <div class="row" ng-controller="DatePickerCtrl">
+        <div class="col-md-3 col-xs-6">
+            <div class="input-group">
+                <input type="text" class="form-control" id="calendar" 
+                    datepicker-popup="dd-MMMM-yyyy" 
+                    ng-model="dt" 
+                    is-open="opened" 
+                    min="minDate" 
+                    max="maxDate" 
+                    datepicker-options="dateOptions" 
+                    date-disabled="disabled(date, mode)" 
+                    ng-required="true"
+                    show-weeks="false" />
+                <span class="input-group-btn">               
+                    <button class="btn btn-default" ng-click="open()"><span class="glyphicon glyphicon-calendar"></span></button>
+                </span>
             </div>
-            <i2-button i2-state="state" type="submit" ng-click="submit()">Submit</i2-button>                                 
-        </form>
+        </div>
+        <div class="col-md-9 col-xs-6">
+            <i2-button i2-state="state" type="submit" ng-click="submit()">Submit</i2-button>
+        </div>                                 
     </div>
     <hr>
     <div class="row">
