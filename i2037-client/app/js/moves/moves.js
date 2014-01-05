@@ -44,6 +44,7 @@ angular.module('i2037.moves', [
 .controller('JournalCtrl', ['$scope', '$rootScope', 'date', 'MovesStoryline', 'MovesPlacesModel', 'MovesPathsModel',
  function($scope, $rootScope, date, MovesStoryline, MovesPlacesModel, MovesPathsModel) {
   
+  $scope.alerts = [];
   $scope.date = date;
 
   function processResponse(storylines) {
@@ -75,10 +76,24 @@ angular.module('i2037.moves', [
     $rootScope.$broadcast('MovesDataLoading');
     var p = loadStoryLine(date).then(function (storyLine) {
       $rootScope.$broadcast('MovesDataLoaded');      
-    }, function(error) {
+    }, function(response) {
+      var msg = 'Failed to load timeline: status: ' + response.status + ' data: ' + response.data;
+      $scope.alerts.push({type: 'danger', msg: msg});      
       $rootScope.$broadcast('MovesDataLoaded');
     });
   }
+
+  $scope.$on('MovesDataLoading', function() {
+    $scope.isTimelineLoading = true;
+  });
+
+  $scope.$on('MovesDataLoaded', function() {
+    $scope.isTimelineLoading = false;
+  });
+
+  $scope.closeAlert = function(index) {
+    $scope.alerts.splice(index, 1);
+  };  
 
   onDateChanged(date);
 }])
@@ -172,7 +187,7 @@ angular.module('i2037.moves', [
 }])
 
 .controller('TimelineEntryCtrl', ['$scope', 'FourSquareVenue', 'Comment', function($scope, FourSquareVenue, Comment) {
-  $scope.showSpinner = false;
+  $scope.isEntryLoading = false;
  
   var CommentPM = function(comment) {
     this.model = comment;
@@ -223,12 +238,12 @@ angular.module('i2037.moves', [
   function load(entry) {
     if(entry.place.type === 'foursquare') {
       if (!entry.venue) {
-        $scope.showSpinner = true;        
+        $scope.isEntryLoading = true;        
         loadVenue(entry.place.foursquareId).then(function(venue) {
           entry.venue = venue;
-          $scope.showSpinner = false;          
+          $scope.isEntryLoading = false;          
         }, function(error) {
-          $scope.showSpinner = false;
+          $scope.isEntryLoading = false;
         });
       }        
     } else {
