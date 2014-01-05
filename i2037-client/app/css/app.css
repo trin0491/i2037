@@ -4,6 +4,9 @@
   display: none !important;
 }
 
+/* angular-bootstrap */
+.nav, .pagination, .carousel a { cursor: pointer; }
+
 .i2-wine-thumbnail {
   height: 10.3em;
   width: 3em;

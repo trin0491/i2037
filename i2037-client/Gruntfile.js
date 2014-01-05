@@ -105,8 +105,7 @@ module.exports = function(grunt) {
           '<%= dir.bower %>/angular-route/angular-route.js',
           '<%= dir.bower %>/angular-resource/angular-resource.js',
           '<%= dir.bower %>/angular-cookies/angular-cookies.js',          
-          // '<%= dir.bower %>/angular-bootstrap/ui-bootstrap-tpls.js',
-          '<%= dir.bower %>/angular-bootstrap/ui-bootstrap-tpls-0.7.0.js'
+          '<%= dir.bower %>/angular-bootstrap/ui-bootstrap-tpls.js'
         ],
         dest: '<%= dir.dist %>/js/angular.js'
       },
