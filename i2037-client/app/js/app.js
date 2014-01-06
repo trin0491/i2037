@@ -228,19 +228,37 @@
 
   .controller('HomeCtrl', [function () {}])
 
-  .controller('ViewChangeCtrl', ['$scope', function($scope) {
+  .controller('ViewPortCtrl', ['$scope', function($scope) {
+    $scope.alerts = [];
 
     $scope.$on('$routeChangeStart', function() {
-      $scope.showSpinner = true;
+      $scope.showViewSpinner = true;
     });
 
     $scope.$on('$routeChangeSuccess', function() {
-      $scope.showSpinner = false;
+      $scope.showViewSpinner = false;
     });
 
     $scope.$on('$routeChangeError', function() {
-      $scope.showSpinner = false;
+      $scope.showViewSpinner = false;
     });
+
+    $scope.$on('ResourceLoading', function(event, name) {
+      $scope.showViewSpinner = true;
+    });
+
+    $scope.$on('ResourceLoaded', function(event, name) {
+      $scope.showViewSpinner = false;
+    });
+
+    $scope.$on('ResourceLoadingError', function(event, name, msg) {
+      $scope.showViewSpinner = false;
+      $scope.alerts.push({type: 'danger', msg: msg});      
+    });
+
+    $scope.closeAlert = function(index) {
+      $scope.alerts.splice(index, 1);
+    };  
 
   }])
   ;

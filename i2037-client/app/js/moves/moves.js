@@ -44,7 +44,6 @@ angular.module('i2037.moves', [
 .controller('JournalCtrl', ['$scope', '$rootScope', 'date', 'MovesStoryline', 'MovesPlacesModel', 'MovesPathsModel',
  function($scope, $rootScope, date, MovesStoryline, MovesPlacesModel, MovesPathsModel) {
   
-  $scope.alerts = [];
   $scope.date = date;
 
   function processResponse(storylines) {
@@ -73,27 +72,14 @@ angular.module('i2037.moves', [
   }
 
   function onDateChanged(date) {
-    $rootScope.$broadcast('MovesDataLoading');
+    $rootScope.$broadcast('ResourceLoading', 'MOVES');
     var p = loadStoryLine(date).then(function (storyLine) {
-      $rootScope.$broadcast('MovesDataLoaded');      
+      $rootScope.$broadcast('ResourceLoaded', 'MOVES');      
     }, function(response) {
       var msg = 'Failed to load timeline: status: ' + response.status + ' data: ' + response.data;
-      $scope.alerts.push({type: 'danger', msg: msg});      
-      $rootScope.$broadcast('MovesDataLoaded');
+      $rootScope.$broadcast('ResourceLoadingError', 'MOVES', msg);
     });
   }
-
-  $scope.$on('MovesDataLoading', function() {
-    $scope.isTimelineLoading = true;
-  });
-
-  $scope.$on('MovesDataLoaded', function() {
-    $scope.isTimelineLoading = false;
-  });
-
-  $scope.closeAlert = function(index) {
-    $scope.alerts.splice(index, 1);
-  };  
 
   onDateChanged(date);
 }])
@@ -124,13 +110,6 @@ angular.module('i2037.moves', [
     }
   };
 
-  $scope.$on('MovesDataLoading', function() {
-    $scope.state = 'LOADING';
-  });
-
-  $scope.$on('MovesDataLoaded', function() {
-    $scope.state = 'default';
-  });
 }])
 
 .controller('MovesSummaryCtrl', ['$scope', 'Moves', 'MovesSummary', function($scope, Moves, MovesSummary) {

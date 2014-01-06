@@ -26,11 +26,6 @@
     </div>
     <hr>
     <div class="row">
-        <div class="col-md-12">
-            <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
-        </div>
-    </div>
-    <div class="row" i2-spin-show="isTimelineLoading">
         <div class="col-md-3" ng-controller="TimelineCtrl">
             <div i2-timeline="entries" i2-selected="selected">
                 <div ng-controller="TimelineEntryCtrl">
