@@ -2,7 +2,6 @@
   'use strict';
 
   angular.module('i2037', [
-      'ngCookies',
       'ui.bootstrap',
       'i2037.recipes',
       'i2037.cellar', 
@@ -168,10 +167,11 @@
     };
 
     $scope.submit = function() {
+      var expireDays = 7;
       if (authDetails.rememberMe && authDetails.userName) {
-        $.cookie('userName', authDetails.userName, { expires: 7 });
+        $.cookie('userName', authDetails.userName, { expires: expireDays });
       } else {
-        $.cookie.removeCookie('userName');
+        $.removeCookie('userName', { expires: expireDays });
       }
 
       User.login(authDetails.userName, authDetails.password).then(function(user) {
