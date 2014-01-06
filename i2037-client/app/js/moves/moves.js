@@ -72,12 +72,12 @@ angular.module('i2037.moves', [
   }
 
   function onDateChanged(date) {
-    $rootScope.$broadcast('ResourceLoading', 'MOVES');
+    $rootScope.$broadcast('Resource::Loading', 'MOVES');
     var p = loadStoryLine(date).then(function (storyLine) {
-      $rootScope.$broadcast('ResourceLoaded', 'MOVES');      
+      $rootScope.$broadcast('Resource::Loaded', 'MOVES');      
     }, function(response) {
       var msg = 'Failed to load timeline: status: ' + response.status + ' data: ' + response.data;
-      $rootScope.$broadcast('ResourceLoadingError', 'MOVES', msg);
+      $rootScope.$broadcast('Resource::LoadingError', 'MOVES', msg);
     });
   }
 
