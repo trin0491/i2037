@@ -61,7 +61,7 @@
     <div class="container" ng-controller="ViewPortCtrl">
       <div class="row">
         <div class="col-md-12">
-          <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+          <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)" ng-cloak>{{alert.msg}}</alert>
         </div>
       </div>    
       <div class="row" i2-spin-show="showViewSpinner" ng-view></div>
