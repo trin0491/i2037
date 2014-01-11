@@ -7,12 +7,13 @@ angular.module('i2037.moves', [
   'i2037.directives.timeline',
   'i2037.directives.spinner',
   'i2037.directives.button',
-  'i2037.directives.comment'
+  'i2037.directives.comment',
+  'journal/journal-date.tpl.html'
 ])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/journal/date/:date', {
-    templateUrl: 'partials/journal-date.html',
+    templateUrl: 'journal/journal-date.tpl.html',
     controller: 'JournalCtrl',
     resolve: {
       date: ['$route', 'Moves', function($route, Moves) { 
