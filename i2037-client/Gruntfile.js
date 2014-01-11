@@ -65,7 +65,12 @@ module.exports = function(grunt) {
           {expand:true, cwd: '<%= dir.bower %>/bootstrap/dist', src:['fonts/**'], dest: '<%= dir.dist %>/'},
           {expand:true, cwd: '<%= dir.bower %>/bootstrap/dist', src:['js/**'], dest: '<%= dir.dist %>/'}                    
         ]
-      }
+      },
+      calendar: {
+        files: [
+          {expand:true, cwd: '<%= dir.bower %>/fullcalendar', src:['*.css'], dest: '<%= dir.dist %>/css'}
+        ]
+      }      
     },
     html2js: {
       app: {
@@ -104,14 +109,16 @@ module.exports = function(grunt) {
           '<%= dir.bower %>/angular/angular.js', 
           '<%= dir.bower %>/angular-route/angular-route.js',
           '<%= dir.bower %>/angular-resource/angular-resource.js',
-          '<%= dir.bower %>/angular-bootstrap/ui-bootstrap-tpls.js'
+          '<%= dir.bower %>/angular-bootstrap/ui-bootstrap-tpls.js',
+          '<%= dir.bower %>/angular-ui-calendar/src/calendar.js',
+          '<%= dir.bower %>/fullcalendar/fullcalendar.js',
         ],
         dest: '<%= dir.dist %>/js/angular.js'
       },
       jquery: {
         src: [
           '<%= dir.bower %>/jquery/jquery.js',
-          '<%= dir.bower %>/jquery.cookie/jquery.cookie.js'          
+          '<%= dir.bower %>/jquery.cookie/jquery.cookie.js',
         ],
         dest: '<%= dir.dist %>/js/jquery.js'
       },
