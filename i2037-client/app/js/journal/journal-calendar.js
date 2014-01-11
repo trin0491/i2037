@@ -69,7 +69,7 @@ angular.module('i2037.journal.calendar', [
   }
 
   function onDayClick(date) {
-    if (date) {
+    if (date && date <= Date.now()) {
       var str = Moves.toDateString(date);
       $scope.$apply(function() {
         $location.path('/journal/date/'+ str);        
