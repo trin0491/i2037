@@ -5,12 +5,13 @@ angular.module('i2037.journal.calendar', [
   'i2037.resources.moves',
   'i2037.moves.model',
   'i2037.directives.daySummary',
-  'ui.calendar'     
+  'ui.calendar',
+  'journal/journal-calendar.tpl.html',     
 ])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/journal', {
-    templateUrl: 'partials/journal-calendar.html',
+    templateUrl: 'journal/journal-calendar.tpl.html',
     controller: 'JournalCalendarCtrl',
     resolve: {
       movesProfile: ['$route', 'MovesProfile', function($route, MovesProfile) {
