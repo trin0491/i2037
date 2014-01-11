@@ -50,14 +50,14 @@ angular.module('i2037.resources.moves', ['i2037.services', 'i2037.moves.filters'
 
 .factory('MovesSummary', ['$http', 'pathFinder', function($http, pathFinder) {
 
-  var url = pathFinder.get('svc/moves/user/summary/daily/');
+  var url = pathFinder.get('svc/moves/user/summary/daily');
 
   var Summary = function(data) {
     angular.extend(this, data);
   };
 
   Summary.get = function(params) {
-    return $http.get(url+params['date']).then(function(response) {
+    return $http.get(url, {params: params}).then(function(response) {
       var summary = new Summary(response.data[0]);
       return summary;
     });

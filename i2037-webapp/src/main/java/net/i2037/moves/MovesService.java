@@ -8,6 +8,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 import org.codehaus.jackson.JsonNode;
 
@@ -21,8 +22,8 @@ public interface MovesService {
 	Map<String, Object> getUserProfile();	
 	
 	@GET
-	@Path("/summary/daily/{date}/")
-	List<?> getDailySummary(@PathParam("date") String date);
+	@Path("/summary/daily")
+	List<?> getDailySummary(@QueryParam("from") String from, @QueryParam("to") String to);
 	
 	@GET
 	@Path("/places/daily/{date}")

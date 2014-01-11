@@ -116,7 +116,7 @@ angular.module('i2037.moves', [
   // date change is no longer raised  
   $scope.$on('DateChanged', function(event, date) {
     var dateStr = Moves.toDateString(date);
-    MovesSummary.get({date: dateStr}).then(function(summary) {
+    MovesSummary.get({from: dateStr, to: dateStr}).then(function(summary) {
       $scope.summary = summary;
     });
   });

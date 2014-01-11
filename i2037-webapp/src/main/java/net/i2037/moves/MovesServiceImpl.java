@@ -40,8 +40,8 @@ public class MovesServiceImpl implements MovesService, TimeLineFeed {
 	}
 
 	@Override
-	public List<?> getDailySummary(String date) {
-		return movesTemplate.getForObject(getUrl("user/summary/daily/" + date), List.class);
+	public List<?> getDailySummary(String from, String to) {
+		return movesTemplate.getForObject(getUrl("user/summary/daily?from={from}&to={to}"), List.class, from, to);
 	}
 
 	@Override
