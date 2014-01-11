@@ -1,34 +1,7 @@
-angular.module('i2037.cage', ['ngRoute', 'i2037.services', 'i2037.directives.comment'])
+angular.module('i2037.cage', ['ngRoute', 'i2037.services'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/cage', {templateUrl: 'partials/cage.html', controller: 'CageCtrl'});
-}])
-
-.controller('CommentTestCtrl', ['$scope', function($scope) {
-
-  function Comment() {
-    this.text = 'A new comment';
-    this.author = 'Richard Priestley';
-    this.isNew = function() {
-      return true;
-    };
-    this.canSave = function() {
-      return true;
-    };
-    this.canDelete = function() {
-      return false;
-    };
-  }
-
-  function makeComment() {
-    return new Comment();
-  }
-
-  $scope.newComment = function() {
-    $scope.comment = makeComment();
-  };
-
-  $scope.comment = makeComment();
 }])
 
 .controller('CageCtrl', ['$scope', 'MovesSummary', 'MovesPlaces', 'MovesStoryline',
