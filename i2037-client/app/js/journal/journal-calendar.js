@@ -34,8 +34,12 @@ angular.module('i2037.journal.calendar', [
   function($scope, $compile, $location, Moves, MovesSummary) {
 
   function eventsFn(start, end, callback) { 
-    var fromStr = Moves.toDateString(start);
-    var toStr = Moves.toDateString(end);
+    // var fromStr = Moves.toDateString(start);
+    // start.setDate(start.getDate()+30); // hack for now
+    // if (start > Date.now()) {
+    //   start = new Date();
+    // }
+    // var toStr = Moves.toDateString(start);
     // MovesSummary.get({from: fromStr, to: toStr}).then(function(summary) {
     //   $scope.summary = summary;
     // });
