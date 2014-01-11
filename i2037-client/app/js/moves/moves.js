@@ -1,5 +1,4 @@
 angular.module('i2037.moves', [
-  'ngRoute',
   'i2037.resources.moves',
   'i2037.resources.foursquare',
   'i2037.resources.comments',
@@ -20,7 +19,7 @@ angular.module('i2037.moves', [
         return Moves.toDate($route.current.params.date); 
       }] 
     }
-  });    
+  });      
 }])
 
 .controller('JournalCtrl', ['$scope', '$rootScope', 'date', 'MovesStoryline', 'MovesPlacesModel', 'MovesPathsModel',

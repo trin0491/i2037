@@ -1,34 +1,5 @@
 <div class="col-md-12">
-    <div class="page-header">
-        <h2>Journal</h2>
-    </div>
-    <div class="row" ng-controller="DatePickerCtrl">
-        <div class="col-md-3 col-xs-6">
-            <div class="input-group">
-                <input type="text" class="form-control" id="calendar" 
-                    datepicker-popup="dd-MMMM-yyyy" 
-                    ng-model="dt" 
-                    is-open="opened" 
-                    min="minDate" 
-                    max="maxDate" 
-                    datepicker-options="dateOptions" 
-                    date-disabled="disabled(date, mode)" 
-                    ng-required="true"
-                    show-weeks="false" />
-                <span class="input-group-btn">               
-                    <button class="btn btn-default" ng-click="open()"><span class="glyphicon glyphicon-calendar"></span></button>
-                </span>
-            </div>
-        </div>
-        <div class="col-md-9 col-xs-6">
-            <i2-button i2-state="state" type="submit" ng-click="submit()">Submit</i2-button>
-        </div>                                 
-    </div>
-    <div class="row">
-        <table class="table table-bordered table-condensed" ng-controller="MovesSummaryCtrl">
-            <tbody>
-                <tr ng-repeat="activity in summary.summary"><th>{{activity.activity | activity }}</th><td>{{activity.duration}}</td></tr>
-            </tbody>
-        </table>            
-    </div>
+  <div class="row">
+    <div ui-calendar="uiConfig.calendar" class="calendar" ng-model="eventSources"></div>
+  </div>
 </div>
