@@ -14,7 +14,9 @@ public class TimeLineServiceImpl implements TimeLineService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(TimeLineServiceImpl.class);
 	private static final DateTimeFormatter DAY_FORMATTER = ISODateTimeFormat.basicDate();
 	
-	private TimeLineFeedLoader loader;
+	private TimeLineEntryLoader entryLoader;
+	
+	private TimeLineSummaryLoader summaryLoader; 
 	
 	/**
 	 * @param date day in "yyyyMMdd" format
@@ -24,20 +26,41 @@ public class TimeLineServiceImpl implements TimeLineService {
 		DateTime startDT = DAY_FORMATTER.parseDateTime(date);
 		DateTime endDT = startDT.plusDays(1);
 		try {
-			return loader.load(startDT.toDate(), endDT.toDate());
+			return entryLoader.loadEntries(startDT.toDate(), endDT.toDate());
 		} catch (InterruptedException e) {
-			LOGGER.warn("FeedLoader was interrupted", e);
+			LOGGER.warn("TimeLine entry loading was interrupted", e);
 			throw new FeedException(e);
 		}
 	}
 
-	public TimeLineFeedLoader getLoader() {
-		return loader;
+	@Override
+	public List<? extends TimeLineSummaryDto> getDailySummary(String from, String to) {
+		DateTime startDT = DAY_FORMATTER.parseDateTime(from);
+		DateTime endDT = DAY_FORMATTER.parseDateTime(to);
+		try {
+			return summaryLoader.loadSummaries(startDT.toDate(), endDT.toDate());
+		} catch (InterruptedException e) {
+			LOGGER.warn("TimeLine summary laoding was interrupted", e);
+			throw new FeedException(e);
+		}		
+	}
+
+	public TimeLineSummaryLoader getSummaryLoader() {
+		return summaryLoader;
 	}
 
 	@Required
-	public void setLoader(TimeLineFeedLoader loader) {
-		this.loader = loader;
+	public void setSummaryLoader(TimeLineSummaryLoader summaryLoader) {
+		this.summaryLoader = summaryLoader;
 	}
 
+	public TimeLineEntryLoader getEntryLoader() {
+		return entryLoader;
+	}
+
+	@Required
+	public void setEntryLoader(TimeLineEntryLoader loader) {
+		this.entryLoader = loader;
+	}	
+	
 }

@@ -7,6 +7,6 @@ import net.i2037.journal.model.TimeLineEntry;
 
 public interface TimeLineFeed {
 
-	Collection<TimeLineEntryDto> load(Date start, Date end);
+	Collection<TimeLineEntryDto> loadEntries(Date start, Date end);
 
 }

@@ -24,12 +24,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(JMockit.class)
-public class TimeLineFeedLoaderTest {
+public class TimeLineEntryLoaderTest {
 
 	private static final Date START = new Date();
 	private static final Date END = new Date(START.getTime() + 1);
 	
-	private TimeLineFeedLoader loader;
+	private TimeLineEntryLoader loader;
 	
 	private ExecutorService executorService;
 	
@@ -45,7 +45,7 @@ public class TimeLineFeedLoaderTest {
 	@Before
 	public void setUp() throws Exception {
 		executorService = Executors.newSingleThreadExecutor();		
-		loader = new TimeLineFeedLoader();
+		loader = new TimeLineEntryLoader();
 		loader.setExecutorService(executorService);
 		loader.setTimeLineEntryDao(mockTimeLineEntryDao);
 		loader.setTimeLineFeeds(Arrays.asList(mockFeed1, mockFeed2));
@@ -62,23 +62,23 @@ public class TimeLineFeedLoaderTest {
 		
 	@Test(expected=IllegalArgumentException.class)
 	public void testStartDateIsNull() throws InterruptedException {
-		loader.load(null, new Date());
+		loader.loadEntries(null, new Date());
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testEndDateIsNull() throws Exception {
-		loader.load(new Date(), null);
+		loader.loadEntries(new Date(), null);
 	}
 	
 	@Test
 	public void testFeedsReturnNothing() throws Exception {
 		new NonStrictExpectations() {{
 			mockTimeLineEntryDao.queryByDateRange(START, END); result = Collections.emptyList();
-			mockFeed1.load(START, END); result = Collections.emptyList();
-			mockFeed2.load(START, END); result = Collections.emptyList();
+			mockFeed1.loadEntries(START, END); result = Collections.emptyList();
+			mockFeed2.loadEntries(START, END); result = Collections.emptyList();
 		}};
 		
-		List<? extends TimeLineEntryDto> entries = loader.load(START, END);
+		List<? extends TimeLineEntryDto> entries = loader.loadEntries(START, END);
 		assertNotNull(entries);
 		assertTrue(entries.isEmpty());
 	}
@@ -89,11 +89,11 @@ public class TimeLineFeedLoaderTest {
 		final Collection<TimeLineEntry> existingEntries = Arrays.asList(entry);
 		new NonStrictExpectations() {{
 			mockTimeLineEntryDao.queryByDateRange(START, END); result = existingEntries;
-			mockFeed1.load(START, END); result = Collections.emptyList();
-			mockFeed2.load(START, END); result = Collections.emptyList();			
+			mockFeed1.loadEntries(START, END); result = Collections.emptyList();
+			mockFeed2.loadEntries(START, END); result = Collections.emptyList();			
 		}};
 		
-		List<? extends TimeLineEntryDto> entries = loader.load(START, END);
+		List<? extends TimeLineEntryDto> entries = loader.loadEntries(START, END);
 		assertNotNull(entries);
 		assertTrue(entries.isEmpty());
 		
@@ -109,11 +109,11 @@ public class TimeLineFeedLoaderTest {
 		final Collection<TimeLineEntry> existingEntries = Collections.emptyList();
 		new NonStrictExpectations() {{
 			mockTimeLineEntryDao.queryByDateRange(START, END); result = existingEntries;
-			mockFeed1.load(START, END); result = Collections.emptyList();
-			mockFeed2.load(START, END); result = Arrays.asList(dto);			
+			mockFeed1.loadEntries(START, END); result = Collections.emptyList();
+			mockFeed2.loadEntries(START, END); result = Arrays.asList(dto);			
 		}};
 		
-		List<? extends TimeLineEntryDto> entries = loader.load(START, END);
+		List<? extends TimeLineEntryDto> entries = loader.loadEntries(START, END);
 		assertNotNull(entries);
 		assertEquals(1, entries.size());
 		assertEquals(dto, entries.get(0));
@@ -130,11 +130,11 @@ public class TimeLineFeedLoaderTest {
 		final Collection<TimeLineEntry> existingEntries = Arrays.asList(entry);
 		new NonStrictExpectations() {{
 			mockTimeLineEntryDao.queryByDateRange(START, END); result = existingEntries;
-			mockFeed1.load(START, END); result = Arrays.asList(dto);
-			mockFeed2.load(START, END); result = Collections.emptyList();			
+			mockFeed1.loadEntries(START, END); result = Arrays.asList(dto);
+			mockFeed2.loadEntries(START, END); result = Collections.emptyList();			
 		}};
 
-		List<? extends TimeLineEntryDto> entries = loader.load(START, END);
+		List<? extends TimeLineEntryDto> entries = loader.loadEntries(START, END);
 		assertNotNull(entries);
 		assertEquals(1, entries.size());
 		assertEquals(dto, entries.get(0));
@@ -149,11 +149,11 @@ public class TimeLineFeedLoaderTest {
 		final Collection<TimeLineEntry> existingEntries = Arrays.asList(entry1, entry2);
 		new NonStrictExpectations() {{
 			mockTimeLineEntryDao.queryByDateRange(START, END); result = existingEntries;
-			mockFeed1.load(START, END); result = Arrays.asList(dto2, dto1);
-			mockFeed2.load(START, END); result = Collections.emptyList();			
+			mockFeed1.loadEntries(START, END); result = Arrays.asList(dto2, dto1);
+			mockFeed2.loadEntries(START, END); result = Collections.emptyList();			
 		}};
 		
-		List<? extends TimeLineEntryDto> entries = loader.load(START, END);
+		List<? extends TimeLineEntryDto> entries = loader.loadEntries(START, END);
 		assertNotNull(entries);
 		assertEquals(2, entries.size());
 		assertEquals(dto1, entries.get(0));

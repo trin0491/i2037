@@ -55,7 +55,7 @@ public class MovesServiceImpl implements MovesService, TimeLineFeed {
 	}
 
 	@Override
-	public Collection<TimeLineEntryDto> load(Date start, Date end) {
+	public Collection<TimeLineEntryDto> loadEntries(Date start, Date end) {
 		DateTime startDt = new DateTime(start);
 		String day = DATE_FORMAT.print(startDt);
 		JsonNode storyline = this.getDailyStoryline(day);

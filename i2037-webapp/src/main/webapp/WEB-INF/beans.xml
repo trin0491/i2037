@@ -44,7 +44,8 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
       </bean>
       <ref bean="movesService"/>
       <bean class="net.i2037.journal.TimeLineServiceImpl">
-        <property name="loader" ref="timeLineFeedLoader" />
+        <property name="entryLoader" ref="timeLineFeedLoader" />
+        <property name="summaryLoader" ref="summaryLoader" />
       </bean>
       <bean class="net.i2037.foursquare.FourSquareServiceImpl">
           <property name="fourSquareTemplate">
@@ -66,10 +67,16 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
     <property name="sessionFactory" ref="sessionFactory" />
   </bean>
 
-  <bean id="timeLineFeedLoader" class="net.i2037.journal.TimeLineFeedLoader">
+  <bean id="timeLineFeedLoader" class="net.i2037.journal.TimeLineEntryLoader">
     <property name="executorService" ref="feedLoaderExecutorService"/>
     <property name="timeLineFeeds" ref="feeds" />
     <property name="timeLineEntryDao" ref="timeLineEntryDao"/>
+  </bean>
+  
+  <bean id="summaryLoader" class="net.i2037.journal.TimeLineSummaryLoader">
+    <property name="executorService" ref="feedLoaderExecutorService"/>
+    <property name="timeLineFeeds" ref="feeds" />
+    <property name="commentDao" ref="commentDao" />  
   </bean>
 
   <util:list id="feeds">

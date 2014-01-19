@@ -11,8 +11,6 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletionService;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorCompletionService;
-import java.util.concurrent.Executor;
 
 import org.springframework.beans.factory.annotation.Required;
 
@@ -20,18 +18,16 @@ import net.i2037.cellar.util.RequestAwareCallable;
 import net.i2037.journal.model.TimeLineEntry;
 import net.i2037.journal.model.TimeLineEntryDao;
 
-public class TimeLineFeedLoader {
+public class TimeLineEntryLoader extends TimeLineLoader {
 
-	private Executor executorService;
-	private Collection<TimeLineFeed> timeLineFeeds;
 	private TimeLineEntryDao timeLineEntryDao;
 	private final Comparator<? super TimeLineEntryDto> timeLineEntryComparator;
 	
-	public TimeLineFeedLoader() {
+	public TimeLineEntryLoader() {
 		timeLineEntryComparator = new TimeLineEntryDtoComparator();
 	}
 	
-	public List<? extends TimeLineEntryDto> load(Date start, Date end) throws InterruptedException {
+	public List<? extends TimeLineEntryDto> loadEntries(Date start, Date end) throws InterruptedException {
 		if (start == null || end == null) {
 			throw new IllegalArgumentException("start and end time must not be null");
 		}
@@ -39,10 +35,31 @@ public class TimeLineFeedLoader {
 	}
 	
 	private List<? extends TimeLineEntryDto> doLoad(final Date start, final Date end) throws InterruptedException {		
-		CompletionService<Collection<TimeLineEntryDto>> ecs = loadEntries(start, end);
+		CompletionService<Collection<TimeLineEntryDto>> ecs = beginLoad(start, end);
 		
 		Set<TimeLineEntry> existingEntries = loadExistingEntries(start, end);
 		
+		List<TimeLineEntryDto> entries = endLoad(ecs);
+
+		for (TimeLineEntryDto dto : entries) {
+			TimeLineEntry entry = toTimeLineEntry(dto);
+			// if existing entries didn't contain it then we need to create it
+			if (!existingEntries.remove(entry)) {
+				timeLineEntryDao.create(entry);
+			} 
+		}		
+		
+		// delete any remaining entries that no longer exist in the feed
+		for (TimeLineEntry orphan : existingEntries) {
+			timeLineEntryDao.delete(orphan);
+		}
+		
+		sortEntries(entries);
+		
+		return entries;
+	}
+
+	private List<TimeLineEntryDto> endLoad(CompletionService<Collection<TimeLineEntryDto>> ecs) throws InterruptedException {
 		List<TimeLineEntryDto> entries = new ArrayList<TimeLineEntryDto>();
 		int n = timeLineFeeds.size();
 		for (int i=0; i < n; ++i) {
@@ -52,23 +69,8 @@ public class TimeLineFeedLoader {
 			} catch (ExecutionException e) {
 				throw new FeedException(e.getCause());
 			}
-			for (TimeLineEntryDto dto : feedResults) {
-				TimeLineEntry entry = toTimeLineEntry(dto);
-				// if existing entries didn't contain it then we need to create it
-				if (!existingEntries.remove(entry)) {
-					timeLineEntryDao.create(entry);
-				} 
-			}
 			entries.addAll(feedResults);
 		}
-		
-		// delete any remaining entries that no longer exist in the feed
-		for (TimeLineEntry orphan : existingEntries) {
-			timeLineEntryDao.delete(orphan);
-		}
-		
-		sortEntries(entries);
-		
 		return entries;
 	}
 
@@ -90,13 +92,13 @@ public class TimeLineFeedLoader {
 		return existingEntries;
 	}
 
-	private CompletionService<Collection<TimeLineEntryDto>> loadEntries(final Date start, final Date end) {
+	private CompletionService<Collection<TimeLineEntryDto>> beginLoad(final Date start, final Date end) {
 		CompletionService<Collection<TimeLineEntryDto>> ecs = newCompletionService();
 		for (final TimeLineFeed feed : getTimeLineFeeds()) {			
 			ecs.submit(new RequestAwareCallable<Collection<TimeLineEntryDto>>() {
 				@Override
 				public Collection<TimeLineEntryDto> doCall() throws Exception {
-					return feed.load(start, end);
+					return feed.loadEntries(start, end);
 				}
 			});
 		}
@@ -107,10 +109,6 @@ public class TimeLineFeedLoader {
 		Collections.sort(entries, timeLineEntryComparator);
 	}
 
-	private CompletionService<Collection<TimeLineEntryDto>> newCompletionService() {
-		return new ExecutorCompletionService<Collection<TimeLineEntryDto>>(getExecutorService());
-	}
-
 	public TimeLineEntryDao getTimeLineEntryDao() {
 		return timeLineEntryDao;
 	}
@@ -118,24 +116,6 @@ public class TimeLineFeedLoader {
 	@Required
 	public void setTimeLineEntryDao(TimeLineEntryDao timeLineEntryDao) {
 		this.timeLineEntryDao = timeLineEntryDao;
-	}
-
-	public Executor getExecutorService() {
-		return executorService;
-	}
-
-	@Required
-	public void setExecutorService(Executor executorService) {
-		this.executorService = executorService;
-	}
-
-	public Collection<TimeLineFeed> getTimeLineFeeds() {
-		return timeLineFeeds;
-	}
-
-	@Required
-	public void setTimeLineFeeds(Collection<TimeLineFeed> timeLineFeeds) {
-		this.timeLineFeeds = timeLineFeeds;
 	}
 	
 }
