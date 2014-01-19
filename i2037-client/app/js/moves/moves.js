@@ -1,5 +1,5 @@
 angular.module('i2037.moves', [
-  'i2037.resources.moves',
+  'i2037.resources.journal',
   'i2037.resources.foursquare',
   'i2037.resources.comments',
   'i2037.moves.model',
@@ -16,15 +16,15 @@ angular.module('i2037.moves', [
     templateUrl: 'journal/journal-date.tpl.html',
     controller: 'JournalCtrl',
     resolve: {
-      date: ['$route', 'Moves', function($route, Moves) { 
-        return Moves.toDate($route.current.params.date); 
+      date: ['$route', 'Journal', function($route, Journal) { 
+        return Journal.toDate($route.current.params.date); 
       }] 
     }
   });      
 }])
 
-.controller('JournalCtrl', ['$scope', '$rootScope', 'date', 'MovesStoryline', 'MovesPlacesModel', 'MovesPathsModel',
- function($scope, $rootScope, date, MovesStoryline, MovesPlacesModel, MovesPathsModel) {
+.controller('JournalCtrl', ['$scope', '$rootScope', 'date', 'JournalStoryline', 'MovesPlacesModel', 'MovesPathsModel',
+ function($scope, $rootScope, date, JournalStoryline, MovesPlacesModel, MovesPathsModel) {
   
   $scope.date = date;
 
@@ -48,7 +48,7 @@ angular.module('i2037.moves', [
   }
 
   function loadStoryLine(dt) {
-    return MovesStoryline.query({date: dt}).then(function(storylines) {
+    return JournalStoryline.query({date: dt}).then(function(storylines) {
       processResponse(storylines);
     });
   }
@@ -66,7 +66,7 @@ angular.module('i2037.moves', [
   onDateChanged(date);
 }])
 
-.controller('DatePickerCtrl', ['$scope', '$timeout', '$location', 'Moves', function ($scope, $timeout, $location, Moves) {
+.controller('DatePickerCtrl', ['$scope', '$timeout', '$location', 'Journal', function ($scope, $timeout, $location, Journal) {
   $scope.dt = $scope.date;  
   $scope.minDate = '2000-01-01';
   $scope.maxDate = new Date();
@@ -88,7 +88,7 @@ angular.module('i2037.moves', [
 
   $scope.submit = function() {
     if ($scope.dt) {
-      $location.path('/journal/date/'+ Moves.toDateString($scope.dt));          
+      $location.path('/journal/date/'+ Journal.toDateString($scope.dt));          
     }
   };
 

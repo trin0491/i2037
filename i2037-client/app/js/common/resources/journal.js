@@ -1,7 +1,7 @@
 
-angular.module('i2037.resources.moves', ['i2037.services', 'i2037.moves.filters'])
+angular.module('i2037.resources.journal', ['i2037.services', 'i2037.moves.filters'])
 
-.factory('Moves', function() {
+.factory('Journal', function() {
     var me = {};
 
     function pad(n){return n<10 ? '0'+n : n;}
@@ -66,7 +66,7 @@ angular.module('i2037.resources.moves', ['i2037.services', 'i2037.moves.filters'
   return Summary;
 }])
 
-.factory('MovesPlaces', ['$http', 'pathFinder', 'Moves', function($http, pathFinder, Moves) {
+.factory('MovesPlaces', ['$http', 'pathFinder', 'Journal', function($http, pathFinder, Journal) {
 
   var url = pathFinder.get('svc/moves/user/places/daily/');
 
@@ -75,7 +75,7 @@ angular.module('i2037.resources.moves', ['i2037.services', 'i2037.moves.filters'
   };
 
   Places.get = function(params) {
-    var dateStr = Moves.toDateString(params['date']);
+    var dateStr = Journal.toDateString(params['date']);
     return $http.get(url+dateStr).then(function(response) {
       var places = new Places(response.data);
       return places;
@@ -85,7 +85,7 @@ angular.module('i2037.resources.moves', ['i2037.services', 'i2037.moves.filters'
   return Places;
 }])
 
-.factory('MovesStoryline', ['$http', 'pathFinder', 'Moves', function($http, pathFinder, Moves) {
+.factory('JournalStoryline', ['$http', 'pathFinder', 'Journal', function($http, pathFinder, Journal) {
 
   var url = pathFinder.get('svc/timeline/daily/');
 
@@ -94,7 +94,7 @@ angular.module('i2037.resources.moves', ['i2037.services', 'i2037.moves.filters'
   };
 
   Storyline.query = function(params) {
-    var dateStr = Moves.toDateString(params['date']);
+    var dateStr = Journal.toDateString(params['date']);
     return $http.get(url+dateStr).then(function(response) {
       var storylines = [];
       angular.forEach(response.data, function(day) {

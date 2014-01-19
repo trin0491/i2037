@@ -2,7 +2,7 @@
 
 angular.module('i2037.journal.calendar', [
   'ngRoute',
-  'i2037.resources.moves',
+  'i2037.resources.journal',
   'i2037.moves.model',
   'i2037.directives.daySummary',
   'ui.calendar',
@@ -30,16 +30,16 @@ angular.module('i2037.journal.calendar', [
   });
 }])
 
-.controller('JournalCalendarCtrl', ['$scope', '$compile', '$location', 'Moves', 'MovesSummary', 
-  function($scope, $compile, $location, Moves, MovesSummary) {
+.controller('JournalCalendarCtrl', ['$scope', '$compile', '$location', 'Journal', 'MovesSummary', 
+  function($scope, $compile, $location, Journal, MovesSummary) {
 
   function eventsFn(start, end, callback) { 
-    // var fromStr = Moves.toDateString(start);
+    // var fromStr = Journal.toDateString(start);
     // start.setDate(start.getDate()+30); // hack for now
     // if (start > Date.now()) {
     //   start = new Date();
     // }
-    // var toStr = Moves.toDateString(start);
+    // var toStr = Journal.toDateString(start);
     // MovesSummary.get({from: fromStr, to: toStr}).then(function(summary) {
     //   $scope.summary = summary;
     // });
@@ -75,7 +75,7 @@ angular.module('i2037.journal.calendar', [
 
   function onDayClick(date) {
     if (date && date <= Date.now()) {
-      var str = Moves.toDateString(date);
+      var str = Journal.toDateString(date);
       $scope.$apply(function() {
         $location.path('/journal/date/'+ str);        
       });

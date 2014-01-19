@@ -1,4 +1,4 @@
-angular.module('i2037.moves.model', ['i2037.resources.moves'])
+angular.module('i2037.moves.model', ['i2037.resources.journal'])
 
 .service('MovesPlacesModel', ['$rootScope', function($rootScope) {
   var places = [];
