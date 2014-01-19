@@ -1,5 +1,5 @@
 
-angular.module('i2037.resources.journal', ['i2037.services', 'i2037.moves.filters'])
+angular.module('i2037.resources.journal', ['i2037.services'])
 
 .factory('Journal', function() {
     var me = {};

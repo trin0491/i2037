@@ -1,7 +1,7 @@
 /* Filters */
 
-angular.module('i2037.moves.filters', [])
-.filter('activity', [ function() {
+angular.module('i2037.journal.filters', [])
+.filter('movesActivity', [ function() {
     var activities = {
       wlk: 'Walking',
       run: 'Running',

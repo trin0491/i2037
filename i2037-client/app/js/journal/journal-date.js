@@ -1,4 +1,4 @@
-angular.module('i2037.moves', [
+angular.module('i2037.journal.date', [
   'i2037.resources.journal',
   'i2037.resources.foursquare',
   'i2037.resources.comments',

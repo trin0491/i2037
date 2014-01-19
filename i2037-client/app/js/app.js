@@ -5,7 +5,6 @@
       'ui.bootstrap',
       'i2037.recipes',
       'i2037.cellar', 
-      'i2037.moves', 
       'i2037.journal',
       'i2037.cage', 
       'i2037.filters', 
