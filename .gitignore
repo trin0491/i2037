@@ -166,3 +166,5 @@ pip-log.txt
 *.sublime-workspace
 
 i2037-client/i2037-client.sublime-workspace
+
+*.sublime-project

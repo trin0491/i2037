@@ -3,6 +3,7 @@
 
   angular.module('i2037', [
       'ui.bootstrap',
+      'i2037.admin',
       'i2037.recipes',
       'i2037.cellar', 
       'i2037.journal',
@@ -67,7 +68,7 @@
     function showLoginForm() {
       var opts = {
           keyboard: true,
-          templateUrl: 'partials/loginform.html', 
+          templateUrl: 'admin/login-form.tpl.html', 
           controller: 'LoginFormCtrl',
           resolve: {
             userName: function() {

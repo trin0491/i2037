@@ -3,7 +3,11 @@
 	[
 		{
 			"follow_symlinks": true,
-			"path": "/Users/richard/src/i2037/i2037-client"
+			"path": "."
+		},
+		{
+			"follow_symlinks": true,
+			"path": "app/partials"
 		}
 	]
 }
