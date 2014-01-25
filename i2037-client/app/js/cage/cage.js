@@ -4,8 +4,14 @@ angular.module('i2037.cage', ['ngRoute', 'i2037.services'])
   $routeProvider.when('/cage', {templateUrl: 'partials/cage.html', controller: 'CageCtrl'});
 }])
 
-.controller('CageCtrl', ['$scope', 'MovesSummary', 'MovesPlaces', 'MovesStoryline',
-  function ($scope, MovesSummary, MovesPlaces, MovesStoryline) {
+.controller('CageCtrl', ['$scope', 'JournalSummary', function($scope, JournalSummary) {
+  JournalSummary.get({from: '20131201', to: '20140120'}).then(function(days) {
+    $scope.days = days;
+  });
+}])
+
+.controller('GraphCtrl', ['$scope', 'MovesPlaces', 'MovesStoryline',
+  function ($scope, MovesPlaces, MovesStoryline) {
 
   function drawChart(rows) {
     var chart = new Highcharts.Chart({

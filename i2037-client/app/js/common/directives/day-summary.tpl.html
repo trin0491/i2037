@@ -1,4 +1,7 @@
-<p>An Event {{event.title}}</p>
+<div class="pull-right">
+  <span class="glyphicon glyphicon-comment"></span>
+  <span class="badge">{{event.comments}}</span>
+</div>
 <table class="table table-bordered table-condensed">
     <tbody>
         <tr ng-repeat="activity in summary.summary"><th>{{activity.activity | movesActivity }}</th><td>{{activity.duration}}</td></tr>

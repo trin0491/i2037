@@ -30,29 +30,27 @@ angular.module('i2037.journal.calendar', [
   });
 }])
 
-.controller('JournalCalendarCtrl', ['$scope', '$compile', '$location', 'Journal', 'MovesSummary', 
-  function($scope, $compile, $location, Journal, MovesSummary) {
+.controller('JournalCalendarCtrl', ['$scope', '$compile', '$location', 'Journal', 'JournalSummary', 
+  function($scope, $compile, $location, Journal, JournalSummary) {
 
   function eventsFn(start, end, callback) { 
-    // var fromStr = Journal.toDateString(start);
-    // start.setDate(start.getDate()+30); // hack for now
-    // if (start > Date.now()) {
-    //   start = new Date();
-    // }
-    // var toStr = Journal.toDateString(start);
-    // MovesSummary.get({from: fromStr, to: toStr}).then(function(summary) {
-    //   $scope.summary = summary;
-    // });
-
-    // var events = [
-    //   {title: 'All Day Event',start: new Date(y, m, 1)},
-    //   {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
-    //   {id: 999,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: false},
-    //   {id: 999,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
-    //   {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
-    //   {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
-    // ];
-    callback([]);
+    var fromStr = Journal.toDateString(start);
+    start.setDate(start.getDate()+30); // hack for now
+    if (start > Date.now()) {
+      start = new Date();
+    }
+    var toStr = Journal.toDateString(start);
+    JournalSummary.get({from: fromStr, to: toStr}).then(function(days) {
+      var events = [];
+      angular.forEach(days, function(day) {
+        events.push({
+          title: day.date, 
+          start: new Date(day.date), 
+          comments: day.comments
+        });
+      });
+      callback(events);      
+    });
   }
 
   var events = {};
@@ -91,8 +89,8 @@ angular.module('i2037.journal.calendar', [
         center: '',
         right: 'today prev,next'
       },
-      // eventRender: onRenderEvent,
-      // eventDestroy: onDestroyEvent,
+      eventRender: onRenderEvent,
+      eventDestroy: onDestroyEvent,
       dayClick: onDayClick,
     }
   };

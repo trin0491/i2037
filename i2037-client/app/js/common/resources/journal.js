@@ -48,22 +48,25 @@ angular.module('i2037.resources.journal', ['i2037.services'])
   return Profile;
 }])
 
-.factory('MovesSummary', ['$http', 'pathFinder', function($http, pathFinder) {
+.factory('JournalSummary', ['$http', 'pathFinder', function($http, pathFinder) {
 
-  var url = pathFinder.get('svc/moves/user/summary/daily');
+  var url = pathFinder.get('svc/timeline/summary/daily');
 
-  var Summary = function(data) {
+  var DaySummary = function(data) {
     angular.extend(this, data);
   };
 
-  Summary.get = function(params) {
+  DaySummary.get = function(params) {
     return $http.get(url, {params: params}).then(function(response) {
-      var summary = new Summary(response.data[0]);
-      return summary;
+      var days = [];
+      angular.forEach(response.data, function(day) {
+        days.push(new DaySummary(day));
+      });
+      return days;
     });
   };
 
-  return Summary;
+  return DaySummary;
 }])
 
 .factory('MovesPlaces', ['$http', 'pathFinder', 'Journal', function($http, pathFinder, Journal) {

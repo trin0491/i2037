@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('i2037.directives.daySummary', ['common/directives/day-summary.tpl.html'])
+  angular.module('i2037.directives.daySummary', ['common/directives/day-summary.tpl.html', 'i2037.journal.filters'])
 
   .directive('i2DaySummary', function() {
     return {
