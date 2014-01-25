@@ -24,5 +24,10 @@
     };
 
     return my;
-  }]);
+  }])
+
+  .factory('d3Service', [function() {
+    return d3;
+  }])
+  ;
 }());

@@ -17,4 +17,19 @@ describe('filter', function() {
       expect($rootScope.$broadcast).toHaveBeenCalledWith('SessionService::AuthRequired');
     })
   });
+
+  describe('d3Service', function() {
+    var d3Svc, $rootScope;
+    beforeEach(function() {
+      inject(function(_d3Service_, _$rootScope_) {
+        d3Svc = _d3Service_;
+        $rootScope = _$rootScope_;
+      });
+    });
+
+    it('provides the d3 global', function() {
+      expect(d3Svc).toBeDefined();
+    })
+  });
+
 });

@@ -5,7 +5,8 @@ module.exports = function(config){
     files : [
       'build/dev/js/jquery.js',
       'build/dev/js/angular.js',
-      'build/dev/js/bootstrap.js',      
+      'build/dev/js/bootstrap.js',
+      'build/dev/js/deps.js',      
       'bower_components/angular-mocks/angular-mocks.js',
       'https://maps.googleapis.com/maps/api/js?key=AIzaSyD1XkZF2vEwPUZeFfadDMe76ozKhrk-mXE&sensor=false',
       'app/js/**/*.js',

@@ -111,7 +111,6 @@ module.exports = function(grunt) {
           '<%= dir.bower %>/angular-resource/angular-resource.js',
           '<%= dir.bower %>/angular-bootstrap/ui-bootstrap-tpls.js',
           '<%= dir.bower %>/angular-ui-calendar/src/calendar.js',
-          '<%= dir.bower %>/fullcalendar/fullcalendar.js',
         ],
         dest: '<%= dir.dist %>/js/angular.js'
       },
@@ -122,9 +121,13 @@ module.exports = function(grunt) {
         ],
         dest: '<%= dir.dist %>/js/jquery.js'
       },
-      spinjs: {
-        src: [ '<%= dir.bower %>/spinjs/spin.js' ],
-        dest: '<%= dir.dist %>/js/spin.js'
+      depsjs: {
+        src: [ 
+          '<%= dir.bower %>/spinjs/spin.js', 
+          '<%= dir.bower %>/fullcalendar/fullcalendar.js',
+          '<%= dir.bower %>/d3/d3.js',
+        ],
+        dest: '<%= dir.dist %>/js/deps.js'
       },
     },
     uglify: {
@@ -143,9 +146,9 @@ module.exports = function(grunt) {
         src: [ '<%= concat.jquery.src %>'],
         dest: '<%= dir.dist %>/js/jquery.min.js'
       },
-      spinjs: {
-        src: [ '<%= concat.spinjs.src %>' ],
-        dest: '<%= dir.dist %>/js/spin.min.js'
+      depsjs: {
+        src: [ '<%= concat.depsjs.src %>' ],
+        dest: '<%= dir.dist %>/js/deps.min.js'
       }          
     },
     karma: {
