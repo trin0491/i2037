@@ -1,13 +1,16 @@
-angular.module('i2037.cage', ['ngRoute', 'i2037.services'])
+angular.module('i2037.cage', ['ngRoute', 'i2037.services', 'i2037.directives.d3'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/cage', {templateUrl: 'partials/cage.html', controller: 'CageCtrl'});
 }])
 
-.controller('CageCtrl', ['$scope', 'JournalSummary', function($scope, JournalSummary) {
+.controller('CageCtrl', ['$scope', 'JournalSummary', 'd3Service', function($scope, JournalSummary, d3Service) {
   JournalSummary.get({from: '20131201', to: '20140120'}).then(function(days) {
     $scope.days = days;
   });
+
+  var ngD3 = d3Service.d3;
+
 }])
 
 .controller('GraphCtrl', ['$scope', 'MovesPlaces', 'MovesStoryline',

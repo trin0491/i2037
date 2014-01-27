@@ -1,0 +1,63 @@
+describe('i2037.directives.d3', function() {
+  beforeEach(function() {
+    module('i2037.directives.d3');
+  });
+
+  describe('i2-pie', function() {
+    var $scope, element, $compile, $window, data;
+
+    beforeEach(function() {
+      var html = '<div i2-pie i2-selected="selected" data="mockData" style="width:30px;height:40px"></div>';
+      data = [];
+      inject(function(_$compile_, _$rootScope_, _$window_) {
+        $window = _$window_;
+        $scope = _$rootScope_.$new();
+        $scope.mockData = data;
+        $compile = _$compile_;
+        element = $compile(html)($scope);        
+      });
+    });
+
+    it('should create an svg element', function() {
+      expect(element.find('svg').length).toBe(1);
+    });
+
+    it('should have a style', function() {
+      expect(element.find('svg').css('width')).toBe('100%');
+      expect(element.find('svg').css('height')).toBe('100%');      
+    });
+
+    it('should translate to the center of the element', function() {
+      $scope.$digest();
+      var grps = element.find('g');
+      expect(grps.length).toBe(1);
+      expect(grps.attr('transform')).toBe("translate(15,20)");
+      expect(element.find("path").length).toBe(0);
+    });
+
+    it('should create a circle for 1 data item', function() {
+      data.push(10);
+      $scope.$digest();
+      var grps = element.find("path");
+      expect(grps.length).toBe(1);      
+    });
+
+    it('should add a sector when an item as added', function() {
+      data.push(10);
+      $scope.$digest();
+      expect(element.find("path").length).toBe(1);
+      data.push(20);
+      $scope.$digest();
+      expect(element.find("path").length).toBe(2);      
+    });
+
+    it('should remove a sector when an item is removed', function() {
+      data.push(10,20,30);
+      $scope.$digest();
+      expect(element.find("path").length).toBe(3);
+      data.pop();
+      $scope.$digest();
+      expect(element.find("path").length).toBe(2);            
+    });
+  })
+});

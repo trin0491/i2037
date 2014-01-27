@@ -27,7 +27,8 @@
   }])
 
   .factory('d3Service', [function() {
-    return d3;
+    var me = {d3: function() { return d3; }};
+    return me;
   }])
   ;
 }());
