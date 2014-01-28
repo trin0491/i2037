@@ -40,7 +40,7 @@
 
           var paths = g.selectAll("path")
             .data(pie(data))
-            .attr("d", arc);
+            .attr("d", arc.outerRadius(radius));
 
           paths.enter()          
             .append("path")
@@ -57,15 +57,25 @@
 
           var width = element.width();
           var height = element.height();
-          radius = Math.min(width/2, height/2);
+          var maxRadius = Math.min(width/2, height/2);
+          if ($scope.max && data) {
+            radius = d3.sum(data) / $scope.max * maxRadius;
+          } else {
+            radius = maxRadius;
+          }
+
           g = svg.append("g")
-                .attr("transform", "translate("+ width/2 +","+  height/2 + ")");
+                .attr("transform", "translate("+ width/2 +","+ height/2 + ")");
 
           update(data, radius);
         }
 
         $scope.$watch("data", function(newData, oldData) {
           update(newData, radius);
+        }, true);
+
+        $scope.$watch("max", function(newMax) {
+          render($scope.data);
         }, true);
 
         $scope.$watch(function() {

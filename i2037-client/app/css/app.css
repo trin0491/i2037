@@ -25,3 +25,8 @@
 .i2-comment {
   padding-bottom: 0.4em;
 }
+
+.i2-pie {
+  height: 2em;
+  width: 2em;
+}
