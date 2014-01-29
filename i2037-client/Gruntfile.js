@@ -158,6 +158,7 @@ module.exports = function(grunt) {
     jshint: {
       files: ['Gruntfile.js', 'app/**/*.js'],
       options:{
+        debug:true,
         curly:true,
         eqeqeq:true,
         immed:true,
