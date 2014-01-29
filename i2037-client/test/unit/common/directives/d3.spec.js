@@ -76,7 +76,7 @@ describe('i2037.directives.d3', function() {
       $scope.mockData[1] = 0;
       $scope.$digest();
       var matches = element.find("path").attr("d").match(/,-(\d+)A/);
-      expect(matches[1]).toBe('10');
+      expect(matches[1]).toBe('5');
     });
   })
 });
