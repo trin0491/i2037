@@ -78,5 +78,13 @@ describe('i2037.directives.d3', function() {
       var matches = element.find("path").attr("d").match(/,-(\d+)A/);
       expect(matches[1]).toBe('5');
     });
+
+    it('should show max radius if the sum is larger than max-sum', function() {
+      element = $compile('<div i2-pie i2-selected="selected" data="mockData" max="100" style="width:40px;height:40px"></div>')($scope);              
+      $scope.mockData = [100,25];
+      $scope.$digest();
+      var matches = element.find("path").attr("d").match(/,-(\d+)A/);
+      expect(matches[1]).toBe('20');
+    });    
   })
 });

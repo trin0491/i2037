@@ -65,7 +65,7 @@
           var maxRadius = Math.min(width/2, height/2);
           var radius = maxRadius;
           if (max > 0) {
-            radius = d3.sum(data) / max * maxRadius;
+            radius = Math.min(d3.sum(data) / max * maxRadius, maxRadius);
           } 
           update(data, radius);
         }
