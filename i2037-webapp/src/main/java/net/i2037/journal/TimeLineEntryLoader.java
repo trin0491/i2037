@@ -59,21 +59,6 @@ public class TimeLineEntryLoader extends TimeLineLoader {
 		return entries;
 	}
 
-	private List<TimeLineEntryDto> endLoad(CompletionService<Collection<TimeLineEntryDto>> ecs) throws InterruptedException {
-		List<TimeLineEntryDto> entries = new ArrayList<TimeLineEntryDto>();
-		int n = timeLineFeeds.size();
-		for (int i=0; i < n; ++i) {
-			Collection<TimeLineEntryDto> feedResults;
-			try {
-				feedResults = ecs.take().get();
-			} catch (ExecutionException e) {
-				throw new FeedException(e.getCause());
-			}
-			entries.addAll(feedResults);
-		}
-		return entries;
-	}
-
 	private TimeLineEntry toTimeLineEntry(TimeLineEntryDto dto) {
 		TimeLineEntry entry = new TimeLineEntry();
 		entry.setEntryId(dto.getEntryId());
@@ -105,6 +90,21 @@ public class TimeLineEntryLoader extends TimeLineLoader {
 		return ecs;
 	}
 
+	private List<TimeLineEntryDto> endLoad(CompletionService<Collection<TimeLineEntryDto>> ecs) throws InterruptedException {
+		List<TimeLineEntryDto> entries = new ArrayList<TimeLineEntryDto>();
+		int n = timeLineFeeds.size();
+		for (int i=0; i < n; ++i) {
+			Collection<TimeLineEntryDto> feedResults;
+			try {
+				feedResults = ecs.take().get();
+			} catch (ExecutionException e) {
+				throw new FeedException(e.getCause());
+			}
+			entries.addAll(feedResults);
+		}
+		return entries;
+	}
+	
 	private void sortEntries(List<TimeLineEntryDto> entries) {
 		Collections.sort(entries, timeLineEntryComparator);
 	}

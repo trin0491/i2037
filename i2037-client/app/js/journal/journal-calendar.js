@@ -33,6 +33,23 @@ angular.module('i2037.journal.calendar', [
 .controller('JournalCalendarCtrl', ['$scope', '$compile', '$location', 'Journal', 'JournalSummary', 
   function($scope, $compile, $location, Journal, JournalSummary) {
 
+  function toEvents(days) {
+    var events = [];
+    angular.forEach(days, function(day) {
+      var distances = [];
+      angular.forEach(day.activities, function(activity) {
+        distances.push(activity.distance);
+      });        
+      events.push({
+        title: "Moves Summary", 
+        start: new Date(day.date), 
+        comments: day.comments,
+        distances: distances
+      });
+    });
+    return events;
+  }
+
   function eventsFn(start, end, callback) { 
     var fromStr = Journal.toDateString(start);
     start.setDate(start.getDate()+30); // hack for now
@@ -41,15 +58,11 @@ angular.module('i2037.journal.calendar', [
     }
     var toStr = Journal.toDateString(start);
     JournalSummary.get({from: fromStr, to: toStr}).then(function(days) {
-      var events = [];
-      angular.forEach(days, function(day) {
-        events.push({
-          title: day.date, 
-          start: new Date(day.date), 
-          comments: day.comments
-        });
-      });
-      callback(events);      
+      var events = toEvents(days);
+      callback(events);            
+    }, function(response) {
+      var msg = 'Failed to load summary data: status: ' + response.status + ' data: ' + response.data;
+      $rootScope.$broadcast('Resource::LoadingError', 'JOURNAL', msg);      
     });
   }
 
@@ -59,6 +72,7 @@ angular.module('i2037.journal.calendar', [
     var eventStr = '<div i2-day-summary></div>';      
     var child = $scope.$new();
     child.event = event;
+    child.maxDistance = 10000;
     var el = $compile(eventStr)(child);
     events[event] = child;
     return el;

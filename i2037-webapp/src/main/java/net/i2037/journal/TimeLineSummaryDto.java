@@ -2,10 +2,12 @@ package net.i2037.journal;
 
 import java.util.Date;
 
+import org.codehaus.jackson.JsonNode;
+
 public class TimeLineSummaryDto {
 	private Date date;
 	private Long comments;
-	private Long distance;
+	private JsonNode activies;
 
 	public Date getDate() {
 		return date;
@@ -23,11 +25,11 @@ public class TimeLineSummaryDto {
 		this.comments = count;
 	}
 	
-	public Long getDistance() {
-		return distance;
+	public JsonNode getActivities() {
+		return activies;
 	}
 	
-	public void setDistance(Long distance) {
-		this.distance = distance;
+	public void setActivities(JsonNode activities) {
+		this.activies = activities;
 	}
 }

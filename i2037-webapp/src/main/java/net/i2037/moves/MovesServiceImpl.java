@@ -9,6 +9,7 @@ import java.util.Map;
 
 import net.i2037.journal.TimeLineEntryDto;
 import net.i2037.journal.TimeLineFeed;
+import net.i2037.journal.TimeLineSummaryDto;
 import net.i2037.journal.model.TimeLineEntry;
 
 import org.codehaus.jackson.JsonNode;
@@ -26,7 +27,9 @@ public class MovesServiceImpl implements MovesService, TimeLineFeed {
 	
 	private static final String MOVES_API_V1 = "https://api.moves-app.com/api/v1/";
 
-	private StorylineSegmentParser parser;
+	private StorylineSegmentParser storylineSegmentParser;
+	
+	private DailySummaryParser dailySummaryParser;
 	
 	private RestTemplate movesTemplate;
 
@@ -40,8 +43,8 @@ public class MovesServiceImpl implements MovesService, TimeLineFeed {
 	}
 
 	@Override
-	public List<?> getDailySummary(String from, String to) {
-		return movesTemplate.getForObject(getUrl("user/summary/daily?from={from}&to={to}"), List.class, from, to);
+	public JsonNode getDailySummary(String from, String to) {
+		return movesTemplate.getForObject(getUrl("user/summary/daily?from={from}&to={to}"), JsonNode.class, from, to);
 	}
 
 	@Override
@@ -56,10 +59,9 @@ public class MovesServiceImpl implements MovesService, TimeLineFeed {
 
 	@Override
 	public Collection<TimeLineEntryDto> loadEntries(Date start, Date end) {
-		DateTime startDt = new DateTime(start);
-		String day = DATE_FORMAT.print(startDt);
+		String day = DATE_FORMAT.print(new DateTime(start));
 		JsonNode storyline = this.getDailyStoryline(day);
-		Collection<TimeLineEntryDto> entries = parse(storyline);
+		Collection<TimeLineEntryDto> entries = parseStoryline(storyline);
 		Iterator<TimeLineEntryDto> itr = entries.iterator();
 		while (itr.hasNext()) {
 			TimeLineEntryDto entry = itr.next();
@@ -69,16 +71,36 @@ public class MovesServiceImpl implements MovesService, TimeLineFeed {
 		}
 		return entries;
 	}
+	
+	@Override
+	public Collection<TimeLineSummaryDto> loadSummaries(Date start, Date end) {
+		String from = toString(start);
+		String to = toString(end);
+		JsonNode dailySummaries = getDailySummary(from, to);
+		return parseDailySummary(dailySummaries);
+	}
 
-	private Collection<TimeLineEntryDto> parse(JsonNode storyline) {
+	private String toString(Date date) {
+		return DATE_FORMAT.print(new DateTime(date));
+	}
+
+	private Collection<TimeLineEntryDto> parseStoryline(JsonNode storyline) {
 		List<TimeLineEntryDto> dtos = new ArrayList<TimeLineEntryDto>();
 		for (JsonNode day : storyline) {
 			for (JsonNode segment : day.get(Storyline.SEGMENTS)) {
-				TimeLineEntryDto dto = parser.parse(segment);
+				TimeLineEntryDto dto = storylineSegmentParser.parse(segment);
 				dtos.add(dto);
 			}
 		}
 		return dtos;
+	}
+	
+	private Collection<TimeLineSummaryDto> parseDailySummary(JsonNode summary) {
+		List<TimeLineSummaryDto> dtos = new ArrayList<TimeLineSummaryDto>();
+		for (JsonNode day : summary) {
+			dtos.add(getDailySummaryParser().parse(day));
+		}
+		return dtos;		
 	}
 
 	public RestTemplate getMovesTemplate() {
@@ -90,12 +112,21 @@ public class MovesServiceImpl implements MovesService, TimeLineFeed {
 		this.movesTemplate = movesTemplate;
 	}
 	
-	public StorylineSegmentParser getParser() {
-		return parser;
+	public StorylineSegmentParser getStorylineSegmentParser() {
+		return storylineSegmentParser;
 	}
 
 	@Required
-	public void setParser(StorylineSegmentParser parser) {
-		this.parser = parser;
+	public void setStorylineSegmentParser(StorylineSegmentParser parser) {
+		this.storylineSegmentParser = parser;
+	}
+
+	public DailySummaryParser getDailySummaryParser() {
+		return dailySummaryParser;
+	}
+
+	@Required
+	public void setDailySummaryParser(DailySummaryParser dailySummaryParser) {
+		this.dailySummaryParser = dailySummaryParser;
 	}
 }

@@ -74,9 +74,9 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
   </bean>
   
   <bean id="summaryLoader" class="net.i2037.journal.TimeLineSummaryLoader">
-    <property name="executorService" ref="feedLoaderExecutorService"/>
-    <property name="timeLineFeeds" ref="feeds" />
-    <property name="commentDao" ref="commentDao" />  
+    <property name="executor" ref="feedLoaderExecutorService"/>
+    <property name="commentDao" ref="commentDao" />
+    <property name="movesService" ref="movesService" />  
   </bean>
 
   <util:list id="feeds">
@@ -91,10 +91,13 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
     <property name="movesTemplate">
       <oa:rest-template resource="moves" access-token-provider="accessTokenProviderChain"/>
     </property>
-    <property name="parser" ref="storylineSegmentParser" />
+    <property name="storylineSegmentParser" ref="storylineSegmentParser" />
+    <property name="dailySummaryParser" ref="dailySummaryParser"/>
   </bean>
 
   <bean id="storylineSegmentParser" class="net.i2037.moves.StorylineSegmentParser" />
+  
+  <bean id="dailySummaryParser" class="net.i2037.moves.DailySummaryParser" />
  
   <tx:annotation-driven />
 
