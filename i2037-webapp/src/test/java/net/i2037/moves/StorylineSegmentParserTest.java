@@ -56,7 +56,7 @@ public class StorylineSegmentParserTest {
 	@Test
 	public void testTime() throws Exception {
 		DateTimeFormatter formatter = ISODateTimeFormat.basicDateTimeNoMillis();
-		Date date = formatter.parseDateTime("20121212T000000Z").toDate();
+		Date date = formatter.parseDateTime("20121211T220000Z").toDate();
 		assertEquals(date, parse(0).getTime());
 	}
 	
@@ -75,12 +75,12 @@ public class StorylineSegmentParserTest {
 	
 	@Test
 	public void testPlaceRefId() throws Exception {
-		assertEquals("20121212T000000Z-1", parse(0).getRefId());
+		assertEquals("20121211T220000Z-1", parse(0).getRefId());
 	}
 	
 	@Test
 	public void testMoveRefId() throws Exception {
-		assertEquals("20121212T071430Z", parse(1).getRefId());
+		assertEquals("20121212T051430Z", parse(1).getRefId());
 	}
 	
 	@Test

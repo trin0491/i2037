@@ -25,7 +25,7 @@ public class MovesServiceImpl implements MovesService, TimeLineFeed {
 
 	private DateTimeFormatter DATE_FORMAT = DateTimeFormat.forPattern("yyyyMMdd");
 	
-	private static final String MOVES_API_V1 = "https://api.moves-app.com/api/v1/";
+	private static final String MOVES_API_V1 = "https://api.moves-app.com/api/1.1/";
 
 	private StorylineSegmentParser storylineSegmentParser;
 	

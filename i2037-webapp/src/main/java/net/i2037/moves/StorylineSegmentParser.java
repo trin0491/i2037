@@ -10,6 +10,8 @@ import net.i2037.journal.TimeLineEntryDto;
 import net.i2037.journal.model.EntryType;
 
 public final class StorylineSegmentParser {
+	
+	private static final DateTimeFormatter UTC_FORMAT = ISODateTimeFormat.basicDateTimeNoMillis().withZoneUTC();
 
 	public TimeLineEntryDto parse(JsonNode segment) {
 		TimeLineEntryDto dto = new TimeLineEntryDto();
@@ -51,7 +53,7 @@ public final class StorylineSegmentParser {
 		case MOVES_PLACE:
 			return getPlaceRefId(segment);
 		case MOVES_MOVE:
-			return getStartTimeOrThrow(segment);
+			return getMovesRefId(segment);
 		default:
 			throw new IllegalArgumentException("Segment has unknown type: "
 					+ type);
@@ -75,7 +77,13 @@ public final class StorylineSegmentParser {
 		if (id == null) {
 			throw new IllegalArgumentException("place id cannot be null");
 		}
-		String startTime = getStartTimeOrThrow(segment);
+		Date start = parseTime(segment);
+		String startTime = UTC_FORMAT.print(start.getTime());
 		return startTime + '-' + id;
 	}
+	
+	private String getMovesRefId(JsonNode segment) {
+		Date start = parseTime(segment);
+		return UTC_FORMAT.print(start.getTime());		
+	}	
 }
