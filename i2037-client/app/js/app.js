@@ -68,7 +68,7 @@
     function showLoginForm() {
       var opts = {
           keyboard: true,
-          templateUrl: 'admin/login-form.tpl.html', 
+          templateUrl: 'admin/admin-loginform.tpl.html', 
           controller: 'LoginFormCtrl',
           resolve: {
             userName: function() {
@@ -104,7 +104,7 @@
 
     $scope.signUp = function() {
       var signUpForm = $modal.open({
-        templateUrl: 'partials/signupform.html',
+        templateUrl: 'admin/admin-signupform.tpl.html',
         controller: 'SignUpFormCtrl'
       });
       signUpForm.result.then(function(user) {
@@ -124,107 +124,6 @@
     };
 
     $scope.login();
-  }])
-
-  .controller('LoginFormCtrl', ['$scope', '$modalInstance', 'User', 'userName',
-      function ($scope, $modalInstance, User, userName) {
-
-    var authDetails = {    
-      userName: userName,
-      password: '',
-      rememberMe: true,    
-      userNameReadonly: false,
-    };
-
-    if (userName) {
-      $scope.title = 'Change Password';
-      authDetails.userNameReadonly = true;
-    } else {
-      $scope.title = 'Login';
-      authDetails.userName = $.cookie('userName');
-    }
-
-    $scope.getCls = function(ngModelController) {
-      if (!ngModelController) {
-        return {};
-      } else {
-        return {
-          'has-error': ngModelController.$invalid && ngModelController.$dirty,
-          'has-success': ngModelController.$valid && ngModelController.$dirty
-        };      
-      }
-    };
-
-    $scope.showErr = function(ngModelController, validation) {
-      if (ngModelController) {
-        return ngModelController.$dirty && ngModelController.$error[validation];
-      } else {
-        return false;
-      }
-    };
-
-    $scope.cancel = function(){
-      $modalInstance.close();
-    };
-
-    $scope.submit = function() {
-      var expireDays = 7;
-      if (authDetails.rememberMe && authDetails.userName) {
-        $.cookie('userName', authDetails.userName, { expires: expireDays });
-      } else {
-        $.removeCookie('userName', { expires: expireDays });
-      }
-
-      User.login(authDetails.userName, authDetails.password).then(function(user) {
-        $modalInstance.close(user);
-      }, function(data, status) {
-        alert("Failed to authenticate");
-      });
-    };
-
-    $scope.authDetails = authDetails;  
-  }])
-
-  .controller('SignUpFormCtrl', ['$scope', '$modalInstance', 'User', function($scope, $modalInstance, User) {
-    $scope.user = new User();
-
-    $scope.cancel = function() {
-      $modalInstance.close();
-    };
-
-    $scope.submit = function() {
-      $scope.user.$save().then(function(user) {
-        $modalInstance.close(user);
-      });
-    };
-
-    $scope.getCls = function(ngModelController) {
-      if (!ngModelController) {
-        return {};
-      } else {
-        return {
-          'has-error': ngModelController.$invalid && ngModelController.$dirty,
-          'has-success': ngModelController.$valid && ngModelController.$dirty
-        };      
-      }
-    };
-
-    $scope.showErr = function(ngModelController, validation) {
-      if (ngModelController) {
-        return ngModelController.$dirty && ngModelController.$error[validation];
-      } else {
-        return false;
-      }
-    };
-
-    $scope.passwordsMatch = function() {
-      return $scope.user.password === $scope.password2;
-    };
-
-    $scope.canSubmit = function() {
-      return $scope.signUpForm.$dirty &&
-        $scope.signUpForm.$valid && $scope.passwordsMatch();
-    };
   }])
 
   .controller('HomeCtrl', [function () {}])
