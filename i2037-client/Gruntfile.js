@@ -126,6 +126,7 @@ module.exports = function(grunt) {
           '<%= dir.bower %>/spinjs/spin.js', 
           '<%= dir.bower %>/fullcalendar/fullcalendar.js',
           '<%= dir.bower %>/d3/d3.js',
+          '<%= dir.bower %>/autofill-event/src/autofill-event.js'
         ],
         dest: '<%= dir.dist %>/js/deps.js'
       },
