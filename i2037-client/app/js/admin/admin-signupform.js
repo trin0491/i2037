@@ -5,6 +5,7 @@
 
   .controller('SignUpFormCtrl', ['$scope', '$modalInstance', 'User', function($scope, $modalInstance, User) {
     $scope.user = new User();
+    $scope.temp = {};
 
     $scope.cancel = function() {
       $modalInstance.close();
@@ -36,13 +37,9 @@
     };
 
     $scope.passwordsMatch = function() {
-      return $scope.user.password === $scope.password2;
+      return $scope.user.password === $scope.temp.password2;
     };
 
-    $scope.canSubmit = function() {
-      return $scope.signUpForm && $scope.signUpForm.$dirty &&
-        $scope.signUpForm.$valid && $scope.passwordsMatch();
-    };
   }])
   ;
 }());

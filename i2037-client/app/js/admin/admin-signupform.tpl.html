@@ -39,13 +39,13 @@
       <label class="control-label col-md-4" for="inputPassword2">Confirm Password</label>
       <div class="input-group col-md-6">
         <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-        <input type="password" class="form-control" id="inputPassword2" name="password2" placeholder="Password" ng-model="password2" required>
+        <input type="password" class="form-control" id="inputPassword2" name="password2" placeholder="Password" ng-model="temp.password2" required>
       </div>
       <p class="help-block col-md-offset-4" ng-show="signUpForm.$dirty &amp;&amp; !passwordsMatch()">Passswords do not match</p>              
     </div>    
   </form>
 </div>
 <div class="modal-footer">
-  <button ng-click="submit()" class="btn btn-primary" ng-disabled="!canSubmit()">Submit</button>
+  <button ng-click="submit()" class="btn btn-primary" ng-disabled="signUpForm.$invalid || !passwordsMatch()">Submit</button>
   <button ng-click="cancel()" class="btn">Cancel</button>  
 </div>
