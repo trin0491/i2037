@@ -55,7 +55,7 @@ public class CommentDaoImpl implements CommentDao {
 	@Override
 	public Comment readById(long id) {
 		Session session = sessionFactory.getCurrentSession();		
-		return (Comment) session.byId(TimeLineEntry.class).load(id);
+		return (Comment) session.byId(Comment.class).load(id);
 	}
 	
 	@SuppressWarnings("unchecked")
