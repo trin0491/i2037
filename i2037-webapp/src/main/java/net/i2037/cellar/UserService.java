@@ -1,6 +1,5 @@
 package net.i2037.cellar;
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -15,7 +14,7 @@ import net.i2037.cellar.model.UserDto;
 public interface UserService {
 
 	@GET
-	UserDto getUser();
+	UserDto getCurrentUser();
 	
 	@POST
 	void create(NewUser user);

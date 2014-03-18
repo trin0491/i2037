@@ -33,15 +33,18 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public UserDto getUser() {
+	public UserDto getCurrentUser() {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal == null) {
+			throw new IllegalStateException("Failed to identify current user");
+		}		
 		if (principal instanceof UserDetails) {
 			UserDetails userDetails = (UserDetails) principal;
 			User user = userDao.readByUsername(userDetails.getUsername());			
 			UserDto dto = newUserDto(user);
 			return dto;			
 		} else {
-			return null;
+			throw new IllegalStateException("Failed to identify current user");
 		}				
 	}
 
