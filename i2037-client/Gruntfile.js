@@ -153,8 +153,8 @@ module.exports = function(grunt) {
       }          
     },
     karma: {
-      unit: { options: karmaConfig('config/karma.conf.js', { singleRun:true, autoWatch: false}) },
-      watch: { options: karmaConfig('config/karma.conf.js', { singleRun:false, autoWatch: true}) }
+      unit: { configFile: 'config/karma.conf.js', singleRun: true, autoWatch: false },
+      watch: { configFile: 'config/karma.conf.js', singleRun: false, autoWatch: true }
     },    
     jshint: {
       files: ['Gruntfile.js', 'app/**/*.js'],
