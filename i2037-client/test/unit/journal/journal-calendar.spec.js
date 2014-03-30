@@ -4,17 +4,25 @@ describe('i2037.journal.calendar', function() {
   });
 
   describe('JournalCalendarCtrl', function() {
-    var ctrl, scope, MovesSummary, location;
+    var ctrl, scope, rootScope, compile, JournalSummary, location, deferred;
 
     beforeEach(function() {
-      inject(function($rootScope, $controller) {
+      inject(function($rootScope, $controller, $q, Journal) {
         scope = $rootScope.$new();
         location = jasmine.createSpyObj('$location', ['path']);
-        MovesSummary = jasmine.createSpyObj('MovesSummary', ['get']);          
+        deferred = $q.defer();
+        JournalSummary = jasmine.createSpyObj('JournalSummary', ['get']);
+        JournalSummary.get.andReturn(deferred.promise);
+        rootScope = $rootScope;
+        spyOn($rootScope, '$broadcast');
+        compile = jasmine.createSpy('$compile');          
         var params = {
           $scope: scope,
+          $rootScope: $rootScope,
+          $compile: compile,
           $location: location,
-          MovesSummary: MovesSummary,          
+          Journal: Journal,
+          JournalSummary: JournalSummary,          
         };
         ctrl = $controller('JournalCalendarCtrl', params);
       });
@@ -36,6 +44,19 @@ describe('i2037.journal.calendar', function() {
       scope.uiConfig.calendar.dayClick(d);
       expect(location.path).not.toHaveBeenCalled();
     });
+
+    it('should raise an error if loading fails', function() {
+      expect(scope.eventSources[0]).toBeDefined();
+      var end = new Date();
+      var start = new Date();
+      start.setDate(end.getDate() - 30);
+      scope.eventSources[0](start, end);
+      expect(JournalSummary.get).toHaveBeenCalled();
+      scope.$apply(function() {
+        deferred.reject('Journal load failed');
+      });
+      expect(rootScope.$broadcast).toHaveBeenCalled();
+    })
 
   });
 });

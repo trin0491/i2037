@@ -30,8 +30,8 @@ angular.module('i2037.journal.calendar', [
   });
 }])
 
-.controller('JournalCalendarCtrl', ['$scope', '$compile', '$location', 'Journal', 'JournalSummary', 
-  function($scope, $compile, $location, Journal, JournalSummary) {
+.controller('JournalCalendarCtrl', ['$scope', '$rootScope', '$compile', '$location', 'Journal', 'JournalSummary', 
+  function($scope, $rootScope, $compile, $location, Journal, JournalSummary) {
 
   function toEvents(days) {
     var events = [];
