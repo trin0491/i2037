@@ -2,6 +2,8 @@ package net.i2037.cellar.model;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional(readOnly=true)
@@ -9,6 +11,21 @@ public class UserDaoImpl implements UserDao {
 
 	private static final String QUERY_BY_USERNAME = "from net.i2037.cellar.model.UserImpl where username = :username" ;
 	private SessionFactory sessionFactory;
+	
+	@Override
+	public UserImpl getCurrentUser() {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal == null) {
+			throw new IllegalStateException("Failed to identify current user");
+		}		
+		if (principal instanceof UserDetails) {
+			UserDetails userDetails = (UserDetails) principal;
+			UserImpl user = readByUsername(userDetails.getUsername());			
+			return user;			
+		} else {
+			throw new IllegalStateException("Failed to identify current user");
+		}				
+	}
 	
 	@Override
 	public UserImpl readById(Long id) {

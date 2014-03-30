@@ -16,6 +16,8 @@ import java.util.concurrent.FutureTask;
 
 import org.springframework.beans.factory.annotation.Required;
 
+import net.i2037.cellar.UserService;
+import net.i2037.cellar.model.User;
 import net.i2037.cellar.util.RequestAwareCallable;
 import net.i2037.journal.model.CommentCount;
 import net.i2037.journal.model.CommentDao;
@@ -26,6 +28,7 @@ public class TimeLineSummaryLoader {
 	private CommentDao commentDao;
 	private Comparator<? super TimeLineSummaryDto> summaryComparator;
 	private MovesService movesService;
+	private UserService userService;
 	private Executor executor;
 	
 	public TimeLineSummaryLoader() {
@@ -36,7 +39,9 @@ public class TimeLineSummaryLoader {
 		
 		Future<Collection<TimeLineSummaryDto>> future = beginLoadSummary(start, end);		
 		
-		List<? extends CommentCount> countByDay = commentDao.countByDay(start, end);
+		User user = userService.getCurrentUser();
+		
+		List<? extends CommentCount> countByDay = commentDao.countByDay(start, end, user);
 		
 		Map<Date, TimeLineSummaryDto> dtosByDate = new HashMap<Date, TimeLineSummaryDto>();
 		for (TimeLineSummaryDto dto : endLoadSummary(future)) {
@@ -111,6 +116,15 @@ public class TimeLineSummaryLoader {
 	@Required
 	public void setMovesService(MovesService movesService) {
 		this.movesService = movesService;
+	}
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	@Required
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 
 }

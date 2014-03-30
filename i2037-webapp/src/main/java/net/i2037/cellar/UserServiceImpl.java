@@ -12,8 +12,6 @@ import net.i2037.cellar.model.UserImpl;
 
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class UserServiceImpl implements UserService {
@@ -34,18 +32,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public UserDto getCurrentUser() {
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if (principal == null) {
-			throw new IllegalStateException("Failed to identify current user");
-		}		
-		if (principal instanceof UserDetails) {
-			UserDetails userDetails = (UserDetails) principal;
-			User user = userDao.readByUsername(userDetails.getUsername());			
-			UserDto dto = newUserDto(user);
-			return dto;			
-		} else {
-			throw new IllegalStateException("Failed to identify current user");
-		}				
+		UserImpl user = userDao.getCurrentUser();
+		UserDto dto = newUserDto(user);
+		return dto;			
 	}
 
 	@Override

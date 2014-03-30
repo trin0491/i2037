@@ -38,10 +38,7 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
         <property name="grapeDao" ref="grapeDao" />
       </bean>
       <bean class="net.i2037.cellar.SessionServiceImpl" />
-      <bean class="net.i2037.cellar.UserServiceImpl">
-        <property name="userDao" ref="userDao" />
-        <property name="passwordEncoder" ref="passwordEncoder"/>
-      </bean>
+      <ref bean="userService"/>
       <ref bean="movesService"/>
       <bean class="net.i2037.journal.TimeLineServiceImpl">
         <property name="entryLoader" ref="timeLineFeedLoader" />
@@ -53,6 +50,7 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
           </property>
       </bean>
       <bean class="net.i2037.journal.CommentServiceImpl">
+        <property name="userDao" ref="userDao" />
       	<property name="commentDao" ref="commentDao" />
       	<property name="timeLineEntryDao" ref="timeLineEntryDao" />
       </bean>
@@ -76,7 +74,8 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
   <bean id="summaryLoader" class="net.i2037.journal.TimeLineSummaryLoader">
     <property name="executor" ref="feedLoaderExecutorService"/>
     <property name="commentDao" ref="commentDao" />
-    <property name="movesService" ref="movesService" />  
+    <property name="movesService" ref="movesService" /> 
+    <property name="userService" ref="userService" />
   </bean>
 
   <util:list id="feeds">
@@ -86,6 +85,11 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
   <task:executor id="feedLoaderExecutorService"
                  pool-size="5-25"
                  queue-capacity="100"/>
+
+  <bean id="userService" class="net.i2037.cellar.UserServiceImpl">
+    <property name="userDao" ref="userDao" />
+    <property name="passwordEncoder" ref="passwordEncoder"/>
+  </bean>
 
   <bean id="movesService" class="net.i2037.moves.MovesServiceImpl">
     <property name="movesTemplate">
