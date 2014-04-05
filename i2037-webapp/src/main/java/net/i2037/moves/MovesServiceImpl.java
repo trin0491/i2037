@@ -18,11 +18,15 @@ import org.joda.time.DateTime;
 import org.joda.time.chrono.ISOChronology;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.client.RestTemplate;
 
 public class MovesServiceImpl implements MovesService, TimeLineFeed {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(MovesServiceImpl.class);
+	
 	private DateTimeFormatter DATE_FORMAT = DateTimeFormat.forPattern("yyyyMMdd");
 	
 	private static final String MOVES_API_V1 = "https://api.moves-app.com/api/1.1/";
@@ -39,22 +43,30 @@ public class MovesServiceImpl implements MovesService, TimeLineFeed {
 	
 	@Override
 	public Map<String, Object> getUserProfile() {
-		return movesTemplate.getForObject(getUrl("user/profile"), Map.class);
+		String url = getUrl("user/profile");
+		LOGGER.info("Calling moves: {}", url);
+		return movesTemplate.getForObject(url, Map.class);
 	}
 
 	@Override
 	public JsonNode getDailySummary(String from, String to) {
-		return movesTemplate.getForObject(getUrl("user/summary/daily?from={from}&to={to}"), JsonNode.class, from, to);
+		String url = getUrl("user/summary/daily?from={from}&to={to}");
+		LOGGER.info("Calling moves: {}, [{},{}]", url, from, to);
+		return movesTemplate.getForObject(url, JsonNode.class, from, to);
 	}
 
 	@Override
 	public List<?> getDailyPlaces(String date) {
-		return movesTemplate.getForObject(getUrl("user/places/daily/" + date), List.class);		
+		String url = getUrl("user/places/daily/" + date);
+		LOGGER.info("Calling moves: {}", url);
+		return movesTemplate.getForObject(url, List.class);		
 	}
 
 	@Override
 	public JsonNode getDailyStoryline(String date) {
-		return movesTemplate.getForObject(getUrl("user/storyline/daily/" + date + "?trackPoints=true"), JsonNode.class);
+		String url = getUrl("user/storyline/daily/" + date + "?trackPoints=true");
+		LOGGER.info("Calling moves: {}", url);
+		return movesTemplate.getForObject(url, JsonNode.class);
 	}
 
 	@Override
