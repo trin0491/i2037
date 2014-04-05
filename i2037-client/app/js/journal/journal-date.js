@@ -137,7 +137,7 @@ angular.module('i2037.journal.date', [
 
 }])
 
-.controller('TimelineEntryCtrl', ['$scope', 'FourSquareVenue', 'Comment', function($scope, FourSquareVenue, Comment) {
+.controller('TimelineEntryCtrl', ['$scope', '$rootScope', 'FourSquareVenue', 'Comment', function($scope, $rootScope, FourSquareVenue, Comment) {
   $scope.isEntryLoading = false;
  
   var CommentPM = function(comment) {
@@ -164,6 +164,9 @@ angular.module('i2037.journal.date', [
       return comments.map(function(comment){ 
         return new CommentPM(comment);
       });
+    }, function(response) {
+      var msg = 'Failed to load comments: status: ' + response.status;
+      $rootScope.$broadcast('Resource::LoadingError', 'COMMENT', msg);        
     });
   }
 
@@ -222,6 +225,9 @@ angular.module('i2037.journal.date', [
       loadComments(entry).then(function(comments) {
         entry.comments = comments;
       });      
+    }, function(response) {
+      var msg = 'Failed to save comment: status: ' + response.status;
+      $rootScope.$broadcast('Resource::SaveError', 'COMMENT', msg);
     });
     newComment();    
   };
@@ -231,6 +237,9 @@ angular.module('i2037.journal.date', [
       loadComments(entry).then(function(comments) {
         entry.comments = comments;
       });
+    }, function(response) {
+      var msg = 'Failed to delete comment: status: ' + response.status;
+      $rootScope.$broadcast('Resource::DeleteError', 'COMMENT', msg);      
     });
   };
 

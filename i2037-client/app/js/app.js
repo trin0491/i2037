@@ -152,9 +152,21 @@
     });
 
     $scope.$on('Resource::LoadingError', function(event, name, msg) {
-      $scope.showViewSpinner = false;
-      $scope.alerts.push({type: 'danger', msg: msg});      
+      showError(msg);
     });
+
+    $scope.$on('Resource::SaveError', function(event, name, msg) {
+      showError(msg);
+    });
+
+    $scope.$on('Resource::DeleteError', function(event, name, msg) {
+      showError(msg);
+    });
+
+    function showError(msg) {
+      $scope.showViewSpinner = false;
+      $scope.alerts.push({type: 'danger', msg: msg});            
+    }
 
     $scope.closeAlert = function(index) {
       $scope.alerts.splice(index, 1);
