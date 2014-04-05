@@ -38,7 +38,7 @@ angular.module('i2037.journal.calendar', [
     angular.forEach(days, function(day) {
       var distances = [];
       angular.forEach(day.activities, function(activity) {
-        if (activity.group === 'walking') {
+        if (activity.group !== 'transport') {
           distances.push(activity.distance);          
         }
       });        
