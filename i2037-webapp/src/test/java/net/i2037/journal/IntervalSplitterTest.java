@@ -15,7 +15,7 @@ import org.junit.Test;
 
 public class IntervalSplitterTest {
 	
-	private static final DateTimeFormatter DATE_TIME_FORMATTER = ISODateTimeFormat.basicDateTime(); 
+	private static final DateTimeFormatter DATE_TIME_FORMATTER = ISODateTimeFormat.basicDateTime().withOffsetParsed(); 
 	
 	private DateTime start;
 	private DateTime end;
@@ -54,10 +54,10 @@ public class IntervalSplitterTest {
 	public void testContainsTwo() throws Exception {
 		start = DATE_TIME_FORMATTER.parseDateTime("20140223T000000.000Z");
 		end = DATE_TIME_FORMATTER.parseDateTime("20140405T000000.000Z");		
-		Iterator<Interval> itr = newSplitter(Days.days(31));
+		Iterator<Interval> itr = newSplitter(Days.days(30));
 		Interval i = next(itr);
 		assertEquals(start, i.getStart());
-		DateTime expected = DATE_TIME_FORMATTER.parseDateTime("20140326T000000.000Z");
+		DateTime expected = DATE_TIME_FORMATTER.parseDateTime("20140325T000000.000Z");
 		assertEquals(expected, i.getEnd());
 		i = next(itr);
 		assertEquals(expected, i.getStart());
