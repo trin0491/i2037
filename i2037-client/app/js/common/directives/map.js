@@ -16,10 +16,10 @@ angular.module('i2037.directives.map', [])
     link: function(scope, element, attrs) {
       // TODO pass in styles
       var colours = {
-        'wlk': '#FF0000',
-        'run': '#FF0000',    
-        'cyc': '#00FF00',
-        'trp': '#585858'
+        'walking': '#808080',
+        'running': '#FF85D6',    
+        'cyclying': '#3399FF',
+        'transport': '#585858'
       };
 
       var infoWindow = new google.maps.InfoWindow();
@@ -75,7 +75,7 @@ angular.module('i2037.directives.map', [])
 
         var polyline = new google.maps.Polyline({
           path: points,
-          strokeColor: colours[path.activity],
+          strokeColor: colours[path.group],
           strokeOpacity: 1.0,
           strokeWeight: 2
         });
