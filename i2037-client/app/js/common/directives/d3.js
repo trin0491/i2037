@@ -12,7 +12,7 @@
       link: function($scope, element, attrs) {
 
         var d3 = d3Service.d3();
-        var colour = d3.scale.ordinal().range(['#99EB99', '#66E066', '#33D633', '#00CC00']);
+        var colour = d3.scale.ordinal().range(['#5CADFF', '#3399FF', '#297ACC', '#1F5C99']);
         var svg = d3.select(element[0]).append('svg')
           .style('width', '100%')
           .style('height', '100%')
