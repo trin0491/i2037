@@ -20,12 +20,12 @@
 
         var pie = d3.layout.pie().sort(null);
 
-        function update(data, radius) {
+        function update(data, radius, innerRadiusRatio) {
 
           function arcTween(d, index, attr) {
             var arc = d3.svg.arc()
               .outerRadius(function(r) { return r;})
-              .innerRadius(0)
+              .innerRadius(function(r) { return r * innerRadiusRatio;})
               .startAngle(d.startAngle)
               .endAngle(d.endAngle);        
             var i = d3.interpolate(0, radius);
@@ -36,7 +36,7 @@
           }
 
           var arc = d3.svg.arc()
-            .innerRadius(0)
+            .innerRadius(radius * innerRadiusRatio)
             .outerRadius(radius);
 
           var paths = svg.selectAll("path")
@@ -47,6 +47,7 @@
             .append("path")
             .style("fill", function(d, i) { return colour(i); })
             .transition()
+            .duration(500)
             .attrTween("d", arcTween);
 
           paths.exit()
@@ -67,7 +68,9 @@
           if (max > 0) {
             radius = Math.min(d3.sum(data) / max * maxRadius, maxRadius);
           } 
-          update(data, radius);
+
+          var innerRadiusRatio = attrs.innerRadiusRatio || 0;
+          update(data, radius, innerRadiusRatio);
         }
 
         $scope.$watch("data", function(newData, oldData) {

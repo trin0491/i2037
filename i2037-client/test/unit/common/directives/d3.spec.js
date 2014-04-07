@@ -60,7 +60,7 @@ describe('i2037.directives.d3', function() {
       expect(element.find("path").length).toBe(2);            
     });
 
-    it('should have a radius of half the smallest dimension', function() {
+    it('should have an outer radius of half the smallest dimension', function() {
       data.push(150);
       $scope.$digest();
       data[0] = 50;
@@ -69,14 +69,14 @@ describe('i2037.directives.d3', function() {
       expect(matches[1]).toBe('15');
     });
 
-    it('should halve the radius if the max-sum', function() {
+    it('should have a radius proportional to the max-sum', function() {
       element = $compile('<div i2-pie i2-selected="selected" data="mockData" max="100" style="width:40px;height:40px"></div>')($scope);              
       $scope.mockData = [25,25];
       $scope.$digest();
       $scope.mockData[1] = 0;
       $scope.$digest();
       var matches = element.find("path").attr("d").match(/,-(\d+)A/);
-      expect(matches[1]).toBe('5');
+      expect(matches[1]).toBe('5');  // 25% of 20px
     });
 
     it('should show max radius if the sum is larger than max-sum', function() {
@@ -85,6 +85,17 @@ describe('i2037.directives.d3', function() {
       $scope.$digest();
       var matches = element.find("path").attr("d").match(/,-(\d+)A/);
       expect(matches[1]).toBe('20');
+    });
+
+    it('should have an inner radius proportional to the outer radius', function() {
+      data.push(50);
+      element = $compile('<div i2-pie i2-selected="selected" data="mockData" max="100" '
+        + 'inner-radius-ratio="0.5" style="width:40px;height:40px"></div>')($scope);              
+      $scope.$digest();
+      var outerRadius = element.find("path").attr("d").match(/M0,(\d+)/);
+      expect(outerRadius[1]).toBe('10');
+      var innerRadius = element.find("path").attr("d").match(/.+M0,(\d+)/);
+      expect(innerRadius[1]).toBe('5');
     });    
   })
 });
