@@ -5,7 +5,7 @@
     </tr>
     <tr ng-class="{info: isSelected(entry)}" ng-click="toggleSelect(entry)">
       <td>{{entry.date | date:"HH:mm"}}</td>
-      <td><a ng-click="isExpanded = !isExpanded">{{entry.text}}</a></td>
+      <td><a ng-click="isExpanded = !isExpanded">{{entry.text || "Unknown"}}</a></td>
     </tr>
     <tr ng-if="isExpanded" ng-repeat-end>
       <td colspan="2" ng-transclude></td>
