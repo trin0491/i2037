@@ -1,14 +1,18 @@
 <table class="table">
   <tbody>
     <tr ng-repeat-start="entry in timeline" ng-if="isNewDay($index)" ng-init="isExpanded = false">
-      <td colspan="2"><h4>{{entry.date | date:"EEEE d MMMM"}}</h4></td>
+      <td colspan="4"><h4>{{entry.date | date:"EEEE d MMMM"}}</h4></td>
     </tr>
     <tr ng-class="{info: isSelected(entry)}" ng-click="toggleSelect(entry)">
       <td>{{entry.date | date:"HH:mm"}}</td>
+      <td>{{entry.duration | duration:"M" | number:0}}mins</td>
       <td><a ng-click="isExpanded = !isExpanded">{{entry.text || "Unknown"}}</a></td>
+      <td>
+        <span class="badge"></span>
+      </td>
     </tr>
     <tr ng-if="isExpanded" ng-repeat-end>
-      <td colspan="2" ng-transclude></td>
+      <td colspan="4" ng-transclude></td>
     </tr>
   </tbody>
 </table>

@@ -8,6 +8,7 @@ public final class StorylineSegment {
 	
 	public static final String TYPE = "type";
 	public static final String START_TIME = "startTime";
+	public static final String END_TIME = "endTime";	
 	public static final String PLACE = "place";
 	public static final String ID = "id";
 	

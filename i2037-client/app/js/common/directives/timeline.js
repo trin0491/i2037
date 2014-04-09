@@ -1,5 +1,5 @@
 
-angular.module('i2037.directives.timeline', ['common/directives/timeline.tpl.html'])
+angular.module('i2037.directives.timeline', ['common/directives/timeline.tpl.html', 'i2037.filters'])
 
 .directive('i2Timeline', ['$compile', function($compile) {
   return {

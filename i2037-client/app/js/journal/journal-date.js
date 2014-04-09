@@ -104,6 +104,9 @@ angular.module('i2037.journal.date', [
     this.text = entry.payload.place.name;
     this.place = entry.payload.place;
     this.comments = [ ];
+
+    var end = new Date(entry.endTime);
+    this.duration = end - this.date;
   };
 
   $scope.$on('MovesPlacesModel::CollectionChange', function(event, model) {

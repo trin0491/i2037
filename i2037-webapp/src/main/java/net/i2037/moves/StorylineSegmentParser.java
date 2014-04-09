@@ -5,11 +5,15 @@ import java.util.Date;
 import org.codehaus.jackson.JsonNode;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import net.i2037.journal.TimeLineEntryDto;
 import net.i2037.journal.model.EntryType;
 
 public final class StorylineSegmentParser {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(StorylineSegmentParser.class);
 	
 	private static final DateTimeFormatter UTC_FORMAT = ISODateTimeFormat.basicDateTimeNoMillis().withZoneUTC();
 
@@ -18,7 +22,8 @@ public final class StorylineSegmentParser {
 		dto.setEntryId(null);
 		dto.setPayload(parsePayload(segment));
 		dto.setRefId(parseRefId(segment));
-		dto.setTime(parseTime(segment));
+		dto.setTime(parseStartTime(segment));
+		dto.setEndTime(parseEndTime(segment));
 		dto.setType(parseType(segment));
 		return dto;
 	}
@@ -37,7 +42,7 @@ public final class StorylineSegmentParser {
 		}
 	}
 
-	private Date parseTime(JsonNode segment) {
+	private Date parseStartTime(JsonNode segment) {
 		String str = getStartTimeOrThrow(segment);
 		try {
 			return StorylineSegment.TIME_FORMAT.parseDateTime(str).toDate();
@@ -45,6 +50,16 @@ public final class StorylineSegmentParser {
 			throw new IllegalArgumentException(String.format(
 					"Segment has invalid time %s at '%s'", str, StorylineSegment.START_TIME), e);
 		}
+	}
+	
+	private Date parseEndTime(JsonNode segment) {
+		String str = getEndTime(segment); 
+		try {
+			return StorylineSegment.TIME_FORMAT.parseDateTime(str).toDate();		
+		} catch (Exception e) {
+			LOGGER.warn("Failed to parse end time: ", e);
+		}
+		return null;
 	}
 
 	private String parseRefId(JsonNode segment) {
@@ -71,19 +86,23 @@ public final class StorylineSegmentParser {
 		}
 		return startTime;
 	}
-		
+
+	private String getEndTime(JsonNode segment) {
+		return segment.path(StorylineSegment.END_TIME).getTextValue();
+	}
+	
 	private String getPlaceRefId(JsonNode segment) {
 		String id = segment.path(StorylineSegment.PLACE).path(StorylineSegment.ID).getValueAsText();
 		if (id == null) {
 			throw new IllegalArgumentException("place id cannot be null");
 		}
-		Date start = parseTime(segment);
+		Date start = parseStartTime(segment);
 		String startTime = UTC_FORMAT.print(start.getTime());
 		return startTime + '-' + id;
 	}
 	
 	private String getMovesRefId(JsonNode segment) {
-		Date start = parseTime(segment);
+		Date start = parseStartTime(segment);
 		return UTC_FORMAT.print(start.getTime());		
 	}	
 }

@@ -45,6 +45,24 @@ angular.module('i2037.filters', [])
       }
     };
  }])
+
+.filter('duration', function() {
+  return function(input, format) {
+    if (!angular.isNumber(input)) {
+      return input;    
+    }
+    switch (format) {
+      case 'H':
+        return input / 3600000;
+      case 'M':
+        return input / 60000;
+      case 'S':
+        return input / 1000;
+      default:
+        return input;
+    }
+  };
+})
 ;
 }());
 

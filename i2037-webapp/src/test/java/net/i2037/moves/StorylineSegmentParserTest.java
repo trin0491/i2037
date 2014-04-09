@@ -67,6 +67,13 @@ public class StorylineSegmentParserTest {
 	}
 	
 	@Test
+	public void testEndTime() throws Exception {
+		DateTimeFormatter formatter = ISODateTimeFormat.basicDateTimeNoMillis();
+		Date date = formatter.parseDateTime("20121212T051430Z").toDate();
+		assertEquals(date, parse(0).getEndTime());
+	}
+	
+	@Test
 	public void testPayload() throws Exception {
 		Object payload = parse(0).getPayload();
 		assertNotNull(payload);

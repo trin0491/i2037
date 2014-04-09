@@ -89,4 +89,36 @@ describe('filter', function() {
     })
   })
 
+  describe('duration', function() {
+    var filter, input;
+    beforeEach(function() {
+      input = "";
+      inject(function(_durationFilter_) {
+        filter = _durationFilter_;
+      });
+    });
+
+    it ('should ignore input unless it is a number', function() {
+      var input = ['a', 'b'];
+      expect(filter(input)).toEqual(input);
+    })
+
+    it('should return no of hours if format is H', function() {
+      expect(filter(8460000, 'H')).toEqual(2.35);
+    })
+
+    it('should return no of mins if format is M', function() {
+      expect(filter(3360000, 'M')).toEqual(56);
+    })
+
+    it('should return no of secs if format is S', function() {
+      expect(filter(1000, 'S')).toEqual(1);
+    })
+
+    it('should return input if invalid format', function() {
+      expect(filter(1000, 'Wibble')).toEqual(1000);
+    })
+
+  })
+
 });

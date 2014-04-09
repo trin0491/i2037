@@ -10,6 +10,7 @@ public class TimeLineEntryDto {
 	private String refId;	
 	private EntryType type;
 	private Date time;
+	private Date endTime;
 	private Object payload;
 	
 	public Long getEntryId() {
@@ -57,5 +58,13 @@ public class TimeLineEntryDto {
 		return "TimeLineEntryDto [entryId=" + entryId + ", type=" + type
 				+ ", time=" + time + ", refId=" + refId + ", payload="
 				+ payload + "]";
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
 }
