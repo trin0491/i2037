@@ -14,7 +14,8 @@
     <textarea class="form-control" placeholder="Enter comment..."    
       rows="{{textRows}}" 
       ng-focus="onTextFocus()"
-      ng-model="comment.text">
+      ng-model="comment.text"
+      maxlength="{{maxlength}}">
     </textarea>
     </div>
     <div ng-show="showActions">

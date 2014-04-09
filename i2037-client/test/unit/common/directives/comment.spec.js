@@ -297,6 +297,16 @@ describe('i2037.directives.comment', function() {
       $scope.$digest();
       expect(getTextArea().val()).toBe('different text');
     })
+
+    it('should set maxlength on textarea if it is set on the scope', function() {
+      comment.isNew(true);
+      $scope.$digest();
+      expect(getTextArea().attr('maxlength')).toEqual('');
+
+      element = compile('<li i2-comment="comment" i2-delete="delete()" i2-save="save(comment)" i2-maxlength="80"></li>');
+      $scope.$digest();      
+      expect(getTextArea().attr('maxlength')).toEqual('80');      
+    })
   });
 
 });

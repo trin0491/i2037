@@ -37,12 +37,13 @@
                         </address>
                         <a ng-href="{{entry.venue.url}}">{{entry.venue.url | trim:30 }}</a>
                     </div>
-                    <div i2-comment="newComment" i2-save="saveComment(comment, entry)"></div>
+                    <div i2-comment="newComment" i2-save="saveComment(comment, entry)" i2-maxlength="255"></div>
                     <hr>    
                     <ul class="media-list">
                         <li i2-comment="comment" ng-repeat="comment in entry.comments"
                             i2-save="saveComment(comment, entry)" 
-                            i2-delete="deleteComment(comment, entry)"></li>
+                            i2-delete="deleteComment(comment, entry)"
+                            i2-maxlength="255"></li>
                     </ul>
                 </div>
             </div>
