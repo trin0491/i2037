@@ -46,23 +46,32 @@ angular.module('i2037.filters', [])
     };
  }])
 
-.filter('duration', function() {
-  return function(input, format) {
+.filter('duration', ['numberFilter', function(numberFilter) {
+
+  var SEC = 1000;
+  var MIN = 60000;
+  var HOUR = 3600000;
+
+  return function(input) {
     if (!angular.isNumber(input)) {
       return input;    
     }
-    switch (format) {
-      case 'H':
-        return input / 3600000;
-      case 'M':
-        return input / 60000;
-      case 'S':
-        return input / 1000;
-      default:
-        return input;
+
+    if (input >= HOUR) {
+      var r = (input % HOUR) / MIN;      
+      var h = input / HOUR;
+      return h.toFixed(0) + 'hrs' + ' ' + numberFilter(r, 0) + 'mins';
+    } else if (input >= MIN) {
+      var m = input / MIN;
+      return numberFilter(m, 0) + 'mins';       
+    } else if (input >= SEC) {
+      var s = input / SEC;
+      return numberFilter(s, 0) + 'secs';
+    } else {
+      return input + 'ms';
     }
   };
-})
+}])
 ;
 }());
 

@@ -5,7 +5,7 @@
     </tr>
     <tr ng-class="{info: isSelected(entry)}" ng-click="toggleSelect(entry)">
       <td>{{entry.date | date:"HH:mm"}}</td>
-      <td>{{entry.duration | duration:"M" | number:0}}mins</td>
+      <td>{{entry.duration | duration}}</td>
       <td><a ng-click="isExpanded = !isExpanded">{{entry.text || "Unknown"}}</a></td>
       <td>
         <span class="badge"></span>

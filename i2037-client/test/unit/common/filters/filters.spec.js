@@ -54,7 +54,7 @@ describe('filter', function() {
     })
   });
 
-  describe('trim', function() {
+  describe('trimFilter', function() {
     var filter, input;
     beforeEach(function() {
       input = "The rain in Spain falls";
@@ -89,7 +89,7 @@ describe('filter', function() {
     })
   })
 
-  describe('duration', function() {
+  describe('durationFilter', function() {
     var filter, input;
     beforeEach(function() {
       input = "";
@@ -103,20 +103,20 @@ describe('filter', function() {
       expect(filter(input)).toEqual(input);
     })
 
-    it('should return no of hours if format is H', function() {
-      expect(filter(8460000, 'H')).toEqual(2.35);
+    it('should return hours and mins if duration greather than an hour', function() {
+      expect(filter(8460001)).toEqual('2h 21m');
     })
 
-    it('should return no of mins if format is M', function() {
-      expect(filter(3360000, 'M')).toEqual(56);
+    it('should return mins if greater than 1 min', function() {
+      expect(filter(3360000)).toEqual('56m');
     })
 
-    it('should return no of secs if format is S', function() {
-      expect(filter(1000, 'S')).toEqual(1);
+    it('should return secs if greater than 1 sec', function() {
+      expect(filter(1000)).toEqual('1s');
     })
 
-    it('should return input if invalid format', function() {
-      expect(filter(1000, 'Wibble')).toEqual(1000);
+    it('should return ms if less than 1sec', function() {
+      expect(filter(999)).toEqual('999ms');
     })
 
   })
