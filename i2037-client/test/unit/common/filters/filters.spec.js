@@ -104,15 +104,15 @@ describe('filter', function() {
     })
 
     it('should return hours and mins if duration greather than an hour', function() {
-      expect(filter(8460001)).toEqual('2h 21m');
+      expect(filter(8460001)).toEqual('2hrs 21mins');
     })
 
     it('should return mins if greater than 1 min', function() {
-      expect(filter(3360000)).toEqual('56m');
+      expect(filter(3360000)).toEqual('56mins');
     })
 
     it('should return secs if greater than 1 sec', function() {
-      expect(filter(1000)).toEqual('1s');
+      expect(filter(1000)).toEqual('1secs');
     })
 
     it('should return ms if less than 1sec', function() {

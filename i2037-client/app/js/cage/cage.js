@@ -11,9 +11,9 @@ angular.module('i2037.cage', ['ngRoute', 'i2037.services', 'i2037.directives.d3'
 
   var dt = new Date();
 
-  JournalStoryline.query({date: dt}).then(function(storylines) {
-    $scope.days = storylines;
-  });
+  // JournalStoryline.query({date: dt}).then(function(storylines) {
+  //   $scope.days = storylines;
+  // });
 
   var ngD3 = d3Service.d3;
 
