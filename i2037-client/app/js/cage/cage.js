@@ -5,9 +5,9 @@ angular.module('i2037.cage', ['ngRoute', 'i2037.services', 'i2037.directives.d3'
 }])
 
 .controller('CageCtrl', ['$scope', 'JournalSummary', 'JournalStoryline', 'd3Service', function($scope, JournalSummary, JournalStoryline, d3Service) {
-  // JournalSummary.get({from: '20131201', to: '20140120'}).then(function(days) {
-  //   $scope.days = days;
-  // });
+  JournalSummary.get({from: '20140412', to: '20140413'}).then(function(days) {
+     $scope.activities = days[1].activities;
+  });
 
   var dt = new Date();
 

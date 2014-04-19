@@ -18,10 +18,11 @@
           .style('height', '100%')
           .append("g");
 
-        var pie = d3.layout.pie().sort(null);
+        var pie = d3.layout.pie()
+          .sort(null)
+          .value(function(d) { return d[attrs.valueField]; });
 
-        function update(data, radius, innerRadiusRatio) {
-
+        function updateSlices(data, arc, radius, innerRadiusRatio) {
           function arcTween(d, index, attr) {
             var arc = d3.svg.arc()
               .outerRadius(function(r) { return r;})
@@ -35,23 +36,48 @@
             };
           }
 
-          var arc = d3.svg.arc()
-            .innerRadius(radius * innerRadiusRatio)
-            .outerRadius(radius);
-
           var paths = svg.selectAll("path")
-            .data(pie(data))
-            .attr("d", arc);
+            .data(pie(data));
 
           paths.enter()          
             .append("path")
             .style("fill", function(d, i) { return colour(i); })
             .transition()
-            .duration(500)
+            .duration(800)
             .attrTween("d", arcTween);
 
+          paths.attr("d", arc);
+
           paths.exit()
+            .remove();
+        }
+
+        function updateLabels(data, arc) {
+          var labels = svg.selectAll("text")
+            .data(pie(data));
+
+          labels.enter()
+            .append("text")
+            .attr("dy", ".35em")
+            .attr("text-anchor", "middle");
+
+          labels.attr("transform", function(d) { return "translate("+arc.centroid(d)+")"; })
+            .text(function(d) { return d.data[attrs.labelField]; });
+
+          labels.exit()
             .remove();                      
+        }
+
+        function update(data, radius, innerRadiusRatio) {
+          var arc = d3.svg.arc()
+            .innerRadius(radius * innerRadiusRatio)
+            .outerRadius(radius);
+
+          updateSlices(data, arc, radius, innerRadiusRatio);
+
+          if (attrs.labelField) {
+            updateLabels(data, arc);
+          }
         }
 
         function render(data, max) {
@@ -66,7 +92,9 @@
           var maxRadius = Math.min(width/2, height/2);
           var radius = maxRadius;
           if (max > 0) {
-            radius = Math.min(d3.sum(data) / max * maxRadius, maxRadius);
+            radius = Math.min(
+              d3.sum(data.map(function(d) { return d[attrs.valueField];})) / max * maxRadius, maxRadius
+            );
           } 
 
           var innerRadiusRatio = attrs.innerRadiusRatio || 0;

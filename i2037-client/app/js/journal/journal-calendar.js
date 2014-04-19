@@ -34,22 +34,17 @@ angular.module('i2037.journal.calendar', [
   function($scope, $rootScope, $compile, $location, Journal, JournalSummary) {
 
   function toEvents(days) {
-    var events = [];
-    angular.forEach(days, function(day) {
-      var distances = [];
-      angular.forEach(day.activities, function(activity) {
-        if (activity.group !== 'transport') {
-          distances.push(activity.distance);          
-        }
+    return days.map(function(day) {
+      var activities = day.activities.filter(function(activity) {
+        return activity.group !== 'transport';
       });        
-      events.push({
+      return {
         title: "Moves Summary", 
         start: new Date(day.date), 
         comments: day.comments,
-        distances: distances
-      });
+        activities: activities
+      };
     });
-    return events;
   }
 
   function eventsFn(start, end, callback) { 
