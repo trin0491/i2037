@@ -35,9 +35,12 @@ angular.module('i2037.journal.calendar', [
 
   function toEvents(days) {
     return days.map(function(day) {
-      var activities = day.activities.filter(function(activity) {
-        return activity.group !== 'transport';
-      });        
+      var activities = [];
+      if (day.activities) {
+        activities = day.activities.filter(function(activity) {
+          return activity.group !== 'transport';
+        });
+      };        
       return {
         title: "Moves Summary", 
         start: new Date(day.date), 
