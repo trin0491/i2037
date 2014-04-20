@@ -10,7 +10,7 @@
   <description>Simple CXF JAX-RS webapp service using spring configuration</description>
   <properties>
     <jackson.version>1.8.6</jackson.version>
-    <cxf.version>2.7.5</cxf.version>
+    <cxf.version>2.7.11</cxf.version>
     <hibernate.version>4.2.8.Final</hibernate.version>
     <spring.version>3.1.0.RELEASE</spring.version>
     <spring-security.version>3.1.4.RELEASE</spring-security.version>
