@@ -40,7 +40,7 @@ angular.module('i2037.journal.calendar', [
         activities = day.activities.filter(function(activity) {
           return activity.group !== 'transport';
         });
-      };        
+      }       
       return {
         title: "Moves Summary", 
         start: new Date(day.date), 
