@@ -175,7 +175,7 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
 
   <sec:http entry-point-ref="forbiddenEntryPoint">
     <sec:access-denied-handler ref="accessDeniedHandler" />
-    <sec:form-login authentication-failure-handler-ref="authFailureHandler" default-target-url="/svc/session/user" />
+    <sec:form-login authentication-failure-handler-ref="authFailureHandler" default-target-url="/svc/user" />
     <sec:logout delete-cookies="JSESSIONID" logout-success-url="/svc/session/loggedout" />
     <sec:session-management />
     <sec:intercept-url pattern="/svc/session/loggedout" access="ROLE_ANONYMOUS,ROLE_USER" />
