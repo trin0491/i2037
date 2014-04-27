@@ -7,6 +7,12 @@ angular.module('i2037.cage', ['ngRoute', 'i2037.services', 'i2037.directives.d3'
 .controller('CageCtrl', ['$scope', 'JournalSummary', 'JournalStoryline', 'd3Service', function($scope, JournalSummary, JournalStoryline, d3Service) {
   JournalSummary.get({from: '20140412', to: '20140413'}).then(function(days) {
      $scope.activities = days[1].activities;
+
+     var totalDistance = 0;
+     days[1].activities.forEach(function(activity) {
+        totalDistance += activity.distance;
+     });
+     $scope.distance = totalDistance + 'm';
   });
 
   var dt = new Date();

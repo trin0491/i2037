@@ -7,7 +7,8 @@
       replace: false,
       scope: {
         data: '=',
-        max: '='
+        max: '=',
+        title: '='
       },
       link: function($scope, element, attrs) {
 
@@ -39,6 +40,10 @@
           var paths = svg.selectAll("path")
             .data(pie(data));
 
+          // update
+          paths.attr("d", arc);
+
+          // enter and update
           paths.enter()          
             .append("path")
             .style("fill", function(d, i) { return colour(i); })
@@ -46,20 +51,20 @@
             .duration(800)
             .attrTween("d", arcTween);
 
-          paths.attr("d", arc);
-
+          // exit
           paths.exit()
             .remove();
         }
 
         function updateLabels(data, arc) {
-          var labels = svg.selectAll("text")
+          var labels = svg.selectAll(".i2037-label")
             .data(pie(data));
 
           labels.enter()
             .append("text")
+            .attr("class", "i2037-label")
             .attr("dy", ".35em")
-            .attr("text-anchor", "middle");
+            .style("text-anchor", "middle");
 
           labels.attr("transform", function(d) { return "translate("+arc.centroid(d)+")"; })
             .text(function(d) { return d.data[attrs.labelField]; });
@@ -100,6 +105,20 @@
           var innerRadiusRatio = attrs.innerRadiusRatio || 0;
           update(data, radius, innerRadiusRatio);
         }
+
+        $scope.$watch("title", function(value) {
+          var title = svg.selectAll(".i2037-title").data([value]);
+          
+          title.text(value);
+
+          title.enter()
+            .append("text")
+            .attr("class", "i2037-title")
+            .attr("dy", ".35em")
+            .style("text-anchor", "middle");
+
+          title.exit().remove();
+        }, true);
 
         $scope.$watch("data", function(newData, oldData) {
           render(newData, $scope.max);
