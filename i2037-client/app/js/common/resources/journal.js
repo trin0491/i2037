@@ -18,8 +18,9 @@ angular.module('i2037.resources.journal', ['i2037.services'])
       var matches = r.exec(str);
       var d = new Date();
       d.setUTCFullYear(+matches[1]);
-      d.setUTCMonth(+matches[2]-1); // Careful, month starts at 0!
-      d.setUTCDate(+matches[3]);
+      var month = +matches[2]-1; // Careful, month starts at 0!
+      var day = +matches[3];      
+      d.setUTCMonth(month, day); 
       d.setUTCHours(0);
       d.setUTCMinutes(0);
       d.setUTCSeconds(0);
