@@ -72,6 +72,7 @@ angular.module('i2037.journal.calendar', [
     var child = $scope.$new();
     child.event = event;
     child.maxDistance = 10000;
+    child.colours = ['#5CADFF', '#3399FF', '#297ACC', '#1F5C99'];
     var el = $compile(eventStr)(child);
     events[event] = child;
     return el;

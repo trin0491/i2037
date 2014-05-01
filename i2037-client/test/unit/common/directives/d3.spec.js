@@ -7,12 +7,14 @@ describe('i2037.directives.d3', function() {
     var $scope, element, $compile, $window, data;
 
     beforeEach(function() {
-      var html = '<div i2-pie i2-selected="selected" data="mockData" value-field="value" style="width:30px;height:40px"></div>';
+      var html = '<div i2-pie i2-selected="selected" data="mockData" colours="colours"'
+        + 'value-field="value" style="width:30px;height:40px"></div>';
       data = [];
       inject(function(_$compile_, _$rootScope_, _$window_) {
         $window = _$window_;
         $scope = _$rootScope_.$new();
         $scope.mockData = data;
+        $scope.colours = ['#5CADFF', '#3399FF', '#297ACC', '#1F5C99'];
         $compile = _$compile_;
         element = $compile(html)($scope);        
       });
@@ -70,7 +72,8 @@ describe('i2037.directives.d3', function() {
     });
 
     it('should have a radius proportional to the max-sum', function() {
-      element = $compile('<div i2-pie i2-selected="selected" data="mockData" max="100" value-field="value" style="width:40px;height:40px"></div>')($scope);              
+      element = $compile('<div i2-pie i2-selected="selected" data="mockData" max="100"'
+        + ' colours="colours" value-field="value" style="width:40px;height:40px"></div>')($scope);              
       $scope.mockData = [{value:25},{value:25}];
       $scope.$digest();
       $scope.mockData[1] = {value:0};
@@ -80,7 +83,8 @@ describe('i2037.directives.d3', function() {
     });
 
     it('should show max radius if the sum is larger than max-sum', function() {
-      element = $compile('<div i2-pie i2-selected="selected" data="mockData" max="100" value-field="value" style="width:40px;height:40px"></div>')($scope);              
+      element = $compile('<div i2-pie i2-selected="selected" data="mockData" max="100"'
+        + ' colours="colours" value-field="value" style="width:40px;height:40px"></div>')($scope);              
       $scope.mockData = [{value:100},{value:25}];
       $scope.$digest();
       var matches = element.find("path").attr("d").match(/,-(\d+)A/);
@@ -90,7 +94,7 @@ describe('i2037.directives.d3', function() {
     it('should have an inner radius proportional to the outer radius', function() {
       data.push({value:50});
       element = $compile('<div i2-pie i2-selected="selected" data="mockData" max="100" '
-        + 'inner-radius-ratio="0.5" value-field="value" style="width:40px;height:40px"></div>')($scope);              
+        + ' colours="colours" inner-radius-ratio="0.5" value-field="value" style="width:40px;height:40px"></div>')($scope);              
       $scope.$digest();
       var outerRadius = element.find("path").attr("d").match(/M0,(\d+)/);
       expect(outerRadius[1]).toBe('10');

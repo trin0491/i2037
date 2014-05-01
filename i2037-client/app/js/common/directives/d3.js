@@ -8,12 +8,13 @@
       scope: {
         data: '=',
         max: '=',
-        title: '='
+        title: '=',
+        colours: '='
       },
       link: function($scope, element, attrs) {
 
         var d3 = d3Service.d3();
-        var colour = d3.scale.ordinal().range(['#5CADFF', '#3399FF', '#297ACC', '#1F5C99']);
+        var colour = d3.scale.ordinal().range($scope.colours);
         var svg = d3.select(element[0]).append('svg')
           .style('width', '100%')
           .style('height', '100%')
@@ -57,12 +58,12 @@
         }
 
         function updateLabels(data, arc) {
-          var labels = svg.selectAll(".i2037-label")
+          var labels = svg.selectAll(".i2-label")
             .data(pie(data));
 
           labels.enter()
             .append("text")
-            .attr("class", "i2037-label")
+            .attr("class", "i2-label")
             .attr("dy", ".35em")
             .style("text-anchor", "middle");
 
@@ -98,7 +99,8 @@
           var radius = maxRadius;
           if (max > 0) {
             radius = Math.min(
-              d3.sum(data.map(function(d) { return d[attrs.valueField];})) / max * maxRadius, maxRadius
+              d3.sum(data.map(function(d) { return d[attrs.valueField];})) / max * maxRadius, 
+              maxRadius
             );
           } 
 
@@ -107,15 +109,15 @@
         }
 
         $scope.$watch("title", function(value) {
-          var title = svg.selectAll(".i2037-title").data([value]);
+          var title = svg.selectAll(".i2-title").data([value]);
           
-          title.text(value);
-
           title.enter()
             .append("text")
-            .attr("class", "i2037-title")
+            .attr("class", "i2-title")
             .attr("dy", ".35em")
             .style("text-anchor", "middle");
+
+          title.text(value);
 
           title.exit().remove();
         }, true);
