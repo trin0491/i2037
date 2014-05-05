@@ -100,15 +100,11 @@ public class MovesServiceImpl implements MovesService, TimeLineFeed {
 	}
 
 	@Override
-	public TimeLineSummaryDto loadSummary(Date day) {
+	public Collection<TimeLineSummaryDto> loadSummaries(Date day) {
 		String dateStr = toString(day);
 		JsonNode dailySummary = getDailySummary(dateStr);
 		List<TimeLineSummaryDto> dtos = parseDailySummary(dailySummary);
-		if (dtos.size() > 0) {
-			return dtos.get(0);
-		} else {
-			return null;
-		}
+		return dtos;
 	}
 	
 	private String toString(Date date) {

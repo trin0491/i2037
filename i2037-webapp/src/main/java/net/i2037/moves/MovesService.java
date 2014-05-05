@@ -43,5 +43,5 @@ public interface MovesService {
 
 	Collection<TimeLineSummaryDto> loadSummaries(Date start, Date end);
 	
-	TimeLineSummaryDto loadSummary(Date day);
+	Collection<TimeLineSummaryDto> loadSummaries(Date day);
 }

@@ -72,7 +72,9 @@ angular.module('i2037.resources.journal', ['i2037.services'])
   DaySummary.get = function(params) {
     params['date'] = Journal.toDateString(params['date']);
     return $http.get(url+'/'+params['date']).then(function(response) {
-      return new DaySummary(response.data);
+      if (response.data && response.data.length > 0) {
+        return new DaySummary(response.data);      
+      }
     });
   };
 
