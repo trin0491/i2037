@@ -140,6 +140,23 @@ angular.module('i2037.journal.date', [
 
 }])
 
+.controller('DailyStatisticsCtrl', ['$scope', 'd3Service', 'Journal', 'JournalSummary', function($scope, d3Service, Journal, JournalSummary) {
+  var d3 = d3Service.d3();
+  $scope.colours = ['#5CADFF', '#3399FF', '#297ACC', '#1F5C99'];
+  $scope.activities = [];
+  $scope.distance = "0m";
+
+  var colour = d3.scale.ordinal().range($scope.colours);
+  $scope.getColour = function(index) {
+    return colour(index);
+  };
+
+  JournalSummary.get({date: $scope.date}).then(function(summary) {
+    $scope.activities = summary.activities;
+    $scope.distance = d3.sum($scope.activities.map(function(a) { return a.distance;})) + 'm';  
+  });
+}])
+
 .controller('TimelineEntryCtrl', ['$scope', '$rootScope', 'FourSquareVenue', 'Comment', function($scope, $rootScope, FourSquareVenue, Comment) {
   $scope.isEntryLoading = false;
  

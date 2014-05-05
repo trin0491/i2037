@@ -20,11 +20,38 @@
                 </span>
             </div>
         </div>
-        <div class="col-md-9 col-xs-6">
+        <div class="col-md-3 col-xs-6">
             <i2-button i2-state="state" type="submit" ng-click="submit()">Submit</i2-button>
-        </div>                                 
+        </div>
+        <div ng-controller="DailyStatisticsCtrl">
+            <div class="col-md-3 col-xs-6">
+                <div i2-pie class="i2-activity-pie"  
+                    data="activities" 
+                    inner-radius-ratio="0.6"
+                    title="distance"
+                    colours="colours"
+                    value-field="distance">
+                </div>            
+            </div>    
+            <div class="col-md-3 col-xs-6">
+                <table class="table table-striped table-condensed">
+                    <tbody>
+                        <tr><th></th><th>Activity</th><th>Distance</th></tr>
+                        <tr ng-repeat="activity in activities">
+                            <td>
+                                <svg>
+                                    <rect style="fill:{{getColour($index)}}" width="14" height="14"></rect>  
+                                </svg>
+                            </td>                    
+                            <td>{{activity.group}}</td>
+                            <td>{{activity.distance}}m</td>
+                        </tr>                    
+                    </tbody>
+                </table>
+            </div>
+        </div>    
     </div>
-    <hr>
+    <hr>    
     <div class="row">
         <div class="col-md-3" ng-controller="TimelineCtrl">
             <div i2-timeline="entries" i2-selected="selected">
