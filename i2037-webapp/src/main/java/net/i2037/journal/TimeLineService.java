@@ -19,5 +19,9 @@ public interface TimeLineService {
 	@GET
 	@Path("/summary/daily")
 	List<? extends TimeLineSummaryDto> getDailySummary(@QueryParam("from") String from, @QueryParam("to") String to);
+
+	@GET
+	@Path("/summary/daily/{date}")
+	TimeLineSummaryDto getDailySummary(@PathParam("date") String day);	
 	
 }

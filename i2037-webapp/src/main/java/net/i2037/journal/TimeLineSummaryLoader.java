@@ -78,7 +78,34 @@ public class TimeLineSummaryLoader {
 		
 		return dtos;
 	}
+	
+	public TimeLineSummaryDto loadSummary(Date date) throws InterruptedException {
+		CompletionService<TimeLineSummaryDto> ecs = new ExecutorCompletionService<TimeLineSummaryDto>(executor);		
+		Future<TimeLineSummaryDto> future = beginLoadSummary(new DateTime(date), ecs);;
+		TimeLineSummaryDto dto = endLoadSummary(future);
+		return dto;
+	}
 
+	private Future<TimeLineSummaryDto> beginLoadSummary(final DateTime start, CompletionService<TimeLineSummaryDto> ecs) {
+		Callable<TimeLineSummaryDto> callable = new RequestAwareCallable<TimeLineSummaryDto>() {
+			@Override
+			public TimeLineSummaryDto doCall() throws Exception {
+				return getMovesService().loadSummary(start.toDate());
+			}			
+		};
+		return ecs.submit(callable);						
+	}
+	
+	private TimeLineSummaryDto endLoadSummary(Future<TimeLineSummaryDto> future) 
+			throws InterruptedException {
+		try {
+			return future.get();
+		} catch (ExecutionException e) {
+			throw new FeedException(e);
+		}			
+	}
+	
+	
 	private Future<Collection<TimeLineSummaryDto>> beginLoadSummary(
 			final DateTime start, final DateTime end,
 			CompletionService<Collection<TimeLineSummaryDto>> ecs) {	

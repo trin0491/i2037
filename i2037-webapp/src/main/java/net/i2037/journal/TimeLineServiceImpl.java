@@ -40,10 +40,22 @@ public class TimeLineServiceImpl implements TimeLineService {
 		try {
 			return summaryLoader.loadSummaries(startDT.toDate(), endDT.toDate());
 		} catch (InterruptedException e) {
-			LOGGER.warn("TimeLine summary laoding was interrupted", e);
+			LOGGER.warn("TimeLine summary loading was interrupted", e);
 			throw new FeedException(e);
 		}		
 	}
+	
+	@Override
+	public TimeLineSummaryDto getDailySummary(String day) {
+		DateTime dayDT = DAY_FORMATTER.parseDateTime(day);
+		try {
+			return summaryLoader.loadSummary(dayDT.toDate());
+		} catch (InterruptedException e) {
+			LOGGER.warn("TimeLine summary loading was interrupted", e);
+			throw new FeedException(e);
+		}		
+	}
+	
 
 	public TimeLineSummaryLoader getSummaryLoader() {
 		return summaryLoader;

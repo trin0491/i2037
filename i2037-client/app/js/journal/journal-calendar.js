@@ -51,12 +51,10 @@ angular.module('i2037.journal.calendar', [
   }
 
   function eventsFn(start, end, callback) { 
-    var fromStr = Journal.toDateString(start);
     if (end > Date.now()) {
       end = new Date();
     }
-    var toStr = Journal.toDateString(end);
-    JournalSummary.get({from: fromStr, to: toStr}).then(function(days) {
+    JournalSummary.query({from: start, to: end}).then(function(days) {
       var events = toEvents(days);
       callback(events);            
     }, function(response) {

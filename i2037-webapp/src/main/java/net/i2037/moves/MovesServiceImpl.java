@@ -56,6 +56,13 @@ public class MovesServiceImpl implements MovesService, TimeLineFeed {
 	}
 
 	@Override
+	public JsonNode getDailySummary(String day) {
+		String url = getUrl("user/summary/daily/{day}");
+		LOGGER.info("Calling moves: {}, [{}]", url, day);
+		return movesTemplate.getForObject(url, JsonNode.class, day);
+	}
+	
+	@Override
 	public List<?> getDailyPlaces(String date) {
 		String url = getUrl("user/places/daily/" + date);
 		LOGGER.info("Calling moves: {}", url);
@@ -92,6 +99,18 @@ public class MovesServiceImpl implements MovesService, TimeLineFeed {
 		return parseDailySummary(dailySummaries);
 	}
 
+	@Override
+	public TimeLineSummaryDto loadSummary(Date day) {
+		String dateStr = toString(day);
+		JsonNode dailySummary = getDailySummary(dateStr);
+		List<TimeLineSummaryDto> dtos = parseDailySummary(dailySummary);
+		if (dtos.size() > 0) {
+			return dtos.get(0);
+		} else {
+			return null;
+		}
+	}
+	
 	private String toString(Date date) {
 		return DATE_FORMAT.print(new DateTime(date));
 	}
@@ -107,7 +126,7 @@ public class MovesServiceImpl implements MovesService, TimeLineFeed {
 		return dtos;
 	}
 	
-	private Collection<TimeLineSummaryDto> parseDailySummary(JsonNode summary) {
+	private List<TimeLineSummaryDto> parseDailySummary(JsonNode summary) {
 		List<TimeLineSummaryDto> dtos = new ArrayList<TimeLineSummaryDto>();
 		for (JsonNode day : summary) {
 			dtos.add(getDailySummaryParser().parse(day));

@@ -49,7 +49,7 @@ angular.module('i2037.resources.journal', ['i2037.services'])
   return Profile;
 }])
 
-.factory('JournalSummary', ['$http', 'pathFinder', function($http, pathFinder) {
+.factory('JournalSummary', ['$http', 'pathFinder', 'Journal', function($http, pathFinder, Journal) {
 
   var url = pathFinder.get('svc/timeline/summary/daily');
 
@@ -57,13 +57,22 @@ angular.module('i2037.resources.journal', ['i2037.services'])
     angular.extend(this, data);
   };
 
-  DaySummary.get = function(params) {
+  DaySummary.query = function(params) {
+    params['from'] = Journal.toDateString(params['from']);
+    params['to'] = Journal.toDateString(params['to']);
     return $http.get(url, {params: params}).then(function(response) {
       var days = [];
       angular.forEach(response.data, function(day) {
         days.push(new DaySummary(day));
       });
       return days;
+    });
+  };
+
+  DaySummary.get = function(params) {
+    params['date'] = Journal.toDateString(params['date']);
+    return $http.get(url+'/'+params['date']).then(function(response) {
+      return new DaySummary(response.data);
     });
   };
 

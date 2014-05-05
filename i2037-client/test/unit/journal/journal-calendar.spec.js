@@ -11,8 +11,8 @@ describe('i2037.journal.calendar', function() {
         scope = $rootScope.$new();
         location = jasmine.createSpyObj('$location', ['path']);
         deferred = $q.defer();
-        JournalSummary = jasmine.createSpyObj('JournalSummary', ['get']);
-        JournalSummary.get.andReturn(deferred.promise);
+        JournalSummary = jasmine.createSpyObj('JournalSummary', ['query']);
+        JournalSummary.query.andReturn(deferred.promise);
         rootScope = $rootScope;
         spyOn($rootScope, '$broadcast');
         compile = jasmine.createSpy('$compile');          
@@ -51,7 +51,7 @@ describe('i2037.journal.calendar', function() {
       var start = new Date();
       start.setDate(end.getDate() - 30);
       scope.eventSources[0](start, end);
-      expect(JournalSummary.get).toHaveBeenCalled();
+      expect(JournalSummary.query).toHaveBeenCalled();
       scope.$apply(function() {
         deferred.reject('Journal load failed');
       });

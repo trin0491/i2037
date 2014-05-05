@@ -28,6 +28,10 @@ public interface MovesService {
 	@GET
 	@Path("/summary/daily")
 	JsonNode getDailySummary(@QueryParam("from") String from, @QueryParam("to") String to);
+
+	@GET
+	@Path("/summary/daily/{date}")
+	JsonNode getDailySummary(@PathParam("date") String day);
 	
 	@GET
 	@Path("/places/daily/{date}")
@@ -38,4 +42,6 @@ public interface MovesService {
 	JsonNode getDailyStoryline(@PathParam("date") String date);
 
 	Collection<TimeLineSummaryDto> loadSummaries(Date start, Date end);
+	
+	TimeLineSummaryDto loadSummary(Date day);
 }
