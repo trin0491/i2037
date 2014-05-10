@@ -7,6 +7,25 @@
 /* angular-bootstrap */
 .nav, .pagination, .carousel a { cursor: pointer; }
 
+.navbar-inverse .i2-logo {
+  overflow: hidden;
+  padding-left: 38px;
+  background: url(../img/i2037-logo.png);
+  background-repeat: no-repeat;
+  background-position: 8px;
+  color: #11a7ed;
+}
+
+.i2-jumbotron {
+  background-color: black;
+  background-image: url(../img/circuit-board.jpg);
+  background-repeat: no-repeat;
+  background-position: right;
+  color: #999;
+}
+
+.nav-bar
+
 .i2-wine-thumbnail {
   height: 10.3em;
   width: 3em;

@@ -4,10 +4,10 @@
 	<meta charset="utf-8">
 	<title>i2037</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/app.css">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">	
     <link href="css/fullcalendar.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/app.css">            
     <link href="img/chrome-icon-196x196.png" rel="icon" sizes="196x196">    
     <link href="img/apple-touch-icon-120x120.png" rel="apple-touch-icon" sizes="120x120" />      
     <link href="img/apple-touch-icon-60x60.png" rel="apple-touch-icon" sizes="60x60" />          
@@ -35,13 +35,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">i2037</a>        
+          <a class="navbar-brand i2-logo" href="#">i2037</a>        
         </div>
 
         <div class="navbar-collapse collapse" id="i2037-navbar-collapse" ng-switch="state">
           <ul class="nav navbar-nav navbar-right" ng-switch-when="LOGGED_IN">
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" ng-cloak>Account <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" ng-cloak><span class="glyphicon glyphicon-user"></span> <b class="caret"></b></a>
               <ul class="dropdown-menu" role="menu">
                 <li ng-show="user"><a tabindex="-1" href="#" ng-click="logout()">Logout</a></li>
                 <li ng-show="user"><a tabindex="-1" href="#" ng-click="logout()">Change Password</a></li>
@@ -74,6 +74,7 @@
 
       <footer>
         <p class="text-center">&copy; Comand UK 2013</p>
+        <p class="text-center">Version: <span i2-app-version></span></p>
       </footer>
 
     </div>
