@@ -173,7 +173,7 @@ module.exports = function(grunt) {
       }      
     },
     watch: {
-      files: ['Gruntfile.js', 'app/**/*.js', 'test/unit/**/*.js', 'app/**/*.html'],
+      files: ['Gruntfile.js', 'app/**/*.js', 'test/unit/**/*.js', 'app/**/*.html', 'app/**/*.css'],
       tasks: ['build']
     }
   });
