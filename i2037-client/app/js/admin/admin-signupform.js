@@ -3,17 +3,21 @@
     'admin/admin-signupform.tpl.html',
   ])
 
-  .controller('SignUpFormCtrl', ['$scope', '$modalInstance', 'User', function($scope, $modalInstance, User) {
+  .config(['$routeProvider', function($routeProvider) {
+      $routeProvider.when('/signup', { templateUrl: 'admin/admin-signupform.tpl.html', controller: 'SignUpFormCtrl'});
+  }])
+
+  .controller('SignUpFormCtrl', ['$scope', '$location', 'User', 'Session', function($scope, $location, User, Session) {
     $scope.user = new User();
     $scope.temp = {};
 
     $scope.cancel = function() {
-      $modalInstance.close();
+      $location.path('/home');
     };
 
     $scope.submit = function() {
-      $scope.user.$save().then(function(user) {
-        $modalInstance.close(user);
+      Session.signup($scope.user).then(function(user) {
+        $location.path('/home');
       });
     };
 

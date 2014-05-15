@@ -1,10 +1,23 @@
 (function() {
   angular.module('i2037.admin.loginform', [
+    'ngRoute',
     'admin/admin-loginform.tpl.html',
   ])
 
-  .controller('LoginFormCtrl', ['$scope', '$modalInstance', 'User', 'userName',
-      function ($scope, $modalInstance, User, userName) {
+  .config(['$routeProvider', function($routeProvider) {
+      $routeProvider.when('/login', { 
+        templateUrl: 'admin/admin-loginform.tpl.html', 
+        controller: 'LoginFormCtrl',
+        resolve: {
+          userName: function() {
+            return null;
+          }
+        }
+      });
+  }])
+
+  .controller('LoginFormCtrl', ['$scope', '$location', 'Session', 'userName',
+      function ($scope, $location, Session, userName) {
 
     var authDetails = {    
       userName: userName,
@@ -41,7 +54,7 @@
     };
 
     $scope.cancel = function(){
-      $modalInstance.close();
+      $location.path("/home");
     };
 
     $scope.submit = function() {
@@ -52,8 +65,8 @@
         $.removeCookie('userName', { expires: expireDays });
       }
 
-      User.login(authDetails.userName, authDetails.password).then(function(user) {
-        $modalInstance.close(user);
+      Session.login(authDetails.userName, authDetails.password).then(function(user) {
+        $location.path("/home");
       }, function(data, status) {
         alert("Failed to authenticate");
       });

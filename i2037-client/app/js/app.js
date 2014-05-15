@@ -18,13 +18,13 @@
       $routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
       $routeProvider.otherwise({redirectTo: '/home'});
 
-    $httpProvider.responseInterceptors.push(['$q', 'Session', function($q, Session) {
+    $httpProvider.responseInterceptors.push(['$q', '$location', function($q, $location) {
       return function(promise) {
         return promise.then(function(response) {
           return response;
         }, function(response) {
           if (response && response.status === 403) {         
-              Session.onAuthFailure();
+              $location.path("/login");
           }
           return $q.reject(response);
         });
@@ -32,16 +32,9 @@
     }]);       
   }])
 
-  .controller('NavBarCtrl', ['$scope', '$location', '$modal', 'User', 'Session', 
-      function($scope, $location, $modal, User, Session) {
+  .controller('NavBarCtrl', ['$scope', '$location', 'Session', 
+      function($scope, $location, Session) {
     $scope.$location = $location;
-
-    var STATES = {
-      LOGGED_OUT: 'LOGGED_OUT',
-      LOGGING_IN: 'LOGGING_IN',
-      LOGGED_IN: 'LOGGED_IN',
-      LOGGING_OUT: 'LOGGING_OUT'
-    };
 
     var Menu = function(name, path) {
       var menu = {
@@ -60,70 +53,28 @@
     ];
     $scope.menus = menus;
 
-    function onUserUpdate(user) {
-      $scope.state = user != null ? STATES.LOGGED_IN : STATES.LOGGED_OUT;
-      $scope.user = user;
-    }
-
-    function showLoginForm() {
-      var opts = {
-          keyboard: true,
-          templateUrl: 'admin/admin-loginform.tpl.html', 
-          controller: 'LoginFormCtrl',
-          resolve: {
-            userName: function() {
-              if ($scope.user && $scope.user.userName) {
-                return $scope.user.userName;  
-              } else {
-                return null;
-              }              
-            }
-          }
-      };
-
-      var oldState = $scope.state;
-      $scope.state = STATES.LOGGING_IN; // move to service
-      var loginForm = $modal.open(opts);
-      loginForm.result.then(function(user){
-        onUserUpdate(user);
-      }, function(response) {
-        $scope.state = oldState;
-      });    
-    }
-
-    $scope.$on('SessionService::AuthRequired', function(e) {
-      $location.path('/home');    
-      showLoginForm();
+    $scope.$on('SessionService::StateChange', function(event, state) {
+      $scope.state = state;
+      if ($scope.state === 'LOGGED_IN') {
+        $scope.user = Session.getUser();
+      } else {
+        $scope.user = null;
+      }
     });
 
     $scope.login = function() {
-      User.get().then(function(user) {
-        onUserUpdate(user);
-      });    
+      $location.path("/login");          
     };
 
     $scope.signUp = function() {
-      var signUpForm = $modal.open({
-        templateUrl: 'admin/admin-signupform.tpl.html',
-        controller: 'SignUpFormCtrl'
-      });
-      signUpForm.result.then(function(user) {
-        onUserUpdate(user);
-      });    
+      $location.path('/signup');
     };
 
     $scope.logout = function() {
-      var oldState = $scope.state;
-      $scope.state = STATES.LOGGING_OUT;
-      User.logout().then(function(user) {
-        onUserUpdate(user);
-      }, function() {
-        $scope.state = oldState;
-        alert("Failed to logout");      
-      }); 
+      Session.logout();
     };
 
-    $scope.login();
+    $scope.user = Session.getUser();
   }])
 
   .controller('HomeCtrl', [function () {}])
