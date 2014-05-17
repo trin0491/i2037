@@ -10,13 +10,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table( name = "user")
+@Table( name = "user", uniqueConstraints= @UniqueConstraint(columnNames="username"))
 public class UserImpl implements UserDetails, Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -41,7 +42,7 @@ public class UserImpl implements UserDetails, Serializable {
 	private String userName;
 
 	@Override
-	@Column(unique=true, nullable=false)		
+	@Column(unique=true, nullable=false, name="username")		
 	public String getUserName() {
 		return userName;
 	}
