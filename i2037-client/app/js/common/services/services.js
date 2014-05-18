@@ -38,6 +38,7 @@
           return User.get().then(function(user) {
             _user = user;
             raiseStateChange(STATES.LOGGED_IN);
+            return user;
           });             
         }
       },
@@ -50,12 +51,13 @@
         return User.login(userName, password).then(function(user) {
           _user = user;
           raiseStateChange(STATES.LOGGED_IN);
+          return user;
         });   
       },
 
       logout: function() {
         return User.logout().then(function(user) {
-          _user = user;
+          _user = null;
           raiseStateChange(STATES.LOGGED_OUT);
         }); 
       },
@@ -64,6 +66,7 @@
         return newUser.$save().then(function(user) {
           _user = user;
           raiseStateChange(STATES.LOGGED_IN);
+          return user;
         });
       }
     };
