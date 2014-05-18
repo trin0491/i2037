@@ -6,27 +6,30 @@ describe('i2037.admin.signupform', function() {
   });
 
   describe('SignUpFormCtrl', function() {
-    var ctrl, scope, mockDialog, mockUser;
+    var ctrl, $scope, $location, mockUser, mockSession;
 
     beforeEach(function() {
-      inject(function($rootScope, $controller) {
-        scope = $rootScope.$new();
+      inject(function(_$rootScope_, $controller, _$location_) {
+        $location = _$location_;
+        $scope = _$rootScope_.$new();
 
-        mockDialog = jasmine.createSpyObj('$modalInstance', ['close']);
+        mockSession = jasmine.createSpyObj('Session', ['signup']);
         mockUser = jasmine.createSpy('User');        
         var params = {
-          $scope: scope,
-          $modalInstance: mockDialog,
+          $scope: $scope,
+          $location: _$location_,
           User: mockUser,
         };
         ctrl = $controller('SignUpFormCtrl', params);
+
+        spyOn($location, 'path').andCallThrough();
       });
     });
 
-    it('cancel should close the dialog', function() {
-      scope.cancel();
-      scope.$digest();
-      expect(mockDialog.close).toHaveBeenCalled();
+    it('cancel should return to the home page', function() {
+      $scope.cancel();
+      $scope.$digest();
+      expect($location.path).toHaveBeenCalledWith('/home');
     });
   });
 });

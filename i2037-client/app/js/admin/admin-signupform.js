@@ -1,5 +1,7 @@
 (function() {
   angular.module('i2037.admin.signupform', [
+    'ngRoute',
+    'i2037.services',
     'admin/admin-signupform.tpl.html',
   ])
 
