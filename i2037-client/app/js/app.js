@@ -74,6 +74,10 @@
       Session.logout();
     };
 
+    $scope.changePassword = function() {
+      $location.path('/changepassword');
+    };
+
     $scope.user = Session.getUser();
   }])
 

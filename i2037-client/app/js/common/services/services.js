@@ -68,6 +68,10 @@
           raiseStateChange(STATES.LOGGED_IN);
           return user;
         });
+      },
+
+      changePassword: function(password) {
+        
       }
     };
     return service;
