@@ -19,6 +19,7 @@ describe('i2037.admin.signupform', function() {
           $scope: $scope,
           $location: _$location_,
           User: mockUser,
+          Session: mockSession
         };
         ctrl = $controller('SignUpFormCtrl', params);
 
