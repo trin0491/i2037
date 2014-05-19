@@ -15,36 +15,16 @@
           }
         }
       });
-
-      $routeProvider.when('/changepassword', {
-        templateUrl: 'admin/admin-loginform.tpl.html', 
-        controller: 'LoginFormCtrl',
-        resolve: {
-          user: ['Session', function(Session) {
-            return Session.getUser();
-          }]
-        }        
-      });
   }])
 
   .controller('LoginFormCtrl', ['$scope', '$location', 'Session', 'user',
       function ($scope, $location, Session, user) {
 
     var userPM = {    
-      userName: null,
+      userName: $.cookie('userName'),
       password: null,
       rememberMe: true,    
-      userNameReadonly: false,
     };
-
-    if (user) {      
-      $scope.title = 'Change Password';
-      userPM.userName = user.userName;
-      userPM.userNameReadonly = true;
-    } else {
-      $scope.title = 'Login';
-      userPM.userName = $.cookie('userName');
-    }
 
     function login() {
       Session.login(userPM.userName, userPM.password).then(function(user) {
@@ -52,15 +32,6 @@
       }, function(data, status) {
         var msg = 'Failed to login: status: ' + response.status + ' data: ' + response.data;        
         $scope.$emit('Resource::SaveError', 'User', msg);      
-      });      
-    }
-
-    function changePassword() {
-      Session.changePassword(userPM.password).then(function() {
-        $location.path("/home");
-      }, function(data, status) {
-        var msg = 'Failed to change password: status: ' + response.status + ' data: ' + response.data;        
-        $scope.$emit('Resource::SaveError', 'User', msg);              
       });      
     }
 
@@ -94,12 +65,7 @@
       } else {
         $.removeCookie('userName', { expires: expireDays });
       }
-
-      if (user) {        
-        changePassword();
-      } else {
-        login();
-      }
+      login();
     };
 
     $scope.userPM = userPM;  

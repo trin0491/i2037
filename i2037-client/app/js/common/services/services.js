@@ -33,7 +33,7 @@
     var service = {
       getUser: function() {
         if (_user) {
-          return $q.when(_user);
+          return _user;
         } else {
           return User.get().then(function(user) {
             _user = user;
@@ -69,10 +69,6 @@
           return user;
         });
       },
-
-      changePassword: function(password) {
-        
-      }
     };
     return service;
   }])

@@ -12,10 +12,6 @@ angular.module('i2037.resources.user', ['i2037.services'])
     angular.extend(this, data);
   };
 
-  User.prototype.$id = function() {
-    return getId(this);
-  };
-
   User.get = function(params) {
     return $http.get(url).then(function(response) {
       return new User(response.data);
@@ -28,8 +24,22 @@ angular.module('i2037.resources.user', ['i2037.services'])
     });
   };
 
+  User.update = function(data) {
+    return $http.post(url+'/'+data.$id(), data).then(function(response) {
+      return data;
+    });        
+  };
+
+  User.prototype.$id = function() {
+    return getId(this);
+  };
+
   User.prototype.$save = function() {
     return User.save(this);
+  };
+
+  User.prototype.$update = function() {
+    return User.update(this);
   };
 
   User.login = function(userName, password) {
