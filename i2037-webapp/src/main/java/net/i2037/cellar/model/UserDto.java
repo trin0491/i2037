@@ -6,6 +6,8 @@ public class UserDto implements Serializable, User {
 
 	private Long userId;
 	private String userName;
+	private String foreName;
+	private String lastName;
 
 	@Override
 	public String getUserName() {
@@ -23,5 +25,23 @@ public class UserDto implements Serializable, User {
 
 	public void setId(Long userId) {
 		this.userId = userId;
+	}
+
+	@Override
+	public String getForeName() {
+		return foreName;
+	}
+
+	public void setForeName(String foreName) {
+		this.foreName = foreName;
+	}
+
+	@Override
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 }

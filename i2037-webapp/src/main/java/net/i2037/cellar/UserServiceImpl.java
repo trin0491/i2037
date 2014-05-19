@@ -2,7 +2,7 @@ package net.i2037.cellar;
 
 import java.util.Collections;
 
-import net.i2037.cellar.model.NewUser;
+import net.i2037.cellar.model.UserDetailDto;
 import net.i2037.cellar.model.Role;
 import net.i2037.cellar.model.RoleImpl;
 import net.i2037.cellar.model.User;
@@ -27,6 +27,8 @@ public class UserServiceImpl implements UserService {
 		UserDto dto = new UserDto();
 		dto.setId(user.getId());
 		dto.setUserName(user.getUserName());
+		dto.setForeName(user.getForeName());
+		dto.setLastName(user.getLastName());
 		return dto;
 	}
 	
@@ -38,7 +40,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void create(NewUser newUser) {
+	public void create(UserDetailDto newUser) {
 		
 		UserImpl user = new UserImpl();
 		user.setId(newUser.getId());
@@ -59,7 +61,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Secured({Role.ADMIN})
 	public UserDto readById(long id) {
-		User user = userDao.readById(id);
+		UserImpl user = userDao.readById(id);
 		UserDto dto = newUserDto(user);
 		return dto;
 	}
@@ -80,6 +82,11 @@ public class UserServiceImpl implements UserService {
 	@Required
 	public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
 		this.passwordEncoder = passwordEncoder;
+	}
+
+	@Override
+	public void update(UserDetailDto dto) {
+		throw new UnsupportedOperationException();
 	}
 
 }
