@@ -1,6 +1,8 @@
 package net.i2037.cellar.model;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -97,4 +99,39 @@ public class UserImpl implements UserDetails, Serializable {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
+	@Override
+	public String toString() {
+		final int maxLen = 10;
+		StringBuilder builder = new StringBuilder();
+		builder.append("UserImpl [id=");
+		builder.append(id);
+		builder.append(", userName=");
+		builder.append(userName);
+		builder.append(", password=");
+		builder.append("**PROTECTED**");
+		builder.append(", roles=");
+		builder.append(roles != null ? toString(roles, maxLen) : null);
+		builder.append(", foreName=");
+		builder.append(foreName);
+		builder.append(", lastName=");
+		builder.append(lastName);
+		builder.append("]");
+		return builder.toString();
+	}
+
+	private String toString(Collection<?> collection, int maxLen) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("[");
+		int i = 0;
+		for (Iterator<?> iterator = collection.iterator(); iterator.hasNext()
+				&& i < maxLen; i++) {
+			if (i > 0)
+				builder.append(", ");
+			builder.append(iterator.next());
+		}
+		builder.append("]");
+		return builder.toString();
+	}
+	
 }

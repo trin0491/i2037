@@ -10,4 +10,6 @@ public interface UserDao {
 
 	void create(UserImpl user);
 
+	void update(UserImpl user);
+
 }
