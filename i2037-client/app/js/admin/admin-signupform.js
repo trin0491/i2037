@@ -32,7 +32,7 @@
     $scope.userPM = user;
     $scope.temp = {};
 
-    if (user.$id()) {
+    if (user.$id() != null) {
       $scope.title = 'Change Password';
       $scope.isNewUser = false;
     } else {

@@ -5,7 +5,7 @@ angular.module('i2037.resources.user', ['i2037.services'])
   var url = pathFinder.get('svc/user');
 
   function getId(user) {
-    return user.userName;
+    return user.id;
   }
 
   var User = function(data) {
