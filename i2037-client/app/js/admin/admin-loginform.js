@@ -29,9 +29,9 @@
     function login() {
       Session.login(userPM.userName, userPM.password).then(function(user) {
         $location.path("/home");
-      }, function(data, status) {
-        var msg = 'Failed to login: status: ' + response.status + ' data: ' + response.data;        
-        $scope.$emit('Resource::SaveError', 'User', msg);      
+      }, function(response) {
+        var msg = 'Failed to login: status: ' + response.status;        
+        $scope.$emit('Resource::LoadingError', 'User', msg);      
       });      
     }
 

@@ -1,6 +1,6 @@
 'use strict';
 
-describe('i2037.admin.loginform', function() {
+ddescribe('i2037.admin.loginform', function() {
   beforeEach(function() {
     module('i2037.admin.loginform');    
   });
@@ -25,6 +25,7 @@ describe('i2037.admin.loginform', function() {
         ctrl = $controller('LoginFormCtrl', params);
 
         spyOn($location, 'path').andCallThrough();
+        spyOn($scope, '$emit');
       });
     });
 
@@ -40,7 +41,7 @@ describe('i2037.admin.loginform', function() {
       expect($location.path).toHaveBeenCalledWith('/home');
     });
 
-    it('should call login into a session on submit', function() {
+    it('should login into a session on submit', function() {
       var deferred = $q.defer();
       mockSession.login.andReturn(deferred.promise);
 
@@ -57,5 +58,22 @@ describe('i2037.admin.loginform', function() {
       expect($location.path).toHaveBeenCalledWith('/home');
     })
 
+    it('should raise an event on login error', function() {
+      var deferred = $q.defer();
+      mockSession.login.andReturn(deferred.promise);
+
+      var userName = 'aUser';
+      var password = 'aPassword';
+      $scope.userPM.userName = userName;
+      $scope.userPM.password = password;
+      $scope.userPM.rememberMe = false;
+      $scope.submit();
+      expect(mockSession.login).toHaveBeenCalledWith(userName, password);
+
+      deferred.reject({});
+      $scope.$apply();
+      expect($location.path).not.toHaveBeenCalled();
+      expect($scope.$emit).toHaveBeenCalled();
+    })
   });
 });
