@@ -1,6 +1,6 @@
 'use strict';
 
-ddescribe('i2037.admin.loginform', function() {
+describe('i2037.admin.loginform', function() {
   beforeEach(function() {
     module('i2037.admin.loginform');    
   });
