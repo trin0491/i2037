@@ -6,8 +6,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-import net.i2037.cellar.model.NewUser;
+import net.i2037.cellar.model.UserDetailDto;
 import net.i2037.cellar.model.UserDto;
+import net.i2037.cellar.model.WineDto;
 
 @Path("/user")
 @Produces("application/json")
@@ -17,7 +18,11 @@ public interface UserService {
 	UserDto getCurrentUser();
 	
 	@POST
-	void create(NewUser user);
+	void create(UserDetailDto user);
+	
+    @POST
+    @Path("/{id}")
+	void update(UserDetailDto user);
 	
 	@GET
 	@Path("/{id}")

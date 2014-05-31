@@ -1,51 +1,54 @@
-<div class="modal-header">
-  <h3>Sign Up</h3>
-</div>
-<div class="modal-body">
+<div class="col-md-12">
+  <div class="page-header">
+    <h3>{{title}}</h3>
+  </div>
   <form name="signUpForm" class="form-horizontal" novalidate>
     <div class="form-group" ng-class="getCls(signUpForm.userName)">
       <label class="control-label col-md-4" for="inputUsername">Email</label>
-      <div class="input-group col-md-6">
+      <div class="input-group col-md-4">
         <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-        <input type="email" class="form-control" id="inputUsername" name="userName" placeholder="Email address" ng-model="user.userName" required>
+        <input type="email" class="form-control" id="inputUsername" name="userName" placeholder="Email address" ng-model="userPM.userName" 
+          ng-readonly="!isNewUser">
       </div>
       <p class="help-block col-md-offset-4" ng-show="showErr(signUpForm.userName, 'email')">Username must be an email address</p>
       <p class="help-block col-md-offset-4" ng-show="showErr(signUpForm.userName, 'required')">Username is required</p>                                    
     </div>    
     <div class="form-group" ng-class="getCls(signUpForm.foreName)">
       <label class="control-label col-md-4" for="inputForename">First Name</label>
-      <div class="input-group col-md-6">
+      <div class="input-group col-md-4">
         <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-        <input type="text" class="form-control" id="inputForename" name="foreName" placeholder="First Name" ng-model="user.foreName" required>
+        <input type="text" class="form-control" id="inputForename" name="foreName" placeholder="First Name" ng-model="userPM.foreName" required>
       </div>              
     </div>
     <div class="form-group" ng-class="getCls(signUpForm.lastName)">
       <label class="control-label col-md-4" for="inputLastname">Last Name</label>
-      <div class="input-group col-md-6">
+      <div class="input-group col-md-4">
         <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-        <input type="text" class="form-control" id="inputLastname" name="lastName" placeholder="Last Name" ng-model="user.lastName" required>
+        <input type="text" class="form-control" id="inputLastname" name="lastName" placeholder="Last Name" ng-model="userPM.lastName" required>
       </div>              
     </div>            
     <div class="form-group" ng-class="getCls(signUpForm.password)">
       <label class="control-label col-md-4" for="inputPassword">Password</label>
-      <div class="input-group col-md-6">
+      <div class="input-group col-md-4">
         <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-        <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" ng-model="user.password" 
+        <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" ng-model="userPM.password" 
           ng-minlength="6" required>
       </div>
       <p class="help-block col-md-offset-4" ng-show="showErr(signUpForm.password, 'minlength')">Password must have at least 6 chars</p>                                             
     </div>
     <div class="form-group" ng-class="getCls(signUpForm.password2)">
       <label class="control-label col-md-4" for="inputPassword2">Confirm Password</label>
-      <div class="input-group col-md-6">
+      <div class="input-group col-md-4">
         <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
         <input type="password" class="form-control" id="inputPassword2" name="password2" placeholder="Password" ng-model="temp.password2" required>
       </div>
       <p class="help-block col-md-offset-4" ng-show="signUpForm.$dirty &amp;&amp; !passwordsMatch()">Passswords do not match</p>              
     </div>    
+    <div class="form-group">
+      <div class="col-md-offset-4 col-md-4">
+        <button ng-click="submit()" class="btn btn-primary" ng-disabled="signUpForm.$invalid || !passwordsMatch()">{{title}}</button>
+        <button ng-click="cancel()" class="btn">Cancel</button>  
+      </div>
+    </div>
   </form>
-</div>
-<div class="modal-footer">
-  <button ng-click="submit()" class="btn btn-primary" ng-disabled="signUpForm.$invalid || !passwordsMatch()">Submit</button>
-  <button ng-click="cancel()" class="btn">Cancel</button>  
 </div>

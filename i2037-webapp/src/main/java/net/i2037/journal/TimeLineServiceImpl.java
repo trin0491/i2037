@@ -1,5 +1,6 @@
 package net.i2037.journal;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -46,7 +47,7 @@ public class TimeLineServiceImpl implements TimeLineService {
 	}
 	
 	@Override
-	public TimeLineSummaryDto getDailySummary(String day) {
+	public Collection<TimeLineSummaryDto> getDailySummary(String day) {
 		DateTime dayDT = DAY_FORMATTER.parseDateTime(day);
 		try {
 			return summaryLoader.loadSummary(dayDT.toDate());

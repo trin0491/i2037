@@ -39,7 +39,13 @@ public class UserDaoImpl implements UserDao {
 		Session session = getSessionFactory().getCurrentSession();
 		UserImpl user = (UserImpl) session.createQuery(QUERY_BY_USERNAME).setString("username", username).uniqueResult();
 		return user;
-	}
+	}	
+
+	@Override
+	@Transactional(readOnly = false)	
+	public void update(UserImpl user) {
+		sessionFactory.getCurrentSession().update(user);				
+	}	
 	
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
@@ -56,4 +62,5 @@ public class UserDaoImpl implements UserDao {
 		session.save(user);
 		
 	}
+
 }

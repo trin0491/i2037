@@ -1,5 +1,6 @@
 package net.i2037.journal;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -22,6 +23,6 @@ public interface TimeLineService {
 
 	@GET
 	@Path("/summary/daily/{date}")
-	TimeLineSummaryDto getDailySummary(@PathParam("date") String day);	
+	Collection<TimeLineSummaryDto> getDailySummary(@PathParam("date") String day);	
 	
 }

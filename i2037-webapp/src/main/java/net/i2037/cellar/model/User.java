@@ -7,4 +7,8 @@ public interface User {
 
 	String getUserName();
 
+	public String getLastName();
+
+	public String getForeName();
+
 }

@@ -5,15 +5,11 @@ angular.module('i2037.resources.user', ['i2037.services'])
   var url = pathFinder.get('svc/user');
 
   function getId(user) {
-    return user.userName;
+    return user.id;
   }
 
   var User = function(data) {
     angular.extend(this, data);
-  };
-
-  User.prototype.$id = function() {
-    return getId(this);
   };
 
   User.get = function(params) {
@@ -28,8 +24,22 @@ angular.module('i2037.resources.user', ['i2037.services'])
     });
   };
 
+  User.update = function(data) {
+    return $http.post(url+'/'+data.$id(), data).then(function(response) {
+      return data;
+    });        
+  };
+
+  User.prototype.$id = function() {
+    return getId(this);
+  };
+
   User.prototype.$save = function() {
     return User.save(this);
+  };
+
+  User.prototype.$update = function() {
+    return User.update(this);
   };
 
   User.login = function(userName, password) {

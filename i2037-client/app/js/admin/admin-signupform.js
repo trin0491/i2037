@@ -1,20 +1,77 @@
 (function() {
   angular.module('i2037.admin.signupform', [
+    'ngRoute',
+    'i2037.services',
+    'i2037.resources.user',
     'admin/admin-signupform.tpl.html',
   ])
 
-  .controller('SignUpFormCtrl', ['$scope', '$modalInstance', 'User', function($scope, $modalInstance, User) {
-    $scope.user = new User();
+  .config(['$routeProvider', function($routeProvider) {
+    $routeProvider.when('/signup', { 
+      templateUrl: 'admin/admin-signupform.tpl.html', 
+      controller: 'SignUpFormCtrl',
+      resolve: {
+        user: ['User', function(User) {
+          return new User();
+        }]
+      }
+    });
+
+    $routeProvider.when('/changepassword', { 
+      templateUrl: 'admin/admin-signupform.tpl.html', 
+      controller: 'SignUpFormCtrl',
+      resolve: {
+        user: ['Session', function(Session) {
+          return Session.getUser();
+        }]
+      }
+    });    
+  }])
+
+  .controller('SignUpFormCtrl', ['$scope', '$location', 'Session', 'user', function($scope, $location, Session, user) {
+    $scope.userPM = user;
     $scope.temp = {};
 
+    if (user.$id() != null) {
+      $scope.title = 'Change Password';
+      $scope.isNewUser = false;
+    } else {
+      $scope.title = 'Sign Up';
+      $scope.isNewUser = true;      
+    }
+
+    function goHome() {
+      $location.path('/home');
+    }
+
+    function signup() {
+      Session.signup(user).then(function() {
+        goHome();
+      }, function(response) {
+        var msg = 'Failed to save user: status: ' + response.status;        
+        $scope.$emit('Resource::SaveError', 'User', msg);              
+      });      
+    }
+
+    function update() {
+      user.$update().then(function() {
+        goHome();
+      }, function(response) {
+        var msg = 'Failed to save user: status: ' + response.status;        
+        $scope.$emit('Resource::SaveError', 'User', msg);              
+      });      
+    }
+
     $scope.cancel = function() {
-      $modalInstance.close();
+      goHome();
     };
 
     $scope.submit = function() {
-      $scope.user.$save().then(function(user) {
-        $modalInstance.close(user);
-      });
+      if ($scope.isNewUser) {
+        signup();      
+      } else {
+        update();      
+      }
     };
 
     $scope.getCls = function(ngModelController) {
@@ -37,7 +94,7 @@
     };
 
     $scope.passwordsMatch = function() {
-      return $scope.user.password === $scope.temp.password2;
+      return $scope.userPM.password === $scope.temp.password2;
     };
 
   }])

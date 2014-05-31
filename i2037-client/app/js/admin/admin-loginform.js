@@ -1,24 +1,38 @@
 (function() {
   angular.module('i2037.admin.loginform', [
+    'ngRoute',
+    'i2037.services',
     'admin/admin-loginform.tpl.html',
   ])
 
-  .controller('LoginFormCtrl', ['$scope', '$modalInstance', 'User', 'userName',
-      function ($scope, $modalInstance, User, userName) {
+  .config(['$routeProvider', function($routeProvider) {
+      $routeProvider.when('/login', { 
+        templateUrl: 'admin/admin-loginform.tpl.html', 
+        controller: 'LoginFormCtrl',
+        resolve: {
+          user: function() {
+            return null;
+          }
+        }
+      });
+  }])
 
-    var authDetails = {    
-      userName: userName,
-      password: '',
+  .controller('LoginFormCtrl', ['$scope', '$location', 'Session', 'user',
+      function ($scope, $location, Session, user) {
+
+    var userPM = {    
+      userName: $.cookie('userName'),
+      password: null,
       rememberMe: true,    
-      userNameReadonly: false,
     };
 
-    if (userName) {
-      $scope.title = 'Change Password';
-      authDetails.userNameReadonly = true;
-    } else {
-      $scope.title = 'Login';
-      authDetails.userName = $.cookie('userName');
+    function login() {
+      Session.login(userPM.userName, userPM.password).then(function(user) {
+        $location.path("/home");
+      }, function(response) {
+        var msg = 'Failed to login: status: ' + response.status;        
+        $scope.$emit('Resource::LoadingError', 'User', msg);      
+      });      
     }
 
     $scope.getCls = function(ngModelController) {
@@ -41,25 +55,20 @@
     };
 
     $scope.cancel = function(){
-      $modalInstance.close();
+      $location.path("/home");
     };
 
     $scope.submit = function() {
       var expireDays = 7;
-      if (authDetails.rememberMe && authDetails.userName) {
-        $.cookie('userName', authDetails.userName, { expires: expireDays });
+      if (userPM.rememberMe && userPM.userName) {
+        $.cookie('userName', userPM.userName, { expires: expireDays });
       } else {
         $.removeCookie('userName', { expires: expireDays });
       }
-
-      User.login(authDetails.userName, authDetails.password).then(function(user) {
-        $modalInstance.close(user);
-      }, function(data, status) {
-        alert("Failed to authenticate");
-      });
+      login();
     };
 
-    $scope.authDetails = authDetails;  
+    $scope.userPM = userPM;  
   }])
   ;
 }());
