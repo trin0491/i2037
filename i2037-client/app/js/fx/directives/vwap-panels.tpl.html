@@ -1,0 +1,28 @@
+<div class="x-tiles-box">
+  <div class="x-tile-box x-tile-box-left">
+    <i2-tile>
+      <div class="x-side x-side-left">
+        <div>SELL</div>
+        <div>{{quote.enteredCcy}}</div>
+      </div>
+      <i2-price-big></i2-price-big>
+      <div class="x-price x-price-left">
+        <div>{{quote.sellPx.fwdPts}}</div>                  
+        <div>{{quote.sellPx.allIn.raw}}</div>
+      </div> 
+    </i2-tile>
+  </div>
+  <div class="x-tile-box x-tile-box-right">
+    <i2-tile>
+      <div class="x-side x-side-right">
+        <div>BUY</div>
+        <div>{{quote.enteredCcy}}</div>
+      </div>
+      <i2-price-big></i2-price-big>
+      <div class="x-price x-price-right">
+        <div>{{quote.buyPx.fwdPts}}</div>                  
+        <div>{{quote.buyPx.allIn.raw}}</div>
+      </div>           
+    </i2-tile>
+  </div>
+</div>

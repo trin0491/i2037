@@ -24,8 +24,6 @@
   color: #999;
 }
 
-.nav-bar
-
 .i2-wine-thumbnail {
   height: 10.3em;
   width: 3em;
@@ -49,3 +47,200 @@
   height: 2em;
   width: 2em;
 }
+
+.x-quote-panel {
+  background-color: #000000;
+  height: 200px;
+  color: white;
+  line-height: 1;  
+}
+
+.x-tiles-box {
+  position: relative;
+  width: 100%;
+  height: 85px;
+}
+
+.x-tile-box {
+  position: absolute;
+  padding: 3px;
+}
+
+.x-tile {
+  padding: 3px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 0.5em;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; 
+  cursor: pointer;
+}
+
+.x-tile-box-left {
+  top: 0px;
+  bottom: 0px;
+  right: 50%;
+  left: 0px;  
+}
+
+.x-tile-box-right {
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 50%;
+}
+
+/* http://www.colorzilla.com/gradient-editor/#d0e4f7+0,73b1e7+18,0a77d5+38,539fe1+79,87bcea+100;dealable */
+.x-tile-dealable {
+ background: #d0e4f7; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2QwZTRmNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjE4JSIgc3RvcC1jb2xvcj0iIzczYjFlNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjM4JSIgc3RvcC1jb2xvcj0iIzBhNzdkNSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijc5JSIgc3RvcC1jb2xvcj0iIzUzOWZlMSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM4N2JjZWEiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  #d0e4f7 0%, #73b1e7 18%, #0a77d5 38%, #539fe1 79%, #87bcea 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d0e4f7), color-stop(18%,#73b1e7), color-stop(38%,#0a77d5), color-stop(79%,#539fe1), color-stop(100%,#87bcea)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #d0e4f7 0%,#73b1e7 18%,#0a77d5 38%,#539fe1 79%,#87bcea 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #d0e4f7 0%,#73b1e7 18%,#0a77d5 38%,#539fe1 79%,#87bcea 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #d0e4f7 0%,#73b1e7 18%,#0a77d5 38%,#539fe1 79%,#87bcea 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #d0e4f7 0%,#73b1e7 18%,#0a77d5 38%,#539fe1 79%,#87bcea 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0e4f7', endColorstr='#87bcea',GradientType=0 );  /* IE6-8 */
+}
+
+.x-tile-nonDealable {
+  background: #e2e2e2; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIxJSIgc3RvcC1jb2xvcj0iI2UyZTJlMiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjE5JSIgc3RvcC1jb2xvcj0iIzdmN2Y3ZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjM5JSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijc4JSIgc3RvcC1jb2xvcj0iIzdmN2Y3ZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijc4JSIgc3RvcC1jb2xvcj0iIzdmN2Y3ZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlMmUyZTIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  #e2e2e2 1%, #7f7f7f 19%, #000000 39%, #7f7f7f 78%, #7f7f7f 78%, #e2e2e2 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#e2e2e2), color-stop(19%,#7f7f7f), color-stop(39%,#000000), color-stop(78%,#7f7f7f), color-stop(78%,#7f7f7f), color-stop(100%,#e2e2e2)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #e2e2e2 1%,#7f7f7f 19%,#000000 39%,#7f7f7f 78%,#7f7f7f 78%,#e2e2e2 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #e2e2e2 1%,#7f7f7f 19%,#000000 39%,#7f7f7f 78%,#7f7f7f 78%,#e2e2e2 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #e2e2e2 1%,#7f7f7f 19%,#000000 39%,#7f7f7f 78%,#7f7f7f 78%,#e2e2e2 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #e2e2e2 1%,#7f7f7f 19%,#000000 39%,#7f7f7f 78%,#7f7f7f 78%,#e2e2e2 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#e2e2e2',GradientType=0 );   /* IE6-8 */  
+}
+
+.x-tile-traded {
+background: #b4e391; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIxJSIgc3RvcC1jb2xvcj0iI2I0ZTM5MSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjE5JSIgc3RvcC1jb2xvcj0iIzg5ZGI0MSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjQwJSIgc3RvcC1jb2xvcj0iIzVlYzExMyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijc5JSIgc3RvcC1jb2xvcj0iIzc0YmMzOCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNiNGUzOTEiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  #b4e391 1%, #89db41 19%, #5ec113 40%, #74bc38 79%, #b4e391 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#b4e391), color-stop(19%,#89db41), color-stop(40%,#5ec113), color-stop(79%,#74bc38), color-stop(100%,#b4e391)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #b4e391 1%,#89db41 19%,#5ec113 40%,#74bc38 79%,#b4e391 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #b4e391 1%,#89db41 19%,#5ec113 40%,#74bc38 79%,#b4e391 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #b4e391 1%,#89db41 19%,#5ec113 40%,#74bc38 79%,#b4e391 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #b4e391 1%,#89db41 19%,#5ec113 40%,#74bc38 79%,#b4e391 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b4e391', endColorstr='#b4e391',GradientType=0 ); /* IE6-8 */  
+}
+
+.x-price {
+  font-size: 0.8em;   
+}
+
+.x-price-big {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 5em;
+  height: 4em;
+  text-align: center;
+  margin: auto;
+}
+
+.x-price-right {
+  text-align: right;
+  position: absolute;
+  bottom: 1px;
+  right: 2px;
+}
+
+.x-price-left {
+  text-align: left;
+  position: absolute;
+  bottom: 1px;
+  left: 2px;
+}
+
+.x-price-pips {
+  font-size: 3em;
+}
+
+.x-price-decimals {
+  vertical-align: top;
+  font-size: 1.5em;
+}
+
+.x-side {
+  color: white;
+  line-height: 1;   
+  font-size: 0.8em;
+  padding: 0.1em;
+}
+
+.x-side-left {
+  text-align: left;
+  position: absolute;
+  top: 1px;
+  left: 3px; 
+}
+
+.x-side-right {
+  text-align: right;
+  position: absolute;
+  top: 1px;
+  right: 3px;
+}
+
+.x-normal-amt-box {
+  height: 35px;
+  padding: 3px;
+}
+
+.x-center-col {
+  position: absolute;
+  top: 0px;
+  left: 25%;
+  right: 25%;
+  bottom: 0%;
+  width: 50%;
+}
+
+.x-wing-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 75%;
+  bottom: 0;
+}
+
+.x-wing-right {
+  position: absolute;
+  top: 0;
+  left: 75%;
+  right: 0;
+  bottom: 0;  
+}
+
+.x-price-normal-amt {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 7em;
+  height: 1.6em;
+  text-align: center;
+  margin: auto;
+  color: white;
+  font-size: 0.8em;
+}
+
+.x-row {
+  position: relative;
+  height: 200px
+}
+
