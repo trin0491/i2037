@@ -1,9 +1,7 @@
 (function() {
   'use strict';
 
-  var TEMPLATE = 'fx/directives/rung.tpl.html';
-
-  angular.module('i2037.fx.directives.rung', [TEMPLATE])
+  angular.module('i2037.fx.directives.rung', [])
 
   .directive('i2Rung', function() {
     return {
