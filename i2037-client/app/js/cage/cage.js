@@ -1,14 +1,20 @@
-angular.module('i2037.cage', ['ngRoute', 'i2037.services', 'i2037.directives.d3', 'i2037.fx'])
+angular.module('i2037.cage', [
+  'ngRoute', 
+  'i2037.services', 
+  'i2037.directives.d3', 
+  'i2037.fx'
+])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/cage', {templateUrl: 'partials/cage.html', controller: 'CageCtrl'});
 }])
 
-.controller('FusionPanelCtrl', ['$scope', function($scope) {
+.controller('FusionPanelCtrl', ['$scope', 'PricingFacade', function($scope, PricingFacade) {
   $scope.quote = {
     ccyPair: 'EURUSD',
     enteredCcy: 'EUR',
     qty: 1000000,
+    state: 'locked',
     buyPx: {
       spot: { prefix: 1.32, pips: 64, decimals: 4, raw: 1.32644 },
       fwdPts: 0.30,
@@ -20,6 +26,11 @@ angular.module('i2037.cage', ['ngRoute', 'i2037.services', 'i2037.directives.d3'
       allIn: { prefix: 1.32, pips: 63, decimals: 7, raw: 1.32647 }      
     }
   };
+
+  PricingFacade.getOrderBook({ccyPair:'EURUSD'}).then(function (ob) {
+    $scope.quote.buy = ob.buy;
+    $scope.quote.sell = ob.sell;
+  });
 }])
 
 .controller('CageCtrl', ['$scope', 'JournalSummary', 'JournalStoryline', 'd3Service', function($scope, JournalSummary, JournalStoryline, d3Service) {
