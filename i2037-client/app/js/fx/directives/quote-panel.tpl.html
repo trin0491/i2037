@@ -9,7 +9,7 @@
         <table>
           <tr ng-repeat="rung in quote.buy">
             <td i2-depth-chart data="rung.amts" max="12" align="right"></td>
-            <td class="x-amt">{{rung.cumQty}}</td>
+            <td class="x-amt">{{rung.totalAmt}}</td>
             <td>{{rung.px}}</td>
           </tr>            
         </table>            
@@ -22,7 +22,7 @@
         <table>
           <tr ng-repeat="rung in quote.sell">
             <td>{{rung.px}}</td>
-            <td class="x-amt">{{rung.cumQty}}</td>
+            <td class="x-amt">{{rung.totalAmt}}</td>
             <td i2-depth-chart data="rung.amts" max="12" align="left"></td>
           </tr>            
         </table>      

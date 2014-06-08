@@ -27,7 +27,9 @@ angular.module('i2037.cage', [
     }
   };
 
-  PricingFacade.getOrderBook({ccyPair:'EURUSD'}).then(function (ob) {
+  var config = {ccyPair:'EURUSD'};
+
+  PricingFacade.getOrderBook(config).then(function (ob) {
     $scope.quote.buy = ob.buy;
     $scope.quote.sell = ob.sell;
   });
