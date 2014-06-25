@@ -1,19 +1,50 @@
-angular.module('i2037.cage', ['ngRoute', 'i2037.services', 'i2037.directives.d3'])
+angular.module('i2037.cage', [
+  'ngRoute', 
+  'i2037.services', 
+  'i2037.directives.d3', 
+  'i2037.fx'
+])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/cage', {templateUrl: 'partials/cage.html', controller: 'CageCtrl'});
 }])
 
-.controller('CageCtrl', ['$scope', 'JournalSummary', 'JournalStoryline', 'd3Service', function($scope, JournalSummary, JournalStoryline, d3Service) {
-  JournalSummary.get({from: '20140412', to: '20140413'}).then(function(days) {
-     $scope.activities = days[1].activities;
+.controller('FusionPanelCtrl', ['$scope', 'PricingFacade', function($scope, PricingFacade) {
+  $scope.quote = {
+    ccyPair: 'EURUSD',
+    enteredCcy: 'EUR',
+    qty: 1000000,
+    state: 'locked',
+    buyPx: {
+      spot: { prefix: 1.32, pips: 64, decimals: 4, raw: 1.32644 },
+      fwdPts: 0.30,
+      allIn: { prefix: 1.32, pips: 64, decimals: 7, raw: 1.32647 }
+    },
+    sellPx: {
+      spot: { prefix: 1.32, pips: 63, decimals: 4, raw: 1.32637 },
+      fwdPts: 0.30,
+      allIn: { prefix: 1.32, pips: 63, decimals: 7, raw: 1.32647 }      
+    }
+  };
 
-     var totalDistance = 0;
-     days[1].activities.forEach(function(activity) {
-        totalDistance += activity.distance;
-     });
-     $scope.distance = totalDistance + 'm';
+  var config = {ccyPair:'EURUSD'};
+
+  PricingFacade.getOrderBook(config).then(function (ob) {
+    $scope.quote.buy = ob.buy;
+    $scope.quote.sell = ob.sell;
   });
+}])
+
+.controller('CageCtrl', ['$scope', 'JournalSummary', 'JournalStoryline', 'd3Service', function($scope, JournalSummary, JournalStoryline, d3Service) {
+  // JournalSummary.get({from: '20140412', to: '20140413'}).then(function(days) {
+  //    $scope.activities = days[1].activities;
+
+  //    var totalDistance = 0;
+  //    days[1].activities.forEach(function(activity) {
+  //       totalDistance += activity.distance;
+  //    });
+  //    $scope.distance = totalDistance + 'm';
+  // });
 
   var dt = new Date();
 

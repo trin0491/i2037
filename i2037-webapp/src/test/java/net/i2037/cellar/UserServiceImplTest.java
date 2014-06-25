@@ -70,6 +70,21 @@ public class UserServiceImplTest {
 		}};		
 	}
 	
+<<<<<<< HEAD
+=======
+	private void expectEncodePassword(final String password) {
+		new Expectations() {{
+			mockPasswordEncoder.encode(password); result = password;
+		}};
+	}	
+	
+	private void expectUpdate() {
+		new Expectations() {{
+			mockDao.update(currentUser);
+		}};
+	}	
+	
+>>>>>>> master
 	@Test(expected=SecurityException.class)
 	public void testUpdateWithNoId() {
 		UserDetailDto dto = newUser();
@@ -118,6 +133,10 @@ public class UserServiceImplTest {
 		dto.setPassword(password);
 		expectGetCurrentUser();
 		expectEncodePassword(password);
+<<<<<<< HEAD
+=======
+		expectUpdate();
+>>>>>>> master
 		userService.update(dto);
 		assertEquals(USER_ID, currentUser.getId());
 		assertEquals(USER_NAME, currentUser.getUserName());
@@ -125,10 +144,13 @@ public class UserServiceImplTest {
 		assertEquals(LAST_NAME, currentUser.getLastName());
 		assertEquals(password, currentUser.getPassword());
 	}
+<<<<<<< HEAD
 
 	private void expectEncodePassword(final String password) {
 		new Expectations() {{
 			mockPasswordEncoder.encode(password); result = password;
 		}};
 	}
+=======
+>>>>>>> master
 }

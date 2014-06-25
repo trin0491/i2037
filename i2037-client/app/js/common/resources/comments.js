@@ -13,6 +13,7 @@ angular.module('i2037.resources.comments', ['i2037.services'])
     angular.extend(this, data);
   };
 
+  // statics
   Comment.get = function(id, params) {
     var url = baseUrl + '/' + id;
     return $http.get(url, { params: params }).then(function(rv) {
@@ -45,6 +46,7 @@ angular.module('i2037.resources.comments', ['i2037.services'])
     });
   };
 
+  // instance methods
   Comment.prototype.$save = function() {
     return Comment.save(this);
   };
