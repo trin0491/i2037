@@ -77,7 +77,7 @@
       create: function(ccyPair) {
         var pm = { rungs: [], maxAmt:0 };
         for (var i=0;i<this.maxDepth;i++) {
-          pm.rungs[i] = new AggregatedRung();
+          pm.rungs[i] = new AggregatedRung(ccyPair);
         }
         return pm;
       },
@@ -236,19 +236,27 @@
 
         if (side === 1) {          
           ladder.rungs = [
-            {px:1.32651, amt:2, src:'MSP1'},
-            {px:1.32652, amt:3, src:'MSP1'},
-            {px:1.3266,  amt:2, src:'MSP1'},
-            {px:1.3267,  amt:5, src:'MSP1'},
-            {px:1.3268,  amt:5, src:'MSP1'}                        
+            {px:1.32651, amt:2, src:'EXT'},
+            {px:1.32651, amt:1, src:'MSMM'},            
+            {px:1.32652, amt:3, src:'EXT'},
+            {px:1.3266,  amt:2, src:'EXT'},
+            {px:1.3266,  amt:3, src:'MSMM'},                        
+            {px:1.3267,  amt:5, src:'EXT'},
+            {px:1.3268,  amt:5, src:'EXT'},
+            {px:1.3268,  amt:5, src:'MSMM'},
+            {px:1.3268,  amt:4, src:'MSP1'}
           ];          
         } else {
           ladder.rungs = [
-            {px:1.32642, amt:1, src:'MSMM'},
-            {px:1.32641, amt:2, src:'MSMM'},
-            {px:1.3263,  amt:3, src:'MSMM'},    
-            {px:1.3262,  amt:4, src:'MSMM'},    
-            {px:1.3261,  amt:4, src:'MSMM'}          
+            {px:1.32642, amt:1, src:'EXT'},
+            {px:1.32641, amt:2, src:'EXT'},
+            {px:1.32641, amt:1, src:'MSMM'},            
+            {px:1.3263,  amt:3, src:'EXT'},    
+            {px:1.3262,  amt:4, src:'EXT'},
+            {px:1.3262,  amt:3, src:'MSMM'},                    
+            {px:1.3261,  amt:4, src:'EXT'},
+            {px:1.3261,  amt:5, src:'MSMM'},
+            {px:1.3261,  amt:5, src:'MSP1'},                                                                            
           ];
         }        
         priceStreams.put(key, ladder);          
