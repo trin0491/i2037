@@ -1,7 +1,7 @@
 
 angular.module('i2037.resources.journal', ['i2037.services'])
 
-.factory('Journal', function() {
+.factory('Journal', function JournalFactory() {
     var me = {};
 
     function pad(n){return n<10 ? '0'+n : n;}
