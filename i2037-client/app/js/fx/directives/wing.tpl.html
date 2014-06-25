@@ -2,8 +2,8 @@
   <div class="x-normal-amt-box">
     <i2-tile state="quote.state">
       <div class="x-price x-price-normal-amt">
-        <div>1.32<span class="x-price-normal-amt-pips">64</span>7</div>
-        <div>5,000,000</div>
+        <div>{{quote.sellNormAmtVwap.getPrefix()}}<span class="x-price-normal-amt-pips">{{quote.sellNormAmtVwap.getPips()}}</span>{{quote.sellNormAmtVwap.getDecimals()}}</div>
+        <div>{{quote.sellNormAmtVwap.amt}}</div>
       </div>
     </i2-tile>
   </div>

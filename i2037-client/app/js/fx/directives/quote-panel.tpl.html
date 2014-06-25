@@ -7,10 +7,10 @@
     <div class="x-row">
       <i2-wing class="x-wing x-wing-left">
         <table>
-          <tr ng-repeat="rung in quote.buy">
-            <td i2-depth-chart data="rung.amts" max="12" align="right"></td>
+          <tr ng-repeat="rung in quote.sell.rungs">
+            <td i2-depth-chart data="rung.amts" max="quote.sell.maxAmt" align="right"></td>
             <td class="x-amt">{{rung.totalAmt}}</td>
-            <td>{{rung.px}}</td>
+            <td>{{rung.px.getPips()}}</td>
           </tr>            
         </table>            
       </i2-wing>
@@ -20,10 +20,10 @@
       </div>
       <i2-wing class="x-wing x-wing-right">
         <table>
-          <tr ng-repeat="rung in quote.sell">
-            <td>{{rung.px}}</td>
+          <tr ng-repeat="rung in quote.buy.rungs">
+            <td>{{rung.px.getPips()}}</td>
             <td class="x-amt">{{rung.totalAmt}}</td>
-            <td i2-depth-chart data="rung.amts" max="12" align="left"></td>
+            <td i2-depth-chart data="rung.amts" max="quote.buy.maxAmt" align="left"></td>
           </tr>            
         </table>      
       </i2-wing>
