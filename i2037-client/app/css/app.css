@@ -286,6 +286,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b4e391', end
   padding-bottom: 3px;
 }
 
+.x-ob-highlight {
+  background: #1F5C99; 
+}
+
 .x-price-normal-amt {
   position: absolute;
   top: 0;

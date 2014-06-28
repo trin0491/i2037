@@ -14,15 +14,7 @@
             </div>
           </i2-tile>
         </div>  
-        <i2-wing>
-          <table>
-            <tr ng-repeat="rung in quote.sell.rungs">
-              <td i2-depth-chart data="rung.amts" max="quote.sell.maxAmt" align="right"></td>
-              <td class="x-amt">{{rung.totalAmt}}</td>
-              <td>{{rung.px.getPips()}}</td>
-            </tr>            
-          </table>            
-        </i2-wing>
+        <i2-order-book ob="quote.sell" align="right"></i2-order-book>
       </div>
       <div class="x-center-col">
         <i2-vwap-tiles quote="quote"></i2-vwap-tiles>
@@ -37,15 +29,7 @@
             </div>
           </i2-tile>
         </div>
-        <i2-wing>
-          <table>
-            <tr ng-repeat="rung in quote.buy.rungs">
-              <td>{{rung.px.getPips()}}</td>
-              <td class="x-amt">{{rung.totalAmt}}</td>
-              <td i2-depth-chart data="rung.amts" max="quote.buy.maxAmt" align="left"></td>
-            </tr>            
-          </table>      
-        </i2-wing>
+        <i2-order-book ob="quote.buy"></i2-order-book>        
       </div>
     </div>
   </div>

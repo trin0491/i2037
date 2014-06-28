@@ -64,7 +64,8 @@
 
     function AggregatedRung(ccyPair) {
       this.px = new Price(ccyPair);
-      this.totalAmt = 0;      
+      this.totalAmt = 0;
+      this.cumAmt = 0;      
       this.amts = [];
       this.srcs = [];
     }
@@ -107,12 +108,14 @@
         function sum(a, b) {
           return a+b;
         }
-        var maxAmt = 0;      
+        var maxAmt = 0;
+        var cumAmt = 0;      
         pmRungs.forEach(function(rung) {
           rung.totalAmt = rung.amts.reduce(sum, 0);
           if (rung.totalAmt > maxAmt) {
             maxAmt = rung.totalAmt;
           }
+          rung.cumAmt = cumAmt += rung.totalAmt;
         });
         pm.maxAmt = maxAmt;
       }
