@@ -1,13 +1,11 @@
 (function() {
   'use strict';
   var TEMPLATE = 'fx/directives/order-book.tpl.html';
-  var RUNG_TPL_LEFT = 'fx/directives/order-book-rung-left.tpl.html';
-  var RUNG_TPL_RIGHT = 'fx/directives/order-book-rung-right.tpl.html';
+  var RUNG_TPL = 'fx/directives/order-book-rung.tpl.html';
 
   angular.module('i2037.fx.directives.orderBook', [
     TEMPLATE, 
-    RUNG_TPL_LEFT, 
-    RUNG_TPL_RIGHT,
+    RUNG_TPL, 
     'i2037.fx.directives.depthChart'    
   ])
 
@@ -24,9 +22,19 @@
       transclude: false,
       link: function($scope, element, attrs) {
         var tbl = element.find('tbody');
-        var t = (attrs.align === 'right') ? RUNG_TPL_RIGHT : RUNG_TPL_LEFT;
+        var t = angular.element($templateCache.get(RUNG_TPL));
+        if (attrs.align === 'right') {
+          var td = t.find('td');
+          var depthChart = td.eq(2);
+          depthChart.attr("align", "right");
+          var tr = td.parent();
+          td.remove();
+          for (var i=td.length-1;i>=0;--i) {
+            tr.eq(0).append(td.eq(i));
+          }
+        }
 
-        var linkFn = $compile($templateCache.get(t));
+        var linkFn = $compile(t);
         var children = [];
 
         $scope.$watch('ob.rungs', function(rungs) {

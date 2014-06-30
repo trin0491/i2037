@@ -63,7 +63,7 @@ describe('i2037.fx.directives.orderBook', function() {
     it('should have a price in the 3rd column, if right aligned', function() {
       element = compile('<i2-order-book ob="ob" align="right"></i2-order-book>');      
       mockPx.getPips.andReturn('1.3264');
-      $scope.$digest();      
+      $scope.$digest(); 
       var td = element.find('td');
       expect(td.eq(2).text()).toEqual('1.3264');
     })
