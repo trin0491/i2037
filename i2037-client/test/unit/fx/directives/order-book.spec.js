@@ -2,17 +2,18 @@ describe('i2037.fx.directives.orderBook', function() {
   beforeEach(module('i2037.fx.directives.orderBook'));
 
   describe('i2OrderBook', function() {
-    var $scope, element, $compile;
+    var $scope, element, $compile, mockPx;
 
     beforeEach(function() {  
       inject(function(_$compile_, _$rootScope_) {
         $compile = _$compile_;
         $scope = _$rootScope_.$new();
       });
+      mockPx = jasmine.createSpyObj('Price', ['getPips']);
       $scope.ob = {
         rungs: [
-          {px:1.3264, amts:[10],   srcs: ['MSMM']},
-          {px:1.3265, amts:[12,5], srcs: ['MSP1']}
+          {px:mockPx, cumAmt:10, amts:[10],   srcs: ['MSMM']},
+          {px:mockPx, cumAmt:28, amts:[12,5], srcs: ['MSP1']}
         ]
       };
       element = compile('<i2-order-book ob="ob" highlight="highlight"></i2-order-book>');
@@ -38,6 +39,47 @@ describe('i2037.fx.directives.orderBook', function() {
       $scope.$digest();
       expect(element.find('tr').length).toBe(0);
     })
+
+    it('should have a price in the 1st column, if left aligned', function() {
+      mockPx.getPips.andReturn('1.3264');
+      $scope.$digest();
+      var td = element.find('td');
+      expect(td.eq(0).text()).toEqual('1.3264');
+    });
+
+    it('should have an amount in the 2nd column, if left aligned', function() {
+      $scope.$digest();
+      var td = element.find('td');
+      expect(td.eq(1).text()).toEqual('10');
+    });
+
+    it('should have a depth chart in the 3rd column, if left aligned', function() {
+      $scope.$digest();
+      var td = element.find('td');
+      expect(td.eq(2).attr("i2-depth-chart")).toBeTruthy;
+      expect(td.eq(2).attr("align")).toEqual("left");      
+    });
+
+    it('should have a price in the 3rd column, if right aligned', function() {
+      element = compile('<i2-order-book ob="ob" align="right"></i2-order-book>');      
+      mockPx.getPips.andReturn('1.3264');
+      $scope.$digest();      
+      var td = element.find('td');
+      expect(td.eq(2).text()).toEqual('1.3264');
+    })
+
+    it('should have an amount in the 2rd column, if right aligned', function() {
+      element = compile('<i2-order-book ob="ob" align="right"></i2-order-book>');            
+      var td = element.find('td');
+      expect(td.eq(1).text()).toEqual('10');
+    });
+
+    it('should have a depth chart in the 3rd column, if left aligned', function() {
+      element = compile('<i2-order-book ob="ob" align="right"></i2-order-book>');                  
+      var td = element.find('td');
+      expect(td.eq(0).attr("i2-depth-chart")).toBeTruthy;      
+      expect(td.eq(0).attr("align")).toEqual("right");
+    });
 
     it('should give each row an index', function() {
       function expectHasHighlights(rows) {
