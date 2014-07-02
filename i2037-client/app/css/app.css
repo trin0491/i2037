@@ -51,6 +51,7 @@
 .x-quote-panel {
   background-color: rgb(24,31,36);
   height: 200px;
+  max-width: 500px;
   color: white;
   line-height: 1;  
 }
@@ -220,24 +221,24 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b4e391', end
 .x-center-col {
   position: absolute;
   top: 0px;
-  left: 25%;
-  right: 25%;
+  left: 30%;
+  right: 30%;
   bottom: 0%;
-  width: 50%;
+  width: 40%;
 }
 
 .x-wing-left {
   position: absolute;
   top: 0;
   left: 0;
-  right: 75%;
+  right: 70%;
   bottom: 0;
 }
 
 .x-wing-right {
   position: absolute;
   top: 0;
-  left: 75%;
+  left: 70%;
   right: 0;
   bottom: 0;  
 }
