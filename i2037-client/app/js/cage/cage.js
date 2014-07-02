@@ -25,6 +25,9 @@ angular.module('i2037.cage', [
     }
   };
 
+  // $scope.quote.buyLevel = 1;
+  // $scope.quote.sellLevel = 2;
+
   var config = {ccyPair:'EURUSD'};
   var BUY = 1;
 

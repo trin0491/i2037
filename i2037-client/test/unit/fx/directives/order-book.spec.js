@@ -16,7 +16,7 @@ describe('i2037.fx.directives.orderBook', function() {
           {px:mockPx, cumAmt:28, amts:[12,5], srcs: ['MSP1']}
         ]
       };
-      element = compile('<i2-order-book ob="ob" highlight="highlight"></i2-order-book>');
+      element = compile('<i2-order-book ob="ob" highlight="highlight" level="level"></i2-order-book>');
     });
 
     function compile(html) {
@@ -101,5 +101,17 @@ describe('i2037.fx.directives.orderBook', function() {
       $scope.$digest();
       expectHasHighlights(rows);
     })
+
+    it('should give mark one row with the normal amount', function() {
+      var rows = element.find('tr');
+      expect(rows.hasClass('x-ob-normamt-level')).toBeFalsy();
+      expect(rows.hasClass('x-ob-level')).toBeTruthy();      
+      $scope.level = 1;
+      $scope.$digest();
+      expect(rows.eq(0).hasClass('x-ob-level')).toBeTruthy;
+      expect(rows.eq(0).hasClass('x-ob-normamt-level')).toBeFalsy;            
+      expect(rows.eq(1).hasClass('x-ob-level')).toBeFalsy;      
+      expect(rows.eq(1).hasClass('x-ob-normamt-level')).toBeTruthy;            
+    });
   });
 });

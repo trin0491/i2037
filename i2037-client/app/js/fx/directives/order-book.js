@@ -17,7 +17,8 @@
       replace: true,
       scope: {
         ob: '=',
-        highlight: '=?'
+        highlight: '=?',
+        level: '=?'
       },
       transclude: false,
       link: function($scope, element, attrs) {
@@ -58,9 +59,16 @@
         });
 
         $scope.getRowCls = function(i) {
+          var cls = [];
           if ($scope.highlight && i < $scope.highlight) {
-            return 'x-ob-highlight';
+            cls.push('x-ob-highlight');
           }
+          if ($scope.level && i === $scope.level) {
+            cls.push('x-ob-normamt-level');
+          } else {
+            cls.push('x-ob-level');
+          }
+          return cls;
         };
 
         $scope.onHover = function(i) {
