@@ -6,7 +6,8 @@
   angular.module('i2037.fx.directives.orderBook', [
     TEMPLATE, 
     RUNG_TPL, 
-    'i2037.fx.directives.depthChart'    
+    'i2037.fx.directives.depthChart',
+    'i2037.fx.directives.legendPopover'    
   ])
 
   .directive('i2OrderBook', ['$templateCache', '$compile', 
