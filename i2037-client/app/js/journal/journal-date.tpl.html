@@ -27,26 +27,7 @@
     <hr>
     <div class="row">
         <div class="col-md-3" ng-controller="TimelineCtrl">
-            <div i2-timeline="entries" i2-selected="selected">
-                <div ng-controller="TimelineEntryCtrl">
-                    <div class="well" i2-spin-show="isEntryLoading">
-                        <a ng-href="{{entry.venue.canonicalUrl}}">Provided by {{entry.venue.type}}</a>
-                        <address>
-                            {{entry.venue.address}}<br>
-                            <abr title="Telephone">T: </abr><a ng-href="tel:{{entry.venue.phone}">{{entry.venue.formattedPhone}}</a>
-                        </address>
-                        <a ng-href="{{entry.venue.url}}">{{entry.venue.url | trim:30 }}</a>
-                    </div>
-                    <div i2-comment="newComment" i2-save="saveComment(comment, entry)" i2-maxlength="255"></div>
-                    <hr>    
-                    <ul class="media-list">
-                        <li i2-comment="comment" ng-repeat="comment in entry.comments"
-                            i2-save="saveComment(comment, entry)" 
-                            i2-delete="deleteComment(comment, entry)"
-                            i2-maxlength="255"></li>
-                    </ul>
-                </div>
-            </div>
+            <div i2-timeline="entries" i2-selected="selected"></div>
         </div>        
         <div class="col-md-9" ng-controller="MovesMapCtrl">
             <div i2-map i2-places="places" i2-paths="paths" i2-selected="selected"></div>

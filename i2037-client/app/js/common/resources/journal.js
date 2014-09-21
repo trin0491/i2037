@@ -100,6 +100,30 @@ angular.module('i2037.resources.journal', ['i2037.services'])
   return Places;
 }])
 
+.factory('PhotoSummary', ['$http', 'pathFinder', 
+  function PhotoSummaryFactory($http, pathFinder) {
+  
+  var url = pathFinder.get('svc/photos/daily/');
+
+  // constructor
+  function PhotoSummary() {
+    angular.extend(this, data);
+  }
+
+  PhotoSummary.query = function(params) {
+    var dateStr = Journal.toDateString(params['date']);
+    return $http.get(url+dateStr).then(function(response) {
+      var photos = [];
+      angular.forEach(response.data.photos.photo, function(photo) {
+        photos.push(new PhotoSummary(photo));      
+      });
+      return photos;
+    });
+  };
+
+  return PhotoSummary;
+}])
+
 .factory('JournalStoryline', ['$http', 'pathFinder', 'Journal', function($http, pathFinder, Journal) {
 
   var url = pathFinder.get('svc/timeline/daily/');
