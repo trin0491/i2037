@@ -50,8 +50,8 @@ public class FlickrServiceImplTest {
 				Map delegate(String uri, Class<?> clazz, Map<String, Object> params) {
 					assertTrue(uri.contains("extras=geo"));
 					assertEquals("flickr.photos.getWithGeoData", params.get("method"));
-					assertEquals("2014-01-01 00:00:00", params.get("min_taken_date"));
-					assertEquals("2014-01-02 00:00:00", params.get("max_taken_date"));					
+					assertEquals("2014-01-01", params.get("min_taken_date"));
+					assertEquals("2014-01-02", params.get("max_taken_date"));					
 					return json;
 				}
 			};						
