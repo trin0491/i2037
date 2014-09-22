@@ -96,6 +96,7 @@ angular.module('i2037.journal.calendar', [
     calendar:{
       height: 450,
       editable: false,
+      firstDay: 1,
       header:{
         left: 'title',
         center: '',

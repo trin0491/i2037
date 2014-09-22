@@ -73,7 +73,7 @@ angular.module('i2037.journal.date', [
   $scope.showWeeks = true;
   $scope.dateOptions = {
     'year-format': "'yy'",
-    'starting-entry': 1
+    'starting-day': 1
   };
 
   $scope.disabled = function(date, mode) {
