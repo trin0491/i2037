@@ -22,7 +22,8 @@ describe('i2037.journal.calendar', function() {
           $compile: compile,
           $location: location,
           Journal: Journal,
-          JournalSummary: JournalSummary,          
+          JournalSummary: JournalSummary,
+          date: { year: 2014, month: 0 }, // January in date         
         };
         ctrl = $controller('JournalCalendarCtrl', params);
       });
@@ -56,6 +57,29 @@ describe('i2037.journal.calendar', function() {
         deferred.reject('Journal load failed');
       });
       expect(rootScope.$broadcast).toHaveBeenCalled();
+    })
+
+    it('should decrement month and year when prev is called', function() {
+      scope.prev();
+      expect(location.path).toHaveBeenCalledWith('/journal/month/201312');      
+    })
+
+    it('should increment month when next is called', function() {
+      scope.next();
+      expect(location.path).toHaveBeenCalledWith('/journal/month/201402');      
+    })
+
+    it('should increment month when next is called', function() {
+      scope.next();
+      expect(location.path).toHaveBeenCalledWith('/journal/month/201402');      
+    })
+
+    it('should go to today when today is called', function() {
+      scope.today();
+      var now = new Date();
+      function pad(n){return n<10 ? '0'+n : n;}    
+      var expectedPath = '/journal/month/' + now.getFullYear() + pad(now.getMonth() + 1)
+      expect(location.path).toHaveBeenCalledWith(expectedPath);      
     })
 
   });
