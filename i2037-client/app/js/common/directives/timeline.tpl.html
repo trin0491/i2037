@@ -13,8 +13,8 @@
     </tr>
     <tr ng-if="isExpanded" ng-repeat-end>
       <td colspan="4">
-        <div ng-controller="TimelineEntryCtrl">
-            <div class="well">
+        <div ng-controller="TimelineEntryCtrl" ng-switch="entry.type">
+            <div class="well" ng-switch-when="MOVES_PLACE">
                 <a ng-href="{{entry.venue.canonicalUrl}}">Provided by {{entry.venue.type}}</a>
                 <address>
                     {{entry.venue.address}}<br>
@@ -22,6 +22,9 @@
                 </address>
                 <a ng-href="{{entry.venue.url}}">{{entry.venue.url | trim:30 }}</a>
             </div>
+            <a ng-switch-when="FLICKR_PHOTOS" ng-href="{{entry.entry.payload.url_c}}" class="thumbnail">
+              <img ng-src="{{entry.entry.payload.url_m}}" width="{{entry.entry.payload.width_m}}" height="{{entry.entry.payload.height_m}}">
+            </a>
             <div i2-comment="newComment" i2-save="saveComment(comment, entry)" i2-maxlength="255"></div>
             <hr>    
             <ul class="media-list">

@@ -10,6 +10,8 @@ import mockit.Expectations;
 import mockit.Mocked;
 import mockit.integration.junit4.JMockit;
 
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.node.ArrayNode;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,23 +33,23 @@ public class FlickrServiceImplTest {
 
 	@Test
 	public void testEcho() {
-		final Map<String, Object> json = new HashMap<String, Object>();		
+		final JsonNode json = new ArrayNode(null);		
 		new Expectations() {{
-			mockTemplate.getForObject(anyString, Map.class, "flickr.test.echo");
+			mockTemplate.getForObject(anyString, JsonNode.class, "flickr.test.echo");
 			result = json;
 		}};
 		
-		Map<String, Object> rv = flickrService.echo();
+		JsonNode rv = flickrService.echo();
 		assertEquals(json, rv);
 	}
 
 	@Test
 	public void testGetPhotos() throws Exception {
-		final Map<String, Object> json = new HashMap<String, Object>();		
+		final JsonNode json = new ArrayNode(null);		
 		new Expectations() {{
-			mockTemplate.getForObject(anyString, Map.class, (Map) any);
+			mockTemplate.getForObject(anyString, JsonNode.class, (Map) any);
 			result = new Delegate() {
-				Map delegate(String uri, Class<?> clazz, Map<String, Object> params) {
+				JsonNode delegate(String uri, Class<?> clazz, Map<String, Object> params) {
 					assertTrue(uri.contains("extras=geo"));
 					assertEquals("flickr.photos.getWithGeoData", params.get("method"));
 					assertEquals("2014-01-01", params.get("min_taken_date"));
@@ -57,7 +59,7 @@ public class FlickrServiceImplTest {
 			};						
 		}};
 		
-		Map<String, Object> rv = flickrService.getPhotoSummaries("20140101");
+		JsonNode rv = flickrService.getPhotoSummaries("20140101", "20140102");
 		assertEquals(json, rv);
 		
 	}

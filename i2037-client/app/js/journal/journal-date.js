@@ -32,16 +32,21 @@ angular.module('i2037.journal.date', [
     var places = [];
     var paths = [];
 
-    for (var entry=0;entry<storylines.length;entry++) {
-      var payload = storylines[entry].payload;
-      if (payload.type === 'place') {
-        places.push(storylines[entry]);
-      } else if (payload.type === 'move') {
-        for (var a in payload.activities) {
-          var activity = payload.activities[a];
-          paths.push(activity);
-        }
-      }       
+    for (var i=0;i<storylines.length;i++) {
+      var entry = storylines[i];
+      var payload = entry.payload;
+      switch (entry.type) {
+        case 'MOVES_PLACE': 
+        case 'FLICKR_PHOTOS':
+          places.push(entry);
+          break;
+        case 'MOVES_MOVE':
+          for (var a in payload.activities) {
+            var activity = payload.activities[a];
+            paths.push(activity);
+          }
+          break;
+      }
     }
     MovesPlacesModel.setPlaces(places);
     MovesPathsModel.setPaths(paths);    
@@ -101,12 +106,25 @@ angular.module('i2037.journal.date', [
     this.refId = entry.refId;
     this.type = entry.type; 
     this.date = new Date(entry.time); 
-    this.text = entry.payload.place.name;
-    this.place = entry.payload.place;
     this.comments = [ ];
 
+    switch (entry.type) {
+      case 'MOVES_PLACE':
+        this.text = entry.payload.place.name;
+        this.place = entry.payload.place;      
+        break;
+      case 'FLICKR_PHOTOS':
+        this.text = 'Photo';
+        break;
+      default:
+        this.text = 'Unknown Entry Type';
+    }
+
     var end = new Date(entry.endTime);
-    this.duration = end - this.date;
+    var duration = end - this.date;
+    if (duration > 0) {
+      this.duration = duration;
+    }
   };
 
   $scope.$on('MovesPlacesModel::CollectionChange', function(event, model) {
@@ -193,20 +211,26 @@ angular.module('i2037.journal.date', [
   }
 
   function load(entry) {
-    if(entry.place.type === 'foursquare') {
-      if (!entry.venue) {
-        $scope.isEntryLoading = true;        
-        loadVenue(entry.place.foursquareId).then(function(venue) {
-          entry.venue = venue;
-          $scope.isEntryLoading = false;          
-        }, function(error) {
-          $scope.isEntryLoading = false;
-        });
-      }        
-    } else {
-      entry.venue = {
-        type: 'Moves'
-      };
+    switch (entry.type) {
+      case 'MOVES_PLACE':
+        if(entry.place.type === 'foursquare') {
+          if (!entry.venue) {
+            $scope.isEntryLoading = true;        
+            loadVenue(entry.place.foursquareId).then(function(venue) {
+              entry.venue = venue;
+              $scope.isEntryLoading = false;          
+            }, function(error) {
+              $scope.isEntryLoading = false;
+            });
+          }        
+        } else {
+          entry.venue = {
+            type: 'Moves'
+          };
+        }
+        break;
+      case 'FLICKR_PHOTOS':
+        break;      
     }
     loadComments(entry).then(function(comments) {
       entry.comments = comments;
@@ -253,9 +277,17 @@ angular.module('i2037.journal.date', [
 .controller('MovesMapCtrl', ['$scope', 'MovesPlacesModel', function($scope, MovesPlacesModel) {
 
   function PlacePM(entry) {
-    this.name = entry.payload.place.name;
-    this.lat = entry.payload.place.location.lat;
-    this.lon = entry.payload.place.location.lon;    
+    switch (entry.type) {
+      case 'MOVES_PLACE':
+        this.name = entry.payload.place.name;
+        this.lat = entry.payload.place.location.lat;
+        this.lon = entry.payload.place.location.lon;    
+        break;
+      case 'FLICKR_PHOTOS':
+        this.name = 'Photo';
+        this.lat = entry.payload.latitude;
+        this.lon = entry.payload.longitude;
+    }
   }
 
   $scope.$on('MovesPlacesModel::CollectionChange', function(e, model) {

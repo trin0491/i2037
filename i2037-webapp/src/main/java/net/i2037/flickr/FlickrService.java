@@ -6,20 +6,25 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+
+import org.codehaus.jackson.JsonNode;
+
+import net.i2037.journal.TimeLineFeed;
 
 @Path("/photos")
 @Produces("application/json")
 public interface FlickrService {
 
 	@GET
-	@Path("/daily/{date}")
-	Map<String, Object> getPhotoSummaries(@PathParam("date") String date);
+	@Path("/summaries")
+	JsonNode getPhotoSummaries(@QueryParam("from") String from, @QueryParam("to") String to);
 	
 	@GET
 	@Path("/echo")
-	Map<String, Object> echo();
+	JsonNode echo();
 	
 	@GET
 	@Path("/login")
-	Map<String, Object> login();
+	JsonNode login();
 }
