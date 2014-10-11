@@ -214,17 +214,17 @@ angular.module('i2037.journal.date', [
     switch (entry.type) {
       case 'MOVES_PLACE':
         if(entry.place.type === 'foursquare') {
-          if (!entry.venue) {
+          if (!$scope.venue) {
             $scope.isEntryLoading = true;        
             loadVenue(entry.place.foursquareId).then(function(venue) {
-              entry.venue = venue;
+              $scope.venue = venue;
               $scope.isEntryLoading = false;          
             }, function(error) {
               $scope.isEntryLoading = false;
             });
           }        
         } else {
-          entry.venue = {
+          $scope.venue = {
             type: 'Moves'
           };
         }
@@ -233,7 +233,7 @@ angular.module('i2037.journal.date', [
         break;      
     }
     loadComments(entry).then(function(comments) {
-      entry.comments = comments;
+      $scope.comments = comments;
     });
   }
  
@@ -250,7 +250,7 @@ angular.module('i2037.journal.date', [
 
     comment.$save().then(function() {
       loadComments(entry).then(function(comments) {
-        entry.comments = comments;
+        $scope.comments = comments;
       });      
     }, function(response) {
       var msg = 'Failed to save comment: status: ' + response.status;
@@ -262,7 +262,7 @@ angular.module('i2037.journal.date', [
   $scope.deleteComment = function(comment, entry) {
     comment.model.$delete().then(function() {
       loadComments(entry).then(function(comments) {
-        entry.comments = comments;
+        $scope.comments = comments;
       });
     }, function(response) {
       var msg = 'Failed to delete comment: status: ' + response.status;

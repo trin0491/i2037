@@ -1,9 +1,9 @@
 (function() {
   'use strict';
 
-angular.module('i2037.directives.map', [])
+angular.module('i2037.directives.map', ['i2037.directives.mapFlyout'])
 
-.directive('i2Map', function() {
+.directive('i2Map', ['$compile', function($compile) {
   return {
     scope: {
       places: '=i2Places',
@@ -23,6 +23,8 @@ angular.module('i2037.directives.map', [])
       };
 
       var infoWindow = new google.maps.InfoWindow();
+      var contentStr = '<div i2-map-flyout></div>';
+      var elements = $compile(contentStr)(scope);                
       var map;
       var polylines = [];
       var markers = [];
@@ -90,13 +92,11 @@ angular.module('i2037.directives.map', [])
       }
 
       scope.onMarkerClick = function(marker, place) {
+          infoWindow.setContent(elements[0]);
+          infoWindow.open(map, marker);        
           scope.$apply(function(scope) {
             scope.selected = place;
-          });        
-          // var contentStr = '<div ng-include="\'partials/moves-place.html\'"></div>';
-          // var elements = $compile(contentStr)(scope);      
-          // infoWindow.setContent(elements[0]);
-          // infoWindow.open(map, marker);        
+          });                  
       };
 
       scope.$watch('places', function(newPlaces, oldPlaces) {
@@ -106,6 +106,9 @@ angular.module('i2037.directives.map', [])
         markers.length = 0;
         for (var n in newPlaces) {
           addMarker(newPlaces[n]);
+        }
+        if (newPlaces.length > 0) {
+          setCenter(newPlaces[0]);
         }
       });
 
@@ -128,7 +131,7 @@ angular.module('i2037.directives.map', [])
       setupMap();
     }
   };
-})
+}])
 ;
 
 }());
