@@ -30,6 +30,11 @@
   padding: 0.5em;
 }
 
+.i2-timeline {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
 .i2-map {
   width: 100%;
   height: 600px;
