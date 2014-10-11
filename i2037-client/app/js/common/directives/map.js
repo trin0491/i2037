@@ -107,7 +107,7 @@ angular.module('i2037.directives.map', ['i2037.directives.mapFlyout'])
         for (var n in newPlaces) {
           addMarker(newPlaces[n]);
         }
-        if (newPlaces.length > 0) {
+        if (newPlaces && newPlaces.length > 0) {
           setCenter(newPlaces[0]);
         }
       });
