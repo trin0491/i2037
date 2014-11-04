@@ -74,10 +74,10 @@ public class FlickrPhotoSummaryParserTest {
 	public void testTime() throws Exception {
 		DateTimeFormatter formatter = ISODateTimeFormat.basicDateTimeNoMillis();		
 		List<TimeLineEntryDto> dtos = parser.parse(rootNode);				
-		Date expectedFirst = formatter.parseDateTime("20140930T065902Z").toDate();
+		Date expectedFirst = formatter.parseDateTime("20140930T095902Z").toDate();
 		assertEquals(expectedFirst, dtos.get(0).getTime());
 		
-		Date expectedSecond = formatter.parseDateTime("20140930T065807Z").toDate();
+		Date expectedSecond = formatter.parseDateTime("20140930T095807Z").toDate();
 		assertEquals(expectedSecond, dtos.get(1).getTime());
 	}
 	
@@ -85,10 +85,10 @@ public class FlickrPhotoSummaryParserTest {
 	public void testEndTime() throws Exception {
 		DateTimeFormatter formatter = ISODateTimeFormat.basicDateTimeNoMillis();		
 		List<TimeLineEntryDto> dtos = parser.parse(rootNode);				
-		Date expectedFirst = formatter.parseDateTime("20140930T065902Z").toDate();
+		Date expectedFirst = formatter.parseDateTime("20140930T095902Z").toDate();
 		assertEquals(expectedFirst, dtos.get(0).getEndTime());
 		
-		Date expectedSecond = formatter.parseDateTime("20140930T065807Z").toDate();
+		Date expectedSecond = formatter.parseDateTime("20140930T095807Z").toDate();
 		assertEquals(expectedSecond, dtos.get(1).getEndTime());	
 	}
 	
