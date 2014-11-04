@@ -10,7 +10,7 @@ public final class FlickrPhoto {
 	public static final String DATE_TAKEN = "datetaken";
 	public static final DateTimeFormatter TIME_FORMAT = DateTimeFormat
 			.forPattern("yyyy-MM-dd HH:mm:ss").withZone(
-					DateTimeZone.forOffsetHours(3));
+					DateTimeZone.forOffsetHours(0));
 
 	private FlickrPhoto() {
 	}
