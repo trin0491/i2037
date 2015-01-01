@@ -3,7 +3,7 @@ angular.module('i2037.directives.timeline', ['common/directives/timeline.tpl.htm
 
 .directive('i2Timeline', ['$compile', function($compile) {
   return {
-    transclude: true,
+    // transclude: true,
     replace: true,
     scope: {
       selected: '=i2Selected',

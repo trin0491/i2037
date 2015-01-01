@@ -10,12 +10,10 @@
       restrict: 'E',
       templateUrl: TEMPLATE,
       replace: true,
+      scope: {
+        px: '='
+      },
       link: function($scope, element, attrs) {
-        $scope.px = {
-          prefix: 1.32,
-          pips: 64,
-          decimals: 7
-        };
       }
     };
   });

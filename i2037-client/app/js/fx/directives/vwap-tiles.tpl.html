@@ -5,7 +5,7 @@
         <div>SELL</div>
         <div>{{quote.enteredCcy}}</div>
       </div>
-      <i2-price-vwap></i2-price-vwap>
+      <i2-price-vwap px="quote.sellVwap"></i2-price-vwap>
       <div class="x-price x-price-left">
         <div>{{quote.sellPx.fwdPts}}</div>                  
         <div>{{quote.sellPx.allIn.raw}}</div>
@@ -18,7 +18,7 @@
         <div>BUY</div>
         <div>{{quote.enteredCcy}}</div>
       </div>
-      <i2-price-vwap></i2-price-vwap>
+      <i2-price-vwap px="quote.buyVwap"></i2-price-vwap>
       <div class="x-price x-price-right">
         <div>{{quote.buyPx.fwdPts}}</div>                  
         <div>{{quote.buyPx.allIn.raw}}</div>

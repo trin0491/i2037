@@ -24,15 +24,17 @@
   color: #999;
 }
 
-<<<<<<< HEAD
 .nav-bar
 
-=======
->>>>>>> master
 .i2-wine-thumbnail {
   height: 10.3em;
   width: 3em;
   padding: 0.5em;
+}
+
+.i2-timeline {
+  max-height: 600px;
+  overflow-y: auto;
 }
 
 .i2-map {
@@ -53,15 +55,19 @@
   width: 2em;
 }
 
-<<<<<<< HEAD
 .i2-activity-pie {
   height: 10em;
   height: 10em;
 }
-=======
+
+.x-popover {
+  color: black;
+}
+
 .x-quote-panel {
   background-color: rgb(24,31,36);
   height: 200px;
+  max-width: 500px;
   color: white;
   line-height: 1;  
 }
@@ -231,31 +237,30 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b4e391', end
 .x-center-col {
   position: absolute;
   top: 0px;
-  left: 25%;
-  right: 25%;
+  left: 30%;
+  right: 30%;
   bottom: 0%;
-  width: 50%;
+  width: 40%;
 }
 
 .x-wing-left {
   position: absolute;
   top: 0;
   left: 0;
-  right: 75%;
+  right: 70%;
   bottom: 0;
 }
 
 .x-wing-right {
   position: absolute;
   top: 0;
-  left: 75%;
+  left: 70%;
   right: 0;
   bottom: 0;  
 }
 
 .x-wing tr {
   border-top: 2px none #2B2B32;
-  border-bottom: 2px groove #2B2B32;
 }
 
 .x-wing-right table,.x-wing-left table {
@@ -297,6 +302,28 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b4e391', end
   padding-bottom: 3px;
 }
 
+.x-ob {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; 
+  cursor: pointer;
+}
+
+.x-ob-highlight {
+  background: #1F5C99; 
+}
+
+.x-ob-level {
+  border-bottom: 2px groove #2B2B32;  
+}
+
+.x-ob-normamt-level {
+  border-bottom: 2px solid gray;
+}
+
 .x-price-normal-amt {
   position: absolute;
   top: 0;
@@ -318,6 +345,3 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b4e391', end
   position: relative;
   height: 200px
 }
-
-
->>>>>>> master

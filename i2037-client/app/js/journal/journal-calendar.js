@@ -1,5 +1,11 @@
 (function() {
 
+function pad(n){return n<10 ? '0'+n : n;}
+
+function toLocation(year, month) {
+  return "/journal/month/" + year + pad(month+1);  
+}
+
 angular.module('i2037.journal.calendar', [
   'ngRoute',
   'i2037.resources.journal',
@@ -11,6 +17,22 @@ angular.module('i2037.journal.calendar', [
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/journal', {
+    redirectTo: function(params, path, search) {
+      var now = new Date();
+      return toLocation(now.getFullYear(), now.getMonth());
+    }
+  });  
+  $routeProvider.when('/journal/month/:month', {
+    templateUrl: 'journal/journal-calendar.tpl.html',
+    controller: 'JournalCalendarCtrl',
+    resolve: {
+      date: ['$route', function($route) {
+        var dStr = $route.current.params.month;
+        return { year: dStr.slice(0,4), month: dStr.slice(4,6) - 1 };
+      }] 
+    }
+  });
+  $routeProvider.when('/journal/authorised',{
     templateUrl: 'journal/journal-calendar.tpl.html',
     controller: 'JournalCalendarCtrl',
     resolve: {
@@ -23,15 +45,16 @@ angular.module('i2037.journal.calendar', [
             }
         });
       }],
-      date: function() {
-        return new Date();
-      } 
-    }
-  });
+      date: ['$route', function($route) {
+        var now = new Date();
+        return toLocation(now.getFullYear(), now.getMonth());        
+      }] 
+    }    
+  });  
 }])
 
-.controller('JournalCalendarCtrl', ['$scope', '$rootScope', '$compile', '$location', 'Journal', 'JournalSummary', 
-  function($scope, $rootScope, $compile, $location, Journal, JournalSummary) {
+.controller('JournalCalendarCtrl', ['$scope', '$rootScope', '$compile', '$location', 'Journal', 'JournalSummary', 'date', 
+  function($scope, $rootScope, $compile, $location, Journal, JournalSummary, date) {
 
   function toEvents(days) {
     return days.map(function(day) {
@@ -96,10 +119,13 @@ angular.module('i2037.journal.calendar', [
     calendar:{
       height: 450,
       editable: false,
+      firstDay: 1,
+      year: date.year,
+      month: date.month,
       header:{
         left: 'title',
         center: '',
-        right: 'today prev,next'
+        right: ''
       },
       eventRender: onRenderEvent,
       eventDestroy: onDestroyEvent,
@@ -108,6 +134,33 @@ angular.module('i2037.journal.calendar', [
   };
 
   $scope.eventSources = [eventsFn];
+
+  $scope.prev = function() {
+    var y = date.year;
+    var m = date.month;
+    m -= 1;
+    if (m < 0) {
+      y -= 1;
+      m = 11;
+    }
+    $location.path(toLocation(y, m));
+  };
+
+  $scope.today = function() {
+    var now = new Date();
+    $location.path(toLocation(now.getFullYear(), now.getMonth()));
+  };
+
+  $scope.next = function() {
+    var y = date.year;
+    var m = date.month;
+    m += 1;
+    if (m > 11) {
+      y += 1;
+      m = 0;
+    }
+    $location.path(toLocation(y, m));    
+  };
 }])
 ;
 }());

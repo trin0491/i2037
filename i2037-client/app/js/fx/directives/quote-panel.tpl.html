@@ -5,27 +5,31 @@
       </button> {{quote.ccyPair}}
     </div>
     <div class="x-row">
-      <i2-wing class="x-wing x-wing-left">
-        <table>
-          <tr ng-repeat="rung in quote.buy">
-            <td i2-depth-chart data="rung.amts" max="12" align="right"></td>
-            <td class="x-amt">{{rung.totalAmt}}</td>
-            <td>{{rung.px}}</td>
-          </tr>            
-        </table>            
-      </i2-wing>
+      <div class="x-wing x-wing-left">
+        <div class="x-normal-amt-box">
+          <i2-tile state="quote.state">
+            <div class="x-price x-price-normal-amt">
+              <div>{{quote.sellNormAmtVwap.getPrefix()}}<span class="x-price-normal-amt-pips">{{quote.sellNormAmtVwap.getPips()}}</span>{{quote.sellNormAmtVwap.getDecimals()}}</div>
+              <div>{{quote.sellNormAmtVwap.amt}}</div>
+            </div>
+          </i2-tile>
+        </div>  
+        <i2-order-book ob="quote.sell" align="right" level="quote.sellLevel"></i2-order-book>
+      </div>
       <div class="x-center-col">
         <i2-vwap-tiles quote="quote"></i2-vwap-tiles>
         <!-- quick ticket goes here -->
       </div>
-      <i2-wing class="x-wing x-wing-right">
-        <table>
-          <tr ng-repeat="rung in quote.sell">
-            <td>{{rung.px}}</td>
-            <td class="x-amt">{{rung.totalAmt}}</td>
-            <td i2-depth-chart data="rung.amts" max="12" align="left"></td>
-          </tr>            
-        </table>      
-      </i2-wing>
+      <div class="x-wing x-wing-right">
+        <div class="x-normal-amt-box">
+          <i2-tile state="quote.state">
+            <div class="x-price x-price-normal-amt">
+              <div>{{quote.buyNormAmtVwap.getPrefix()}}<span class="x-price-normal-amt-pips">{{quote.buyNormAmtVwap.getPips()}}</span>{{quote.buyNormAmtVwap.getDecimals()}}</div>
+              <div>{{quote.buyNormAmtVwap.amt}}</div>
+            </div>
+          </i2-tile>
+        </div>
+        <i2-order-book ob="quote.buy" level="quote.buyLevel"></i2-order-book>        
+      </div>
     </div>
   </div>

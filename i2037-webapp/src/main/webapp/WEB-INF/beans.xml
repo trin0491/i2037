@@ -5,24 +5,19 @@
   xmlns:util="http://www.springframework.org/schema/util"
   xmlns:task="http://www.springframework.org/schema/task"
   xmlns:tx="http://www.springframework.org/schema/tx" xmlns:sec="http://www.springframework.org/schema/security"
-  xmlns:p="http://www.springframework.org/schema/p" xmlns:oa="http://www.springframework.org/schema/security/oauth2"  
+  xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:oa1="http://www.springframework.org/schema/security/oauth" 
+  xmlns:oa2="http://www.springframework.org/schema/security/oauth2"  
   xsi:schemaLocation="
-http://www.springframework.org/schema/beans 
-http://www.springframework.org/schema/beans/spring-beans.xsd
-http://www.springframework.org/schema/context 
-http://www.springframework.org/schema/context/spring-context.xsd
-http://www.springframework.org/schema/util 
-http://www.springframework.org/schema/util/spring-util.xsd
-http://www.springframework.org/schema/task 
-http://www.springframework.org/schema/task/spring-task.xsd
-http://cxf.apache.org/jaxrs
-http://cxf.apache.org/schemas/jaxrs.xsd
-http://www.springframework.org/schema/tx 
-http://www.springframework.org/schema/tx/spring-tx.xsd
-http://www.springframework.org/schema/security
-http://www.springframework.org/schema/security/spring-security.xsd
-http://www.springframework.org/schema/security/oauth2
-http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+http://www.springframework.org/schema/security/oauth http://www.springframework.org/schema/security/spring-security-oauth-1.0.xsd
+http://www.springframework.org/schema/security/oauth2 http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
 
   <import resource="classpath:META-INF/cxf/cxf.xml" />
 
@@ -40,6 +35,7 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
       <bean class="net.i2037.cellar.SessionServiceImpl" />
       <ref bean="userService"/>
       <ref bean="movesService"/>
+      <ref bean="flickrService"/>
       <bean class="net.i2037.journal.TimeLineServiceImpl">
         <property name="entryLoader" ref="timeLineFeedLoader" />
         <property name="summaryLoader" ref="summaryLoader" />
@@ -80,6 +76,7 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
 
   <util:list id="feeds">
     <ref bean="movesService" />
+    <ref bean="flickrService" />
   </util:list>
   
   <task:executor id="feedLoaderExecutorService"
@@ -93,7 +90,7 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
 
   <bean id="movesService" class="net.i2037.moves.MovesServiceImpl">
     <property name="movesTemplate">
-      <oa:rest-template resource="moves" access-token-provider="accessTokenProviderChain"/>
+      <oa2:rest-template resource="moves" access-token-provider="accessTokenProviderChain"/>
     </property>
     <property name="storylineSegmentParser" ref="storylineSegmentParser" />
     <property name="dailySummaryParser" ref="dailySummaryParser"/>
@@ -102,7 +99,15 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
   <bean id="storylineSegmentParser" class="net.i2037.moves.StorylineSegmentParser" />
   
   <bean id="dailySummaryParser" class="net.i2037.moves.DailySummaryParser" />
- 
+  
+  <bean id="flickrService" class="net.i2037.flickr.FlickrServiceImpl">
+    <property name="flickrTemplate">
+      <bean class="org.springframework.security.oauth.consumer.client.OAuthRestTemplate">
+        <constructor-arg ref="flickrResourceDetails" />
+      </bean>    
+    </property>
+  </bean>      
+  
   <tx:annotation-driven />
 
   <bean id="cellarDB" class="org.apache.commons.dbcp.BasicDataSource"
@@ -125,8 +130,9 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
         <value>net.i2037.cellar.model.WineImpl</value>
         <value>net.i2037.cellar.model.GrapeImpl</value>
         <value>net.i2037.oauth2.OAuth2AccessTokenImpl</value>
+        <value>net.i2037.oauth.OAuthConsumerTokenImpl</value>        
         <value>net.i2037.journal.model.TimeLineEntry</value>
-        <value>net.i2037.journal.model.Comment</value>
+        <value>net.i2037.journal.model.Comment</value>        
       </list>
     </property>
     <property name="hibernateProperties">
@@ -203,12 +209,12 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
   </bean>
   
   <!-- spring oauth -->
-  <oa:client id="oauth2ClientFilter" redirect-strategy-ref="jsonRedirect" />
+  <oa2:client id="oauth2ClientFilter" redirect-strategy-ref="jsonRedirect" />
   
   <!--  returns JSON object so that Angular can change window location rather than relying upon 302 -->
   <bean id="jsonRedirect" class="net.i2037.oauth2.AngularRedirectStrategy" />
 
-  <oa:resource id="moves" 
+  <oa2:resource id="moves" 
     type="authorization_code"
     pre-established-redirect-uri="${i2037.moves.redirect-uri}"
     use-current-uri="false"
@@ -239,4 +245,26 @@ http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
   <bean id="clientTokenServices" class="net.i2037.oauth2.ClientTokenServicesDao">
     <property name="sessionFactory" ref="sessionFactory" />      
   </bean>
+  
+  <oa1:consumer resource-details-service-ref="resourceDetails" token-services-ref="oauthConsumerTokenServices">
+    <oa1:url pattern="/svc/photos/**" resources="flickrResourceDetails"/>
+    <oa1:url pattern="/svc/timeline/daily/**" resources="flickrResourceDetails"/>    
+  </oa1:consumer>
+
+  <oa1:resource-details-service id="resourceDetails">
+    <oa1:resource id="flickrResourceDetails"
+                    key="${i2037.flickr.client-id}"
+                    secret="${i2037.flickr.client-secret}"
+                    request-token-url="https://www.flickr.com/services/oauth/request_token"
+                    user-authorization-url="https://www.flickr.com/services/oauth/authorize?perms=read"
+                    access-token-url="https://www.flickr.com/services/oauth/access_token"
+                    user-authorization-token-param="oauth_token"
+                    accepts-authorization-header="false"/>
+  </oa1:resource-details-service>  
+  
+  <bean id="oauthConsumerTokenServices" class="net.i2037.oauth.OAuthConsumerTokenServicesDao">
+      <property name="sessionFactory" ref="sessionFactory" />
+      <property name="userDao" ref="userDao" />
+  </bean>
+  
 </beans>

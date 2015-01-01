@@ -1,0 +1,6 @@
+<tr ng-class="getRowCls(index)" ng-mouseover="onHover(index)" ng-mouseleave="onLeave(index)">
+  <td>{{rung.px.getPips()}}</td>
+  <td class="x-amt">{{rung.cumAmt}}</td>
+  <td i2-depth-chart data="rung.amts" max="ob.maxAmt" align="left" i2-legend-popover></td>
+</tr>            
+  

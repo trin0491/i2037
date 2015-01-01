@@ -3,9 +3,8 @@
   var TEMPLATE = 'fx/directives/quote-panel.tpl.html';
 
   angular.module('i2037.fx.directives.quotePanel', [TEMPLATE,   
-    'i2037.fx.directives.wing',
-    'i2037.fx.directives.vwapTiles',
-    'i2037.fx.directives.depthChart'
+    'i2037.fx.directives.orderBook',    
+    'i2037.fx.directives.vwapTiles'
   ])
 
   .directive('i2QuotePanel', function() {

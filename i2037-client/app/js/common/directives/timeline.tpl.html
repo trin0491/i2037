@@ -12,7 +12,29 @@
       </td>
     </tr>
     <tr ng-if="isExpanded" ng-repeat-end>
-      <td colspan="4" ng-transclude></td>
+      <td colspan="4">
+        <div ng-controller="TimelineEntryCtrl" ng-switch="entry.type">
+            <div class="well" ng-switch-when="MOVES_PLACE">
+                <a ng-href="{{venue.canonicalUrl}}">Provided by {{venue.type}}</a>
+                <address>
+                    {{venue.address}}<br>
+                    <abr title="Telephone">T: </abr><a ng-href="tel:{{venue.phone}">{{venue.formattedPhone}}</a>
+                </address>
+                <a ng-href="{{venue.url}}">{{venue.url | trim:30 }}</a>
+            </div>
+            <a ng-switch-when="FLICKR_PHOTOS" ng-href="{{entry.entry.payload.url_c}}" class="thumbnail">
+              <img ng-src="{{entry.entry.payload.url_m}}" width="{{entry.entry.payload.width_m}}" height="{{entry.entry.payload.height_m}}">
+            </a>
+            <div i2-comment="newComment" i2-save="saveComment(comment, entry)" i2-maxlength="255"></div>
+            <hr>    
+            <ul class="media-list">
+                <li i2-comment="comment" ng-repeat="comment in comments"
+                    i2-save="saveComment(comment, entry)" 
+                    i2-delete="deleteComment(comment, entry)"
+                    i2-maxlength="255"></li>
+            </ul>
+        </div>        
+      </td>
     </tr>
   </tbody>
 </table>

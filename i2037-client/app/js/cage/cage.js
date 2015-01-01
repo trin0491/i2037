@@ -16,23 +16,29 @@ angular.module('i2037.cage', [
     qty: 1000000,
     state: 'locked',
     buyPx: {
-      spot: { prefix: 1.32, pips: 64, decimals: 4, raw: 1.32644 },
       fwdPts: 0.30,
       allIn: { prefix: 1.32, pips: 64, decimals: 7, raw: 1.32647 }
     },
     sellPx: {
-      spot: { prefix: 1.32, pips: 63, decimals: 4, raw: 1.32637 },
       fwdPts: 0.30,
       allIn: { prefix: 1.32, pips: 63, decimals: 7, raw: 1.32647 }      
     }
   };
 
-  var config = {ccyPair:'EURUSD'};
+  // $scope.quote.buyLevel = 1;
+  // $scope.quote.sellLevel = 2;
 
-  PricingFacade.getOrderBook(config).then(function (ob) {
-    $scope.quote.buy = ob.buy;
-    $scope.quote.sell = ob.sell;
-  });
+  var config = {ccyPair:'EURUSD'};
+  var BUY = 1;
+
+  $scope.quote.buyVwap = PricingFacade.getVwap(config, BUY, 10);
+  $scope.quote.buy = PricingFacade.getOrderBook(config, BUY);
+  $scope.quote.buyNormAmtVwap = PricingFacade.getVwap(config, BUY, 10); 
+
+  var SELL = 2;
+  $scope.quote.sellVwap = PricingFacade.getVwap(config, SELL, 10);  
+  $scope.quote.sell = PricingFacade.getOrderBook(config, SELL);
+  $scope.quote.sellNormAmtVwap = PricingFacade.getVwap(config, SELL, 10); 
 }])
 
 .controller('CageCtrl', ['$scope', 'JournalSummary', 'JournalStoryline', 'd3Service', function($scope, JournalSummary, JournalStoryline, d3Service) {
