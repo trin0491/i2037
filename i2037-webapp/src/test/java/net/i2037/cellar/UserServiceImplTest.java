@@ -138,5 +138,4 @@ public class UserServiceImplTest {
 		assertEquals(LAST_NAME, currentUser.getLastName());
 		assertEquals(password, currentUser.getPassword());
 	}
-
 }
