@@ -80,18 +80,18 @@
     </div>
 
 <!-- @if NODE_ENV == 'DEV' -->  
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/deps.js"></script> 
-    <script src="js/angular.js"></script>
-    <script src="js/dev/i2037-client.js"></script>
+    <script src="lib/jquery.js"></script>
+    <script src="lib/bootstrap.js"></script>
+    <script src="lib/deps.js"></script>
+    <script src="lib/angular.js"></script>
+    <script src="js/i2037-client.js"></script>
 <!-- @endif -->
 <!-- @if NODE_ENV == 'PROD' -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/deps.min.js"></script> 
-    <script src="js/angular.min.js"></script>
-    <script src="js/<!-- @echo i2037_VERSION -->/i2037-client.min.js"></script>
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="lib/deps.min.js"></script>
+    <script src="lib/angular.min.js"></script>
+    <script src="js/i2037-client.min.js"></script>
 <!-- @endif -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1XkZF2vEwPUZeFfadDMe76ozKhrk-mXE&amp;sensor=false"></script>
 </body>

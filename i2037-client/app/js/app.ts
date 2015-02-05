@@ -1,3 +1,9 @@
+///<reference path="admin/admin.ts" />
+///<reference path="recipes/recipes.ts" />
+
+declare var angular:any;
+declare var $:any;
+
 (function() {
   'use strict';
 
@@ -35,16 +41,7 @@
   .controller('NavBarCtrl', ['$scope', '$location', 'Session', 
       function($scope, $location, Session) {
     $scope.$location = $location;
-
-    var Menu = function(name, path) {
-      var menu = {
-          name: name,
-          path: path,
-          isActive: false
-      };
-      return menu;
-    };
-
+        
     var menus = [
       new Menu('Recipes', '/recipes'), 
       new Menu('Cellar', '/cellar'),

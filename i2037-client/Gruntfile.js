@@ -10,16 +10,17 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-env');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-html2js');
+  grunt.loadNpmTasks('grunt-typescript');
 
   grunt.registerTask('config_dev', 'Prepare for dev build', function() {
-    grunt.config.set('dir.dist', 'build/dev');
+    grunt.config.set('dir.dist', 'build');
   });
 
   grunt.registerTask('config_release', 'Prepare for release build', function() {
-    grunt.config.set('dir.dist', 'build/release');
+    grunt.config.set('dir.dist', 'build');
   });
   
-  grunt.registerTask('build', ['clean', 'jshint', 'html2js', 'config_dev', 'env:dev', 'copy', 'preprocess', 'concat']);
+  grunt.registerTask('build', ['clean', 'jshint', 'html2js', 'config_dev', 'env:dev', 'copy', 'preprocess', 'typescript', 'concat']);
   grunt.registerTask('release', ['build', 'config_release', 'env:release', 'copy', 'preprocess', 'uglify']);
   grunt.registerTask('default', ['build', 'karma:unit']);
 
@@ -34,8 +35,7 @@ module.exports = function(grunt) {
 
     // i2037 dir 
     dir: {
-      dist: 'build/dev',
-      tmp: 'build/tmp',
+      dist: 'build',
       bower: 'bower_components',
     },
     clean: [ 'build/**' ],
@@ -63,7 +63,7 @@ module.exports = function(grunt) {
         files: [
           {expand:true, cwd: '<%= dir.bower %>/bootstrap/dist', src:['css/**'], dest: '<%= dir.dist %>/'},
           {expand:true, cwd: '<%= dir.bower %>/bootstrap/dist', src:['fonts/**'], dest: '<%= dir.dist %>/'},
-          {expand:true, cwd: '<%= dir.bower %>/bootstrap/dist', src:['js/**'], dest: '<%= dir.dist %>/'}                    
+          {expand:true, cwd: '<%= dir.bower %>/bootstrap/dist/js', src:['**'], dest: '<%= dir.dist %>/lib/'}
         ]
       },
       calendar: {
@@ -78,7 +78,7 @@ module.exports = function(grunt) {
           base: 'app/js'
         },
         src: ['app/**/*.tpl.html'],
-        dest: '<%= dir.tmp %>/templates/app.js',
+        dest: '<%= dir.dist %>/js/templates/<%= pkg.name %>.tpl.js',
         module: 'templates.app'
       }
     },        
@@ -92,17 +92,27 @@ module.exports = function(grunt) {
           },
           files: [
             {'<%= dir.dist %>/index.html': 'app/index.html' },
-            { expand:true, cwd: 'app/js', src:'**/*.js', dest: '<%= dir.tmp %>/js/dev/'} 
+            { expand:true, cwd: 'app/js', src:'**/*.js', dest: '<%= dir.dist %>/js/'},
+            { expand:true, cwd: 'app/js', src:'**/*.ts', dest: '<%= dir.dist %>/js/'}
           ]          
         }
-    },        
+    },
+    typescript: {
+      base: {
+        src: ['<%= dir.dist %>/js/**/*.ts'],
+        dest: '<%= dir.dist %>/js/<%= pkg.name %>.ts.js',
+        options: {
+          target: 'es5', 
+          basePath: 'app/js',
+          sourceMap: true,
+          declaration: true
+        }
+      }
+    },    
     concat: {
-      options: {
-        separator: ';'
-      },
       app: {
-        src:  ['<%= dir.tmp %>/js/dev/**/*.js', '<%= dir.tmp %>/templates/app.js'], 
-        dest: '<%= dir.dist %>/js/dev/<%= pkg.name %>.js'
+        src:  ['<%= dir.dist %>/js/**/*.js'], 
+        dest: '<%= dir.dist %>/js/<%= pkg.name %>.js'
       },
       angular: {
         src:[ 
@@ -112,14 +122,14 @@ module.exports = function(grunt) {
           '<%= dir.bower %>/angular-bootstrap/ui-bootstrap-tpls.js',
           '<%= dir.bower %>/angular-ui-calendar/src/calendar.js',
         ],
-        dest: '<%= dir.dist %>/js/angular.js'
+        dest: '<%= dir.dist %>/lib/angular.js'
       },
       jquery: {
         src: [
           '<%= dir.bower %>/jquery/jquery.js',
           '<%= dir.bower %>/jquery.cookie/jquery.cookie.js',
         ],
-        dest: '<%= dir.dist %>/js/jquery.js'
+        dest: '<%= dir.dist %>/lib/jquery.js'
       },
       depsjs: {
         src: [ 
@@ -128,7 +138,7 @@ module.exports = function(grunt) {
           '<%= dir.bower %>/d3/d3.js',
           '<%= dir.bower %>/autofill-event/src/autofill-event.js'
         ],
-        dest: '<%= dir.dist %>/js/deps.js'
+        dest: '<%= dir.dist %>/lib/deps.js'
       },
     },
     uglify: {
@@ -136,20 +146,20 @@ module.exports = function(grunt) {
         banner: '/*! <%= pkg.name %> <%= pkg.version %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
       },
       app: {
-        src: ['<%= concat.app.src %>'],
-        dest: '<%= dir.dist %>/js/<%= pkg.version %>/<%= pkg.name %>.min.js' 
+        src: ['<%= dir.dist %>/js/<%= pkg.name %>.js'],
+        dest: '<%= dir.dist %>/js/<%= pkg.name %>.min.js' 
       },
       angular: {
         src: ['<%= concat.angular.src %>'],
-        dest: '<%= dir.dist %>/js/angular.min.js'
+        dest: '<%= dir.dist %>/lib/angular.min.js'
       },
       jquery: {
         src: [ '<%= concat.jquery.src %>'],
-        dest: '<%= dir.dist %>/js/jquery.min.js'
+        dest: '<%= dir.dist %>/lib/jquery.min.js'
       },
       depsjs: {
         src: [ '<%= concat.depsjs.src %>' ],
-        dest: '<%= dir.dist %>/js/deps.min.js'
+        dest: '<%= dir.dist %>/lib/deps.min.js'
       }          
     },
     karma: {

@@ -25,9 +25,6 @@ angular.module('i2037.cage', [
     }
   };
 
-  // $scope.quote.buyLevel = 1;
-  // $scope.quote.sellLevel = 2;
-
   var config = {ccyPair:'EURUSD'};
   var BUY = 1;
 
@@ -42,21 +39,8 @@ angular.module('i2037.cage', [
 }])
 
 .controller('CageCtrl', ['$scope', 'JournalSummary', 'JournalStoryline', 'd3Service', function($scope, JournalSummary, JournalStoryline, d3Service) {
-  // JournalSummary.get({from: '20140412', to: '20140413'}).then(function(days) {
-  //    $scope.activities = days[1].activities;
-
-  //    var totalDistance = 0;
-  //    days[1].activities.forEach(function(activity) {
-  //       totalDistance += activity.distance;
-  //    });
-  //    $scope.distance = totalDistance + 'm';
-  // });
-
+  
   var dt = new Date();
-
-  // JournalStoryline.query({date: dt}).then(function(storylines) {
-  //   $scope.days = storylines;
-  // });
 
   var ngD3 = d3Service.d3;
 
