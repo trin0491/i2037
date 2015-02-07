@@ -1,5 +1,6 @@
 ///<reference path="admin/admin.ts" />
 ///<reference path="recipes/recipes.ts" />
+///<reference path="cellar/cellar.ts" />
 
 declare var angular:any;
 declare var $:any;
