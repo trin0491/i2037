@@ -1,9 +1,8 @@
 ///<reference path="admin/admin.ts" />
 ///<reference path="recipes/recipes.ts" />
 ///<reference path="cellar/cellar.ts" />
-
-declare var angular:any;
-declare var $:any;
+///<reference path="/Users/richard/src/i2037/i2037-client/typings/angularjs/angular.d.ts" />
+///<reference path="/Users/richard/src/i2037/i2037-client/typings/jquery.cookie/jquery.cookie.d.ts" />
 
 (function() {
   'use strict';
@@ -22,6 +21,7 @@ declare var $:any;
       'i2037.directives'])
 
   .config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
+
       $routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
       $routeProvider.otherwise({redirectTo: '/home'});
 
