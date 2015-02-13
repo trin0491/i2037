@@ -13,6 +13,9 @@
     },
     "jquery.cookie/jquery.cookie.d.ts": {
       "commit": "35fffaa44bff5392741b3022d805fe3563023a3d"
+    },
+    "angularjs/angular-route.d.ts": {
+      "commit": "7d298be1db15bbd1e17638b9c37423efc38fa602"
     }
   }
 }

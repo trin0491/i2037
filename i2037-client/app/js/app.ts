@@ -1,8 +1,7 @@
 ///<reference path="admin/admin.ts" />
 ///<reference path="recipes/recipes.ts" />
 ///<reference path="cellar/cellar.ts" />
-///<reference path="/Users/richard/src/i2037/i2037-client/typings/angularjs/angular.d.ts" />
-///<reference path="/Users/richard/src/i2037/i2037-client/typings/jquery.cookie/jquery.cookie.d.ts" />
+///<reference path="../../typings/tsd.d.ts" />
 
 (function() {
   'use strict';
@@ -20,7 +19,7 @@
       'i2037.resources.user', 
       'i2037.directives'])
 
-  .config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
+  .config(['$routeProvider', '$httpProvider', function($routeProvider:ng.route.IRouteProvider, $httpProvider) {
 
       $routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
       $routeProvider.otherwise({redirectTo: '/home'});
@@ -40,14 +39,14 @@
   }])
 
   .controller('NavBarCtrl', ['$scope', '$location', 'Session', 
-      function($scope, $location, Session) {
+      function($scope, $location:ng.ILocationService, Session) {
     $scope.$location = $location;
         
-    var menus = [
+    var menus:Menu[] = [
       new Menu('Recipes', '/recipes'), 
       new Menu('Cellar', '/cellar'),
       new Menu('Journal', '/journal'),
-      new Menu('Cage', '/cage')
+      new Menu('Cage', '/cage'),
     ];
     $scope.menus = menus;
 
