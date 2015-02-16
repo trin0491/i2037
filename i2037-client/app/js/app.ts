@@ -1,6 +1,7 @@
 ///<reference path="admin/admin.ts" />
 ///<reference path="recipes/recipes.ts" />
 ///<reference path="cellar/cellar.ts" />
+///<reference path="common/services/services.ts" />
 ///<reference path="../../typings/tsd.d.ts" />
 
 (function() {

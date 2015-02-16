@@ -1,8 +1,14 @@
-angular.module('i2037.recipes', ['ngRoute'])
+module recipies {
 
-.config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/recipes', {templateUrl: 'partials/recipes.html', controller: 'RecipesCtrl'});
-}])
+  interface IRecipesScope extends ng.IScope { }
 
-.controller('RecipesCtrl', ['$scope', function ($scope) {
-}]);
+  angular.module('i2037.recipes', ['ngRoute'])
+
+    .config(['$routeProvider', function ($routeProvider:ng.route.IRouteProvider) {
+      $routeProvider.when('/recipes', {templateUrl: 'partials/recipes.html', controller: 'RecipesCtrl'});
+    }])
+
+    .controller('RecipesCtrl', ['$scope', function ($scope) {
+
+    }]);
+}

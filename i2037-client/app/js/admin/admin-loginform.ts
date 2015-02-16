@@ -1,11 +1,26 @@
-(function() {
+module admin {
+
+  class UserPM {
+    userName:String = $.cookie('userName');
+    password: String = null;
+    rememberMe: Boolean = true;
+  }
+
+  interface ILoginFormScope extends ng.IScope {
+    userPM:UserPM;
+    getCls(controller:ng.INgModelController);
+    showErr(controller:ng.INgModelController, validation:any)
+    cancel();
+    submit();
+  }
+
   angular.module('i2037.admin.loginform', [
     'ngRoute',
     'i2037.services',
     'admin/admin-loginform.tpl.html',
   ])
 
-  .config(['$routeProvider', function($routeProvider) {
+  .config(['$routeProvider', function($routeProvider:ng.route.IRouteProvider) {
       $routeProvider.when('/login', { 
         templateUrl: 'admin/admin-loginform.tpl.html', 
         controller: 'LoginFormCtrl',
@@ -18,13 +33,9 @@
   }])
 
   .controller('LoginFormCtrl', ['$scope', '$location', 'Session', 'user',
-      function ($scope, $location, Session, user) {
+      function ($scope:ILoginFormScope, $location, Session, user) {
 
-    var userPM = {    
-      userName: $.cookie('userName'),
-      password: null,
-      rememberMe: true,    
-    };
+    var userPM:UserPM = new UserPM();
 
     function login() {
       Session.login(userPM.userName, userPM.password).then(function(user) {
@@ -71,4 +82,4 @@
     $scope.userPM = userPM;  
   }])
   ;
-}());
+}
