@@ -1,9 +1,10 @@
+///<reference path="../../typings/tsd.d.ts" />
 ///<reference path="admin/admin.ts" />
 ///<reference path="recipes/recipes.ts" />
 ///<reference path="cellar/cellar.ts" />
 ///<reference path="common/services/services.ts" />
 ///<reference path="common/services/environment.ts" />
-///<reference path="../../typings/tsd.d.ts" />
+///<reference path="common/filters.ts" />
 
 (function() {
   'use strict';
