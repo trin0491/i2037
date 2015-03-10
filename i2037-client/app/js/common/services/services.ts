@@ -1,8 +1,10 @@
-module services {
-  class Session {
+///<reference path="../../../../typings/tsd.d.ts" />
+
+module i2037.services {
+  export class Session {
   }
 
-  class PathFinder {
+  export class PathFinder {
     private prefix:string;
 
     constructor(svcPrefix:string) {
@@ -12,7 +14,7 @@ module services {
       }
     }
 
-    get(name:string):String {
+    get(name:string):string {
       return this.prefix + name;
     }
   }

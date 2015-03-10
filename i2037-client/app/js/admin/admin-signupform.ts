@@ -1,4 +1,7 @@
-(function() {
+///<reference path="../../../typings/tsd.d.ts" />
+
+module i2037.admin {
+
   angular.module('i2037.admin.signupform', [
     'ngRoute',
     'i2037.services',
@@ -99,4 +102,4 @@
 
   }])
   ;
-}());
+}

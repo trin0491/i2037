@@ -2,9 +2,12 @@
 ///<reference path="admin/admin.ts" />
 ///<reference path="recipes/recipes.ts" />
 ///<reference path="cellar/cellar.ts" />
+///<reference path="common/resources/user.ts" />
 ///<reference path="common/services/services.ts" />
 ///<reference path="common/services/environment.ts" />
 ///<reference path="common/filters.ts" />
+
+import Menu = i2037.admin.Menu;
 
 (function() {
   'use strict';

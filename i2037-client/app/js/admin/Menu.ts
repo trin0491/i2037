@@ -1,10 +1,12 @@
-class Menu {
-  name: string;
-  path: string;
-  isActive: boolean = false;
-  constructor(name, path) {
-    this.name = name;
-    this.path = path;
+module i2037.admin {
+  export class Menu {
+    name: string;
+    path: string;
+    isActive: boolean = false;
+    constructor(name, path) {
+      this.name = name;
+      this.path = path;
+    }
   }
 }
- 
+

@@ -1,4 +1,6 @@
-module admin {
+///<reference path="../../../typings/tsd.d.ts" />
+
+module i2037.admin {
 
   class UserPM {
     userName:String = $.cookie('userName');

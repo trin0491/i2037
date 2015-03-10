@@ -2,9 +2,9 @@
 ///<reference path="admin-signupform.ts" />
 ///<reference path="Menu.ts" />
 
-(function() {
+module i2037.admin {
   angular.module('i2037.admin', [
     'i2037.admin.loginform',
     'i2037.admin.signupform'
   ]);
-}());
+}
