@@ -19,9 +19,6 @@ module i2037.services {
     }
   }
 
-  (function () {
-    'use strict';
-
     angular.module('i2037.services', ['i2037.environment', 'i2037.resources.user'])
 
       .factory('pathFinder', ['version', 'svcPrefix', function (version, svcPrefix) {
@@ -95,5 +92,4 @@ module i2037.services {
         return me;
       }])
     ;
-  }());
 }
