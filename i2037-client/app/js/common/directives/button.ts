@@ -1,3 +1,5 @@
+///<reference path="../../../../typings/tsd.d.ts" />
+
 angular.module('i2037.directives.button', [])
 
 .directive("i2Button", [function() {
