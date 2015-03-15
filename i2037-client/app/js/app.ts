@@ -9,9 +9,6 @@
 
 import Menu = i2037.admin.Menu;
 
-(function() {
-  'use strict';
-
   angular.module('i2037', [
       'ui.bootstrap',
       'i2037.admin',
@@ -132,4 +129,3 @@ import Menu = i2037.admin.Menu;
 
   }])
   ;
-}());
