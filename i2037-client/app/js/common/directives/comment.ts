@@ -1,5 +1,29 @@
-(function() {
-  'use strict';
+///<reference path="../../../../typings/tsd.d.ts" />
+///<reference path="../resources/comments.ts" />
+
+module i2037.directives {
+
+  import r = i2037.resources;
+
+  interface CommentScope extends ng.IScope {
+    state:string;
+    textRows:number;
+    saveLabel:string;
+    maxlength:number;
+    comment:r.IComment;
+    momento:r.IComment;
+    showActions:boolean;
+    canDelete():void;
+    delete():void;
+    canSave():void;
+    save():void;
+    edit():void;
+    canCancel():void;
+    cancel():void;
+    onTextFocus():void;
+    saveFn(params:any):void;
+    deleteFn():void;
+  }
 
   angular.module('i2037.directives.comment', ['common/directives/comment.tpl.html'])
 
@@ -8,11 +32,11 @@
       scope: {
         comment: '=i2Comment',
         saveFn: '&i2Save',
-        deleteFn: '&i2Delete',
+        deleteFn: '&i2Delete'
       },
       templateUrl: 'common/directives/comment.tpl.html',
       replace: false,
-      link: function($scope, element, attrs) {
+      link: function($scope:CommentScope, element, attrs) {
         element.addClass('media');
 
         $scope.state = 'read';
@@ -133,5 +157,5 @@
       }
     };
   });
-}());
+}
 

@@ -1,68 +1,71 @@
 ///<reference path="../../../../typings/tsd.d.ts" />
 
-angular.module('i2037.directives.button', [])
+module i2037.directives {
 
-.directive("i2Button", [function() {
-  return {
-    restrict: 'E',
-    template: '<button class="btn"' +
-      'i2-spin-opts="options"' +
-      'i2-spin-show="showSpinner" ng-transclude>' +
-      '</button>',
-    replace: true,
-    transclude: true,
-    link: function(scope, element, attrs){
-      scope.options = {radius:6, width:3, length: 4, lines:11, hwaccel:'on'};
-      if (attrs.type === 'submit') {
-        element.addClass('btn-primary');
-        scope.options.color = '#FFFFFF';
-      } else {
-        element.addClass('btn-default');
-      }
+  angular.module('i2037.directives.button', [])
 
-      if (attrs.size) {
-        element.addClass('btn-' + attrs.size);
-      }
+    .directive("i2Button", [function () {
+      return {
+        restrict: 'E',
+        template: '<button class="btn"' +
+        'i2-spin-opts="options"' +
+        'i2-spin-show="showSpinner" ng-transclude>' +
+        '</button>',
+        replace: true,
+        transclude: true,
+        link: function (scope, element, attrs) {
+          scope.options = {radius: 6, width: 3, length: 4, lines: 11, hwaccel: 'on'};
+          if (attrs.type === 'submit') {
+            element.addClass('btn-primary');
+            scope.options.color = '#FFFFFF';
+          } else {
+            element.addClass('btn-default');
+          }
 
-      function getContent() {
-        return element.find('span').eq(0);
-      }
+          if (attrs.size) {
+            element.addClass('btn-' + attrs.size);
+          }
 
-      function loading() {
-        scope.showSpinner = true;
-        getContent().css('visibility', 'hidden');
-      }
+          function getContent() {
+            return element.find('span').eq(0);
+          }
 
-      function reset() {
-        scope.showSpinner = false;
-        element.removeClass('disabled');
-        element.prop('disabled', false);
-        getContent().css('visibility', 'visible');        
-      }
+          function loading() {
+            scope.showSpinner = true;
+            getContent().css('visibility', 'hidden');
+          }
 
-      function disabled() {
-        element.addClass('disabled');
-        element.prop('disabled', true);
-      }
+          function reset() {
+            scope.showSpinner = false;
+            element.removeClass('disabled');
+            element.prop('disabled', false);
+            getContent().css('visibility', 'visible');
+          }
 
-      function setState(state) {
-        reset();
-        switch (state) {
-          case 'LOADING':
-            loading();
-            break;
-          case 'DISABLED':
-            disabled();
-            break;
-          default:
-            break;
+          function disabled() {
+            element.addClass('disabled');
+            element.prop('disabled', true);
+          }
+
+          function setState(state) {
+            reset();
+            switch (state) {
+              case 'LOADING':
+                loading();
+                break;
+              case 'DISABLED':
+                disabled();
+                break;
+              default:
+                break;
+            }
+          }
+
+          scope.$watch(attrs.i2State, function (newState, oldState) {
+            setState(newState);
+          }, true);
         }
-      }
-
-      scope.$watch(attrs.i2State, function(newState, oldState) {
-        setState(newState);
-      }, true);
-    }
-  }; 
-}])
-;
+      };
+    }])
+  ;
+}
