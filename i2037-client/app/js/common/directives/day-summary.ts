@@ -1,6 +1,6 @@
-(function() {
-  'use strict';
+///<reference path="../../../../typings/tsd.d.ts" />
 
+module i2037.directives {
   angular.module('i2037.directives.daySummary', ['common/directives/day-summary.tpl.html', 'i2037.journal.filters'])
 
   .directive('i2DaySummary', function() {
@@ -12,5 +12,5 @@
       }
     };
   });
-}());
+}
 
