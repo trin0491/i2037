@@ -1,8 +1,13 @@
-(function() {
+///<reference path="../../../../typings/tsd.d.ts" />
+///<reference path="../services/services.ts" />
+
+module i2037.directives {
+
+  import D3Service = i2037.services.D3Service;
 
   angular.module('i2037.directives.d3', ['i2037.services'])
 
-  .directive('i2Pie', ['d3Service', '$window', function(d3Service, $window) {
+  .directive('i2Pie', ['d3Service', '$window', function(d3Service:D3Service, $window) {
     return {
       replace: false,
       scope: {
@@ -13,7 +18,7 @@
       },
       link: function($scope, element, attrs) {
 
-        var d3 = d3Service.d3();
+        var d3:D3.Base = d3Service.d3();
         var colour = d3.scale.ordinal().range($scope.colours);
         var svg = d3.select(element[0]).append('svg')
           .style('width', '100%')
@@ -148,5 +153,4 @@
       }
     };
   }]);
-}());
-
+}
