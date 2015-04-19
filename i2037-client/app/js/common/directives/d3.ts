@@ -7,7 +7,7 @@ module i2037.directives {
 
   angular.module('i2037.directives.d3', ['i2037.services'])
 
-  .directive('i2Pie', ['d3Service', '$window', function(d3Service:D3Service, $window) {
+    .directive('i2Pie', ['d3Service', '$window', function(d3Service: D3Service, $window) {
     return {
       replace: false,
       scope: {
@@ -18,7 +18,7 @@ module i2037.directives {
       },
       link: function($scope, element, attrs) {
 
-        var d3:D3.Base = d3Service.d3();
+        var d3: D3.Base = d3Service.d3();
         var colour = d3.scale.ordinal().range($scope.colours);
         var svg = d3.select(element[0]).append('svg')
           .style('width', '100%')
@@ -32,10 +32,10 @@ module i2037.directives {
         function updateSlices(data, arc, radius, innerRadiusRatio) {
           function arcTween(d, index, attr) {
             var arc = d3.svg.arc()
-              .outerRadius(function(r) { return r;})
-              .innerRadius(function(r) { return r * innerRadiusRatio;})
+              .outerRadius(function(r) { return r; })
+              .innerRadius(function(r) { return r * innerRadiusRatio; })
               .startAngle(d.startAngle)
-              .endAngle(d.endAngle);        
+              .endAngle(d.endAngle);
             var i = d3.interpolate(0, radius);
             return function(t) {
               var r = i(t);
@@ -50,7 +50,7 @@ module i2037.directives {
           paths.attr("d", arc);
 
           // enter and update
-          paths.enter()          
+          paths.enter()
             .append("path")
             .style("fill", function(d, i) { return colour(i); })
             .transition()
@@ -72,11 +72,11 @@ module i2037.directives {
             .attr("dy", ".35em")
             .style("text-anchor", "middle");
 
-          labels.attr("transform", function(d) { return "translate("+arc.centroid(d)+")"; })
+          labels.attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
             .text(function(d) { return d.data[attrs.labelField]; });
 
           labels.exit()
-            .remove();                      
+            .remove();
         }
 
         function update(data, radius, innerRadiusRatio) {
@@ -98,16 +98,16 @@ module i2037.directives {
 
           var width = element.width();
           var height = element.height();
-          svg.attr("transform", "translate("+ width/2 +","+ height/2 + ")");
+          svg.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-          var maxRadius = Math.min(width/2, height/2);
+          var maxRadius = Math.min(width / 2, height / 2);
           var radius = maxRadius;
           if (max > 0) {
             radius = Math.min(
-              d3.sum(data.map(function(d) { return d[attrs.valueField];})) / max * maxRadius, 
+              d3.sum(data.map(function(d) { return d[attrs.valueField]; })) / max * maxRadius,
               maxRadius
-            );
-          } 
+              );
+          }
 
           var innerRadiusRatio = attrs.innerRadiusRatio || 0;
           update(data, radius, innerRadiusRatio);
@@ -115,7 +115,7 @@ module i2037.directives {
 
         $scope.$watch("title", function(value) {
           var title = svg.selectAll(".i2-title").data([value]);
-          
+
           title.enter()
             .append("text")
             .attr("class", "i2-title")
@@ -136,10 +136,11 @@ module i2037.directives {
         }, true);
 
         $scope.$watch(function() {
-          return angular.element($window)[0].innerWidth;
+          var elem = angular.element($window);
+          return elem.innerWidth();
         }, function() {
-          render($scope.data, $scope.max);
-        });
+            render($scope.data, $scope.max);
+          });
 
         function onResize() {
           $scope.$apply();
