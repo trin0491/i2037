@@ -1,4 +1,6 @@
-module filters {
+///<reference path="../../../typings/tsd.d.ts" />
+
+module i2037.filters {
 
   angular.module('i2037.filters', [])
     .filter('interpolate', ['version', function (version) {
