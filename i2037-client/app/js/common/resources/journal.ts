@@ -30,23 +30,26 @@ module i2037.resources {
   }
 
 
-  export class Profile {
+  export class MovesProfile {
+
+    redirectTo:string;
+
     constructor(data:any) {
       angular.extend(this, data);            
     }
   }
 
-  interface IProfileResource {
-      get(params: any): ng.IPromise<Profile>;
+  export interface IMovesProfileResource {
+      get(params: any): ng.IPromise<MovesProfile>;
   }
 
-  class ProfileResource implements IProfileResource {
+  class MovesProfileResource implements IMovesProfileResource {
     constructor(private $http:ng.IHttpService, private url:string) {
     }
 
-    get(params):ng.IPromise<Profile> {
+    get(params):ng.IPromise<MovesProfile> {
       return this.$http.get(this.url, { params: params }).then(function(response) {
-          var profile = new Profile(response.data);
+          var profile = new MovesProfile(response.data);
           return profile;
       });      
     }
@@ -172,7 +175,7 @@ module i2037.resources {
 
       .factory('MovesProfile', ['$http', 'pathFinder', function($http:ng.IHttpService, pathFinder) {
         var url = pathFinder.get('svc/moves/user/profile');
-        var resource: ProfileResource = new ProfileResource($http, url);
+        var resource:IMovesProfileResource = new MovesProfileResource($http, url);
         return resource;
       }])
 
