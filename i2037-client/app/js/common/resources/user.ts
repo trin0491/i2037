@@ -1,3 +1,6 @@
+///<reference path="../../../../typings/tsd.d.ts" />
+///<reference path="../services/services.ts" />
+
 module i2037.resources {
 
   class User {
@@ -12,7 +15,7 @@ module i2037.resources {
 
   angular.module('i2037.resources.user', ['i2037.services'])
 
-    .factory('User', ['$http', 'pathFinder', function ($http:ng.IHttpService, pathFinder:services.PathFinder) {
+    .factory('User', ['$http', 'pathFinder', function ($http:ng.IHttpService, pathFinder:i2037.services.PathFinder) {
 
       var url:string = pathFinder.get('svc/user');
 
