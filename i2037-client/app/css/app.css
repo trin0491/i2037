@@ -24,6 +24,8 @@
   color: #999;
 }
 
+.nav-bar
+
 .i2-wine-thumbnail {
   height: 10.3em;
   width: 3em;
@@ -51,6 +53,11 @@
 .i2-pie {
   height: 2em;
   width: 2em;
+}
+
+.i2-activity-pie {
+  height: 10em;
+  height: 10em;
 }
 
 .x-popover {
@@ -338,5 +345,3 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b4e391', end
   position: relative;
   height: 200px
 }
-
-
