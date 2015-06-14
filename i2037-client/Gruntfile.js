@@ -12,17 +12,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-typescript');
 
-  grunt.registerTask('config_dev', 'Prepare for dev build', function() {
-    grunt.config.set('dir.dist', 'build');
-  });
-
-  grunt.registerTask('config_release', 'Prepare for release build', function() {
-    grunt.config.set('dir.dist', 'build');
-  });
+  grunt.config.set('dir.dist', 'build');
   
-  grunt.registerTask('build', ['clean', 'jshint', 'html2js', 'config_dev', 'env:dev', 'copy', 'preprocess', 'typescript', 'concat']);
-  grunt.registerTask('release', ['build', 'config_release', 'env:release', 'copy', 'preprocess', 'uglify']);
-  grunt.registerTask('default', ['build', 'karma:unit']);
+  grunt.registerTask('build', ['clean', 'jshint', 'html2js', 'copy', 'preprocess', 'typescript', 'concat', 'karma:unit']);
+  grunt.registerTask('release', ['env:release', 'build', 'uglify']);
+  grunt.registerTask('default', ['env:dev', 'build']);
 
   var karmaConfig = function(configFile, customOptions) {
     var options = { configFile: configFile, keepalive: true };
