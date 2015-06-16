@@ -7,6 +7,7 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
 var ts = require('gulp-typescript');
+var sourcemaps = require('gulp-sourcemaps');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
@@ -15,14 +16,21 @@ var paths = {
 
 var tsProject = ts.createProject({
   declarationFiles:false,
-  noExternalResolve:true
+  noExternalResolve:true,
+  sortOutput:true
 });
 
-gulp.task('default', ['sass']);
+gulp.task('default', ['sass', 'tsc']);
 
 gulp.task('tsc', function() {
-  var tsResult = gulp.src(paths.ts).pipe(ts(tsProject));
-  return tsResult.js.pipe(gulp.dest('./www/js'));
+  var tsResult = gulp.src(paths.ts)
+    .pipe(sourcemaps.init())
+    .pipe(ts(tsProject));
+
+  return tsResult.js
+    .pipe(concat('i2037-mobile.js'))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('./www/js'));
 })
 
 gulp.task('sass', function(done) {
