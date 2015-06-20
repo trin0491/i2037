@@ -8,10 +8,12 @@ var rename = require('gulp-rename');
 var sh = require('shelljs');
 var ts = require('gulp-typescript');
 var sourcemaps = require('gulp-sourcemaps');
+var jasmine = require('gulp-jasmine');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
-  ts: ['app/js/**/*.ts', 'typings/**/*.d.ts']
+  ts: ['app/js/**/*.ts', 'typings/**/*.d.ts'],
+  unit: ['test/**/*.js']
 };
 
 var tsProject = ts.createProject({
@@ -20,7 +22,11 @@ var tsProject = ts.createProject({
   sortOutput:true
 });
 
-gulp.task('default', ['sass', 'tsc']);
+gulp.task('default', ['sass', 'tsc', 'test']);
+
+gulp.task('test', function() {
+  return gulp.src(paths.unit).pipe(jasmine());
+})
 
 gulp.task('tsc', function() {
   var tsResult = gulp.src(paths.ts)
