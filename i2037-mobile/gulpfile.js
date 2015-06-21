@@ -8,12 +8,18 @@ var rename = require('gulp-rename');
 var sh = require('shelljs');
 var ts = require('gulp-typescript');
 var sourcemaps = require('gulp-sourcemaps');
-var jasmine = require('gulp-jasmine');
+var karma = require('gulp-karma');
 
 var paths = {
-  sass: ['./scss/**/*.scss'],
+  sass: ['scss/**/*.scss'],
   ts: ['app/js/**/*.ts', 'typings/**/*.d.ts'],
-  unit: ['test/**/*.js']
+  tests: ['test/**/*.ts'],
+  karma: [
+    'www/lib/ionic/js/ionic.bundle.js',
+    'node_modules/angular-mocks/angular-mocks.js',
+    'www/js/**/*.js',
+    'build/js/unit/**/*.spec.js'
+  ]
 };
 
 var tsProject = ts.createProject({
@@ -22,10 +28,17 @@ var tsProject = ts.createProject({
   sortOutput:true
 });
 
-gulp.task('default', ['sass', 'tsc', 'test']);
+gulp.task('default', ['sass', 'tsc', 'tsc-tests', 'test']);
 
 gulp.task('test', function() {
-  return gulp.src(paths.unit).pipe(jasmine());
+  return gulp.src(paths.karma)
+    .pipe(karma({
+      configFile: 'config/karma.conf.js',
+      action: 'run'
+    }))
+    .on('error', function(err) {
+      throw err;
+    });
 })
 
 gulp.task('tsc', function() {
@@ -37,6 +50,14 @@ gulp.task('tsc', function() {
     .pipe(concat('i2037-mobile.js'))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('./www/js'));
+})
+
+gulp.task('tsc-tests', function() {
+  var tsResult = gulp.src(paths.tests)
+    .pipe(ts());
+
+  return tsResult.js
+    .pipe(gulp.dest('./build/js'));  
 })
 
 gulp.task('sass', function(done) {
