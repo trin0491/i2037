@@ -30,16 +30,21 @@ var tsProject = ts.createProject({
 
 gulp.task('default', ['sass', 'tsc', 'tsc-tests', 'test']);
 
-gulp.task('test', function() {
-  return gulp.src(paths.karma)
-    .pipe(karma({
-      configFile: 'config/karma.conf.js',
-      action: 'run'
-    }))
-    .on('error', function(err) {
-      throw err;
-    });
-})
+function makeKarma(action) {
+  return function() {
+    return gulp.src(paths.karma)
+      .pipe(karma({
+        configFile: 'config/karma.conf.js',
+        action: action
+      }))
+      .on('error', function(err) {
+        throw err;
+      });
+  }
+}
+
+gulp.task('test', makeKarma('run'));
+gulp.task('karma', makeKarma('watch'));
 
 gulp.task('tsc', function() {
   var tsResult = gulp.src(paths.ts)
@@ -77,6 +82,7 @@ gulp.task('sass', function(done) {
 gulp.task('watch', function() {
   gulp.watch(paths.sass, ['sass']);
   gulp.watch(paths.ts, ['tsc']);
+  gulp.watch(paths.tests, ['tsc-tests'])
 });
 
 gulp.task('install', ['git-check'], function() {
