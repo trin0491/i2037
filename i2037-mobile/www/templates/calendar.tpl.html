@@ -1,0 +1,8 @@
+<div class="i2-calendar">
+  <div class="i2-calendar-row i2-calendar-row">
+    <span class="i2-calendar-cell" ng-repeat="h in weeks[0]">{{h.format('ddd')}}</span>
+  </div>
+  <div class="i2-calendar-row" ng-repeat="w in weeks">
+    <span class="i2-calendar-cell" ng-repeat="d in w">{{d.date()}}</span>
+  </div>
+</div>

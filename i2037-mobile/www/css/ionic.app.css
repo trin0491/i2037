@@ -7674,3 +7674,13 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+.i2-calendar {
+  width: 300px; }
+
+.i2-calendar-row {
+  width: 100%; }
+
+.i2-calendar-cell {
+  width: 14%;
+  display: inline-block; }

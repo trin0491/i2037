@@ -6,15 +6,17 @@ describe('i2037.directives.calendar', function() {
     });
 
     describe('i2Calendar', function() {
-      var $scope, calendar;
+      var $scope, calendar, $compile:ng.ICompileService;
       beforeEach(function() {
-        inject(function(_$rootScope_, _$compile_) {
+        inject(function(_$rootScope_, _$compile_:ng.ICompileService) {
             $scope = _$rootScope_;
+            $compile = _$compile_;
         });
+        calendar = $compile("<i2-calendar></i2-calendar>")($scope);
       })
 
-      it('should have a scope', function() {
-          expect($scope).toBeDefined();
+      it('should be defined', function() {
+          expect(calendar).toBeDefined();
       })
     });
 });

@@ -21,3 +21,17 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+.i2-calendar {
+  width: 300px
+};
+
+.i2-calendar-row {
+  width: 100%;
+}
+
+.i2-calendar-cell {
+  width: 14%;
+  display: inline-block;
+}
+
+

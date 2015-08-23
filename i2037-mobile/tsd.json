@@ -97,6 +97,12 @@
     },
     "jasmine/jasmine.d.ts": {
       "commit": "84dfeeac378552c22297a5d555b1999a396d7e7c"
+    },
+    "moment/moment.d.ts": {
+      "commit": "2c96e9e77765b72ce43ab8163f42e504f3e2facb"
+    },
+    "moment/moment-node.d.ts": {
+      "commit": "2c96e9e77765b72ce43ab8163f42e504f3e2facb"
     }
   }
 }

@@ -29,3 +29,5 @@
 /// <reference path="cordova/plugins/WebSQL.d.ts" />
 /// <reference path="jquery/jquery.d.ts" />
 /// <reference path="jasmine/jasmine.d.ts" />
+/// <reference path="moment/moment.d.ts" />
+/// <reference path="moment/moment-node.d.ts" />
