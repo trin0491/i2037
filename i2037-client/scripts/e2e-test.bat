@@ -5,7 +5,7 @@ REM You have to run server and capture some browser first
 REM
 REM Requirements:
 REM - NodeJS (http://nodejs.org/)
-REM - Karma (npm install -g karma)
+REM - Protractor
 
 set BASE_DIR=%~dp0
-karma start "%BASE_DIR%\..\config\karma-e2e.conf.js" %*
+"%BASE_DIR%\..\node_modules\protractor\bin\protractor" "%BASE_DIR%\..\test\e2e\protractor.conf.js" %*

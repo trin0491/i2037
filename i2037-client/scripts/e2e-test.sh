@@ -6,4 +6,4 @@ echo ""
 echo "Starting Karma Server (http://karma-runner.github.io)"
 echo "-------------------------------------------------------------------"
 
-karma start $BASE_DIR/../config/karma-e2e.conf.js $*
+$BASE_DIR/../node_modules/protractor/bin/protractor $BASE_DIR/../test/e2e/protractor.conf.js $*
