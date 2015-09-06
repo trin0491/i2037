@@ -8,18 +8,26 @@ var rename = require('gulp-rename');
 var sh = require('shelljs');
 var ts = require('gulp-typescript');
 var sourcemaps = require('gulp-sourcemaps');
-var karma = require('gulp-karma');
+var karma = require('karma').server;
+var del = require('del');
+var path = require('path');
 
 var paths = {
-  sass: ['scss/**/*.scss'],
-  ts: ['app/js/**/*.ts', 'typings/**/*.d.ts'],
-  tests: ['test/**/*.ts'],
-  karma: [
-    'www/lib/ionic/js/ionic.bundle.js',
-    'node_modules/angular-mocks/angular-mocks.js',
-    'www/js/**/*.js',
-    'build/js/unit/**/*.spec.js'
-  ]
+  app: {
+    base: 'app/js',
+    src: ['app/js/**/*'],
+    ts: ['./www/js/**/*.ts', 'typings/**/*.d.ts'],
+    dest: "./www/js"
+  },
+  test: {
+    base: 'test',
+    src: ['test/**/*'],
+    ts: ['test/**/*.ts'],
+    dest: "./test"
+  },
+  styles: {
+    sass: ['scss/**/*.scss']
+  }
 };
 
 var tsProject = ts.createProject({
@@ -28,45 +36,63 @@ var tsProject = ts.createProject({
   sortOutput:true
 });
 
-gulp.task('default', ['sass', 'tsc', 'tsc-tests', 'test']);
+gulp.task('default', ['copy', 'sass', 'tsc', 'tsc:test', 'test']);
 
-function makeKarma(action) {
-  return function() {
-    return gulp.src(paths.karma)
-      .pipe(karma({
-        configFile: 'config/karma.conf.js',
-        action: action
-      }))
-      .on('error', function(err) {
-        throw err;
-      });
+function makeKarma(singleRun) {
+  return function(done) {
+    karma.start({
+        configFile: __dirname + '/config/karma.conf.js',
+        singleRun: singleRun
+      }, done);
   }
 }
 
-gulp.task('test', makeKarma('run'));
-gulp.task('karma', makeKarma('watch'));
+gulp.task('clean', function () {
+  return del([
+    paths.app.dest + '/**/*.js',
+    paths.app.dest + '/**/*.js.map',
+    paths.test.dest + '/**/*.js',
+    paths.test.dest + '/**/*.js.map',
+  ]);
+});
 
-gulp.task('tsc', function() {
-  var tsResult = gulp.src(paths.ts)
+gulp.task('test', ['tsc', 'tsc:test'], makeKarma(true));
+gulp.task('karma', makeKarma(false));
+
+gulp.task('copy:app', ['clean'], function() {
+  return gulp.src(paths.app.src, {base: paths.app.base})
+  .pipe(gulp.dest(paths.app.dest));
+});
+
+gulp.task('copy:test', ['clean'], function() {
+  return gulp.src(paths.test.src, {base: paths.test.base})
+    .pipe(gulp.dest(paths.test.dest));
+});
+gulp.task('copy', ['copy:app', 'copy:test']);
+
+gulp.task('tsc', ['copy:app'], function() {
+  var tsResult = gulp.src(paths.app.ts, {base: paths.app.dest})
     .pipe(sourcemaps.init())
     .pipe(ts(tsProject));
 
   return tsResult.js
-    .pipe(concat('i2037-mobile.js'))
+    //.pipe(concat('i2037-mobile.js'))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./www/js'));
+    .pipe(gulp.dest(paths.app.dest));
 })
 
-gulp.task('tsc-tests', function() {
-  var tsResult = gulp.src(paths.tests)
+gulp.task('tsc:test', ['copy:test'], function() {
+  var tsResult = gulp.src(paths.test.ts, {base: paths.test.base})
+    .pipe(sourcemaps.init())
     .pipe(ts());
 
   return tsResult.js
-    .pipe(gulp.dest('./build/js'));  
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest(paths.test.dest));
 })
 
 gulp.task('sass', function(done) {
-  gulp.src('./scss/ionic.app.scss')
+  gulp.src(paths.styles.sass)
     .pipe(sass({
       errLogToConsole: true
     }))
@@ -80,9 +106,9 @@ gulp.task('sass', function(done) {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(paths.sass, ['sass']);
-  gulp.watch(paths.ts, ['tsc']);
-  gulp.watch(paths.tests, ['tsc-tests'])
+  gulp.watch(paths.styles.sass, ['sass']);
+  gulp.watch(paths.app.ts, ['tsc']);
+  gulp.watch(paths.test.ts, ['tsc:test'])
 });
 
 gulp.task('install', ['git-check'], function() {

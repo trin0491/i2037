@@ -1,26 +1,28 @@
-module.exports = function(config){
+module.exports = function (config) {
   config.set({
-    basePath : './',
+    basePath: '../',
 
-    files : [
-      'build/js/**/*.spec.js',
+    files: [
+      "https://cdnjs.cloudflare.com/ajax/libs/rxjs/3.1.2/rx.all.min.js",
+      'test/**/*.spec.js'
     ],
 
-    autoWatch : true,
+    autoWatch: true,
 
     frameworks: ['jasmine'],
 
-    browsers : ['Chrome'],
+    browsers: ['Chrome'],
 
-    plugins : [
-            'karma-junit-reporter',
-            'karma-chrome-launcher',
-            'karma-jasmine'       
-            ],
+    plugins: [
+      'Karma-junit-reporter',
+      'Karma-chrome-launcher',
+      'Karma-jasmine'
+    ],
 
-    junitReporter : {
+    junitReporter: {
       outputFile: 'test_out/unit.xml',
       suite: 'unit'
     }
 
-})}
+  })
+}
