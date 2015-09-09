@@ -1,8 +1,11 @@
 ///<reference path="../../../../typings/tsd.d.ts" />
+
+import CalendarModule from 'www/js/common/directives/calendar';
+
 describe('i2037.directives.calendar', function() {
     beforeEach(function() {
         debugger;
-        module('i2037.directives.calendar');
+        module(CalendarModule.NAME);
     });
 
     describe('i2Calendar', function() {

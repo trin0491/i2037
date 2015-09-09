@@ -2,7 +2,7 @@
 <project version="4">
   <component name="TypeScriptCompiler">
     <option name="isCompilerEnabled" value="true" />
-    <option name="typeScriptCompilerParams" value="--module amd" />
+    <option name="typeScriptCompilerParams" value="--module amd --target es5" />
     <option name="scopeName" value="typescript" />
     <option name="outDirectory" value="$ModuleFileDir$/www/js" />
   </component>

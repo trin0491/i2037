@@ -1,7 +1,18 @@
 ///<reference path="../../../typings/tsd.d.ts" />
 
-module i2037.journal {
+import CalendarModule from 'common/directives/calendar';
 
-  angular.module('i2037.journal', ['i2037.directives.calendar']);
+export default class JournalModule {
+  public static NAME:string = 'i2037.journal';
 
+  private static _instance:JournalModule = new JournalModule();
+
+  public get instance():JournalModule {
+    return JournalModule._instance;
+  }
+
+  constructor() {
+    angular.module(JournalModule.NAME, [CalendarModule.NAME]);
+  }
 }
+

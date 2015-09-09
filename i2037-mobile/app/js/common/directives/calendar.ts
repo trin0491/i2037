@@ -1,17 +1,20 @@
 ///<reference path="../../../../typings/tsd.d.ts" />
 
-module i2037.directives {
+import Moment = moment.Moment;
 
-  import Moment = moment.Moment;
+export default class CalendarModule {
+  public static NAME:string = 'i2037.directives.calendar';
 
-  interface CalendarScope extends ng.IScope {
-    selected: Moment;
-    weeks: Array<Array<Moment>>;
+  private static _instance:CalendarModule = new CalendarModule();
+
+  public get instance():CalendarModule {
+    return CalendarModule._instance;
   }
 
-  angular.module('i2037.directives.calendar', [])
+  constructor() {
+    var m = angular.module(CalendarModule.NAME, [])
 
-    .directive('i2Calendar', [function() {
+    m.directive('i2Calendar', [function () {
 
       var START_DAY = 1;
 
@@ -21,14 +24,14 @@ module i2037.directives {
           //selected: '=i2Selected'
         },
         templateUrl: 'templates/calendar.tpl.html',
-        link: function($scope:CalendarScope, element: ng.IAugmentedJQuery, attrs:ng.IAttributes) {
+        link: function ($scope:CalendarScope, element:ng.IAugmentedJQuery, attrs:ng.IAttributes) {
 
           function render(selected:Moment) {
             renderHeading(selected);
             renderWeeks(selected);
           }
 
-          function renderHeading(selected: Moment) {
+          function renderHeading(selected:Moment) {
             $scope.selected = selected;
           }
 
@@ -52,5 +55,11 @@ module i2037.directives {
           render(moment());
         }
       }
-    }])  
+    }]);
+  }
+}
+
+interface CalendarScope extends ng.IScope {
+  selected: Moment;
+  weeks: Array<Array<Moment>>;
 }
