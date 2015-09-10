@@ -1,8 +1,10 @@
 ///<reference path="../../../typings/tsd.d.ts" />
 
-import CalendarModule from 'common/directives/calendar';
+import CalendarModule = require('common/directives/calendar');
 
-export default class JournalModule {
+export = JournalModule;
+
+class JournalModule {
   public static NAME:string = 'i2037.journal';
 
   private static _instance:JournalModule = new JournalModule();

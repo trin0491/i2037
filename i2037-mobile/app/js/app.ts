@@ -7,9 +7,11 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 
-import JournalModule from 'journal/journal';
+import JournalModule = require('journal/journal');
 
-export default class AppModule {
+export = AppModule;
+
+class AppModule {
   public static NAME:string = 'i2037-mobile';
 
   private static _instance:AppModule = new AppModule();

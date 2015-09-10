@@ -16,13 +16,13 @@ var paths = {
   app: {
     base: 'app/js',
     src: ['app/js/**/*'],
-    ts: ['./www/js/**/*.ts', 'typings/**/*.d.ts'],
+    ts: ['./www/js/**/*.ts', './typings/**/*.d.ts'],
     dest: "./www/js"
   },
   test: {
     base: 'test',
     src: ['test/**/*'],
-    ts: ['test/**/*.ts'],
+    ts: ['./www/js/**/*.ts', './test/**/*.ts', './typings/**/*.d.ts' ],
     dest: "./test"
   },
   styles: {
@@ -30,10 +30,20 @@ var paths = {
   }
 };
 
-var tsProject = ts.createProject({
+var appProject = ts.createProject({
   declarationFiles:false,
   noExternalResolve:true,
-  sortOutput:true
+  sortOutput:false,
+  module:'amd',
+  target:'es5'
+});
+
+var testProject = ts.createProject({
+  declarationFiles:false,
+  noExternalResolve:true,
+  sortOutput:false,
+  module:'amd',
+  target:'es5'
 });
 
 gulp.task('default', ['copy', 'sass', 'tsc', 'tsc:test', 'test']);
@@ -56,7 +66,7 @@ gulp.task('clean', function () {
   ]);
 });
 
-gulp.task('test', ['tsc', 'tsc:test'], makeKarma(true));
+gulp.task('test', ['tsc'], makeKarma(true));
 gulp.task('karma', makeKarma(false));
 
 gulp.task('copy:app', ['clean'], function() {
@@ -70,10 +80,10 @@ gulp.task('copy:test', ['clean'], function() {
 });
 gulp.task('copy', ['copy:app', 'copy:test']);
 
-gulp.task('tsc', ['copy:app'], function() {
+gulp.task('tsc:app', ['copy'], function() {
   var tsResult = gulp.src(paths.app.ts, {base: paths.app.dest})
     .pipe(sourcemaps.init())
-    .pipe(ts(tsProject));
+    .pipe(ts(appProject));
 
   return tsResult.js
     //.pipe(concat('i2037-mobile.js'))
@@ -81,15 +91,17 @@ gulp.task('tsc', ['copy:app'], function() {
     .pipe(gulp.dest(paths.app.dest));
 })
 
-gulp.task('tsc:test', ['copy:test'], function() {
+gulp.task('tsc:test', ['copy', 'tsc:app'], function() {
   var tsResult = gulp.src(paths.test.ts, {base: paths.test.base})
     .pipe(sourcemaps.init())
-    .pipe(ts());
+    .pipe(ts(testProject));
 
   return tsResult.js
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.test.dest));
 })
+
+gulp.task('tsc', ['tsc:app', 'tsc:test']);
 
 gulp.task('sass', function(done) {
   gulp.src(paths.styles.sass)

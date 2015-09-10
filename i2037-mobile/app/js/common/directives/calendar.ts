@@ -2,7 +2,9 @@
 
 import Moment = moment.Moment;
 
-export default class CalendarModule {
+export = CalendarModule
+
+class CalendarModule {
   public static NAME:string = 'i2037.directives.calendar';
 
   private static _instance:CalendarModule = new CalendarModule();

@@ -1,6 +1,6 @@
 ///<reference path="../../../../typings/tsd.d.ts" />
 
-import CalendarModule from 'www/js/common/directives/calendar';
+import CalendarModule = require('www/js/common/directives/calendar');
 
 describe('i2037.directives.calendar', function() {
     beforeEach(function() {
