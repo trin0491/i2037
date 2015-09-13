@@ -5,6 +5,7 @@ module.exports = function (config) {
     files: [
       'www/lib/ionic/js/ionic.bundle.js',
       'www/lib/angular-mocks/angular-mocks.js',
+      {pattern: 'www/lib/rxjs/dist/*.js', included: false},
       {pattern: 'www/js/**/*.js', included: false},
       {pattern: 'www/js/**/*.js.map', included: false},
       {pattern: 'www/js/**/*.ts', included: false},

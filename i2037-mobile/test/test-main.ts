@@ -19,9 +19,9 @@ requirejs.config({
   baseUrl: '/base',
 
   paths: {
-    "rx": "http://cdnjs.cloudflare.com/ajax/libs/rxjs/3.1.2/rx",
-    "rx.time": "http://cdnjs.cloudflare.com/ajax/libs/rxjs/3.1.2/rx.time",
-    "rx.experimental": "http://cdnjs.cloudflare.com/ajax/libs/rxjs/3.1.2/rx.experimental"
+    "rx": "www/lib/rxjs/dist/rx.lite",
+    "rx.time": "www/lib/rxjs/dist/rx.time",
+    "rx.experimental": "www/lib/rxjs/dist/rx.experimental"
   },
 
   // ask Require.js to load these files (all our tests)

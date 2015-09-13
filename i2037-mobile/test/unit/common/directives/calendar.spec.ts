@@ -4,7 +4,6 @@ import CalendarModule = require('www/js/common/directives/calendar');
 
 describe('i2037.directives.calendar', function() {
     beforeEach(function() {
-        debugger;
         module(CalendarModule.NAME);
     });
 
