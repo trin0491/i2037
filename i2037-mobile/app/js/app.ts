@@ -8,6 +8,7 @@
 // 'starter.controllers' is found in controllers.js
 
 import JournalModule = require('journal/journal');
+import TestModule = require('./test/TestModule');
 
 export = AppModule;
 
@@ -23,7 +24,8 @@ class AppModule {
   constructor() {
     var m = angular.module(AppModule.NAME, [
       'ionic',
-      JournalModule.NAME
+      JournalModule.NAME,
+      TestModule.NAME
     ])
     m.run(function ($ionicPlatform) {
       $ionicPlatform.ready(function () {
@@ -57,8 +59,11 @@ class AppModule {
         })
         .state('app.test', {
           url: "/test",
-          templateUrl: "templates/test.html",
-          controller: 'test'
+          views: {
+            menuContent: {
+              templateUrl: "templates/test.html"
+            }
+          }
         })
 
       // if none of the above states are matched, use this as the fallback
