@@ -19,9 +19,11 @@ requirejs.config({
   baseUrl: '/base',
 
   paths: {
+    "angular": "www/lib/ionic/js/ionic.bundle",
     "rx": "www/lib/rxjs/dist/rx.lite",
     "rx.time": "www/lib/rxjs/dist/rx.time",
-    "rx.experimental": "www/lib/rxjs/dist/rx.experimental"
+    "rx.experimental": "www/lib/rxjs/dist/rx.experimental",
+    "rx.angular": "www/lib/rx-angular/dist/rx.angular"
   },
 
   // ask Require.js to load these files (all our tests)

@@ -5,7 +5,11 @@ module.exports = function (config) {
     files: [
       'www/lib/ionic/js/ionic.bundle.js',
       'www/lib/angular-mocks/angular-mocks.js',
-      {pattern: 'www/lib/rxjs/dist/*.js', included: false},
+      'www/lib/rxjs/dist/rx.all.js',
+      'www/lib/rx-angular/dist/rx.angular.js',
+      'www/lib/requirejs/require.js',
+      'node_modules/karma-requirejs/lib/adapter.js',
+      {pattern: 'www/lib/**/*.js', included: false},
       {pattern: 'www/js/**/*.js', included: false},
       {pattern: 'www/js/**/*.js.map', included: false},
       {pattern: 'www/js/**/*.ts', included: false},
@@ -36,7 +40,7 @@ module.exports = function (config) {
 
     autoWatch: true,
 
-    frameworks: ['jasmine', 'requirejs'],
+    frameworks: ['jasmine'],
 
     browsers: ['Chrome'],
 

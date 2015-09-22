@@ -1,8 +1,11 @@
 <ion-view view-title="Test">
   <ion-content ng-controller="test as c">
     <h1>Test</h1>
-    <button ng-click="c.onClick()">Action</button>
+    <button>Action</button>
 
-    <div style="height: 100px;width: 100px;background-color: black" draggable="true"></div>
+    <div style="height: 100px;width: 100px;background-color: black" draggable="true"
+         ng-click="c.onClick($event)"
+         ng-mousedown="c.onMousedown($event)"
+         ng-mouseup="c.onMouseup($event)"></div>
   </ion-content>
 </ion-view>

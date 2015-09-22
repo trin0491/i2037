@@ -3,7 +3,7 @@
  */
 ///<reference path="../../../typings/tsd.d.ts" />
 
-import testController = require('./testDirective');
+import testController = require('./testController');
 
 export = TestModule;
 
@@ -13,7 +13,7 @@ class TestModule {
   private static _instance:TestModule = new TestModule();
 
   constructor() {
-    var m = angular.module(TestModule.NAME, []);
+    var m = angular.module(TestModule.NAME, ['rx']);
     m.controller('test', testController);
   }
 }

@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="On explicit save action" serverName="ionic" deleteMissingItems="true">
+  <component name="PublishConfigData" autoUpload="On explicit save action" serverName="ionic" deleteMissingItems="true" autoUploadExternalChanges="true">
     <serverData>
+      <paths name="i2037-server">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/www" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="ionic">
         <serverdata>
           <mappings>

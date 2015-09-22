@@ -119,8 +119,8 @@ gulp.task('sass', function(done) {
 
 gulp.task('watch', function() {
   gulp.watch(paths.styles.sass, ['sass']);
-  gulp.watch(paths.app.ts, ['tsc']);
-  gulp.watch(paths.test.ts, ['tsc:test'])
+  //gulp.watch(paths.app.ts, ['tsc']);
+  //gulp.watch(paths.test.ts, ['tsc:test'])
 });
 
 gulp.task('install', ['git-check'], function() {
