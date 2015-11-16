@@ -6,6 +6,7 @@ module.exports = function (config) {
       'www/lib/ionic/js/ionic.bundle.js',
       'www/lib/angular-mocks/angular-mocks.js',
       'www/lib/rxjs/dist/rx.all.js',
+      'www/lib/rxjs/dist/rx.testing.js',
       'www/lib/rx-angular/dist/rx.angular.js',
       'www/lib/requirejs/require.js',
       'node_modules/karma-requirejs/lib/adapter.js',
@@ -45,4 +46,4 @@ module.exports = function (config) {
     browsers: ['Chrome'],
 
   })
-}
+};
