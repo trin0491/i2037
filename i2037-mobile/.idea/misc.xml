@@ -1,4 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectRootManager" version="2" />
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/es6-promise.es6.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/iterable.es6.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.aggregates.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.aggregates.es6.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.all.es6.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.async.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.async.es6.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.backpressure.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.backpressure.es6.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.binding.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.binding.es6.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.coincidence.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.coincidence.es6.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.core.binding.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.core.binding.es6.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.core.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.core.es6.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.core.testing.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.core.testing.es6.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.es6.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.experimental.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.experimental.es6.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.joinpatterns.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.joinpatterns.es6.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.lite.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.lite.es6.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.lite.extras.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.lite.extras.es6.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.sorting.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.sorting.es6.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.testing.es6.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.time.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.time.es6.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.virtualtime.d.ts" />
+    <file url="file://$PROJECT_DIR$/www/lib/rxjs/ts/rx.virtualtime.es6.d.ts" />
+  </component>
 </project>
