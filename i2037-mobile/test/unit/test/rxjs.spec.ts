@@ -60,42 +60,4 @@ describe("Reactive JS", function () {
     ]);
 
   });
-
-  it('should concatMap', function () {
-    var xs = scheduler.createHotObservable(
-      onNext(260, 'a')
-    )
-      .do(function () {
-        console.log("do1");
-      })
-      .concatMap((x) => {
-        return mockCommand(x);
-      })
-      .publish();
-
-    mockCommand.and.callFake(function () {
-      return scheduler.createResolvedPromise(350, 'a1')
-    });
-
-    var results = [];
-
-    function log(x) {
-      console.log("value: ", x);
-    }
-
-    xs.subscribe(log);
-    xs.subscribe(log);
-    results[0] = scheduler.startWithCreate(function () {
-      return xs
-    });
-
-
-    expect(mockCommand).toHaveBeenCalled();
-    results.forEach(function (result, i) {
-      console.log("index: ", i);
-      expect(result.messages).toEqual([
-        onNext(350, 'a1'),
-      ]);
-    });
-  })
 });
