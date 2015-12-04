@@ -15,7 +15,7 @@
 
         var d3 = d3Service.d3();
         var colour = d3.scale.ordinal().range(['#C3E9FF', '#3599F3', '#042E67', '#1F5C99']);
-        var svg = d3.select(element[0]).append('svg');
+        var svg = d3.select(element[0]).append('svg').attr('viewBox', '0 0 100 20');
         var GAP = 2;
 
 
