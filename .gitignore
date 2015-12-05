@@ -170,3 +170,5 @@ i2037-client/i2037-client.sublime-workspace
 *.sublime-project
 
 i2037-client/.idea/workspace.xml
+
+npm-debug.log
