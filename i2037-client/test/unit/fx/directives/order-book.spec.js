@@ -38,7 +38,7 @@ describe('i2037.fx.directives.orderBook', function() {
       $scope.ob = {rungs:[]};
       $scope.$digest();
       expect(element.find('tr').length).toBe(0);
-    })
+    });
 
     it('should have a price in the 1st column, if left aligned', function() {
       mockPx.getPips.andReturn('1.3264');
@@ -56,7 +56,7 @@ describe('i2037.fx.directives.orderBook', function() {
     it('should have a depth chart in the 3rd column, if left aligned', function() {
       $scope.$digest();
       var td = element.find('td');
-      expect(td.eq(2).attr("i2-depth-chart")).toBeTruthy;
+      expect(td.eq(2).attr("i2-depth-chart")).toBeDefined();
       expect(td.eq(2).attr("align")).toEqual("left");      
     });
 
@@ -66,7 +66,7 @@ describe('i2037.fx.directives.orderBook', function() {
       $scope.$digest(); 
       var td = element.find('td');
       expect(td.eq(2).text()).toEqual('1.3264');
-    })
+    });
 
     it('should have an amount in the 2rd column, if right aligned', function() {
       element = compile('<i2-order-book ob="ob" align="right"></i2-order-book>');            
@@ -77,7 +77,7 @@ describe('i2037.fx.directives.orderBook', function() {
     it('should have a depth chart in the 3rd column, if left aligned', function() {
       element = compile('<i2-order-book ob="ob" align="right"></i2-order-book>');                  
       var td = element.find('td');
-      expect(td.eq(0).attr("i2-depth-chart")).toBeTruthy;      
+      expect(td.eq(0).attr("i2-depth-chart")).toBeDefined();
       expect(td.eq(0).attr("align")).toEqual("right");
     });
 
@@ -100,7 +100,7 @@ describe('i2037.fx.directives.orderBook', function() {
       $scope.highlight = 3;
       $scope.$digest();
       expectHasHighlights(rows);
-    })
+    });
 
     it('should give mark one row with the normal amount', function() {
       var rows = element.find('tr');
@@ -108,10 +108,10 @@ describe('i2037.fx.directives.orderBook', function() {
       expect(rows.hasClass('x-ob-level')).toBeTruthy();      
       $scope.level = 1;
       $scope.$digest();
-      expect(rows.eq(0).hasClass('x-ob-level')).toBeTruthy;
-      expect(rows.eq(0).hasClass('x-ob-normamt-level')).toBeFalsy;            
-      expect(rows.eq(1).hasClass('x-ob-level')).toBeFalsy;      
-      expect(rows.eq(1).hasClass('x-ob-normamt-level')).toBeTruthy;            
+      expect(rows.eq(0).hasClass('x-ob-level')).toBeTruthy();
+      expect(rows.eq(0).hasClass('x-ob-normamt-level')).toBeFalsy();
+      expect(rows.eq(1).hasClass('x-ob-level')).toBeFalsy();
+      expect(rows.eq(1).hasClass('x-ob-normamt-level')).toBeTruthy();
     });
   });
 });
