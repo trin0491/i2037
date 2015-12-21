@@ -79,7 +79,10 @@ module i2037.admin {
 
     $scope.getCls = function(ngModelController) {
       if (!ngModelController) {
-        return {};
+        return {
+          'has-error': false,
+          'has-success': false
+        };
       } else {
         return {
           'has-error': ngModelController.$invalid && ngModelController.$dirty,

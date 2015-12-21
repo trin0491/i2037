@@ -22,6 +22,9 @@
     },
     "googlemaps/google.maps.d.ts": {
       "commit": "e57df787f4e11601625d7e1c1b2ee351b97a18a1"
+    },
+    "jasmine/jasmine.d.ts": {
+      "commit": "40c60850ad6c8175a62d5ab48c4e016ea5b3dffe"
     }
   }
 }

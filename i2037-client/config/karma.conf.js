@@ -10,9 +10,9 @@ module.exports = function(config){
       'bower_components/angular-mocks/angular-mocks.js',
       'https://maps.googleapis.com/maps/api/js?key=AIzaSyD1XkZF2vEwPUZeFfadDMe76ozKhrk-mXE&sensor=false',
       'app/js/**/*.js',
-      'test/unit/**/*.spec.js',
+      'build/js/**/*.js',
       'build/js/templates/i2037-client.tpl.js',
-      'build/js/i2037-client.ts.js'      
+      'test/unit/**/*.spec.js'
     ],
 
     autoWatch : true,
@@ -32,4 +32,4 @@ module.exports = function(config){
       suite: 'unit'
     }
 
-})}
+})};

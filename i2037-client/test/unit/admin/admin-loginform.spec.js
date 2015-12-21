@@ -34,7 +34,7 @@ describe('i2037.admin.loginform', function() {
       expect($scope.userPM.userName).toBeUndefined();
       expect($scope.userPM.password).toBeNull();
       expect($scope.userPM.rememberMe).toBeTruthy();
-    })
+    });
 
     it('should go to the home page on cancel', function() {
       $scope.cancel();

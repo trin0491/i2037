@@ -10,12 +10,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-env');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-html2js');
-  grunt.loadNpmTasks('grunt-typescript');
+  grunt.loadNpmTasks('grunt-ts');
   grunt.loadNpmTasks('grunt-sass');
 
   grunt.config.set('dir.dist', 'build');
 
-  grunt.registerTask('build', ['clean', 'jshint', 'html2js', 'copy', 'preprocess', 'typescript', 'sass', 'concat', 'karma:unit']);
+  grunt.registerTask('build', ['clean', 'jshint', 'html2js', 'copy', 'preprocess', 'ts', 'sass', 'concat', 'karma:unit']);
   grunt.registerTask('release', ['env:release', 'build', 'uglify']);
   grunt.registerTask('default', ['env:dev', 'build']);
 
@@ -45,14 +45,14 @@ module.exports = function(grunt) {
           '<%= dir.bower %>/angular-route/angular-route.js',
           '<%= dir.bower %>/angular-resource/angular-resource.js',
           '<%= dir.bower %>/angular-bootstrap/ui-bootstrap-tpls.js',
-          '<%= dir.bower %>/angular-ui-calendar/src/calendar.js',
+          '<%= dir.bower %>/angular-ui-calendar/src/calendar.js'
         ],
         dest: '<%= dir.dist %>/lib/angular.js'
       },
       jquery: {
         src: [
           '<%= dir.bower %>/jquery/jquery.js',
-          '<%= dir.bower %>/jquery.cookie/jquery.cookie.js',
+          '<%= dir.bower %>/jquery.cookie/jquery.cookie.js'
         ],
         dest: '<%= dir.dist %>/lib/jquery.js'
       },
@@ -64,14 +64,14 @@ module.exports = function(grunt) {
           '<%= dir.bower %>/autofill-event/src/autofill-event.js'
         ],
         dest: '<%= dir.dist %>/lib/deps.js'
-      },
+      }
     },
     copy: {
       static: {
         files: [
           {expand: true, cwd: 'app', src: ['img/**'], dest: '<%= dir.dist %>/'},
           {expand: true, cwd: 'app', src: ['partials/**'], dest: '<%= dir.dist %>/'},
-          {expand: true, cwd: 'app', src: ['css/**'], dest: '<%= dir.dist %>/'},
+          {expand: true, cwd: 'app', src: ['css/**'], dest: '<%= dir.dist %>/'}
         ]
       },
       bootstrap: {
@@ -134,7 +134,7 @@ module.exports = function(grunt) {
           options: {
             context: {
               name: '<%= pkg.name %>',
-              now: '<%= now %>',
+              now: '<%= now %>'
             }
           },
           files: [
@@ -151,16 +151,9 @@ module.exports = function(grunt) {
         }
       }
     },
-    typescript: {
-      base: {
-        src: ['<%= dir.dist %>/js/**/*.ts'],
-        dest: '<%= dir.dist %>/js/<%= pkg.name %>.ts.js',
-        options: {
-          target: 'es5', 
-          basePath: 'app/js',
-          sourceMap: true,
-          declaration: true
-        }
+    ts: {
+      default: {
+        tsconfig: true
       }
     },
     uglify: {
