@@ -3,16 +3,14 @@ module.exports = function(config){
     basePath : '../',
 
     files : [
-      'build/lib/jquery.js',
-      'build/lib/angular.js',
-      'build/lib/bootstrap.js',
-      'build/lib/deps.js',      
+      'build/app/lib/jquery.js',
+      'build/app/lib/angular.js',
+      'build/app/lib/bootstrap.js',
+      'build/app/lib/deps.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'https://maps.googleapis.com/maps/api/js?key=AIzaSyD1XkZF2vEwPUZeFfadDMe76ozKhrk-mXE&sensor=false',
-      'app/js/**/*.js',
-      'build/js/**/*.js',
-      'build/js/templates/i2037-client.tpl.js',
-      'test/unit/**/*.spec.js'
+      'build/app/js/**/*.js',
+      'build/test/unit/**/*.spec.js'
     ],
 
     autoWatch : true,

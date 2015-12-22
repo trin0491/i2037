@@ -3,7 +3,8 @@
     "module": "amd",
     "target": "es5",
     "sourceMap": true,
-    "outFile": "./build/js/i2037-client.ts.js"
+    "outDir": "./build",
+    "rootDir": "."
   },
   "exclude": [
     "node_modules",

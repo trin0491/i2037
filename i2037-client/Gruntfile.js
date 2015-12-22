@@ -13,9 +13,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-ts');
   grunt.loadNpmTasks('grunt-sass');
 
-  grunt.config.set('dir.dist', 'build');
-
-  grunt.registerTask('build', ['clean', 'jshint', 'html2js', 'copy', 'preprocess', 'ts', 'sass', 'concat', 'karma:unit']);
+  grunt.registerTask('build', ['clean', 'jshint', 'copy', 'preprocess', 'ts', 'html2js', 'sass', 'concat', 'karma:unit']);
   grunt.registerTask('release', ['env:release', 'build', 'uglify']);
   grunt.registerTask('default', ['env:dev', 'build']);
 
@@ -36,8 +34,8 @@ module.exports = function(grunt) {
     clean: [ 'build/**' ],
     concat: {
       app: {
-        src: ['<%= dir.dist %>/js/**/*.js'],
-        dest: '<%= dir.dist %>/js/<%= pkg.name %>.js'
+        src: ['<%= dir.dist %>/app/js/**/*.js'],
+        dest: '<%= dir.dist %>/app/js/<%= pkg.name %>.js'
       },
       angular: {
         src: [
@@ -47,14 +45,14 @@ module.exports = function(grunt) {
           '<%= dir.bower %>/angular-bootstrap/ui-bootstrap-tpls.js',
           '<%= dir.bower %>/angular-ui-calendar/src/calendar.js'
         ],
-        dest: '<%= dir.dist %>/lib/angular.js'
+        dest: '<%= dir.dist %>/app/lib/angular.js'
       },
       jquery: {
         src: [
           '<%= dir.bower %>/jquery/jquery.js',
           '<%= dir.bower %>/jquery.cookie/jquery.cookie.js'
         ],
-        dest: '<%= dir.dist %>/lib/jquery.js'
+        dest: '<%= dir.dist %>/app/lib/jquery.js'
       },
       depsjs: {
         src: [
@@ -63,27 +61,35 @@ module.exports = function(grunt) {
           '<%= dir.bower %>/d3/d3.js',
           '<%= dir.bower %>/autofill-event/src/autofill-event.js'
         ],
-        dest: '<%= dir.dist %>/lib/deps.js'
+        dest: '<%= dir.dist %>/app/lib/deps.js'
       }
     },
     copy: {
-      static: {
+      app: {
         files: [
-          {expand: true, cwd: 'app', src: ['img/**'], dest: '<%= dir.dist %>/'},
-          {expand: true, cwd: 'app', src: ['partials/**'], dest: '<%= dir.dist %>/'},
-          {expand: true, cwd: 'app', src: ['css/**'], dest: '<%= dir.dist %>/'}
+          {expand: true, cwd: '.', src: ['app/img/**'],    dest: '<%= dir.dist %>'},
+          {expand: true, cwd: '.', src: ['app/**/*.html'], dest: '<%= dir.dist %>'},
+          {expand: true, cwd: '.', src: ['app/**/*.css'],  dest: '<%= dir.dist %>'},
+          {expand: true, cwd: '.', src: ['app/**/*.scss'], dest: '<%= dir.dist %>'},
+          {expand: true, cwd: '.', src: ['app/**/*.js'],   dest: '<%= dir.dist %>'},
+          {expand: true, cwd: '.', src: ['app/**/*.ts'],   dest: '<%= dir.dist %>'}
+        ]
+      },
+      tests: {
+        files: [
+          {expand: true, cwd: '.', src: ['test/unit/**/*.js'], dest: '<%= dir.dist %>/'}
         ]
       },
       bootstrap: {
         files: [
-          {expand: true, cwd: '<%= dir.bower %>/bootstrap/dist', src: ['css/**'], dest: '<%= dir.dist %>/'},
-          {expand: true, cwd: '<%= dir.bower %>/bootstrap/dist', src: ['fonts/**'], dest: '<%= dir.dist %>/'},
-          {expand: true, cwd: '<%= dir.bower %>/bootstrap/dist/js', src: ['**'], dest: '<%= dir.dist %>/lib/'}
+          {expand: true, cwd: '<%= dir.bower %>/bootstrap/dist', src: ['css/**'],   dest: '<%= dir.dist %>/app/'},
+          {expand: true, cwd: '<%= dir.bower %>/bootstrap/dist', src: ['fonts/**'], dest: '<%= dir.dist %>/app/'},
+          {expand: true, cwd: '<%= dir.bower %>/bootstrap/dist/js', src: ['**'],    dest: '<%= dir.dist %>/app/lib/'}
         ]
       },
       calendar: {
         files: [
-          {expand: true, cwd: '<%= dir.bower %>/fullcalendar', src: ['*.css'], dest: '<%= dir.dist %>/css'}
+          {expand: true, cwd: '<%= dir.bower %>/fullcalendar', src: ['*.css'], dest: '<%= dir.dist %>/app/css'}
         ]
       }
     },
@@ -102,10 +108,10 @@ module.exports = function(grunt) {
     html2js: {
       app: {
         options: {
-          base: 'app/js'
+          base: '<%= dir.dist %>/app/js'
         },
-        src: ['app/**/*.tpl.html'],
-        dest: '<%= dir.dist %>/js/templates/<%= pkg.name %>.tpl.js',
+        src: ['<%= dir.dist %>/app/**/*.tpl.html'],
+        dest: '<%= dir.dist %>/app/js/templates/<%= pkg.name %>.tpl.js',
         module: 'templates.app'
       }
     },
@@ -131,23 +137,20 @@ module.exports = function(grunt) {
     },
     preprocess: {
         app: {
+          src: [ '<%= dir.dist %>/app/index.html' ],
           options: {
+            inline: true,
             context: {
               name: '<%= pkg.name %>',
               now: '<%= now %>'
             }
-          },
-          files: [
-            {'<%= dir.dist %>/index.html': 'app/index.html' },
-            { expand:true, cwd: 'app/js', src:'**/*.js', dest: '<%= dir.dist %>/js/'},
-            { expand:true, cwd: 'app/js', src:'**/*.ts', dest: '<%= dir.dist %>/js/'}
-          ]          
+          }
         }
     },
     sass: {
       dist: {
         files: {
-          '<%= dir.dist %>/css/app.css': 'app/css/app.scss'
+          '<%= dir.dist %>/app/css/app.css': '<%= dir.dist %>/app/css/app.scss'
         }
       }
     },
@@ -161,20 +164,20 @@ module.exports = function(grunt) {
         banner: '/*! <%= pkg.name %> <%= pkg.version %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
       },
       app: {
-        src: ['<%= dir.dist %>/js/<%= pkg.name %>.js'],
-        dest: '<%= dir.dist %>/js/<%= pkg.name %>.min.js' 
+        src: ['<%= dir.dist %>/app/js/<%= pkg.name %>.js'],
+        dest: '<%= dir.dist %>/app/js/<%= pkg.name %>.min.js'
       },
       angular: {
         src: ['<%= concat.angular.src %>'],
-        dest: '<%= dir.dist %>/lib/angular.min.js'
+        dest: '<%= dir.dist %>/app/lib/angular.min.js'
       },
       jquery: {
         src: [ '<%= concat.jquery.src %>'],
-        dest: '<%= dir.dist %>/lib/jquery.min.js'
+        dest: '<%= dir.dist %>/app/lib/jquery.min.js'
       },
       depsjs: {
         src: [ '<%= concat.depsjs.src %>' ],
-        dest: '<%= dir.dist %>/lib/deps.min.js'
+        dest: '<%= dir.dist %>/app/lib/deps.min.js'
       }          
     },
     watch: {
