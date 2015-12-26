@@ -120,7 +120,7 @@ module.exports = function(grunt) {
         },
         src: ['<%= dir.dist %>/app/**/*.tpl.html'],
         dest: '<%= dir.dist %>/app/js/templates/<%= pkg.name %>.tpl.js',
-        module: 'templates.app'
+        module: 'i2037.templates'
       }
     },
     jshint: {

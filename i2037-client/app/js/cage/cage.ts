@@ -2,6 +2,7 @@
 
 import services from "../common/services/services";
 import d3 from "../common/directives/d3";
+import fx from "../fx/fx";
 
   declare var Highcharts:any;
   declare var Slick:any;
@@ -10,7 +11,7 @@ export default angular.module('i2037.cage', [
     'ngRoute',
     services.name,
     d3.name,
-    'i2037.fx'
+    fx.name
   ])
 
     .config(['$routeProvider', function ($routeProvider) {
