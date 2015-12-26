@@ -1,6 +1,6 @@
 ///<reference path="../../../typings/tsd.d.ts" />
 
-import cellar from "js/common/resources/cellar";
+import cellar from "../common/resources/cellar";
 
 export default angular.module('i2037.cellar', ['ngRoute', cellar.name])
 
