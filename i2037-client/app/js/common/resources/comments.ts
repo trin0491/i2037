@@ -1,7 +1,5 @@
 ///<reference path="../../../../typings/tsd.d.ts" />
 
-module i2037.resources
-{
   var commentResource:ICommentResource;
 
   export interface IComment {
@@ -81,7 +79,7 @@ module i2037.resources
     }
   }
 
-  angular.module('i2037.resources.comments', ['i2037.services'])
+  export default angular.module('i2037.resources.comments', ['i2037.services'])
 
     .factory('Comment', ['$http', 'pathFinder', function ($http:ng.IHttpService, pathFinder) {
 
@@ -92,4 +90,4 @@ module i2037.resources
       return commentResource;
     }])
   ;
-}
+

@@ -1,5 +1,4 @@
-module i2037.admin {
-  export class Menu {
+  export default class Menu {
     name: string;
     path: string;
     isActive: boolean = false;
@@ -8,5 +7,4 @@ module i2037.admin {
       this.path = path;
     }
   }
-}
 

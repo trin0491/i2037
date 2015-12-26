@@ -1,97 +1,107 @@
 ///<reference path="../../../../typings/tsd.d.ts" />
 
-module i2037.services {
-  export class Session {
+import environment from "./environment";
+
+class User {
+  static get(params):any {
+
   }
 
-  export class PathFinder {
-    private prefix:string;
+  constructor(data:any) {
+    angular.extend(this, data);
+  }
+}
 
-    constructor(svcPrefix:string) {
-      this.prefix = svcPrefix;
-      this.prefix += '/';
-    }
+export class Session {
+}
 
-    get(name:string):string {
-      return this.prefix + name;
-    }
+export class PathFinder {
+  private prefix:string;
+
+  constructor(svcPrefix:string) {
+    this.prefix = svcPrefix;
+    this.prefix += '/';
   }
 
-  export class D3Service {
-    constructor(private d3Base:D3.Base) {
-    }
+  get(name:string):string {
+    return this.prefix + name;
+  }
+}
 
-    d3():D3.Base {
-      return this.d3Base;
-    }
+export class D3Service {
+  constructor(private d3Base:D3.Base) {
   }
 
-  angular.module('i2037.services', ['i2037.environment', 'i2037.resources.user'])
+  d3():D3.Base {
+    return this.d3Base;
+  }
+}
 
-    .factory('pathFinder', ['version', 'svcPrefix', function (version, svcPrefix) {
-      var pathFinder:PathFinder = new PathFinder(svcPrefix);
-      return pathFinder;
-    }])
+export default angular.module('i2037.services', [environment.name, 'i2037.resources.user'])
 
-    .factory('Session', ['$rootScope', '$location', '$q', 'User', function ($rootScope:ng.IRootScopeService, $location, $q, User) {
-      var STATES = {
-        LOGGED_OUT: 'LOGGED_OUT',
-        LOGGED_IN: 'LOGGED_IN'
-      };
+  .factory('pathFinder', ['version', 'svcPrefix', function (version, svcPrefix) {
+    var pathFinder:PathFinder = new PathFinder(svcPrefix);
+    return pathFinder;
+  }])
 
-      var _user = null;
-      var _state = STATES.LOGGED_OUT;
+  .factory('Session', ['$rootScope', '$location', '$q', 'User', function ($rootScope:ng.IRootScopeService, $location, $q, User) {
+    var STATES = {
+      LOGGED_OUT: 'LOGGED_OUT',
+      LOGGED_IN: 'LOGGED_IN'
+    };
 
-      function raiseStateChange(state) {
-        _state = state;
-        $rootScope.$broadcast('SessionService::StateChange', state);
-      }
+    var _user = null;
+    var _state = STATES.LOGGED_OUT;
 
-      var service = {
-        getUser: function () {
-          if (_user) {
-            return _user;
-          } else {
-            return User.get().then(function (user) {
-              _user = user;
-              raiseStateChange(STATES.LOGGED_IN);
-              return user;
-            });
-          }
-        },
+    function raiseStateChange(state) {
+      _state = state;
+      $rootScope.$broadcast('SessionService::StateChange', state);
+    }
 
-        getState: function () {
-          return _state;
-        },
-
-        login: function (userName, password) {
-          return User.login(userName, password).then(function (user) {
-            _user = user;
-            raiseStateChange(STATES.LOGGED_IN);
-            return user;
-          });
-        },
-
-        logout: function () {
-          return User.logout().then(function (user) {
-            _user = null;
-            raiseStateChange(STATES.LOGGED_OUT);
-          });
-        },
-
-        signup: function (newUser) {
-          return newUser.$save().then(function (user) {
+    var service = {
+      getUser: function () {
+        if (_user) {
+          return _user;
+        } else {
+          return User.get().then(function (user) {
             _user = user;
             raiseStateChange(STATES.LOGGED_IN);
             return user;
           });
         }
-      };
-      return service;
-    }])
+      },
 
-    .factory('d3Service', [function () {
-      var svc:D3Service = new D3Service(d3);
-      return svc;
-    }]);
-}
+      getState: function () {
+        return _state;
+      },
+
+      login: function (userName, password) {
+        return User.login(userName, password).then(function (user) {
+          _user = user;
+          raiseStateChange(STATES.LOGGED_IN);
+          return user;
+        });
+      },
+
+      logout: function () {
+        return User.logout().then(function (user) {
+          _user = null;
+          raiseStateChange(STATES.LOGGED_OUT);
+        });
+      },
+
+      signup: function (newUser) {
+        return newUser.$save().then(function (user) {
+          _user = user;
+          raiseStateChange(STATES.LOGGED_IN);
+          return user;
+        });
+      }
+    };
+    return service;
+  }])
+
+  .factory('d3Service', [function () {
+    var svc:D3Service = new D3Service(d3);
+    return svc;
+  }]);

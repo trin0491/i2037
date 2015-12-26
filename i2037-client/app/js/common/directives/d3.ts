@@ -1,11 +1,10 @@
 ///<reference path="../../../../typings/tsd.d.ts" />
 ///<reference path="../services/services.ts" />
 
-module i2037.directives {
+  import services from "../services/services";
+  import {D3Service} from "../services/services";
 
-  import D3Service = i2037.services.D3Service;
-
-  angular.module('i2037.directives.d3', ['i2037.services'])
+export default angular.module('i2037.directives.d3', [services.name])
 
     .directive('i2Pie', ['d3Service', '$window', function(d3Service: D3Service, $window) {
     return {
@@ -154,4 +153,4 @@ module i2037.directives {
       }
     };
   }]);
-}
+

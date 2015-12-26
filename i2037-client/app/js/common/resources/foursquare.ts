@@ -1,9 +1,7 @@
 ///<reference path="../../../../typings/tsd.d.ts" />
 ///<reference path="../services/services.ts" />
 
-module i2037.resources {
-
-    import PathFinder = i2037.services.PathFinder;
+    import {PathFinder} from "../services/services";
 
     interface IVenue {
 
@@ -28,7 +26,7 @@ module i2037.resources {
       }
     }
 
-    angular.module('i2037.resources.foursquare', ['i2037.services'])
+export default angular.module('i2037.resources.foursquare', ['i2037.services'])
 
         .factory('FourSquareVenue', ['$http', 'pathFinder', 
           function($http:ng.IHttpService, pathFinder:PathFinder) {
@@ -37,4 +35,4 @@ module i2037.resources {
 
         return new VenueResource($http, baseUrl);
     }]);
-}
+

@@ -1,17 +1,14 @@
 ///<reference path="../../../../typings/tsd.d.ts" />
-///<reference path="../resources/comments.ts" />
 
-module i2037.directives {
-
-  import r = i2037.resources;
+import {IComment} from "../resources/comments";
 
   interface CommentScope extends ng.IScope {
     state:string;
     textRows:number;
     saveLabel:string;
     maxlength:number;
-    comment:r.IComment;
-    momento:r.IComment;
+    comment:IComment;
+    momento:IComment;
     showActions:boolean;
     canDelete():void;
     delete():void;
@@ -25,7 +22,7 @@ module i2037.directives {
     deleteFn():void;
   }
 
-  angular.module('i2037.directives.comment', ['common/directives/comment.tpl.html'])
+export default angular.module('i2037.directives.comment', ['common/directives/comment.tpl.html'])
 
   .directive('i2Comment', function() {
     return {
@@ -157,5 +154,5 @@ module i2037.directives {
       }
     };
   });
-}
+
 

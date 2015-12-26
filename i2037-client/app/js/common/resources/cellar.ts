@@ -1,11 +1,8 @@
 ///<reference path="../../../../typings/tsd.d.ts" />
-///<reference path="../services/services.ts" />
 
-module i2037.resources {
+import {PathFinder} from "../services/services";
 
-  import PathFinder = i2037.services.PathFinder;
-
-  angular.module('i2037.resources.cellar', ['i2037.services', 'ngResource'])
+export default angular.module('i2037.resources.cellar', ['i2037.services', 'ngResource'])
 
     .factory('Wine', ['$resource', 'pathFinder', function($resource, pathFinder:PathFinder) {
     return $resource(pathFinder.get('svc/wines/:wineId'),
@@ -21,4 +18,3 @@ module i2037.resources {
   }])
   ;
 
-}

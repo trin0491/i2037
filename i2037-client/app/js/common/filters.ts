@@ -1,8 +1,6 @@
 ///<reference path="../../../typings/tsd.d.ts" />
 
-module i2037.filters {
-
-  angular.module('i2037.filters', [])
+export default angular.module('i2037.filters', [])
     .filter('interpolate', ['version', function (version) {
       return function (text) {
         return String(text).replace(/\%VERSION\%/mg, version);
@@ -71,6 +69,6 @@ module i2037.filters {
         }
       };
     }]);
-}
+
 
 

@@ -1,7 +1,5 @@
 ///<reference path="../../../../typings/tsd.d.ts" />
 
-module i2037.directives {
-
     interface ISpinner {
         stop(): void;
         spin(elem): void;
@@ -11,7 +9,7 @@ module i2037.directives {
         Spinner: new (options:any) => ISpinner;
     }
 
-    angular.module('i2037.directives.spinner', [])
+export default angular.module('i2037.directives.spinner', [])
 
         .directive("i2SpinShow", ['$window', function($window: ISpinnerWindow) {
         return function(scope, element, attrs) {
@@ -56,4 +54,3 @@ module i2037.directives {
         };
     }])
     ;
-}

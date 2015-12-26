@@ -1,8 +1,7 @@
-module recipies {
 
   interface IRecipesScope extends ng.IScope { }
 
-  angular.module('i2037.recipes', ['ngRoute'])
+export default angular.module('i2037.recipes', ['ngRoute'])
 
     .config(['$routeProvider', function ($routeProvider:ng.route.IRouteProvider) {
       $routeProvider.when('/recipes', {templateUrl: 'partials/recipes.html', controller: 'RecipesCtrl'});
@@ -11,4 +10,3 @@ module recipies {
     .controller('RecipesCtrl', ['$scope', function ($scope) {
 
     }]);
-}

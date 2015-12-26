@@ -1,14 +1,15 @@
 ///<reference path="../../../typings/tsd.d.ts" />
 
-module i2037.cage {
+import services from "../common/services/services";
+import d3 from "../common/directives/d3";
 
   declare var Highcharts:any;
   declare var Slick:any;
 
-  angular.module('i2037.cage', [
+export default angular.module('i2037.cage', [
     'ngRoute',
-    'i2037.services',
-    'i2037.directives.d3',
+    services.name,
+    d3.name,
     'i2037.fx'
   ])
 
@@ -125,4 +126,3 @@ module i2037.cage {
 
       }]);
 
-}

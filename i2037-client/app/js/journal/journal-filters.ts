@@ -1,8 +1,6 @@
 ///<reference path="../../../typings/tsd.d.ts" />
 
-module i2037.journal.filters {
-
-  angular.module('i2037.journal.filters', [])
+export default angular.module('i2037.journal.filters', [])
   .filter('movesActivity', [ function() {
       var activities = {
         wlk: 'Walking',
@@ -18,4 +16,3 @@ module i2037.journal.filters {
       };
    }])
   ;
-}

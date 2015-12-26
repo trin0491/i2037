@@ -1,8 +1,6 @@
 ///<reference path="../../../../typings/tsd.d.ts" />
 
-module i2037.directives {
-
-  angular.module('i2037.directives.button', [])
+export default angular.module('i2037.directives.button', [])
 
     .directive("i2Button", [function () {
       return {
@@ -68,4 +66,4 @@ module i2037.directives {
       };
     }])
   ;
-}
+

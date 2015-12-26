@@ -1,12 +1,13 @@
 ///<reference path="../../../typings/tsd.d.ts" />
 
-module i2037.journal {
+import journalCalendar from "./journal-calendar";
+import journalDate from "./journal-date";
 
-  angular.module('i2037.journal', [
+export default angular.module('i2037.journal', [
     'ngRoute',  
-    'i2037.journal.calendar',
-    'i2037.journal.date'
+    journalCalendar.name,
+    journalDate.name
     ])
   ;
 
-}
+

@@ -1,7 +1,6 @@
 ///<reference path="../../../../typings/tsd.d.ts" />
-///<reference path="../services/services.ts" />
 
-module i2037.resources {
+import services, {PathFinder} from "../services/services";
 
   class User {
     static get(params):any {
@@ -13,9 +12,9 @@ module i2037.resources {
     }
   }
 
-  angular.module('i2037.resources.user', ['i2037.services'])
+  export default angular.module('i2037.resources.user', [services.name])
 
-    .factory('User', ['$http', 'pathFinder', function ($http:ng.IHttpService, pathFinder:i2037.services.PathFinder) {
+    .factory('User', ['$http', 'pathFinder', function ($http:ng.IHttpService, pathFinder:PathFinder) {
 
       var url:string = pathFinder.get('svc/user');
 
@@ -80,4 +79,3 @@ module i2037.resources {
       return User;
     }])
   ;
-}

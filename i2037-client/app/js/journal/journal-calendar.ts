@@ -1,11 +1,14 @@
 ///<reference path="../../../typings/tsd.d.ts" />
-///<reference path="../common/resources/journal.ts" />
 
-module i2037.journal {
+import {
+    Journal,
+    IJournalSummaryResource,
+    IMovesProfileResource
+  } from "../common/resources/journal";
 
-  import Journal = i2037.resources.Journal;
-  import IJournalSummaryResource = i2037.resources.IJournalSummaryResource;
-  import IMovesProfileResource = i2037.resources.IMovesProfileResource;
+import movesModel from "../moves/moves-model";
+import journalResource from "../common/resources/journal";
+import daySummary from "../common/directives/day-summary";
 
   function pad(n) { return n < 10 ? '0' + n : n; }
 
@@ -13,12 +16,12 @@ module i2037.journal {
     return "/journal/month/" + year + pad(month + 1);
   }
 
-  angular.module('i2037.journal.calendar', [
+  export default angular.module('i2037.journal.calendar', [
     'ngRoute',
-    'i2037.resources.journal',
-    'i2037.moves.model',
-    'i2037.directives.daySummary',
     'ui.calendar',
+    journalResource.name,
+    movesModel.name,
+    daySummary.name,
     'journal/journal-calendar.tpl.html',
   ])
 
@@ -176,4 +179,3 @@ module i2037.journal {
       };
   }])
   ;
-}

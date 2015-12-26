@@ -1,7 +1,6 @@
 ///<reference path="../../../typings/tsd.d.ts" />
 
-module i2037.moves.model {
-  angular.module('i2037.moves.model', ['i2037.resources.journal'])
+export default angular.module('i2037.moves.model', ['i2037.resources.journal'])
 
   .service('MovesPlacesModel', ['$rootScope', function($rootScope:ng.IRootScopeService) {
     var places = [];
@@ -44,4 +43,3 @@ module i2037.moves.model {
     };
     }])
   ;
-}

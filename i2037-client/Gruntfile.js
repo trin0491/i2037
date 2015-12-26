@@ -29,7 +29,8 @@ module.exports = function(grunt) {
     // i2037 dir 
     dir: {
       dist: 'build',
-      bower: 'bower_components'
+      bower: 'bower_components',
+      node: 'node_modules'
     },
     clean: [ 'build/**' ],
     concat: {
@@ -62,6 +63,13 @@ module.exports = function(grunt) {
           '<%= dir.bower %>/autofill-event/src/autofill-event.js'
         ],
         dest: '<%= dir.dist %>/app/lib/deps.js'
+      },
+      requirejs: {
+        src: [
+          '<%= dir.node %>/requirejs/require.js'
+        ],
+        dest: '<%= dir.dist %>/app/lib/require.js'
+
       }
     },
     copy: {

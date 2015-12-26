@@ -1,26 +1,29 @@
 ///<reference path="../../typings/tsd.d.ts" />
-///<reference path="admin/admin.ts" />
-///<reference path="recipes/recipes.ts" />
-///<reference path="cellar/cellar.ts" />
-///<reference path="common/resources/user.ts" />
-///<reference path="common/services/services.ts" />
-///<reference path="common/services/environment.ts" />
-///<reference path="common/filters.ts" />
 
-import Menu = i2037.admin.Menu;
+import admin from "./admin/admin";
+import recipes from "./recipes/recipes";
+import cellar from "./cellar/cellar";
+import user from "./common/resources/user";
+import services from "./common/services/services";
+import environment from "./common/services/environment";
+import filters from "./common/filters";
+import journal from "./journal/journal"
+import Menu from "./admin/Menu";
+import cage from "./cage/cage";
+import directives from "./common/directives/directives";
 
-  angular.module('i2037', [
+export default angular.module('i2037', [
       'ui.bootstrap',
-      'i2037.admin',
-      'i2037.recipes',
-      'i2037.cellar', 
-      'i2037.journal',
-      'i2037.cage', 
-      'i2037.filters', 
-      'i2037.environment', 
-      'i2037.services',
-      'i2037.resources.user', 
-      'i2037.directives'])
+      admin.name,
+      recipes.name,
+      cellar.name,
+      journal.name,
+      cage.name,
+       filters.name,
+       environment.name,
+       services.name,
+       user.name,
+      directives.name])
 
   .config(['$routeProvider', '$httpProvider', function($routeProvider:ng.route.IRouteProvider, $httpProvider) {
 

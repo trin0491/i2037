@@ -1,8 +1,8 @@
 ///<reference path="../../../../typings/tsd.d.ts" />
 
-module i2037.directives {
+import mapFlyout from "./map-flyout";
 
-    angular.module('i2037.directives.map', ['i2037.directives.mapFlyout'])
+export default angular.module('i2037.directives.map', [mapFlyout.name])
 
         .directive('i2Map', ['$compile', function($compile) {
         return {
@@ -135,4 +135,3 @@ module i2037.directives {
     }])
     ;
 
-}

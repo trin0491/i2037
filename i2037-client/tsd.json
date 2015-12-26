@@ -6,16 +6,16 @@
   "bundle": "typings/tsd.d.ts",
   "installed": {
     "angularjs/angular.d.ts": {
-      "commit": "49b821f06b711a86be349c4bbff4351467c024b9"
+      "commit": "1da639a106527e0c4010b354a1efe52a3059a291"
     },
     "jquery/jquery.d.ts": {
-      "commit": "49b821f06b711a86be349c4bbff4351467c024b9"
+      "commit": "1da639a106527e0c4010b354a1efe52a3059a291"
     },
     "jquery.cookie/jquery.cookie.d.ts": {
       "commit": "49b821f06b711a86be349c4bbff4351467c024b9"
     },
     "angularjs/angular-route.d.ts": {
-      "commit": "49b821f06b711a86be349c4bbff4351467c024b9"
+      "commit": "1da639a106527e0c4010b354a1efe52a3059a291"
     },
     "d3/d3.d.ts": {
       "commit": "49b821f06b711a86be349c4bbff4351467c024b9"
@@ -24,7 +24,13 @@
       "commit": "e57df787f4e11601625d7e1c1b2ee351b97a18a1"
     },
     "jasmine/jasmine.d.ts": {
-      "commit": "40c60850ad6c8175a62d5ab48c4e016ea5b3dffe"
+      "commit": "1da639a106527e0c4010b354a1efe52a3059a291"
+    },
+    "requirejs/require.d.ts": {
+      "commit": "1da639a106527e0c4010b354a1efe52a3059a291"
+    },
+    "angularjs/angular-mocks.d.ts": {
+      "commit": "1da639a106527e0c4010b354a1efe52a3059a291"
     }
   }
 }
