@@ -46,18 +46,18 @@ describe('i2037.fx.services.pricing', function () {
 
     it('should be injected', function () {
       expect(VwapPx).toBeDefined();
-    })
+    });
 
     it('should be a constructor', function () {
       expect(vwap).toBeDefined();
-    })
+    });
 
     it('should create a PM even with no rungs', function () {
-      var px = vwap.pm
+      var px = vwap.pm;
       expect(px).toBeDefined();
       expect(px.raw).toBe(null);
       expect(px.amt).toBe(4500000);
-    })
+    });
 
     it('should calculate vwap with 1 rung', function () {
       mockLadder.rungs = [
@@ -67,7 +67,7 @@ describe('i2037.fx.services.pricing', function () {
       vwap.update(mockLadder);
       expect(px.raw).toEqual(1.32645);
       expect(px.amt).toEqual(4500000);
-    })
+    });
 
     it('should calculate vwap across 2 rungs', function () {
       mockLadder.rungs = [
@@ -78,7 +78,7 @@ describe('i2037.fx.services.pricing', function () {
       vwap.update(mockLadder);
       expect(px.raw).toEqual(1.3264477777777777);
       expect(px.amt).toEqual(4500000);
-    })
+    });
 
     it('should calculate vwap across a partial rung', function () {
       mockLadder.rungs = [
@@ -89,7 +89,7 @@ describe('i2037.fx.services.pricing', function () {
       vwap.update(mockLadder);
       expect(px.raw).toEqual(1.3264477777777777);
       expect(px.amt).toEqual(4500000);
-    })
+    });
 
     it('should have no price if there is insufficient qty', function () {
       mockLadder.rungs = [
@@ -144,17 +144,17 @@ describe('i2037.fx.services.pricing', function () {
 
     it('should be defined', function () {
       expect(AggregatedOrderBook).toBeDefined();
-    })
+    });
 
     it('should be a constructor', function () {
       expect(ob).toBeDefined();
-    })
+    });
 
     it('should eagearly create a PM with n levels', function () {
       var pm = ob.pm;
       expect(pm).toBeDefined();
       expect(pm.rungs.length).toEqual(LEVELS);
-    })
+    });
 
     it('should have n levels even if ladder has no rungs', function () {
       mockLadder.rungs = [];
@@ -162,7 +162,7 @@ describe('i2037.fx.services.pricing', function () {
       var pm = ob.pm;
       expect(pm.rungs.length).toEqual(LEVELS);
       expect(pm.maxAmt).toEqual(0);
-    })
+    });
 
     it('should have one populated rung if there is only one order', function () {
       mockLadder.rungs = [{px: 1.32645, amt: 1000000, src: 'MSMM'}];
@@ -171,7 +171,7 @@ describe('i2037.fx.services.pricing', function () {
       expectRungs(pm, 1);
       expectRung(pm, 0, {px: 1.32645, amts: [1000000], srcs: ['MSMM']});
       expect(pm.maxAmt).toEqual(1000000);
-    })
+    });
 
     it('should have one populated rung with two orders at the same price', function () {
       mockLadder.rungs = [
@@ -183,7 +183,7 @@ describe('i2037.fx.services.pricing', function () {
       expectRungs(pm, 1);
       expectRung(pm, 0, {px: 1.32645, amts: [1000000, 5000000], srcs: ['MSMM', 'MSP1']});
       expect(pm.maxAmt).toEqual(6000000);
-    })
+    });
 
     it('should have two populated rungs with two orders at different prices', function () {
       mockLadder.rungs = [
@@ -196,7 +196,7 @@ describe('i2037.fx.services.pricing', function () {
       expectRung(pm, 0, {px: 1.32645, amts: [1000000], srcs: ['MSMM']});
       expectRung(pm, 1, {px: 1.32646, amts: [5000000], srcs: ['MSP1']});
       expect(pm.maxAmt).toEqual(5000000);
-    })
+    });
 
     it('should only populate max depth rungs even if there are more orders', function () {
       mockLadder.rungs = [
@@ -217,7 +217,7 @@ describe('i2037.fx.services.pricing', function () {
       expectRung(pm, 3, {px: 1.32642, amts: [10], srcs: ['1']});
       expectRung(pm, 4, {px: 1.32641, amts: [10], srcs: ['1']});
       expect(pm.maxAmt).toEqual(20);
-    })
+    });
 
     it('should update the pm', function () {
       mockLadder.rungs = [
@@ -263,21 +263,21 @@ describe('i2037.fx.services.pricing', function () {
 
     it('should be injected', function () {
       expect(Price).toBeDefined();
-    })
+    });
 
     it('should provide a toString', function () {
       var px = new Price('EURUSD');
       expect(px.toString()).toBeNull();
 
-      px.raw = 1.326,
-        expect(px.toString()).toEqual('1.32600');
+      px.raw = 1.326;
+      expect(px.toString()).toEqual('1.32600');
 
       px.raw = 1.32645;
       expect(px.toString()).toEqual('1.32645');
 
       px.raw = 1.326456;
       expect(px.toString()).toEqual('1.32646');
-    })
+    });
 
     it('should return prefix, pips and decimals as strings', function () {
       var px = new Price('EURUSD');
@@ -285,7 +285,7 @@ describe('i2037.fx.services.pricing', function () {
       expect(px.getPrefix()).toBe('1.32');
       expect(px.getPips()).toBe('64');
       expect(px.getDecimals()).toBe('5');
-    })
+    });
 
     it('should return null for prefix, pips and decimals, if there is no price', function () {
       var px = new Price('EURUSD');
@@ -293,7 +293,7 @@ describe('i2037.fx.services.pricing', function () {
       expect(px.getPrefix()).toBe(null);
       expect(px.getPips()).toBe(null);
       expect(px.getDecimals()).toBe(null);
-    })
+    });
 
     it('should pad decimals with 0 if there are insufficient digits', function () {
       var px = new Price('EURUSD');
