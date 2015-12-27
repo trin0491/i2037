@@ -125,11 +125,7 @@ export default angular.module('i2037.directives.comment', ['i2037.templates'])
         }
 
         function evalShowActions(isNew, text) {
-          if (isNew && !text) {
-            $scope.showActions = false;
-          } else {
-            $scope.showActions = true;
-          }
+          $scope.showActions = !isNew || text;
         }
 
         function evalTextRows(text) {
