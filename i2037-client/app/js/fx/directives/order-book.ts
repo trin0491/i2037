@@ -2,8 +2,8 @@
 import depthChart from "./depth-chart";
 import legendPopover from "./legend-popover";
 
-var TEMPLATE = 'fx/directives/order-book.tpl.html';
-var RUNG_TPL = 'fx/directives/order-book-rung.tpl.html';
+const TEMPLATE = 'js/fx/directives/order-book.tpl.html';
+const RUNG_TPL = 'js/fx/directives/order-book-rung.tpl.html';
 
 export default angular.module('i2037.fx.directives.orderBook', [
     TEMPLATE,

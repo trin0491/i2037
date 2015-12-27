@@ -1,14 +1,14 @@
 ///<reference path="../../../../typings/tsd.d.ts" />
-  var TEMPLATE = 'fx/directives/legend-popover.tpl.html';
+const TEMPLATE = 'js/fx/directives/legend-popover.tpl.html';
 
 export default angular.module('i2037.fx.directives.legendPopover', [
     TEMPLATE
   ])
 
-  .directive('i2LegendPopover', ['$templateCache', function($templateCache) {
+  .directive('i2LegendPopover', ['$templateCache', function ($templateCache) {
     return {
       replace: false,
-      link: function($scope, element, attrs) {
+      link: function ($scope, element, attrs) {
         var t = $templateCache.get(TEMPLATE);
 
         var options = {

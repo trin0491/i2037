@@ -1,5 +1,5 @@
 ///<reference path="../../../../typings/tsd.d.ts" />
-var TEMPLATE = 'fx/directives/quote-panel.tpl.html';
+const TEMPLATE = 'js/fx/directives/quote-panel.tpl.html';
 
 import orderBook from "./order-book";
 import vwapTiles from "./vwap-tiles";

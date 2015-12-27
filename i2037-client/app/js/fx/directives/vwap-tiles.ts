@@ -1,5 +1,5 @@
 ///<reference path="../../../../typings/tsd.d.ts" />
-var TEMPLATE = 'fx/directives/vwap-tiles.tpl.html';
+var TEMPLATE = 'js/fx/directives/vwap-tiles.tpl.html';
 
 import priceVwap from "./price-vwap";
 import tile from "./tile";

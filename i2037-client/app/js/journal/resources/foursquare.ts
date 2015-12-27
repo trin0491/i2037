@@ -1,7 +1,7 @@
 ///<reference path="../../../../typings/tsd.d.ts" />
-///<reference path="../services/services.ts" />
+///<reference path="../../common/services/services.ts" />
 
-    import {PathFinder} from "../services/services";
+import {PathFinder} from "../../common/services/services";
 
     interface IVenue {
 

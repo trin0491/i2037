@@ -1,6 +1,6 @@
 ///<reference path="../../../../typings/tsd.d.ts" />
 
-import services from "../services/services";
+import services from "../../common/services/services";
 
 export class Journal {
 

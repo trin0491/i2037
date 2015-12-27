@@ -16,15 +16,16 @@ interface ILoginFormScope extends ng.IScope {
   submit();
 }
 
+const TEMPLATE = 'js/admin/admin-loginform.tpl.html';
 export default angular.module('i2037.admin.loginform', [
     'ngRoute',
     services.name,
-    'admin/admin-loginform.tpl.html',
+    TEMPLATE,
   ])
 
   .config(['$routeProvider', function ($routeProvider:ng.route.IRouteProvider) {
     $routeProvider.when('/login', {
-      templateUrl: 'admin/admin-loginform.tpl.html',
+      templateUrl: TEMPLATE,
       controller: 'LoginFormCtrl',
       resolve: {
         user: function () {

@@ -116,7 +116,7 @@ module.exports = function(grunt) {
     html2js: {
       app: {
         options: {
-          base: '<%= dir.dist %>/app/js'
+          base: '<%= dir.dist %>/app'
         },
         src: ['<%= dir.dist %>/app/**/*.tpl.html'],
         dest: '<%= dir.dist %>/app/js/templates/<%= pkg.name %>.tpl.js',

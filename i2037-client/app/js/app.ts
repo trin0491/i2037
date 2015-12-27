@@ -7,128 +7,130 @@ import user from "./common/resources/user";
 import services from "./common/services/services";
 import environment from "./common/services/environment";
 import filters from "./common/filters";
-import journal from "./journal/journal"
+import {journal} from "./journal/module";
 import Menu from "./admin/Menu";
 import cage from "./cage/cage";
 import directives from "./common/directives/directives";
 
 export default angular.module('i2037', [
-      'ui.bootstrap',
-      admin.name,
-      recipes.name,
-      cellar.name,
-      journal.name,
-      cage.name,
-       filters.name,
-       environment.name,
-       services.name,
-       user.name,
-      directives.name])
+    'ui.bootstrap',
+    admin.name,
+    recipes.name,
+    cellar.name,
+    journal.name,
+    cage.name,
+    filters.name,
+    environment.name,
+    services.name,
+    user.name,
+    directives.name,
+    'i2037.templates'])
 
-  .config(['$routeProvider', '$httpProvider', function($routeProvider:ng.route.IRouteProvider, $httpProvider) {
+  .config(['$routeProvider', '$httpProvider', function ($routeProvider:ng.route.IRouteProvider, $httpProvider) {
 
-      $routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
-      $routeProvider.otherwise({redirectTo: '/home'});
+    $routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
+    $routeProvider.otherwise({redirectTo: '/home'});
 
-    $httpProvider.responseInterceptors.push(['$q', '$location', function($q, $location) {
-      return function(promise) {
-        return promise.then(function(response) {
+    $httpProvider.responseInterceptors.push(['$q', '$location', function ($q, $location) {
+      return function (promise) {
+        return promise.then(function (response) {
           return response;
-        }, function(response) {
-          if (response && response.status === 403) {         
-              $location.path("/login");
+        }, function (response) {
+          if (response && response.status === 403) {
+            $location.path("/login");
           }
           return $q.reject(response);
         });
       };
-    }]);       
+    }]);
   }])
 
-  .controller('NavBarCtrl', ['$scope', '$location', 'Session', 
-      function($scope, $location:ng.ILocationService, Session) {
-    $scope.$location = $location;
-        
-    var menus:Menu[] = [
-      new Menu('Recipes', '/recipes'), 
-      new Menu('Cellar', '/cellar'),
-      new Menu('Journal', '/journal'),
-      new Menu('Cage', '/cage'),
-    ];
-    $scope.menus = menus;
+  .controller('NavBarCtrl', ['$scope', '$location', 'Session',
+    function ($scope, $location:ng.ILocationService, Session) {
+      $scope.$location = $location;
 
-    $scope.$on('SessionService::StateChange', function(event, state) {
-      $scope.state = state;
-      if ($scope.state === 'LOGGED_IN') {
-        $scope.user = Session.getUser();
-      } else {
-        $scope.user = null;
-      }
-    });
+      var menus:Menu[] = [
+        new Menu('Recipes', '/recipes'),
+        new Menu('Cellar', '/cellar'),
+        new Menu('Journal', '/journal'),
+        new Menu('Cage', '/cage'),
+      ];
+      $scope.menus = menus;
 
-    $scope.login = function() {
-      $location.path("/login");          
-    };
+      $scope.$on('SessionService::StateChange', function (event, state) {
+        $scope.state = state;
+        if ($scope.state === 'LOGGED_IN') {
+          $scope.user = Session.getUser();
+        } else {
+          $scope.user = null;
+        }
+      });
 
-    $scope.signUp = function() {
-      $location.path('/signup');
-    };
+      $scope.login = function () {
+        $location.path("/login");
+      };
 
-    $scope.logout = function() {
-      Session.logout();
-    };
+      $scope.signUp = function () {
+        $location.path('/signup');
+      };
 
-    $scope.changePassword = function() {
-      $location.path('/changepassword');
-    };
+      $scope.logout = function () {
+        Session.logout();
+      };
 
-    $scope.user = Session.getUser();
+      $scope.changePassword = function () {
+        $location.path('/changepassword');
+      };
+
+      $scope.user = Session.getUser();
+    }])
+
+  .controller('HomeCtrl', [function () {
   }])
 
-  .controller('HomeCtrl', [function () {}])
-
-  .controller('ViewPortCtrl', ['$scope', function($scope) {
+  .controller('ViewPortCtrl', ['$scope', function ($scope) {
     $scope.alerts = [];
 
-    $scope.$on('$routeChangeStart', function() {
+    $scope.$on('$routeChangeStart', function () {
       $scope.showViewSpinner = true;
     });
 
-    $scope.$on('$routeChangeSuccess', function() {
+    $scope.$on('$routeChangeSuccess', function () {
       $scope.showViewSpinner = false;
     });
 
-    $scope.$on('$routeChangeError', function() {
+    $scope.$on('$routeChangeError', function () {
       $scope.showViewSpinner = false;
     });
 
-    $scope.$on('Resource::Loading', function(event, name) {
+    $scope.$on('Resource::Loading', function (event, name) {
       $scope.showViewSpinner = true;
     });
 
-    $scope.$on('Resource::Loaded', function(event, name) {
+    $scope.$on('Resource::Loaded', function (event, name) {
       $scope.showViewSpinner = false;
     });
 
-    $scope.$on('Resource::LoadingError', function(event, name, msg) {
+    $scope.$on('Resource::LoadingError', function (event, name, msg) {
       showError(msg);
     });
 
-    $scope.$on('Resource::SaveError', function(event, name, msg) {
+    $scope.$on('Resource::SaveError', function (event, name, msg) {
       showError(msg);
     });
 
-    $scope.$on('Resource::DeleteError', function(event, name, msg) {
+    $scope.$on('Resource::DeleteError', function (event, name, msg) {
       showError(msg);
     });
 
     function showError(msg) {
       $scope.showViewSpinner = false;
-      $scope.alerts.push({type: 'danger', msg: msg});            
+      $scope.alerts.push({type: 'danger', msg: msg});
     }
 
-    $scope.closeAlert = function(index) {
+    $scope.closeAlert = function (index) {
       $scope.alerts.splice(index, 1);
-    };  
+    };
 
   }])
-  ;
+;

@@ -1,5 +1,5 @@
 ///<reference path="../../../../typings/tsd.d.ts" />
-export default angular.module('i2037.directives.mapFlyout', ['common/directives/map-flyout.tpl.html'])
+export default angular.module('i2037.directives.mapFlyout', ['js/common/directives/map-flyout.tpl.html'])
 
   .directive('i2MapFlyout', [function() {
     return {

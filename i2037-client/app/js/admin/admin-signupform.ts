@@ -3,16 +3,18 @@
 import services from "../common/services/services";
 import userResources from "../common/resources/user";
 
+const TEMPLATE = 'js/admin/admin-signupform.tpl.html';
+
 export default angular.module('i2037.admin.signupform', [
     'ngRoute',
     services.name,
     userResources.name,
-    'admin/admin-signupform.tpl.html',
+    TEMPLATE,
   ])
 
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/signup', {
-      templateUrl: 'admin/admin-signupform.tpl.html',
+      templateUrl: TEMPLATE,
       controller: 'SignUpFormCtrl',
       resolve: {
         user: ['User', function (User) {
@@ -22,7 +24,7 @@ export default angular.module('i2037.admin.signupform', [
     });
 
     $routeProvider.when('/changepassword', {
-      templateUrl: 'admin/admin-signupform.tpl.html',
+      templateUrl: TEMPLATE,
       controller: 'SignUpFormCtrl',
       resolve: {
         user: ['Session', function (Session) {

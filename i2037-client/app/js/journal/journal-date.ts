@@ -4,17 +4,19 @@ import {
   ICommentResource,
   IComment,
   Comment
-} from "../common/resources/comments";
+} from "./resources/comments";
 
-import journalResource from "../common/resources/journal";
-import foursquareResource from "../common/resources/foursquare";
-import commentResource from "../common/resources/comments";
+import journalResource from "./resources/journal";
+import foursquareResource from "./resources/foursquare";
+import commentResource from "./resources/comments";
 import movesModel from "../moves/moves-model";
 import mapDirective from "../common/directives/map";
 import timelineDirective from "../common/directives/timeline";
 import spinnerDirective from "../common/directives/spinner";
 import buttonDirective from "../common/directives/button";
-import commentDirective from "../common/directives/comment";
+import commentDirective from "./directives/comment";
+
+const TEMPLATE = 'js/journal/templates/journal-date.tpl.html';
 
 export default angular.module('i2037.journal.date', [
     journalResource.name,
@@ -26,12 +28,12 @@ export default angular.module('i2037.journal.date', [
     spinnerDirective.name,
     buttonDirective.name,
     commentDirective.name,
-    'journal/journal-date.tpl.html'
   ])
 
   .config(['$routeProvider', function ($routeProvider) {
+
     $routeProvider.when('/journal/date/:date', {
-      templateUrl: 'journal/journal-date.tpl.html',
+      templateUrl: TEMPLATE,
       controller: 'JournalCtrl',
       resolve: {
         date: ['$route', 'Journal', function ($route, Journal) {

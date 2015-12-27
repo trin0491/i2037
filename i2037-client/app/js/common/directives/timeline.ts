@@ -2,7 +2,8 @@
 
 import filters from "../filters";
 
-export default angular.module('i2037.directives.timeline', ['common/directives/timeline.tpl.html', filters.name])
+const TEMPLATE = 'js/common/directives/timeline.tpl.html';
+export default angular.module('i2037.directives.timeline', [TEMPLATE, filters.name])
 
   .directive('i2Timeline', ['$compile', function ($compile:ng.ICompileService) {
     return {
@@ -12,7 +13,7 @@ export default angular.module('i2037.directives.timeline', ['common/directives/t
         selected: '=i2Selected',
         timeline: '=i2Timeline',
       },
-      templateUrl: 'common/directives/timeline.tpl.html',
+      templateUrl: TEMPLATE,
 
       compile: function (element, attrs:ng.IAttributes, linker:ng.ITemplateLinkingFunction) {
 

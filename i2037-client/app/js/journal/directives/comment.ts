@@ -22,7 +22,9 @@ import {IComment} from "../resources/comments";
     deleteFn():void;
   }
 
-export default angular.module('i2037.directives.comment', ['common/directives/comment.tpl.html'])
+const TEMPLATE = 'js/journal/templates/comment.tpl.html';
+
+export default angular.module('i2037.directives.comment', ['i2037.templates'])
 
   .directive('i2Comment', function() {
     return {
@@ -31,7 +33,7 @@ export default angular.module('i2037.directives.comment', ['common/directives/co
         saveFn: '&i2Save',
         deleteFn: '&i2Delete'
       },
-      templateUrl: 'common/directives/comment.tpl.html',
+      templateUrl: TEMPLATE,
       replace: false,
       link: function($scope:CommentScope, element, attrs) {
         element.addClass('media');

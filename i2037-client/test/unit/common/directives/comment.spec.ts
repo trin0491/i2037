@@ -1,4 +1,4 @@
-import comment from "../../../../app/js/common/directives/comment";
+import comment from "../../../../app/js/journal/directives/comment";
 
 describe('i2037.directives.comment', function () {
 
