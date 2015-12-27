@@ -1,4 +1,4 @@
-  export default class Menu {
+export class Menu {
     name: string;
     path: string;
     isActive: boolean = false;

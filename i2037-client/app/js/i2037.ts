@@ -1,6 +1,6 @@
 ///<reference path="../../typings/tsd.d.ts" />
 
-import admin from "./admin/admin";
+import {adminModule, Menu} from "./admin/module";
 import recipes from "./recipes/recipes";
 import cellar from "./cellar/cellar";
 import user from "./common/resources/user";
@@ -8,13 +8,12 @@ import services from "./common/services/services";
 import environment from "./common/services/environment";
 import filters from "./common/filters";
 import {journal} from "./journal/module";
-import Menu from "./admin/Menu";
 import cage from "./cage/cage";
 import directives from "./common/directives/directives";
 
 export default angular.module('i2037', [
     'ui.bootstrap',
-    admin.name,
+    adminModule.name,
     recipes.name,
     cellar.name,
     journal.name,
