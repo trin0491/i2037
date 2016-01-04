@@ -64,11 +64,11 @@ module.exports = function(grunt) {
         ],
         dest: '<%= dir.dist %>/app/lib/deps.js'
       },
-      requirejs: {
+      systemjs: {
         src: [
-          '<%= dir.node %>/requirejs/require.js'
+          '<%= dir.node %>/systemjs/dist/system.src.js'
         ],
-        dest: '<%= dir.dist %>/app/lib/require.js'
+        dest: '<%= dir.dist %>/app/lib/system.js'
 
       }
     },
@@ -186,7 +186,11 @@ module.exports = function(grunt) {
       depsjs: {
         src: [ '<%= concat.depsjs.src %>' ],
         dest: '<%= dir.dist %>/app/lib/deps.min.js'
-      }          
+      },
+      systemjs: {
+        src: ['<%= concat.systemjs.src %>'],
+        dest: '<%= dir.dist %>/app/lib/system.min.js'
+      }
     },
     watch: {
       files: ['Gruntfile.js', 'app/**/*.ts', 'test/unit/**/*.js', 'app/**/*.html', 'app/**/*.scss'],

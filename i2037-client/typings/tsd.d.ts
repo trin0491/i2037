@@ -6,6 +6,5 @@
 /// <reference path="d3/d3.d.ts" />
 /// <reference path="googlemaps/google.maps.d.ts" />
 /// <reference path="jasmine/jasmine.d.ts" />
-/// <reference path="requirejs/require.d.ts" />
 
 

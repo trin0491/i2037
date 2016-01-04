@@ -1,39 +1,37 @@
-/**
- * Created by richard on 25/12/2015.
- */
-var TEST_REGEXP = /(spec|test)\.js$/i;
-var allTestFiles = ['js/templates/i2037-client.tpl'];
-
-// Get a list of all the test files to include
-Object.keys(window.__karma__.files).forEach(function(file) {
-  if (TEST_REGEXP.test(file)) {
-    // Normalize paths to RequireJS module names.
-    // If you require sub-dependencies of test files to be loaded as-is (requiring file extension)
-    // then do not normalize the paths
-    var normalizedTestModule = file.replace(/^\/base\/|\.js$/g, '');
-    allTestFiles.push(normalizedTestModule);
+// Cancel Karma's synchronous start,
+// we will call `__karma__.start()` later, once all the specs are loaded.
+__karma__.loaded = function () {
+};
+System.config({
+  packages: {
+    'base/app/js': {
+      defaultExtension: false,
+      format: 'register',
+      map: Object.keys(window.__karma__.files).filter(onlyAppFiles).reduce(function createPathRecords(pathsMapping, appPath) {
+        // creates local module name mapping to global path with karma's fingerprint in path, e.g.:
+        // './hero.service': '/base/src/app/hero.service.js?f4523daf879cfb7310ef6242682ccf10b2041b3e'
+        var moduleName = appPath.replace(/^\/base\/app\/js\//, './').replace(/\.js$/, '');
+        pathsMapping[moduleName] = appPath + '?' + window.__karma__.files[appPath]
+        return pathsMapping;
+      }, {})
+    }
   }
 });
-
-require.config({
-  // Karma serves files under /base, which is the basePath from your config file
-  baseUrl: '/base',
-
-  // example of using a couple path translations (paths), to allow us to refer to different library dependencies, without using relative paths
-  paths: {
-    'js': 'app/js'
-  },
-
-  // example of using a shim, to load non AMD libraries (such as underscore)
-  shim: {
-    'underscore': {
-      exports: '_'
-    }
-  },
-
-  // dynamically load all test files
-  deps: allTestFiles,
-
-  // we have to kickoff jasmine, as it is asynchronous
-  callback: window.__karma__.start
-});
+Promise.all(
+  Object.keys(window.__karma__.files) // All files served by Karma.
+    .filter(onlySpecFiles)
+    .map(function (moduleName) {
+      // loads all spec files via their global module names
+      return System.import(moduleName);
+    }))
+  .then(function () {
+    __karma__.start();
+  }, function (error) {
+    __karma__.error(error.stack || error);
+  });
+function onlyAppFiles(filePath) {
+  return /^\/base\/app\/js\/.*\.js$/.test(filePath)
+}
+function onlySpecFiles(path) {
+  return /\.spec\.js$/.test(path);
+}

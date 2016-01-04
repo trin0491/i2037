@@ -10,6 +10,7 @@ import filters from "./common/filters";
 import {journal} from "./journal/module";
 import cage from "./cage/cage";
 import directives from "./common/directives/directives";
+import "./templates/i2037-client.tpl";
 
 export default angular.module('i2037', [
     'ui.bootstrap',
@@ -133,3 +134,5 @@ export default angular.module('i2037', [
 
   }])
 ;
+
+angular.bootstrap(document.documentElement, ['i2037']);

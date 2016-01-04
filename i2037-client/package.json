@@ -22,7 +22,9 @@
     "karma-html2js-preprocessor": "^0.1.0",
     "karma-jasmine": "^0.3.6",
     "karma-junit-reporter": "^0.3.8",
-    "karma-phantomjs-launcher": "^0.2.2",
-    "karma-requirejs": "^0.2.2"
+    "karma-phantomjs-launcher": "^0.2.2"
+  },
+  "dependencies": {
+    "systemjs": "^0.19.9"
   }
 }

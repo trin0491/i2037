@@ -26,9 +26,6 @@
     "jasmine/jasmine.d.ts": {
       "commit": "1da639a106527e0c4010b354a1efe52a3059a291"
     },
-    "requirejs/require.d.ts": {
-      "commit": "1da639a106527e0c4010b354a1efe52a3059a291"
-    },
     "angularjs/angular-mocks.d.ts": {
       "commit": "1da639a106527e0c4010b354a1efe52a3059a291"
     }
