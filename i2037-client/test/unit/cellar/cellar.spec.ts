@@ -2,7 +2,7 @@ import cellar from "../../../app/js/cellar/cellar";
 
 describe('i2037.cellar', function () {
   beforeEach(function () {
-    module(cellar.name);
+    angular.mock.module(cellar.name);
   });
 
   describe('ListWineCtrl', function () {

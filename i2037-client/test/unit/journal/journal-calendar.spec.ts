@@ -2,7 +2,7 @@ import calendar from "../../../app/js/journal/journal-calendar";
 
 describe('i2037.journal.calendar', function () {
   beforeEach(function () {
-    module(calendar.name);
+    angular.mock.module(calendar.name);
   });
 
   describe('JournalCalendarCtrl', function () {

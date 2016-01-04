@@ -2,7 +2,7 @@ import map from "../../../../app/js/common/directives/map";
 
 describe('i2037.directives.map', function () {
   beforeEach(function () {
-    module(map.name);
+    angular.mock.module(map.name);
   })
 
 

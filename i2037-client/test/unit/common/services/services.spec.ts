@@ -1,7 +1,7 @@
 import services from "../../../../app/js/common/services/services";
 
 describe('i2037.services', function () {
-  beforeEach(module(services.name));
+  beforeEach(angular.mock.module(services.name));
 
   describe('Session', function () {
     var Session, $rootScope, mockUser, $q;
@@ -9,7 +9,7 @@ describe('i2037.services', function () {
 
       mockUser = jasmine.createSpyObj('User', ['login', 'logout', 'get']);
 
-      module(function ($provide) {
+      angular.mock.module(function ($provide) {
         $provide.value('User', mockUser);
       });
 

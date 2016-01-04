@@ -2,7 +2,7 @@ import comment from "../../../../app/js/journal/directives/comment";
 
 describe('i2037.directives.comment', function () {
 
-  beforeEach(module(comment.name));
+  beforeEach(angular.mock.module(comment.name));
 
   describe('i2Comment', function () {
     var $scope, $compile, comment, element;

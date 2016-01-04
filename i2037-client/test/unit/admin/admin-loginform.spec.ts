@@ -4,7 +4,7 @@ import loginform from "../../../app/js/admin/admin-loginform";
 
 describe('i2037.admin.loginform', function () {
   beforeEach(function () {
-    module(loginform.name);
+    angular.mock.module(loginform.name);
   });
 
   describe('LoginFormCtrl', function () {

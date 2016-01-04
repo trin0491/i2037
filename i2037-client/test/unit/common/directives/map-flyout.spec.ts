@@ -2,7 +2,7 @@ import mapFlyout from "../../../../app/js/common/directives/map-flyout";
 
 describe('i2037.directives.mapFlyout', function () {
   beforeEach(function () {
-    module(mapFlyout.name);
+    angular.mock.module(mapFlyout.name);
   })
 
   describe('i2-flyout', function () {

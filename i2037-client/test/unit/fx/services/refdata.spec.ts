@@ -1,7 +1,7 @@
 import refDataServices from "../../../../app/js/fx/services/refdata";
 
 describe('i2037.fx.services.refData', function () {
-  beforeEach(module(refDataServices.name));
+  beforeEach(angular.mock.module(refDataServices.name));
 
   describe('refData', function () {
     var refData;

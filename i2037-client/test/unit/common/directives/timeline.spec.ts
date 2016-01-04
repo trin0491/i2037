@@ -2,7 +2,7 @@ import timeline from "../../../../app/js/common/directives/timeline";
 
 describe('i2037.directives.timeline', function () {
   beforeEach(function () {
-    module(timeline.name);
+    angular.mock.module(timeline.name);
   });
 
   describe('i2037-timeline', function () {

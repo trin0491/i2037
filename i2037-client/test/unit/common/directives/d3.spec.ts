@@ -2,7 +2,7 @@ import d3 from "../../../../app/js/common/directives/d3";
 
 describe('i2037.directives.d3', function () {
   beforeEach(function () {
-    module(d3.name);
+    angular.mock.module(d3.name);
   });
 
   describe('i2-pie', function () {

@@ -2,11 +2,11 @@ import filters from "../../../../app/js/common/filters";
 /* jasmine specs for filters go here */
 
 describe('filter', function () {
-  beforeEach(module(filters.name));
+  beforeEach(angular.mock.module(filters.name));
 
 
   describe('interpolate', function () {
-    beforeEach(module(function ($provide) {
+    beforeEach(angular.mock.module(function ($provide) {
       $provide.value('version', 'TEST_VER');
     }));
 

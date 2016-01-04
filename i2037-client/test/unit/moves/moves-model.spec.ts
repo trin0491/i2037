@@ -2,7 +2,7 @@ import model from "../../../app/js/moves/moves-model";
 
 describe('i2037.moves.model', function () {
   beforeEach(function () {
-    module(model.name);
+    angular.mock.module(model.name);
   })
 
   describe('MovesPlacesModel', function () {

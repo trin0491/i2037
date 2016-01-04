@@ -5,7 +5,7 @@ import signupform from "../../../app/js/admin/admin-signupform";
 describe('i2037.admin.signupform', function () {
 
   beforeEach(function () {
-    module(signupform.name);
+    angular.mock.module(signupform.name);
   });
 
   function newMockSession() {

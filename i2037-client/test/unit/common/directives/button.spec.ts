@@ -2,7 +2,7 @@ import button from "../../../../app/js/common/directives/button";
 
 describe('i2037.directives.button', function () {
 
-  beforeEach(module(button.name));
+  beforeEach(angular.mock.module(button.name));
 
   describe('i2Button', function () {
     var $scope, $compile;

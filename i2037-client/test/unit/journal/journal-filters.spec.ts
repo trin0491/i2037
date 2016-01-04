@@ -2,7 +2,7 @@ import filters from "../../../app/js/journal/journal-filters";
 
 describe('i2037.journal.filters', function () {
   beforeEach(function () {
-    module(filters.name);
+    angular.mock.module(filters.name);
   });
 
   describe('movesActivity', function () {

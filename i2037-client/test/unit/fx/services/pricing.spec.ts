@@ -1,7 +1,7 @@
 import pricing from "../../../../app/js/fx/services/pricing";
 
 describe('i2037.fx.services.pricing', function () {
-  beforeEach(module(pricing.name));
+  beforeEach(angular.mock.module(pricing.name));
 
   describe('PricingFacade', function () {
     var PricingFacade;
@@ -252,7 +252,7 @@ describe('i2037.fx.services.pricing', function () {
       mockRefData.getPipsExponent.and.returnValue(-4);
       mockRefData.getMinIncrExponent.and.returnValue(-5);
 
-      module(function ($provide) {
+      angular.mock.module(function ($provide) {
         $provide.value('refData', mockRefData);
       });
 

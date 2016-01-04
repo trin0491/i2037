@@ -1,7 +1,7 @@
 import orderBook from "../../../../app/js/fx/directives/order-book";
 
 describe('i2037.fx.directives.orderBook', function () {
-  beforeEach(module(orderBook.name));
+  beforeEach(angular.mock.module(orderBook.name));
 
   describe('i2OrderBook', function () {
     var $scope, element, $compile, mockPx;

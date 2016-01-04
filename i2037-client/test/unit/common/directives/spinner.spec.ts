@@ -2,13 +2,13 @@ import spinner from "../../../../app/js/common/directives/spinner";
 
 describe('i2037.directives.spinner', function () {
 
-  beforeEach(module(spinner.name));
+  beforeEach(angular.mock.module(spinner.name));
 
   describe('i2Spinner', function () {
     var $scope, element, $compile, Spinner, spin, stop;
 
     beforeEach(function () {
-      module(function ($provide) {
+      angular.mock.module(function ($provide) {
         Spinner = jasmine.createSpy('spinner');
         spin = jasmine.createSpy('spin');
         Spinner.prototype.spin = spin;

@@ -1,7 +1,7 @@
 import depthChart from "../../../../app/js/fx/directives/depth-chart";
 
 describe('i2037.fx.directives.depthChart', function () {
-  beforeEach(module(depthChart.name));
+  beforeEach(angular.mock.module(depthChart.name));
 
   describe('i2DepthChart', function () {
     var $scope, element, $compile;

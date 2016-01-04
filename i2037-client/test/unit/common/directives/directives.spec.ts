@@ -2,12 +2,12 @@ import directives from "../../../../app/js/common/directives/directives";
 
 describe('i2037.directives', function () {
   beforeEach(function () {
-    module(directives.name);
+    angular.mock.module(directives.name);
   });
 
   describe('app-version', function () {
     it('should print current version', function () {
-      module(function ($provide) {
+      angular.mock.module(function ($provide) {
         $provide.value('version', 'TEST_VER');
       });
       inject(function ($compile, $rootScope) {
