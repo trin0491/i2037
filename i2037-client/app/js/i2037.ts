@@ -1,5 +1,6 @@
 ///<reference path="../../typings/tsd.d.ts" />
 
+import {UpgradeAdapter} from 'angular2/upgrade';
 import {adminModule, Menu} from "./admin/module";
 import recipes from "./recipes/recipes";
 import cellar from "./cellar/cellar";
@@ -135,4 +136,5 @@ export default angular.module('i2037', [
   }])
 ;
 
-angular.bootstrap(document.documentElement, ['i2037']);
+const upgradeAdapter = new UpgradeAdapter();
+upgradeAdapter.bootstrap(document.documentElement, ['i2037']);

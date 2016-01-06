@@ -314,5 +314,5 @@ declare module angular {
 // functions attached to global object (window)
 ///////////////////////////////////////////////////////////////////////////////
 //Use `angular.mock.module` instead of `module`, as `module` conflicts with commonjs.
-declare var module: (...modules: any[]) => any;
+//declare var module: (...modules: any[]) => any;
 declare var inject: angular.IInjectStatic;

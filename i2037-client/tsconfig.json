@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
-    "module": "system",
     "target": "es5",
+    "module": "system",
+    "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "./build",
     "rootDir": ".",
@@ -11,7 +12,6 @@
   },
   "exclude": [
     "node_modules",
-    "typings",
     "bower_components",
     "build"
   ]

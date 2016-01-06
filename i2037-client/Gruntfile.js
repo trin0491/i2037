@@ -48,6 +48,18 @@ module.exports = function(grunt) {
         ],
         dest: '<%= dir.dist %>/app/lib/angular.js'
       },
+      angular2: {
+        src: [
+          '<%= dir.node %>/systemjs/dist/system.src.js',
+          '<%= dir.node %>/es6-shim/es6-shim.js',
+          '<%= dir.node %>/es6-promise/dist/es6-promise.js',
+          '<%= dir.node %>/angular2/bundles/angular2-polyfills.js',
+          '<%= dir.node %>/angular2/bundles/angular2.dev.js',
+          '<%= dir.node %>/angular2/bundles/upgrade.dev.js',
+          '<%= dir.node %>/rxjs/bundles/Rx.js'
+        ],
+        dest: '<%= dir.dist %>/app/lib/angular2.js'
+      },
       jquery: {
         src: [
           '<%= dir.bower %>/jquery/jquery.js',
@@ -69,7 +81,6 @@ module.exports = function(grunt) {
           '<%= dir.node %>/systemjs/dist/system.src.js'
         ],
         dest: '<%= dir.dist %>/app/lib/system.js'
-
       }
     },
     copy: {
@@ -178,6 +189,10 @@ module.exports = function(grunt) {
       angular: {
         src: ['<%= concat.angular.src %>'],
         dest: '<%= dir.dist %>/app/lib/angular.min.js'
+      },
+      angular2: {
+        src: ['<%= concat.angular2.src %>'],
+        dest: '<%= dir.dist %>/app/lib/angular2.min.js'
       },
       jquery: {
         src: [ '<%= concat.jquery.src %>'],
