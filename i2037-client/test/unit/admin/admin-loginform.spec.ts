@@ -32,14 +32,14 @@ describe('i2037.admin.loginform', function () {
     });
 
     it('should define an empty userPM on the scope', function () {
-      expect($scope.userPM).toBeDefined();
-      expect($scope.userPM.userName).toBeUndefined();
-      expect($scope.userPM.password).toBeNull();
-      expect($scope.userPM.rememberMe).toBeTruthy();
+      expect(ctrl.userPM).toBeDefined();
+      expect(ctrl.userPM.userName).toBeUndefined();
+      expect(ctrl.userPM.password).toBeNull();
+      expect(ctrl.userPM.rememberMe).toBeTruthy();
     });
 
     it('should go to the home page on cancel', function () {
-      $scope.cancel();
+      ctrl.cancel();
       expect($location.path).toHaveBeenCalledWith('/home');
     });
 
@@ -49,10 +49,10 @@ describe('i2037.admin.loginform', function () {
 
       var userName = 'aUser';
       var password = 'aPassword';
-      $scope.userPM.userName = userName;
-      $scope.userPM.password = password;
-      $scope.userPM.rememberMe = false;
-      $scope.submit();
+      ctrl.userPM.userName = userName;
+      ctrl.userPM.password = password;
+      ctrl.userPM.rememberMe = false;
+      ctrl.submit();
       expect(mockSession.login).toHaveBeenCalledWith(userName, password);
 
       deferred.resolve({});
@@ -66,10 +66,10 @@ describe('i2037.admin.loginform', function () {
 
       var userName = 'aUser';
       var password = 'aPassword';
-      $scope.userPM.userName = userName;
-      $scope.userPM.password = password;
-      $scope.userPM.rememberMe = false;
-      $scope.submit();
+      ctrl.userPM.userName = userName;
+      ctrl.userPM.password = password;
+      ctrl.userPM.rememberMe = false;
+      ctrl.submit();
       expect(mockSession.login).toHaveBeenCalledWith(userName, password);
 
       deferred.reject({});

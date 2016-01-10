@@ -1,7 +1,7 @@
 ///<reference path="../../../typings/tsd.d.ts" />
 
 import services from "../common/services/services";
-import {LoginFromCtrl} from "./controllers/LoginFromCtrl";
+import {LoginForm} from "./controllers/LoginForm";
 
 const TEMPLATE = 'js/admin/templates/admin-loginform.tpl.html';
 export default angular.module('i2037.admin.loginform', [
@@ -14,6 +14,7 @@ export default angular.module('i2037.admin.loginform', [
     $routeProvider.when('/login', {
       templateUrl: TEMPLATE,
       controller: 'LoginFormCtrl',
+      controllerAs: 'vm',
       resolve: {
         user: function () {
           return null;
@@ -22,6 +23,6 @@ export default angular.module('i2037.admin.loginform', [
     });
   }])
 
-  .controller('LoginFormCtrl', LoginFromCtrl)
+  .controller('LoginFormCtrl', LoginForm)
 ;
 

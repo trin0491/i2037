@@ -2,37 +2,42 @@
   <div class="page-header">
     <h3>Login</h3>
   </div>
-  <form name="loginForm" class="form-horizontal" role="form" ng-submit="submit()">
-    <div class="form-group" ng-class="getCls(loginForm.username)">
+  <form name="loginForm" class="form-horizontal" role="form" ng-submit="vm.submit()">
+    <div class="form-group" ng-class="vm.getCls(loginForm.username)">
       <label class="control-label col-md-3" for="inputUsername">Email</label>
       <div class="input-group col-md-4">
         <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-        <input type="email" class="form-control" id="inputUsername" name="username" placeholder="Username" ng-model="userPM.userName" required>
+        <input type="email" class="form-control" id="inputUsername" name="username" placeholder="Username"
+               ng-model="vm.userPM.userName" required>
       </div>
-      <p class="help-block col-md-offset-3" ng-show="showErr(loginForm.username, 'email')">Username must be an email address</p>
-      <p class="help-block col-md-offset-3" ng-show="showErr(loginForm.username, 'required')">Username is required</p>  
+      <p class="help-block col-md-offset-3" ng-show="vm.showErr(loginForm.username, 'email')">Username must be an email
+        address</p>
+      <p class="help-block col-md-offset-3" ng-show="vm.showErr(loginForm.username, 'required')">Username is
+        required</p>
     </div>
-    <div class="form-group" ng-class="getCls(loginForm.password)">
+    <div class="form-group" ng-class="vm.getCls(loginForm.password)">
       <label class="control-label col-md-3" for="inputPassword">Password</label>
       <div class="input-group col-md-4">
         <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-        <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" ng-model="userPM.password" required>
+        <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password"
+               ng-model="vm.userPM.password" required>
       </div>
-      <p class="help-block col-md-offset-3" ng-show="showErr(loginForm.password, 'required')">Password is required</p>              
+      <p class="help-block col-md-offset-3" ng-show="vm.showErr(loginForm.password, 'required')">Password is
+        required</p>
     </div>
     <div class="form-group">
       <div class="col-md-offset-3 col-md-4">
         <div class="checkbox">
           <label for="inputRememberMe">
-            <input type="checkbox" id="inputRememberMe" ng-model="userPM.rememberMe"> Remember me
+            <input type="checkbox" id="inputRememberMe" ng-model="vm.userPM.rememberMe"> Remember me
           </label>        
         </div>
       </div>
     </div>
     <div class="form-group">
       <div class="col-md-offset-3 col-md-4">
-        <input type="submit" id="submit" value="Login" class="btn btn-primary"/>    
-        <button ng-click="cancel()" class="btn btn-default">Cancel</button>  
+        <input type="submit" id="submit" value="Login" class="btn btn-primary"/>
+        <button ng-click="vm.cancel()" class="btn btn-default">Cancel</button>
       </div>
     </div>
   </form>
