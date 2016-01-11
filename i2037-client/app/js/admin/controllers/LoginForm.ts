@@ -19,7 +19,7 @@ export class LoginForm {
   private login() {
     this.Session.login(this.userPM.userName, this.userPM.password).then(() => {
       this.$location.path("/home");
-    }, function (response) {
+    }, (response) => {
       var msg = 'Failed to login: status: ' + response.status;
       this.$scope.$emit('Resource::LoadingError', 'User', msg);
     });
