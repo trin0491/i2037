@@ -12,7 +12,7 @@ describe('i2037.admin.signupform', function () {
     return jasmine.createSpyObj('Session', ['signup', 'login', 'logout']);
   }
 
-  describe('SignUpFormCtrl creating a new user', function () {
+  describe('SignUpForm creating a new user', function () {
     var ctrl, $scope, $location, $q, mockUser, mockSession;
 
     beforeEach(function () {
@@ -29,26 +29,26 @@ describe('i2037.admin.signupform', function () {
           user: mockUser,
           Session: mockSession
         };
-        ctrl = $controller('SignUpFormCtrl', params);
+        ctrl = $controller('SignUpForm', params);
 
         spyOn($location, 'path').and.callThrough();
       });
     });
 
     it('should set the user on the scope', function () {
-      expect($scope.userPM).toEqual(mockUser);
+      expect(ctrl.userPM).toEqual(mockUser);
     });
 
     it('should set the title', function () {
-      expect($scope.title).toEqual("Sign Up");
+      expect(ctrl.title).toEqual("Sign Up");
     });
 
     it('should set the user name to read only', function () {
-      expect($scope.isNewUser).toBeTruthy();
+      expect(ctrl.isNewUser).toBeTruthy();
     });
 
     it('should go to the home page on cancel', function () {
-      $scope.cancel();
+      ctrl.cancel();
       $scope.$digest();
       expect($location.path).toHaveBeenCalledWith('/home');
     });
@@ -57,7 +57,7 @@ describe('i2037.admin.signupform', function () {
       var deferred = $q.defer();
       mockSession.signup.and.returnValue(deferred.promise);
 
-      $scope.submit();
+      ctrl.submit();
       expect(mockSession.signup).toHaveBeenCalled();
 
       deferred.resolve(mockUser);
@@ -66,7 +66,7 @@ describe('i2037.admin.signupform', function () {
     })
   });
 
-  describe('SignUpFormCtrl updating an existing user', function () {
+  describe('SignUpForm updating an existing user', function () {
     var ctrl, $scope, $location, mockUser, mockSession, $q;
 
     beforeEach(function () {
@@ -87,22 +87,22 @@ describe('i2037.admin.signupform', function () {
           user: mockUser,
           Session: mockSession
         };
-        ctrl = $controller('SignUpFormCtrl', params);
+        ctrl = $controller('SignUpForm', params);
 
         spyOn($location, 'path').and.callThrough();
       });
     });
 
     it('should set the user on the scope', function () {
-      expect($scope.userPM).toEqual(mockUser);
+      expect(ctrl.userPM).toEqual(mockUser);
     });
 
     it('should set the title', function () {
-      expect($scope.title).toEqual("Change Password");
+      expect(ctrl.title).toEqual("Change Password");
     });
 
     it('should set the user name to read only', function () {
-      expect($scope.isNewUser).toBeFalsy();
+      expect(ctrl.isNewUser).toBeFalsy();
     });
 
     it('should save user on submit', function () {
@@ -110,9 +110,9 @@ describe('i2037.admin.signupform', function () {
       mockUser.$update.and.returnValue(deferred.promise);
 
       var password = 'aNewPassword';
-      $scope.userPM.password = password;
-      $scope.userPM.rememberMe = false;
-      $scope.submit();
+      ctrl.userPM.password = password;
+      ctrl.userPM.rememberMe = false;
+      ctrl.submit();
       expect(mockUser.$update).toHaveBeenCalled();
 
       deferred.resolve();
