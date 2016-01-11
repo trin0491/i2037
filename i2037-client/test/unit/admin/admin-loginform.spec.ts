@@ -58,7 +58,7 @@ describe('i2037.admin.loginform', function () {
       deferred.resolve({});
       $scope.$apply();
       expect($location.path).toHaveBeenCalledWith('/home');
-    })
+    });
 
     it('should raise an event on login error', function () {
       var deferred = $q.defer();
