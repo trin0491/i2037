@@ -96,7 +96,8 @@ module.exports = function(grunt) {
       },
       tests: {
         files: [
-          {expand: true, cwd: '.', src: ['test/unit/**/*.js'], dest: '<%= dir.dist %>/'}
+          {expand: true, cwd: '.', src: ['test/unit/**/*.js'], dest: '<%= dir.dist %>/'},
+          {expand: true, cwd: '.', src: ['test/unit/**/*.ts'], dest: '<%= dir.dist %>/'}
         ]
       },
       bootstrap: {

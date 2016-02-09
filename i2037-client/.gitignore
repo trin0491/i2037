@@ -3,4 +3,5 @@ node_modules/*
 logs/*
 .tscache/*
 i2037-client.sublime-workspace
+.idea/*
 !.gitkeep

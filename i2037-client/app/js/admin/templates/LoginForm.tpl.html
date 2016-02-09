@@ -1,0 +1,43 @@
+<div class="col-md-12">
+  <div class="page-header">
+    <h3>Login</h3>
+  </div>
+  <form class="form-horizontal" role="form" (ngSubmit)="submit()" #login="ngForm">
+    <div class="form-group" [ngClass]="getCls(login.controls.username)">
+      <label class="control-label col-md-3" for="inputUsername">Email</label>
+      <div class="input-group col-md-4">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+        <input type="email" class="form-control" id="inputUsername" ngControl="username" #username="ngForm"
+               placeholder="Username"
+               [(ngModel)]="userPM.userName" required>
+      </div>
+      <p class="help-block col-md-offset-3" *ngIf="hasErr(username.control, 'required')">Username is required</p>
+    </div>
+    <div class="form-group" [ngClass]="getCls(login.controls.password)">
+      <label class="control-label col-md-3" for="inputPassword">Password</label>
+      <div class="input-group col-md-4">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+        <input type="password" class="form-control" id="inputPassword" ngControl="password" #password="ngForm"
+               placeholder="Password"
+               [(ngModel)]="userPM.password" required>
+      </div>
+      <p class="help-block col-md-offset-3" *ngIf="hasErr(password.control, 'required')">Password is required</p>
+    </div>
+    <div class="form-group">
+      <div class="col-md-offset-3 col-md-4">
+        <div class="checkbox">
+          <label for="inputRememberMe">
+            <input type="checkbox" id="inputRememberMe" ngControl="rememberMe" [(ngModel)]="userPM.rememberMe"> Remember
+            me
+          </label>        
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-offset-3 col-md-4">
+        <input type="submit" id="submit" value="Login" class="btn btn-primary" [disabled]="!login.form.valid"/>
+        <button (click)="cancel()" class="btn btn-default">Cancel</button>
+      </div>
+    </div>
+  </form>
+</div>

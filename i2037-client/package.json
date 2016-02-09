@@ -2,13 +2,13 @@
   "name": "i2037-client",
   "version": "1.0.0",
   "dependencies": {
-    "angular2": "2.0.0-beta.0",
+    "angular2": "2.0.0-beta.3",
     "es6-promise": "^3.0.2",
     "es6-shim": "^0.33.3",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.0",
     "systemjs": "^0.19.6",
-    "zone.js": "0.5.10"
+    "zone.js": "0.5.11"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
@@ -32,6 +32,6 @@
     "karma-jasmine": "^0.3.6",
     "karma-junit-reporter": "^0.3.8",
     "karma-phantomjs-launcher": "^0.2.2",
-    "typescript": "^1.7.3"
+    "typescript": "1.7.5"
   }
 }

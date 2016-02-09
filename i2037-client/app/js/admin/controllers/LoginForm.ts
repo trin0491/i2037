@@ -2,17 +2,29 @@
  * Created by richard on 27/12/2015.
  */
 ///<reference path="../../../../typings/tsd.d.ts" />
+import {AbstractControl, FORM_DIRECTIVES, CORE_DIRECTIVES} from "angular2/common";
+import {Inject, Component, EventEmitter, Output} from "angular2/core";
 
+const TEMPLATE = 'js/admin/templates/LoginForm.tpl.html';
+
+@Component({
+  selector: 'i2-login-form',
+  templateUrl: TEMPLATE,
+  directives: [CORE_DIRECTIVES, FORM_DIRECTIVES]
+})
 export class LoginForm {
 
-  static $inject = ['$scope', '$location', 'Session', 'user'];
+  @Output() loadingError = new EventEmitter<String>();
 
-  public userPM:UserPM = new UserPM();
+  userPM:UserPM = new UserPM();
 
-  constructor(private $scope:ILoginFormScope,
-              private $location:ng.ILocationService,
-              private Session:any,
-              private user) {
+  private _class:any = {
+    'has-error': false,
+    'has-success': false
+  };
+
+  constructor(@Inject('$location') private $location:ng.ILocationService,
+              @Inject('Session') private Session:any) {
 
   }
 
@@ -21,22 +33,21 @@ export class LoginForm {
       this.$location.path("/home");
     }, (response) => {
       var msg = 'Failed to login: status: ' + response.status;
-      this.$scope.$emit('Resource::LoadingError', 'User', msg);
+      this.loadingError.emit(msg);
     });
   }
 
   //noinspection JSMethodCanBeStatic
-  getCls(ctrl:ng.INgModelController) {
-      return {
-        'has-error': ctrl ? ctrl.$invalid && ctrl.$dirty : false,
-        'has-success': ctrl ? ctrl.$valid && ctrl.$dirty : false
-      };
+  getCls(ctrl:AbstractControl) {
+    this._class['has-error'] =  ctrl ? !ctrl.valid && ctrl.dirty : false;
+    this._class['has-success'] = ctrl ? ctrl.valid && ctrl.dirty : false;
+    return this._class;
   }
 
   //noinspection JSMethodCanBeStatic
-  howErr(ngModelController:ng.INgModelController, validation:string) {
-    if (ngModelController) {
-      return ngModelController.$dirty && ngModelController.$error[validation];
+  hasErr(ctrl:AbstractControl, validation:string) {
+    if (ctrl) {
+      return ctrl.dirty && ctrl.hasError(validation);
     } else {
       return false;
     }
@@ -61,12 +72,4 @@ class UserPM {
   userName:String = $.cookie('userName');
   password:String = null;
   rememberMe:Boolean = true;
-}
-
-interface ILoginFormScope extends ng.IScope {
-  userPM:UserPM;
-  getCls(controller:ng.INgModelController);
-  showErr(controller:ng.INgModelController, validation:any)
-  cancel();
-  submit();
 }

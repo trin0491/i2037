@@ -8,11 +8,12 @@
     "rootDir": ".",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "removeComments": false
+    "removeComments": false,
+    "noImplicitAny": false
   },
   "exclude": [
     "node_modules",
-    "bower_components",
-    "build"
+    "build",
+    "typings"
   ]
 }
