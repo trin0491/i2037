@@ -113,9 +113,9 @@ http://www.springframework.org/schema/security/oauth2 http://www.springframework
   <bean id="cellarDB" class="org.apache.commons.dbcp.BasicDataSource"
     destroy-method="close">
     <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-    <property name="url" value="jdbc:mysql://${i2037.db.host}/i2037" />
-    <property name="username" value="${i2037.db.username}" />
-    <property name="password" value="${i2037.db.password}" />
+    <property name="url" value="jdbc:mysql://${I2037_DB_HOST}/i2037" />
+    <property name="username" value="${I2037_DB_USERNAME}" />
+    <property name="password" value="${I2037_DB_PASSWORD}" />
     <property name="validationQuery" value="SELECT 1" />
     <property name="testWhileIdle" value="true" />
   </bean>

@@ -1,4 +1,5 @@
 apply plugin: 'war'
+apply plugin: 'idea'
 apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
 
 group = 'net.i2037'
