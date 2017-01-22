@@ -35,6 +35,9 @@ spec:
         - name: I2037_DB_HOST
           value: i2037-db
         - name: I2037_DB_PASSWORD
-          value: richard    
+          valueFrom:
+            secretKeyRef:
+              name: i2037-db-pass
+              key: password
         ports:
         - containerPort: 8080
