@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: i2037-webapp
-        image: i2037-webapp:1.0.1
+        image: i2037-webapp:1.0.2
         env:
         - name: I2037_DB_HOST
           value: i2037-db

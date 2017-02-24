@@ -17,12 +17,6 @@ module.exports = function(grunt) {
   grunt.registerTask('release', ['env:release', 'build', 'uglify']);
   grunt.registerTask('default', ['env:dev', 'build']);
 
-  var karmaConfig = function(configFile, customOptions) {
-    var options = { configFile: configFile, keepalive: true };
-    var travisOptions = process.env.JENKINS_HOME && { browsers: ['Firefox'], reporters: 'dots' };
-    return grunt.util._.extend(options, customOptions, travisOptions);
-  };
-
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 

@@ -40,7 +40,7 @@ spec:
         tier: db
     spec:
       containers:
-      - image: i2037-db:1.0.0
+      - image: i2037-db:1.0.1
         name: i2037-db
         env:
           # Use secret in real usage
@@ -52,10 +52,10 @@ spec:
         ports:
         - containerPort: 3306
           name: i2037-db
-        volumeMounts:
-        - name: mysql-persistent-storage
-          mountPath: /var/lib/mysql
-      volumes:
-      - name: mysql-persistent-storage
-        persistentVolumeClaim:
-          claimName: i2037-db-pvc
+      #   volumeMounts:
+      #   - name: mysql-persistent-storage
+      #     mountPath: /var/lib/mysql
+      # volumes:
+      # - name: mysql-persistent-storage
+      #   persistentVolumeClaim:
+      #     claimName: i2037-db-pvc
