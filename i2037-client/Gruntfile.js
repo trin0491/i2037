@@ -44,13 +44,9 @@ module.exports = function(grunt) {
       },
       angular2: {
         src: [
-          '<%= dir.node %>/systemjs/dist/system.src.js',
-          '<%= dir.node %>/es6-shim/es6-shim.js',
-          '<%= dir.node %>/es6-promise/dist/es6-promise.js',
-          '<%= dir.node %>/angular2/bundles/angular2-polyfills.js',
-          '<%= dir.node %>/angular2/bundles/angular2.dev.js',
-          '<%= dir.node %>/angular2/bundles/upgrade.dev.js',
-          '<%= dir.node %>/rxjs/bundles/Rx.js'
+          '<%= dir.node %>/core-js/client/shim.min.js',
+          '<%= dir.node %>/zone.js/dist/zone.js',
+          '<%= dir.node %>/systemjs/dist/system.src.js'
         ],
         dest: '<%= dir.dist %>/app/lib/angular2.js'
       },
@@ -69,12 +65,6 @@ module.exports = function(grunt) {
           '<%= dir.bower %>/autofill-event/src/autofill-event.js'
         ],
         dest: '<%= dir.dist %>/app/lib/deps.js'
-      },
-      systemjs: {
-        src: [
-          '<%= dir.node %>/systemjs/dist/system.src.js'
-        ],
-        dest: '<%= dir.dist %>/app/lib/system.js'
       }
     },
     copy: {
@@ -196,10 +186,6 @@ module.exports = function(grunt) {
       depsjs: {
         src: [ '<%= concat.depsjs.src %>' ],
         dest: '<%= dir.dist %>/app/lib/deps.min.js'
-      },
-      systemjs: {
-        src: ['<%= concat.systemjs.src %>'],
-        dest: '<%= dir.dist %>/app/lib/system.min.js'
       }
     },
     watch: {

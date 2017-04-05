@@ -74,7 +74,6 @@
     </div>
 
     <!-- @if NODE_ENV == 'DEV' -->
-    <script src="lib/system.js"></script>
     <script src="lib/jquery.js"></script>
     <script src="lib/bootstrap.js"></script>
     <script src="lib/deps.js"></script>
@@ -82,7 +81,6 @@
     <script src="lib/angular2.js"></script>
 <!-- @endif -->
 <!-- @if NODE_ENV == 'PROD' -->
-    <script src="lib/system.min.js"></script>
     <script src="lib/jquery.min.js"></script>
     <script src="lib/bootstrap.min.js"></script>
     <script src="lib/deps.min.js"></script>
@@ -90,11 +88,9 @@
     <script src="lib/angular2.min.js"></script>
 <!-- @endif -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1XkZF2vEwPUZeFfadDMe76ozKhrk-mXE"></script>
+    <script src="systemjs.config.js"></script>
     <script>
-      System.config({
-        packages: {'js': {defaultExtension: 'js'}}
-      });
-      System.import('js/i2037');
+      System.import('js/main.js').catch(function (err) { console.error(err) });
     </script>
 </body>
 </html>

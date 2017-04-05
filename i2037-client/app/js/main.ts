@@ -1,6 +1,6 @@
 ///<reference path="../../typings/tsd.d.ts" />
 
-import {upgradeAdapter} from './common/upgradeAdapter';
+import {UpgradeAdapter} from "@angular/upgrade";
 import {adminModule, Menu} from "./admin/module";
 import recipes from "./recipes/recipes";
 import cellar from "./cellar/cellar";
@@ -12,6 +12,8 @@ import {journal} from "./journal/module";
 import cage from "./cage/cage";
 import directives from "./common/directives/directives";
 import "./templates/i2037-client.tpl";
+import {AppModule} from "./AppModule";
+import {upgradeAdapter} from "./common/upgradeAdapter";
 
 export default angular.module('i2037', [
     'ui.bootstrap',
@@ -135,5 +137,8 @@ export default angular.module('i2037', [
 
   }])
 ;
+
+upgradeAdapter.upgradeNg1Provider('$location');
+upgradeAdapter.upgradeNg1Provider('Session');
 
 upgradeAdapter.bootstrap(document.documentElement, ['i2037']);

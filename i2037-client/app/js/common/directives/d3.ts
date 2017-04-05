@@ -1,8 +1,8 @@
 ///<reference path="../../../../typings/tsd.d.ts" />
 ///<reference path="../services/services.ts" />
 
-  import services from "../services/services";
-  import {D3Service} from "../services/services";
+import services from "../services/services";
+import {D3Service} from "../services/services";
 
 export default angular.module('i2037.directives.d3', [services.name])
 
@@ -17,7 +17,7 @@ export default angular.module('i2037.directives.d3', [services.name])
       },
       link: function($scope, element, attrs) {
 
-        var d3: D3.Base = d3Service.d3();
+        var d3 = d3Service.d3();
         var colour = d3.scale.ordinal().range($scope.colours);
         var svg = d3.select(element[0]).append('svg')
           .style('width', '100%')

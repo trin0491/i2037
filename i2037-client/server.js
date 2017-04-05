@@ -8,12 +8,14 @@ var express = require('express'),
   path = require('path');
 
 var PROXY_PATHS = ['/svc'];
-var proxyAddr = '192.168.99.100:30764';
+var proxyAddr = 'localhost:8080';
 
 var server = express();
 var appDir = path.join(__dirname, './build/app');
+var nodeModulesDir = path.join(__dirname, './node_modules');
 
 server.set('title','i2037');
+server.use('/node_modules', express.static(nodeModulesDir));
 server.use('/', express.static(appDir));
 server.use(liveload({
   port: 35729

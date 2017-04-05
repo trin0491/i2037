@@ -8,15 +8,24 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "angular2": "2.0.0-beta.3",
-    "es6-promise": "^3.0.2",
-    "es6-shim": "^0.33.3",
-    "reflect-metadata": "0.1.2",
-    "rxjs": "5.0.0-beta.0",
-    "systemjs": "^0.19.6",
-    "zone.js": "0.5.11"
+    "@angular/common": "^4.0.1",
+    "@angular/compiler": "^4.0.1",
+    "@angular/core": "^4.0.1",
+    "@angular/forms": "^4.0.1",
+    "@angular/http": "^4.0.1",
+    "@angular/platform-browser": "^4.0.1",
+    "@angular/platform-browser-dynamic": "^4.0.1",
+    "@angular/router": "^4.0.1",
+    "@angular/upgrade": "^4.0.1",
+    "angular-in-memory-web-api": "~0.3.0",
+    "core-js": "^2.4.1",
+    "rxjs": "5.0.1",
+    "systemjs": "^0.19.40",
+    "zone.js": "^0.8.4"
   },
   "devDependencies": {
+    "@types/jasmine": "2.5.36",
+    "@types/node": "^6.0.46",
     "connect-livereload": "^0.6.0",
     "express": "^4.14.1",
     "express-http-proxy": "^0.11.0",
@@ -33,7 +42,7 @@
     "grunt-karma": "^0.12.1",
     "grunt-preprocess": "^5.0.1",
     "grunt-sass": "^1.2.1",
-    "grunt-ts": "^5.2.0",
+    "grunt-ts": "^6.0.0-beta.15",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.16",
     "karma-chrome-launcher": "^0.2.2",
@@ -42,6 +51,6 @@
     "karma-junit-reporter": "^0.3.8",
     "karma-phantomjs-launcher": "^0.2.2",
     "phantomjs": "^2.1.7",
-    "typescript": "1.7.5"
+    "typescript": "~2.1.0"
   }
 }

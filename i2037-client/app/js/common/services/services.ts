@@ -2,6 +2,8 @@
 
 import environment from "./environment";
 
+declare var d3:any;
+
 class User {
   static get(params):any {
 
@@ -29,10 +31,10 @@ export class PathFinder {
 }
 
 export class D3Service {
-  constructor(private d3Base:D3.Base) {
+  constructor(private d3Base) {
   }
 
-  d3():D3.Base {
+  d3() {
     return this.d3Base;
   }
 }

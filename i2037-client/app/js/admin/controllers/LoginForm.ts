@@ -2,15 +2,14 @@
  * Created by richard on 27/12/2015.
  */
 ///<reference path="../../../../typings/tsd.d.ts" />
-import {AbstractControl, FORM_DIRECTIVES, CORE_DIRECTIVES} from "angular2/common";
-import {Inject, Component, EventEmitter, Output} from "angular2/core";
+import {AbstractControl} from "@angular/forms";
+import {Inject, Component, EventEmitter, Output} from "@angular/core";
 
 const TEMPLATE = 'js/admin/templates/LoginForm.tpl.html';
 
 @Component({
   selector: 'i2-login-form',
-  templateUrl: TEMPLATE,
-  directives: [CORE_DIRECTIVES, FORM_DIRECTIVES]
+  templateUrl: TEMPLATE
 })
 export class LoginForm {
 

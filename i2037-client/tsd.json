@@ -23,14 +23,8 @@
     "googlemaps/google.maps.d.ts": {
       "commit": "e57df787f4e11601625d7e1c1b2ee351b97a18a1"
     },
-    "jasmine/jasmine.d.ts": {
-      "commit": "1da639a106527e0c4010b354a1efe52a3059a291"
-    },
     "angularjs/angular-mocks.d.ts": {
       "commit": "1da639a106527e0c4010b354a1efe52a3059a291"
     },
-    "systemjs/systemjs.d.ts": {
-      "commit": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
-    }
   }
 }

@@ -18,7 +18,7 @@ export default angular.module('i2037.fx.directives.tile', [TEMPLATE])
       transclude: true,
       link: function ($scope, element, attrs:ng.IAttributes) {
 
-        $scope.$watch(attrs['state'], function (newState, oldState) {
+        $scope.$watch(attrs['state'], function (newState:string, oldState:string) {
           if (CLASSES[newState]) {
             if (CLASSES[oldState] && newState !== oldState) {
               attrs.$removeClass(CLASSES[oldState]);

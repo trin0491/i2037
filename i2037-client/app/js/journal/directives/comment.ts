@@ -41,7 +41,7 @@ export default angular.module('i2037.directives.comment', ['i2037.templates'])
         $scope.state = 'read';
         $scope.textRows = 1;
         $scope.saveLabel = 'Update';
-        $scope.maxlength = attrs.i2Maxlength;
+        $scope.maxlength = attrs["i2Maxlength"];
         var momento = null;
 
         $scope.canDelete = function() {
