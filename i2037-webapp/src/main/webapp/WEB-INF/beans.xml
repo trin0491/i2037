@@ -5,7 +5,6 @@
   xmlns:util="http://www.springframework.org/schema/util"
   xmlns:task="http://www.springframework.org/schema/task"
   xmlns:tx="http://www.springframework.org/schema/tx" xmlns:sec="http://www.springframework.org/schema/security"
-  xmlns:p="http://www.springframework.org/schema/p"
   xmlns:oa1="http://www.springframework.org/schema/security/oauth" 
   xmlns:oa2="http://www.springframework.org/schema/security/oauth2"  
   xsi:schemaLocation="
@@ -15,7 +14,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
 http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
 http://www.springframework.org/schema/security/oauth http://www.springframework.org/schema/security/spring-security-oauth-1.0.xsd
 http://www.springframework.org/schema/security/oauth2 http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
 

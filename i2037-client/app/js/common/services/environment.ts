@@ -2,6 +2,6 @@
 
 export default angular.module('i2037.environment', [])
       .constant('version', 'dev')
-      .constant('svcPrefix', '')
+      .constant('svcPrefix', '/i2037-webapp')
     ;
 
