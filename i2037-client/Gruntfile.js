@@ -13,7 +13,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-ts');
   grunt.loadNpmTasks('grunt-sass');
 
-  grunt.registerTask('build', ['clean', 'jshint', 'copy', 'preprocess', 'ts', 'html2js', 'sass', 'concat', 'karma:unit']);
+  grunt.registerTask('build', ['clean', 'jshint', 'copy', 'ts', 'html2js', 'preprocess', 'sass', 'concat', 'karma:unit']);
   grunt.registerTask('release', ['env:release', 'build', 'uglify']);
   grunt.registerTask('default', ['env:dev', 'build']);
 
@@ -141,7 +141,7 @@ module.exports = function(grunt) {
     },
     preprocess: {
         app: {
-          src: [ '<%= dir.dist %>/app/index.html' ],
+          src: [ '<%= dir.dist %>/app/index.html', '<%= dir.dist %>/app/**/*.js' ],
           options: {
             inline: true,
             context: {

@@ -5,46 +5,46 @@ var express = require('express'),
   proxy = require('express-http-proxy'),
   liveload = require('connect-livereload'),
   url = require('url'),
+  morgan = require('morgan'),
   path = require('path');
 
-var PROXY_PATHS = ['/i2037-webapp/svc'];
-var proxyAddr = 'localhost:8080';
+const PROXY_PATHS = ['/i2037-webapp/svc', '/i2037-webapp/j_spring_security_check', '/i2037-webapp/j_spring_security_logout'];
+const PROXY_ADDR = 'localhost:8080';
+const PORT = process.env.PORT || 9070;
 
-var server = express();
+var app = express();
 var appDir = path.join(__dirname, './build/app');
 var nodeModulesDir = path.join(__dirname, './node_modules');
+var logger = morgan('combined');
 
-server.set('title','i2037');
-server.use('/i2037-webapp/node_modules', express.static(nodeModulesDir));
-server.use('/i2037-webapp', express.static(appDir));
-server.use(liveload({
+app.set('title','i2037');
+app.use('/i2037-webapp/node_modules', express.static(nodeModulesDir));
+app.use('/i2037-webapp', express.static(appDir));
+app.use(liveload({
   port: 35729
 }));
+app.use(logger);
 
-PROXY_PATHS.forEach(function (path) {
-  server.use(path, proxy(proxyAddr, {
+PROXY_PATHS.forEach(function (proxyPath) {
+  app.use(proxyPath, proxy(PROXY_ADDR, {
     forwardPath: function(req, rsp) {
-      var proxyPath = path + url.parse(req.url).path;
-      console.log("proxyPath: " + proxyPath);
-      return proxyPath;
+      var path = url.parse(req.url).path;
+      if (path.length > 1) {
+        return proxyPath + path;
+      } else {
+        return proxyPath;
+      }
+    },
+    intercept: function(rsp, data, req, res, callback) {
+      if (rsp.statusCode === 302) {
+        var redirect = url.parse(res.getHeader('location'));
+        res.setHeader('location', "http://localhost:" + PORT + redirect.path);
+      }
+      callback(null, data);
     }
   }))
 });
 
-server.use('/i2037-webapp/j_spring_security_check', proxy(proxyAddr, {
-  forwardPath: function(req, rsp) {
-    var proxyPath = path + url.parse(req.url).path;
-    console.log("proxyPath: " + proxyPath);
-    return proxyPath;
-  }
-}));
-
-// server.get('/', function (req, res) {
-//     res.sendFile("index.html", {"root": appDir});
-// });
-
-var port = process.env.PORT || 9070;
-
-server.listen(port, function () {
-  console.log('Express server listening on port ' + port);
+app.listen(PORT, function () {
+  console.log('Express server listening on port ' + PORT);
 });
