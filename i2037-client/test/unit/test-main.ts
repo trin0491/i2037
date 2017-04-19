@@ -1,55 +1,92 @@
 ///<reference path="../../typings/tsd.d.ts" />
 
-// Cancel Karma's synchronous start,
-// we will call `__karma__.start()` later, once all the specs are loaded.
-
-
 declare var __karma__:any;
-declare interface Window {
+
+interface Window {
   __karma__:any
 }
 
-__karma__.loaded = function () {
-};
-System.config({
-  packages: {
-    'base/app/js': {
-      defaultExtension: false,
-      format: 'register',
-      map: Object.keys(window.__karma__.files).filter(onlyAppFiles).reduce(function createPathRecords(pathsMapping, appPath) {
-        // creates local module name mapping to global path with karma's fingerprint in path, e.g.:
-        // './hero.service': '/base/src/app/hero.service.js?f4523daf879cfb7310ef6242682ccf10b2041b3e'
-        var moduleName = appPath.replace(/^\/base\/app\/js\//, './').replace(/\.js$/, '');
-        pathsMapping[moduleName] = appPath + '?' + window.__karma__.files[appPath];
-        return pathsMapping;
-      }, {})
-    }
-  }
-});
+// /*global jasmine, __karma__, window*/
+// Error.stackTraceLimit = 0; // "No stacktrace"" is usually best for app testing.
 
+// Uncomment to get full stacktrace output. Sometimes helpful, usually not.
+Error.stackTraceLimit = Infinity; //
 
-System.import('angular2/src/platform/browser/browser_adapter').then(function (browser_adapter) {
-  browser_adapter.BrowserDomAdapter.makeCurrent();
-}).then(function () {
-  Promise.all(
-    Object.keys(window.__karma__.files) // All files served by Karma.
-      .filter(onlySpecFiles)
-      .map(function (moduleName) {
-        // loads all spec files via their global module names
-        return System.import(moduleName);
-      })
-    )
-    .then(function () {
-      __karma__.start();
-    }, function (error) {
-      __karma__.error(error.stack || error);
-    });
-});
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000;
 
-function onlyAppFiles(filePath) {
-  return /^\/base\/app\/js\/.*\.js$/.test(filePath)
+// builtPaths: root paths for output ("built") files
+// get from karma.config.js, then prefix with '/base/' (default is 'src/')
+var builtPaths = (__karma__.config.builtPaths || ['src/'])
+  .map(function(p) { return '/base/'+p;});
+
+__karma__.loaded = function () { };
+
+function isJsFile(path) {
+  return path.slice(-3) == '.js';
 }
 
-function onlySpecFiles(path) {
-  return /\.spec\.js$/.test(path);
+function isSpecFile(path) {
+  return /\.spec\.(.*\.)?js$/.test(path);
+}
+
+// Is a "built" file if is JavaScript file in one of the "built" folders
+function isBuiltFile(path) {
+  return isJsFile(path) &&
+    builtPaths.reduce(function(keep, bp) {
+      return keep || (path.substr(0, bp.length) === bp);
+    }, false);
+}
+
+var allSpecFiles = Object.keys(window.__karma__.files)
+  .filter(isSpecFile)
+  .filter(isBuiltFile);
+
+System.config({
+  // Base URL for System.js calls. 'base/' is where Karma serves files from.
+  baseURL: 'base/build/app',
+  // Extend usual application package list with test folder
+  packages: { 'testing': { main: 'index.js', defaultExtension: 'js' } },
+
+  // Assume npm: is set in `paths` in systemjs.config
+  // Map the angular testing umd bundles
+  map: {
+    '@angular/core/testing': 'npm:@angular/core/bundles/core-testing.umd.js',
+    '@angular/common/testing': 'npm:@angular/common/bundles/common-testing.umd.js',
+    '@angular/compiler/testing': 'npm:@angular/compiler/bundles/compiler-testing.umd.js',
+    '@angular/platform-browser/testing': 'npm:@angular/platform-browser/bundles/platform-browser-testing.umd.js',
+    '@angular/platform-browser-dynamic/testing': 'npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
+    '@angular/http/testing': 'npm:@angular/http/bundles/http-testing.umd.js',
+    '@angular/router/testing': 'npm:@angular/router/bundles/router-testing.umd.js',
+    '@angular/forms/testing': 'npm:@angular/forms/bundles/forms-testing.umd.js',
+  },
+});
+
+System.import('systemjs.config.js')
+  .then(initTestBed)
+  .then(initTesting);
+
+function initTestBed(){
+  return Promise.all([
+    System.import('@angular/core/testing'),
+    System.import('@angular/platform-browser-dynamic/testing')
+  ])
+
+    .then(function (providers) {
+      var coreTesting    = providers[0];
+      var browserTesting = providers[1];
+
+      coreTesting.TestBed.initTestEnvironment(
+        browserTesting.BrowserDynamicTestingModule,
+        browserTesting.platformBrowserDynamicTesting());
+    })
+}
+
+// Import all spec files and start karma
+function initTesting () {
+  return Promise.all(
+    allSpecFiles.map(function (moduleName) {
+      return System.import(moduleName);
+    })
+  )
+    .then(__karma__.start, __karma__.error);
 }

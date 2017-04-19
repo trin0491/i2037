@@ -39,6 +39,14 @@ export class D3Service {
   }
 }
 
+export class GoogleService {
+  constructor(private _google) {}
+
+  get google() {
+    return this._google;
+  }
+}
+
 export default angular.module('i2037.services', [environment.name, 'i2037.resources.user'])
 
   .factory('pathFinder', ['version', 'svcPrefix', function (version, svcPrefix) {
@@ -106,4 +114,9 @@ export default angular.module('i2037.services', [environment.name, 'i2037.resour
   .factory('d3Service', [function () {
     var svc:D3Service = new D3Service(d3);
     return svc;
-  }]);
+  }])
+
+  .factory('googleService', [function () {
+    return new GoogleService(google);
+  }])
+;
