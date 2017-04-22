@@ -1,7 +1,10 @@
+var uglify = require('rollup-plugin-uglify');
+var nodeResolve = require('rollup-plugin-node-resolve');
+var commonjs = require('rollup-plugin-commonjs');
+
 module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -12,9 +15,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-ts');
   grunt.loadNpmTasks('grunt-sass');
+  grunt.loadNpmTasks('grunt-rollup');
 
-  grunt.registerTask('build', ['clean', 'jshint', 'copy', 'ts', 'html2js', 'preprocess', 'sass', 'concat', 'karma:unit']);
-  grunt.registerTask('release', ['env:release', 'build', 'uglify']);
+  grunt.registerTask('build', ['clean', 'copy', 'ts:default', 'html2js', 'preprocess', 'sass', 'concat', 'karma:unit']);
+  grunt.registerTask('release', ['env:release', 'build', 'uglify', 'ts:release', 'preprocess', 'rollup']);
   grunt.registerTask('default', ['env:dev', 'build']);
 
   grunt.initConfig({
@@ -105,7 +109,7 @@ module.exports = function(grunt) {
       },
       release : {
           NODE_ENV : 'PROD',
-          i2037_SVC_PREFIX: '',
+          i2037_SVC_PREFIX: '/i2037-webapp',
           i2037_VERSION: '<%= pkg.version %>'
       }
     },
@@ -117,22 +121,6 @@ module.exports = function(grunt) {
         src: ['<%= dir.dist %>/app/**/*.tpl.html'],
         dest: '<%= dir.dist %>/app/js/templates/<%= pkg.name %>.tpl.js',
         module: 'i2037.templates'
-      }
-    },
-    jshint: {
-      files: ['Gruntfile.js', 'app/**/*.js'],
-      options: {
-        debug: true,
-        curly: true,
-        eqeqeq: true,
-        immed: true,
-        latedef: true,
-        newcap: true,
-        noarg: true,
-        sub: true,
-        boss: true,
-        eqnull: true,
-        globals: {}
       }
     },
     karma: {
@@ -151,6 +139,34 @@ module.exports = function(grunt) {
           }
         }
     },
+    rollup: {
+      options: {
+        sourceMap: true,
+        sourceMapFile: 'build/app/js/bundle.js.map',
+        format: 'umd',
+        moduleName: 'i2037-client',
+        onwarn: function(warning) {
+          // Skip certain warnings
+
+          // should intercept ... but doesn't in some rollup versions
+          if ( warning.code === 'THIS_IS_UNDEFINED' ) { return; }
+
+          // console.warn everything else
+          console.warn( warning.message );
+        },
+        plugins: [
+          nodeResolve({jsnext: true, module: true}),
+          commonjs({
+            include: ['node_modules/rxjs/**']
+          }),
+          uglify()
+        ]
+      },
+      files: {
+        'dest': 'build/app/js/bundle.js',
+        'src' : 'build/app/js/main.js'
+      }
+    },
     sass: {
       dist: {
         files: {
@@ -161,6 +177,9 @@ module.exports = function(grunt) {
     ts: {
       default: {
         tsconfig: true
+      },
+      release: {
+        tsconfig: 'tsconfig-aot.json'
       }
     },
     uglify: {
