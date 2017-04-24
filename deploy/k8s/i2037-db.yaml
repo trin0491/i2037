@@ -49,13 +49,22 @@ spec:
             secretKeyRef:
               name: i2037-db-root-pass
               key: password
+        - name: MYSQL_DATABASE
+          value: i2037
+        - name: MYSQL_USER
+          value: richard
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: i2037-db-pass
+              key: password
         ports:
         - containerPort: 3306
           name: i2037-db
-      #   volumeMounts:
-      #   - name: mysql-persistent-storage
-      #     mountPath: /var/lib/mysql
-      # volumes:
-      # - name: mysql-persistent-storage
-      #   persistentVolumeClaim:
-      #     claimName: i2037-db-pvc
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: i2037-db-pvc

@@ -2,9 +2,8 @@ kind: PersistentVolume
 apiVersion: v1
 metadata:
   name: i2037-pv1
-  annotations:
-    pv.beta.kubernetes.io/gid: "1200"  
   labels:
+    app: i2037
     type: local
 spec:
   capacity:
@@ -12,4 +11,4 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/mnt/sda1/var/i2037-pv1"
+    path: "/data/i2037-pv1"

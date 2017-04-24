@@ -22,8 +22,6 @@ spec:
   replicas: 1 
   template: 
     metadata:
-      # unlike pod-nginx.yaml, the name is not included in the meta data as a unique name is
-      # generated from the deployment name
       labels:
         app: i2037
         tier: web
