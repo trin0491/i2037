@@ -29,6 +29,13 @@ spec:
       containers:
       - name: i2037-webapp
         image: i2037-webapp:1.0.3
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "512Mi"
+          limits:
+            cpu: "500m"
+            memory: "1024Mi"
         env:
         - name: I2037_DB_HOST
           value: i2037-db
