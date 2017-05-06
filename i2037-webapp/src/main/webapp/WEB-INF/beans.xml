@@ -20,7 +20,9 @@ http://www.springframework.org/schema/security/oauth2 http://www.springframework
 
   <import resource="classpath:META-INF/cxf/cxf.xml" />
 
-  <context:property-placeholder location="WEB-INF/i2037.properties" />
+  <context:property-placeholder
+          location="WEB-INF/i2037.properties,file://${I2037_HOME}/i2037.properties"
+          ignore-resource-not-found="true" />
   <context:annotation-config />
 
   <jaxrs:server id="services" address="/">
