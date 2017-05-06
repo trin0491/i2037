@@ -28,14 +28,14 @@ spec:
     spec:
       containers:
       - name: i2037-webapp
-        image: i2037-webapp:1.0.3
+        image: eu.gcr.io/i2037-165621/i2037-webapp:1.0.3
         resources:
           requests:
             cpu: "250m"
-            memory: "512Mi"
+            memory: "250Mi"
           limits:
             cpu: "500m"
-            memory: "1024Mi"
+            memory: "512Mi"
         env:
         - name: I2037_DB_HOST
           value: i2037-db

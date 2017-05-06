@@ -1,0 +1,8 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: i2037-lb
+spec:
+  backend:
+    serviceName: i2037-webapp
+    servicePort: 80

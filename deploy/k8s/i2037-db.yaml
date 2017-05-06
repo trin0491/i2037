@@ -40,15 +40,15 @@ spec:
         tier: db
     spec:
       containers:
-      - image: i2037-db:1.0.1
+      - image: eu.gcr.io/i2037-165621/i2037-db:1.0.1
         name: i2037-db
         resources:
           requests:
             cpu: "250m"
-            memory: "700Mi"
+            memory: "100Mi"
           limits:
             cpu: "500m"
-            memory: "1024Mi"
+            memory: "500Mi"
         env:
           # Use secret in real usage
         - name: MYSQL_ROOT_PASSWORD

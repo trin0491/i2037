@@ -1,2 +1,3 @@
 #!/bin/bash
-kubectl run -it --rm --image=mysql:5.6 mysql-client -- mysql -h i2037-db -p
+pod=`kubectl get pods -l tier=db -o 'jsonpath={.items[*].metadata.name}'`
+kubectl exec $pod -it -- /usr/local/mysql/bin/mysql -p
