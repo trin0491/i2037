@@ -1,2 +1,8 @@
 #!/bin/bash
-docker build -t i2037-db:1.0.1 i2037-db
+if [ "$#" -lt 1 ]
+then
+  TAG="i2037-db"
+else
+  TAG="i2037-db:$1"
+fi
+docker build -t $TAG i2037-db

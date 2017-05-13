@@ -1,4 +1,9 @@
 #!/bin/bash
-export VERSION=1.0.3
-cp ../../i2037-webapp/build/libs/i2037-webapp-${VERSION}-SNAPSHOT.war ./i2037-webapp/i2037-webapp.war
-docker build -t i2037-webapp:${VERSION} i2037-webapp
+if [ "$#" -lt 1 ]
+then
+  TAG="i2037-webapp"
+else
+  TAG="i2037-webapp:$1"
+fi
+cp ../../i2037-webapp/build/libs/i2037-webapp.war ./i2037-webapp/i2037-webapp.war
+docker build -t $TAG i2037-webapp
