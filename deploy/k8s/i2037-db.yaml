@@ -63,7 +63,7 @@ spec:
         - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: i2037-db-pass
+              name: i2037-db-user-pass
               key: password
         ports:
         - containerPort: 3306

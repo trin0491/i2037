@@ -37,12 +37,24 @@ spec:
             cpu: "500m"
             memory: "512Mi"
         env:
-        - name: I2037_DB_HOST
-          value: i2037-db
+        - name: I2037_PASSWORD_SALT
+          valueFrom:
+            secretKeyRef:
+              name: i2037-webapp-salt
+              key: salt
         - name: I2037_DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: i2037-db-pass
+              name: i2037-db-user-pass
               key: password
+        - name: I2037_HOME
+          value: /var/lib/i2037
         ports:
         - containerPort: 8080
+        volumeMounts:
+        - name: config-volume
+          mountPath: /var/lib/i2037/etc
+      volumes:
+      - name: config-volume
+        configMap:
+          name: i2037-config
