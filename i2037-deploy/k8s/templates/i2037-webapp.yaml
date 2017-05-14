@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: i2037-webapp
-        image: eu.gcr.io/i2037-165621/i2037-webapp:1.0.3
+        image: __IMAGE__
         resources:
           requests:
             cpu: "250m"

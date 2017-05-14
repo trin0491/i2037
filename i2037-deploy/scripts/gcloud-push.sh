@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ "$#" -lt 1 ]
 then
-  echo "usage: $0 <image>"
+  echo "usage: $0 <image>:<tag>"
   exit 1
 fi
 project_id=i2037-165621

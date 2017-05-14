@@ -40,7 +40,7 @@ spec:
         tier: db
     spec:
       containers:
-      - image: eu.gcr.io/i2037-165621/i2037-db:1.0.1
+      - image: __IMAGE__
         name: i2037-db
         resources:
           requests:

@@ -1,8 +1,10 @@
 #!/bin/sh
-RELEASE=1.0.1
-cd i2037-client
-./build.sh
-cd ../i2037-webapp
-./build.sh
-cd ../i2037-deploy
-./build.sh $RELEASE
+release=$1
+
+projects="i2037-client i2037-webapp i2037-deploy"
+for project in $projects
+do
+  cd $project
+  ./build.sh $release
+  cd ..
+done
