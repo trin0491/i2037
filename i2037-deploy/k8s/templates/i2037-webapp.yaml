@@ -37,11 +37,11 @@ spec:
             cpu: "500m"
             memory: "512Mi"
         env:
-        - name: I2037_PASSWORD_SALT
+        - name: I2037_DB_USERNAME
           valueFrom:
             secretKeyRef:
-              name: i2037-webapp-salt
-              key: salt
+              name: i2037-db-user-pass
+              key: username
         - name: I2037_DB_PASSWORD
           valueFrom:
             secretKeyRef:
@@ -54,7 +54,14 @@ spec:
         volumeMounts:
         - name: config-volume
           mountPath: /var/lib/i2037/etc
+        - name: secret-volume
+          mountPath: /var/lib/i2037/secret
+          readOnly: true
       volumes:
       - name: config-volume
         configMap:
-          name: i2037-config
+          name: i2037-webapp
+      - name: secret-volume
+        secret: 
+          secretName: i2037-webapp
+

@@ -59,7 +59,10 @@ spec:
         - name: MYSQL_DATABASE
           value: i2037
         - name: MYSQL_USER
-          value: richard
+          valueFrom:
+            secretKeyRef:
+              name: i2037-db-user-pass
+              key: username
         - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:

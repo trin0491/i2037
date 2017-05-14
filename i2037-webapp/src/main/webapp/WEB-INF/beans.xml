@@ -21,7 +21,7 @@ http://www.springframework.org/schema/security/oauth2 http://www.springframework
   <import resource="classpath:META-INF/cxf/cxf.xml" />
 
   <context:property-placeholder
-          location="WEB-INF/i2037.properties,file://${I2037_HOME}/etc/i2037.properties"
+          location="WEB-INF/i2037.properties,file://${I2037_HOME}/etc/i2037.properties,file://${I2037_HOME}/secret/secret.properties"
           ignore-resource-not-found="true" />
   <context:annotation-config />
 
@@ -115,7 +115,7 @@ http://www.springframework.org/schema/security/oauth2 http://www.springframework
     destroy-method="close">
     <property name="driverClassName" value="com.mysql.jdbc.Driver" />
     <property name="url" value="jdbc:mysql://${i2037.db.host}/i2037" />
-    <property name="username" value="${i2037.db.username}" />
+    <property name="username" value="${I2037_DB_USERNAME}" />
     <property name="password" value="${I2037_DB_PASSWORD}" />
     <property name="validationQuery" value="SELECT 1" />
     <property name="testWhileIdle" value="true" />
@@ -201,7 +201,7 @@ http://www.springframework.org/schema/security/oauth2 http://www.springframework
   
   <bean id="passwordEncoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder">
       <constructor-arg>
-          <value>${I2037_PASSWORD_SALT}</value>
+          <value>${i2037.password.salt}</value>
       </constructor-arg>
   </bean>
   

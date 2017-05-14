@@ -4,4 +4,4 @@ then
   echo "usage: $0 <dir>"
   exit 1
 fi
-kubectl create configmap i2037-config --from-file=$1
+kubectl create configmap i2037-webapp --from-file=$1
