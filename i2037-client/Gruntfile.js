@@ -104,12 +104,12 @@ module.exports = function(grunt) {
     env: {
       dev: {
           NODE_ENV : 'DEV',
-          i2037_SVC_PREFIX: '/i2037-webapp',
+          i2037_SVC_PREFIX: '',
           i2037_VERSION: 'dev'
       },
       release : {
           NODE_ENV : 'PROD',
-          i2037_SVC_PREFIX: '/i2037-webapp',
+          i2037_SVC_PREFIX: '',
           i2037_VERSION: '<%= pkg.version %>'
       }
     },
