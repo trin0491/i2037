@@ -6,6 +6,7 @@ metadata:
     app: i2037
     tier: db
 spec:
+  type: NodePort
   ports:
   - port: 3306
   selector:
