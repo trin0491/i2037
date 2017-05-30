@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: i2037-lb
 spec:
+  tls:
+    - secretName: i2037-cert
   backend:
     serviceName: i2037-webapp
     servicePort: 80
