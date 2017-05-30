@@ -1,5 +1,5 @@
 #!/bin/sh
-release=$1
+release="1.0.2"
 
 projects="i2037-client i2037-webapp i2037-deploy"
 for project in $projects
